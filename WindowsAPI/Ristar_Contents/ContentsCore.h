@@ -1,5 +1,5 @@
 #pragma once
-#include <EngineCore/EngineCore.h>
+#include <EngineCore\EngineCore.h>
 
 // Ό³Έν :
 class ContentsCore : public EngineCore
@@ -16,9 +16,9 @@ public:
 	ContentsCore& operator=(ContentsCore&& _Other) noexcept = delete;
 
 protected:
-	void EngineStart() override;
-	void EngineUpdate() override;
-	void EngineEnd() override;
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+	void End() override;
 
 private:
 
