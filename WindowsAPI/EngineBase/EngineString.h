@@ -22,3 +22,4 @@ private:
 	EngineString& operator=(const EngineString& _Other) = delete;
 	EngineString& operator=(EngineString&& _Other) noexcept = delete;
 };
+

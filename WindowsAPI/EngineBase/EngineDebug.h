@@ -1,6 +1,8 @@
 #pragma once
 #include <Windows.h>
 #include <assert.h>
+#include <string>
+#include <string_view>
 
 namespace EngineDebug
 {
@@ -9,3 +11,4 @@ namespace EngineDebug
 	std::string ErrorText = std::string(Value); \
 	MessageBoxA(nullptr, ErrorText.c_str(), "치명적 에러", MB_OK); assert(false);
 }
+

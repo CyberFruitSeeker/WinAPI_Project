@@ -114,3 +114,5 @@ unsigned __int64 EngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)()
 
 	return msg.wParam;
 }
+
+
