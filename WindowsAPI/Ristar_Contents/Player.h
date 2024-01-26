@@ -1,7 +1,6 @@
 #pragma once
 #include <EngineCore\Actor.h>
 
-// Ό³Έν :
 class Player : public AActor
 {
 public:
@@ -21,4 +20,10 @@ protected:
 
 private:
 	float QSkillCool = 0.0f;
+
+	UImageRenderer* HeadRenderer;
+	UImageRenderer* BodyRenderer;
+
+	// std::vector<UImageRenderer*>
 };
+
