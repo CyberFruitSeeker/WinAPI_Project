@@ -122,7 +122,7 @@ void Player::Tick(float _DeltaTime)
 	// 0.5 0.5 0.5 0.5 
 	// 2차가 지나야 
 	// 초당 2번 실행된다고 칩시다.
-	if (true == EngineInput::IsDown('Q'))
+	if (true == EngineInput::IsPress('Q'))
 	{
 		ABullet* NewBullet = GetWorld()->SpawnActor<ABullet>();
 		NewBullet->SetActorLocation(GetActorLocation());
