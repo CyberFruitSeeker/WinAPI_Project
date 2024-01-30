@@ -7,4 +7,3 @@ UNameObject::UNameObject()
 UNameObject::~UNameObject()
 {
 }
-

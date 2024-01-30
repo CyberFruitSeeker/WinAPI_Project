@@ -77,7 +77,8 @@ void ULevel::LevelRelease(float _DeltaTime)
 	// Render의 메모리의 결정권을 가진것은 액터입니다.
 	// 앞으로 포인터를 굉장히 여러개로 나눠서 사용하는 경우가 많습니다.
 	// 그러면 누가 이에 대한 삭제를 담당해야 하나요?
-	// 이건 정답이 없지만... 우선은 만든놈 == new 를 한 놈이 하자.
+	// 이건 정답이 없지만 선생님은 만든놈이 하자.
+	// new를 한 놈이 한다.
 
 
 	for (std::pair<const int, std::list<UImageRenderer*>>& OrderListPair : Renderers)
@@ -104,7 +105,7 @@ void ULevel::LevelRelease(float _DeltaTime)
 	}
 
 
-	// 절대로 실행도중 삭제를 하지 않습니다.
+	// 선생님은 절대로 실행도중 삭제를 하지 않습니다.
 	for (std::pair<const int, std::list<AActor*>>& OrderListPair : AllActor)
 	{
 		std::list<AActor*>& ActorList = OrderListPair.second;

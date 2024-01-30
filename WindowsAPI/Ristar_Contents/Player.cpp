@@ -26,14 +26,15 @@ void Player::BeginPlay()
 	{
 		BodyRenderer = CreateImageRenderer(0);
 		BodyRenderer->SetPosition({ 0, 30 });
-		BodyRenderer->SetScale({ 80, 80 });
+		BodyRenderer->SetImageToScale("Ristar.png");
+		// BodyRenderer->SetScale({ 80, 80 });
 	}
 
 
 	{
 		HeadRenderer = CreateImageRenderer(0);
 		HeadRenderer->SetPosition({ 0, -25 });
-		HeadRenderer->SetScale({ 60, 60 });
+		HeadRenderer->SetImageToScale("Ristar.png");
 	}
 	// UImageRenderer* Ptr = CreateRenderer();
 	// 플레이어 기준
