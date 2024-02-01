@@ -17,5 +17,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	LeakCheck;
 	UContentExCore NewUserCore = UContentExCore();
-	UEngineCore::EngineStart(hInstance, &NewUserCore);
+	NewUserCore.EngineStart(hInstance);
 }

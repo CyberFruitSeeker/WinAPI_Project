@@ -1,5 +1,6 @@
 #include "ContentExCore.h"
-#include "ColorTest01.h"
+#include "TestTitleLevel.h"
+#include "TestPlayLevel.h"
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include <EngineCore\EngineResourcesManager.h>
@@ -33,16 +34,21 @@ void UContentExCore::BeginPlay()
 
 	std::list<UEngineFile> NewList = NewDir.AllFile({ ".png", ".bmp" }, true);
 
+	// 엔진만의 규칙을 정할거냐.
 	for (UEngineFile& File : NewList)
 	{
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
 	}
 
+	UEngineResourcesManager::GetInst().CuttingImage("Player_Right.png", 13, 8);
+	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("PlayLevel\\TestFolderAnimation"));
+
 	// 리로스를 여기서 로드할수도 있다.
 
 	// 우리가 제공하는건 Level
-	CreateLevel<ColorTest01>("Title");
-	ChangeLevel("Title");
+	CreateLevel<UTestTitleLevel>("Title");
+	CreateLevel<UTestPlayLevel>("Play");
+	ChangeLevel("Play");
 }
 
 void UContentExCore::Tick(float _DeltaTime)

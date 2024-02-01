@@ -1,14 +1,14 @@
-#include "ColorTest01.h"
+#include "TestTitleLogo.h"
 
-ColorTest01::ColorTest01()
+ATestTitleLogo::ATestTitleLogo()
 {
 }
 
-ColorTest01::~ColorTest01()
+ATestTitleLogo::~ATestTitleLogo()
 {
 }
 
-void ColorTest01::BeginPlay()
+void ATestTitleLogo::BeginPlay()
 {
 	AActor::BeginPlay();
 
@@ -17,13 +17,13 @@ void ColorTest01::BeginPlay()
 	Renderer->SetImage("Title.png");
 	// 이미지가 나올 위치
 	SetActorLocation({ 50, 50 });
-	Renderer->SetTransform({ {0,0}, {100, 100} });
+	Renderer->SetTransform({ {50,50}, {100, 100} });
 	Renderer->SetImageCuttingTransform({ {0,0}, {200, 200} });
 
 	// Renderer->SetImageToScale("Title.png");
 }
 
-void ColorTest01::Tick(float _DeltaTime)
+void ATestTitleLogo::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 

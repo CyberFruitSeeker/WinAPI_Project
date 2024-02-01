@@ -1,217 +1,363 @@
-#include "EngineWindow.h"
-#include <EngineBase\EngineDebug.h>
 #include "WindowImage.h"
+#include <EngineBase\EngineString.h>
+#include <Windows.h>
+#include <EngineBase\EngineDebug.h>
+#include <EngineBase\EngineDirectory.h>
+#include <EngineBase\EngineFile.h>
 
-bool UEngineWindow::WindowLive = true;
-HINSTANCE UEngineWindow::hInstance;
+// 윈도우에서 이미지를 사용하기 위해서 지원하는 라이브러리.
+// 헤더랑 다르게 라이브러리는 #pragma comment 통해서 추가 해야 한다.
+#pragma comment(lib, "Msimg32.lib")
 
+#include <objidl.h>
+#include <gdiplus.h>
 
-LRESULT CALLBACK UEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+// Png를 로드하는 기능을 윈도우 기본 라이브러리만으로 지원해주지 않기 때문ㅇ
+// GDIPlus를 사용해야 한다.
+// GIDPlus는 윈도우가 초기 윈도우의 그래픽 시스템을 개선해서 추가한 라이브러리입니다.
+
+#pragma comment(lib, "Gdiplus.lib")
+
+UWindowImage::UWindowImage()
 {
-	switch (message)
+}
+
+UWindowImage::~UWindowImage()
+{
+	// 윈도우가 할당해준거지만
+	// 정리는 우리가 해주는게 좋습니다.
+
+	switch (LoadType)
 	{
-	case WM_PAINT:
+	case EImageLoadType::IMG_Folder:
 	{
-		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hWnd, &ps);
-		EndPaint(hWnd, &ps);
+		for (size_t i = 0; i < Infos.size(); i++)
+		{
+			DeleteObject(Infos[i].hBitMap);
+			DeleteDC(Infos[i].ImageDC);
+		}
+		break;
 	}
-	break;
-	case WM_DESTROY:
-		WindowLive = false;
-		// PostQuitMessage(123213);
+	case EImageLoadType::IMG_Cutting:
+		DeleteObject(hBitMap);
+		DeleteDC(ImageDC);
 		break;
 	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
+		break;
 	}
-	return 0;
 }
 
-void UEngineWindow::Init(HINSTANCE _hInst)
+FVector UWindowImage::GetScale()
 {
-	hInstance = _hInst;
+	return FVector(BitMapInfo.bmWidth, BitMapInfo.bmHeight);
 }
 
-
-UEngineWindow::UEngineWindow()
+bool UWindowImage::Create(HDC _MainDC)
 {
+	ImageDC = _MainDC;
+
+	if (nullptr == ImageDC)
+	{
+		return false;
+	}
+
+	return true;
 }
 
-UEngineWindow::~UEngineWindow()
+bool UWindowImage::Load(UWindowImage* _Image)
 {
-	if (nullptr != BackBufferImage)
+	LoadType = EImageLoadType::IMG_Cutting;
+
+	UEnginePath Path = GetEnginePath();
+
+	std::string UpperExt = UEngineString::ToUpper(Path.GetExtension());
+
+	if (".BMP" == UpperExt)
 	{
-		delete BackBufferImage;
-		BackBufferImage = nullptr;
+		//HINSTANCE hInst,  이 이미지를 사용할 프로그램을 알려달라는건데. nullptr넣어도 괜찮다.
+		//LPCSTR name, // 경로
+		//UINT type, // 이미지 타입
+		//int cx, // 이미지를 로드할 크기 X 0을 넣으면 전체 크기로 로드
+		//int cy, // 이미지를 로드할 크기 Y 0을 넣으면 전체 크기로 로드
+		//UINT fuLoad 로드 옵션
+
+		// 비트맵을 제어할수 있는 핸들입니다.
+		// 비트맵을 그릴수 있는 핸들은 아닙니다.
+		// 그린다는 목적을 가진 핸들과
+		// 비트맵을 로드한다는 목적의 핸들이 다르다는 것입니다.
+		HANDLE ImageHandle = LoadImageA(nullptr, Path.GetFullPath().c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hBitMap = reinterpret_cast<HBITMAP>(ImageHandle);
+		ImageType = EWIndowImageType::IMG_BMP;
 	}
-
-	if (nullptr != WindowImage)
+	else if (".PNG" == UpperExt)
 	{
-		delete WindowImage;
-		WindowImage = nullptr;
-	}
+		ULONG_PTR gdiplusToken = 0;
+		// Gdiplus헤더의 함수들은 전부다 Gdiplus 네임스페이스 안에 들어있어요.
+		// GDi를 사용하겠다는 시작 
+		// GDIPlus를 사용해본적이 거의 없는데 이번에 Png가 로드가 안되면 여러분들이 귀찮아 할것같아서
+		// 로드하는걸 알아봤는데.
+		// Png를 그대로 출력하는 함수도 있었는데. 
+		// 겁나게 느렸습니다.
+		// 게임을 못만들정도였다.
+		// 그건 포기
+		// 로드는 가능한데. png로 사용하면 안되기 때문에
+		// Png로 로드한 녀석을 Bmp로 바꾸면 무리없이 되서 그 방식으로 하기로 했습니다.
+		Gdiplus::GdiplusStartupInput gdistartupinput;
+		Gdiplus::GdiplusStartup(&gdiplusToken, &gdistartupinput, nullptr);
 
-}
+		// 유니코드로 되었습니다.
+		// 그래서 멀티바이트 경로를 유니코드 경로로 변경하는 함수가 필요한데.
+		std::wstring wPath = UEngineString::AnsiToUniCode(Path.GetFullPath());
 
-void UEngineWindow::Open(std::string_view _Title /*= "Title"*/)
-{
-	// 간혹가다가 앞쪽이이나 뒤쪽에 W가 붙거나 A가 붙어있는 함수들을 보게 될겁니다.
-	// A가 붙어있으면 멀티바이트 함수
-	// W가 붙어있으면 와이드 바이트 함수
-	WNDCLASSEXA wcex;
+		// 어떤 문자열에 기반해서 만들어졌는지 알수 없죠?
+		// 그냥 모든 문자열에 대비할 방법을 찾아야 합니다.
+		Gdiplus::Image* pImage = Gdiplus::Image::FromFile(wPath.c_str());
+		Gdiplus::Bitmap* pBitMap = reinterpret_cast<Gdiplus::Bitmap*>(pImage->Clone());
 
-	wcex.cbSize = sizeof(WNDCLASSEX);
+		Gdiplus::Status stat = pBitMap->GetHBITMAP(Gdiplus::Color(0, 0, 0, 0), &hBitMap);
 
-	wcex.style = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc = WndProc;
-	wcex.cbClsExtra = 0;
-	wcex.cbWndExtra = 0;
-	wcex.hInstance = hInstance;
-	wcex.hIcon = nullptr;
-	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wcex.lpszMenuName = nullptr;
-	wcex.lpszClassName = "DefaultWindow";
-	wcex.hIconSm = nullptr;
-
-	RegisterClassExA(&wcex);
-
-	// const std::string& = 내부에 뭘들고 있다고 생각하라고 했나요?
-	// std::vector<char> 들고 있다고 생각하라고 했다.
-	// _Title[0] = char&를 리턴해준 것과 같다.
-	// _Title.c_str(); => 자연스럽게 내부에서 
-	// const char* Test = &_Title[0]
-	// return Test;
-
-	int Style = WS_OVERLAPPED |
-		WS_CAPTION |
-		WS_SYSMENU |
-		WS_THICKFRAME |
-		WS_MINIMIZEBOX |
-		WS_MAXIMIZEBOX;
-
-	// WS_OVERLAPPEDWINDOW
-
-	// void CreateWindow(bool IsTitle, bool IsMenu, bool IsMax, bool )
-	// bool IsTitle, 
-
-
-	hWnd = CreateWindowA("DefaultWindow", _Title.data(), Style,
-		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-
-	if (!hWnd)
-	{
-		MsgBoxAssert("윈도우 생성에 실패했습니다.");
-		return;
-	}
-
-	HDC hDC = GetDC(hWnd);
-
-	if (nullptr == WindowImage)
-	{
-		WindowImage = new UWindowImage();
-		WindowImage->Create(hDC);
-	}
-
-
-	ShowWindow(hWnd, SW_SHOW);
-	UpdateWindow(hWnd);
-
-}
-
-unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)())
-{
-	MSG msg = {};
-
-	while (WindowLive)
-	{
-		// 기본 메시지 루프입니다:
-		// 10개가 들어있을 
-		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+		if (Gdiplus::Status::Ok != stat)
 		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			MsgBoxAssert("Png 형식 리소스 로드에 실패했습니다.");
 		}
 
-		// 메세지 루프의 데드타임이라는 곳에서 실행됩니다.
-		if (nullptr != _Update)
+		ImageType = EWIndowImageType::IMG_PNG;
+	}
+
+	// 그릴수있고 이미지에 간섭할수 있는 권한이다.
+	// 어디에 그릴거냐.
+	// 어디속해서 어디에 그려질 DC냐를 넣어줘야 합니다.
+	// 당연히 하나뿐인 mainwindow의 DC를 넣어주면 됩니다.
+	// 그릴수 있는 권한이 자신이 뭘 그려야하는지를 알려줘야 합니다.
+	// ImageDC야 너는 BitMap그려야 해.
+	ImageDC = CreateCompatibleDC(_Image->ImageDC);
+
+	if (nullptr == ImageDC)
+	{
+		MsgBoxAssert("이미지 생성에 실패했습니다");
+		return false;
+	}
+
+	HBITMAP OldBitMap = reinterpret_cast<HBITMAP>(SelectObject(ImageDC, hBitMap));
+	DeleteObject(OldBitMap);
+
+	// hBitMap에서 얻어오겠다.
+	GetObject(hBitMap, sizeof(BITMAP), &BitMapInfo);
+
+	// ImageDC를 만들면 내부에서 1,1크기의 HBITMAP을 만든다.
+
+	ImageInfo Info;
+	Info.hBitMap = hBitMap;
+	Info.ImageDC = ImageDC;
+	Info.CuttingTrans.SetPosition({ 0,0 });
+	Info.CuttingTrans.SetScale(GetScale());
+	Info.ImageType = ImageType;
+	Infos.push_back(Info);
+
+	return true;
+}
+
+
+bool UWindowImage::LoadFolder(UWindowImage* _Image)
+{
+	LoadType = EImageLoadType::IMG_Folder;
+
+	UEnginePath EnginePath = GetEnginePath();
+
+	if (false == EnginePath.IsDirectory())
+	{
+		MsgBoxAssert("디렉토리가 아닌 경로로 폴더로드를 하려고 했습니다");
+	}
+
+	UEngineDirectory Dir = EnginePath;
+
+	std::list<UEngineFile> NewList = Dir.AllFile({ ".png", ".bmp" }, false);
+
+	for (UEngineFile& File : NewList)
+	{
+		UEnginePath Path = File;
+
+		std::string UpperExt = UEngineString::ToUpper(Path.GetExtension());
+
+		if (".BMP" == UpperExt)
 		{
-			_Update();
+			HANDLE ImageHandle = LoadImageA(nullptr, Path.GetFullPath().c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+			hBitMap = reinterpret_cast<HBITMAP>(ImageHandle);
+			ImageType = EWIndowImageType::IMG_BMP;
 		}
+		else if (".PNG" == UpperExt)
+		{
+			ULONG_PTR gdiplusToken = 0;
+			Gdiplus::GdiplusStartupInput gdistartupinput;
+			Gdiplus::GdiplusStartup(&gdiplusToken, &gdistartupinput, nullptr);
+			std::wstring wPath = UEngineString::AnsiToUniCode(Path.GetFullPath());
+			Gdiplus::Image* pImage = Gdiplus::Image::FromFile(wPath.c_str());
+			Gdiplus::Bitmap* pBitMap = reinterpret_cast<Gdiplus::Bitmap*>(pImage->Clone());
+			Gdiplus::Status stat = pBitMap->GetHBITMAP(Gdiplus::Color(0, 0, 0, 0), &hBitMap);
+			if (Gdiplus::Status::Ok != stat)
+			{
+				MsgBoxAssert("Png 형식 리소스 로드에 실패했습니다.");
+			}
+
+			ImageType = EWIndowImageType::IMG_PNG;
+		}
+		ImageDC = CreateCompatibleDC(_Image->ImageDC);
+
+		if (nullptr == ImageDC)
+		{
+			MsgBoxAssert("이미지 생성에 실패했습니다");
+			return false;
+		}
+
+		HBITMAP OldBitMap = reinterpret_cast<HBITMAP>(SelectObject(ImageDC, hBitMap));
+		DeleteObject(OldBitMap);
+		GetObject(hBitMap, sizeof(BITMAP), &BitMapInfo);
+
+		ImageInfo Info;
+		Info.hBitMap = hBitMap;
+		Info.ImageDC = ImageDC;
+		Info.CuttingTrans.SetPosition({ 0,0 });
+		Info.CuttingTrans.SetScale(GetScale());
+		Infos.push_back(Info);
 	}
 
-	if (nullptr != _End)
+
+	return true;
+}
+
+bool UWindowImage::Create(UWindowImage* _Image, const FVector& _Scale)
+{
+	// 시작이 먼저 이미지를 만든다.
+
+
+	// HBITMAP 비트맵 이미지의 메모리권한
+	HANDLE ImageHandle = CreateCompatibleBitmap(_Image->ImageDC, _Scale.iX(), _Scale.iY());
+
+	if (nullptr == ImageHandle)
 	{
-		_End();
+		MsgBoxAssert("이미지 생성에 실패했습니다");
+		return false;
 	}
 
-	return msg.wParam;
-}
+	hBitMap = reinterpret_cast<HBITMAP>(ImageHandle);
 
+	ImageDC = CreateCompatibleDC(_Image->ImageDC);
 
-
-
-void UEngineWindow::SetWindowPosition(const FVector& _Pos)
-{
-	//HWND hWnd, 당연히 크기를 바꾸고 싶은 윈도우의 handle
-	//HWND hWndInsertAfter, ??????
-	//int X, 왼쪽위점
-	//int Y, 오른쫌 위점
-	//int cx, 크기 x
-	//int cy, 크기 y
-	//UINT uFlags
-	// 크기와 위치가 혼합되어 있습니다.
-
-}
-
-void UEngineWindow::SetWindowScale(const FVector& _Scale)
-{
-	Scale = _Scale;
-
-
-	// window크기만한 이미지를 만들거라고 했는데.
-	// Load랑 다르다.
-
-	if (nullptr != BackBufferImage)
+	if (nullptr == ImageDC)
 	{
-		delete BackBufferImage;
-		BackBufferImage = nullptr;
+		MsgBoxAssert("이미지 생성에 실패했습니다");
+		return false;
 	}
 
-	BackBufferImage = new UWindowImage();
-	BackBufferImage->Create(WindowImage, Scale);
+	HBITMAP OldBitMap = reinterpret_cast<HBITMAP>(SelectObject(ImageDC, hBitMap));
+	DeleteObject(OldBitMap);
 
-	// 메뉴크기까지 포함 윈도우의 크기를 만들어줍니다.
-	// EX) 1000, 1000짜리 윈도우 만들어줘 => 1000 1100 이라는 수치를 내려줘
-	//     윈도우의 부가요소 크기까지 다 포함해서 내부크기가 1000 1000이 될수 있는 수치를 리턴해준다.
+	// hBitMap에서 얻어오겠다.
+	GetObject(hBitMap, sizeof(BITMAP), &BitMapInfo);
 
-	RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
-
-	AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
-
-	// SWP_NOMOVE 현재 위치를 유지합니다(X 및 Y 매개 변수 무시).
-	// 크기 조절기능 + 위치조절 다들어가 있다.
-	::SetWindowPos(hWnd, nullptr, 0, 0, Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER | SWP_NOMOVE);
+	return true;
 }
 
-void UEngineWindow::ScreenClear()
+void UWindowImage::BitCopy(UWindowImage* _CopyImage, const FTransform& _Trans)
 {
-	// 1280 720
-	Rectangle(BackBufferImage->ImageDC, -1, -1, Scale.iX() + 1, Scale.iY() + 1);
-	// 1282 722
-	// Rectangle(BackBufferImage->ImageDC, -1, -1, 1281, 721);
+	if (nullptr == _CopyImage)
+	{
+		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
+	}
+	// 렉탱글이 아니고
+	// 이미지로 그려야합니다
+
+	// HDC hdc, // => 어떤 이미지에
+	// int x,   // => 이 크기로
+	// int y,   // 
+	// int cx,  // => 
+	// int cy,  
+	// HDC hdcSrc,  
+	// int x1,  
+	// int y1, 
+	// DWORD rop
+
+	// 윈도우
+	HDC hdc = ImageDC;
+	// 이미지
+	HDC hdcSrc = _CopyImage->ImageDC;
+	BitBlt(
+		hdc, 							  // HDC hdc, // 
+		_Trans.iLeft(), 				  // int x,   // 
+		_Trans.iTop(), 				  // int y,   // 
+		_Trans.GetScale().iX(), 		  // int cx,  // 
+		_Trans.GetScale().iY(),		  // int cy,  
+		hdcSrc,							// HDC hdcSrc, 
+		0,								// int x1,  
+		0,								// int y1, 
+		SRCCOPY							// DWORD rop => 이미지 그대로 고속 복사를 해라.
+	);
 }
 
-void UEngineWindow::ScreenUpdate()
+void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color)
 {
-	FTransform CopyTrans;
-	CopyTrans.SetPosition({ Scale.ihX(), Scale.ihY() });
-	CopyTrans.SetScale({ Scale.iX(), Scale.iY() });
+	if (nullptr == _CopyImage)
+	{
+		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
+	}
 
-	WindowImage->BitCopy(BackBufferImage, CopyTrans);
+	if (_Index >= _CopyImage->Infos.size())
+	{
+		MsgBoxAssert(GetName() + "이미지 정보의 인덱스를 오버하여 사용했습니다");
+	}
+
+	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
+
+	int RenderLeft = _Trans.iLeft();
+	int RenderTop = _Trans.iTop();
+	int RenderScaleX = _Trans.GetScale().iX();
+	int RenderScaleY = _Trans.GetScale().iY();
+
+	int ImageLeft = ImageTrans.GetPosition().iX();
+	int ImageTop = ImageTrans.GetPosition().iY();
+	int ImageScaleX = ImageTrans.GetScale().iX();
+	int ImageScaleY = ImageTrans.GetScale().iY();
+
+	HDC hdc = ImageDC;
+	// 이미지
+	HDC hdcSrc = _CopyImage->Infos[_Index].ImageDC;
+	TransparentBlt(
+		hdc, 							  // HDC hdc, // 
+		RenderLeft, 		  // int x,   // 
+		RenderTop, 		  // int y,   // 
+		RenderScaleX,		  // int cx,  // 
+		RenderScaleY,		  // int cy,  
+		hdcSrc,							// HDC hdcSrc, 
+		ImageLeft,   							// int y1, 
+		ImageTop,   							// int x1,  
+		ImageScaleX, 							// int y1, 
+		ImageScaleY, 							// int y1, 
+		_Color.Color						// DWORD rop => 이미지 그대로 고속 복사를 해라.
+	);
+	// 이미지의 어떤 부위를 그릴지를 정해줄수가 있다.
 }
 
-//void UEngineWindow::SetWindowScale(const FVector& _Scale)
-//{
-//
-//}
+void UWindowImage::Cutting(int _X, int _Y)
+{
+	Infos.clear();
+
+	FVector CuttingScale = { GetScale().X / _X,  GetScale().Y / _Y };
+	FVector CuttingPos = { 0, 0 };
+
+	for (int i = 0; i < _Y; i++)
+	{
+		for (int i = 0; i < _X; i++)
+		{
+			ImageInfo Info;
+			Info.ImageDC = ImageDC;
+			Info.CuttingTrans.SetPosition(CuttingPos);
+			Info.CuttingTrans.SetScale(CuttingScale);
+			Infos.push_back(Info);
+
+			CuttingPos.X += CuttingScale.X;
+		}
+
+		CuttingPos.X = 0.0f;
+		CuttingPos.Y += CuttingScale.Y;
+	}
+}
