@@ -45,6 +45,9 @@
     <ClInclude Include="TestPlayer.h">
       <Filter>TestCode\Object_Test\PlayLevel</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsHelper.h">
+      <Filter>TestCode\ContentEXCore</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentExCore.cpp">
@@ -61,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="TestPlayer.cpp">
       <Filter>TestCode\Object_Test\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsHelper.cpp">
+      <Filter>TestCode\ContentEXCore</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

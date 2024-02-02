@@ -19,6 +19,7 @@ void UContentExCore::BeginPlay()
 	// MainWindow.SetWindowScale({1280, 720});
 
 	// 중요한건 크기가 아니라 비율
+	//MainWindow.SetWindowPosition({500, 100});
 	MainWindow.SetWindowScale({ 1280/* * 1.5f*/, 720/* * 1.5f*/ });
 
 	UEngineCore::BeginPlay();

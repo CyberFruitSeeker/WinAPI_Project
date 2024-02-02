@@ -1,5 +1,6 @@
 #include "TestTitleLevel.h"
 #include "TestTitleLogo.h"
+#include "EngineCore\EngineCore.h"
 
 UTestTitleLevel::UTestTitleLevel()
 {
