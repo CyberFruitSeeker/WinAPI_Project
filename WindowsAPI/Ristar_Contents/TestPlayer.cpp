@@ -15,54 +15,59 @@ void ATestPlayer::BeginPlay()
 {
 	AActor::BeginPlay();
 
-	Renderer = CreateImageRenderer();
-	Renderer->SetImage("Player_Right.png");
-	// Renderer->SetTransColor({255, 255, 255, 255});
-	Renderer->SetTransform({ {0,0}, {100, 100} });
-	Renderer->SetImageCuttingTransform({ {64,64}, {32, 32} });
-	Renderer->CreateAnimation("Idle", "Player_Right.png", 0, 12, 0.5f, true);
-	Renderer->CreateAnimation("Attack", "Player_Right.png", 26, 32, 0.5f, true);
-	Renderer->ChangeAnimation("Idle");
+	Renderer = CreateImageRenderer(MarioRenderOrder::Player);
+	Renderer->SetImage("TestPlayer_Right.png");
+	Renderer->SetTransform({ {0,0}, {256, 256} });
+	Renderer->CreateAnimation("Small_Idle_Right", "TestPlayer_Right.png", 0, 0, 0.5f, true);
+	Renderer->ChangeAnimation("Small_Idle_Right");
+}
+
+void ATestPlayer::GravityCheck(float _DeltaTime)
+{
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY());
+	if (Color != Color8Bit(255, 0, 255, 0))
+	{
+		AddActorLocation(FVector::Down * _DeltaTime * Gravity);
+	}
+}
+
+void ATestPlayer::StateUpdate(float _DeltaTime)
+{
+	switch (State)
+	{
+	case PlayState::Idle:
+		Idle(_DeltaTime);
+		break;
+	case PlayState::Move:
+		Move(_DeltaTime);
+		break;
+	case PlayState::Jump:
+		Jump(_DeltaTime);
+		break;
+	default:
+		break;
+	}
+
 
 }
+
+void ATestPlayer::Idle(float _DeltaTime)
+{
+	GravityCheck(_DeltaTime);
+}
+void ATestPlayer::Jump(float _DeltaTime)
+{
+
+}
+void ATestPlayer::Move(float _DeltaTime)
+{
+
+}
+
 
 void ATestPlayer::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-	EngineDebug::OutPutDebugText(UContentsHelper::GetMousePos().ToString());
-
-	AlphaTime += _DeltaTime;
-	if (1.0f <= AlphaTime)
-	{
-		Dir = !Dir;
-		AlphaTime = 0.0f;
-	}
-
-	if (true == Dir)
-	{
-		Renderer->SetAlpha(AlphaTime);
-	}
-	else
-	{
-		Renderer->SetAlpha(1.0f - AlphaTime);
-	}
-
-
-	if (EngineInput::IsDown('Q'))
-	{
-		Renderer->ChangeAnimation("Attack");
-	}
-
-	//// 어떻게 편하게 쓸까?
-	//// 테스트 코드
-	//AnimationTime -= _DeltaTime;
-
-	//if (0 >= AnimationTime)
-	//{
-	//	AnimationFrame++;
-	//	AnimationTime = 1.0f;
-	//}
-
-	//Renderer->SetImageIndex(AnimationFrame);
+	StateUpdate(_DeltaTime);
 }

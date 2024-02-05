@@ -24,4 +24,18 @@ void UTestTitleLevel::BeginPlay()
 void UTestTitleLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
+
+	if (EngineInput::IsDown('P'))
+	{
+		GEngine->ChangeLevel("Play");
+	}
+
+}
+void UTestTitleLevel::LevelStart(ULevel* _Level)
+{
+	int a = 0;
+}
+void UTestTitleLevel::LevelEnd(ULevel* _Level)
+{
+	int a = 0;
 }

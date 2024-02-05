@@ -162,6 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackGroundMap.h" />
     <ClInclude Include="ContentExCore.h">
       <SubType>
       </SubType>
@@ -196,6 +197,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BackGroundMap.cpp" />
     <ClCompile Include="ContentExCore.cpp">
       <SubType>
       </SubType>

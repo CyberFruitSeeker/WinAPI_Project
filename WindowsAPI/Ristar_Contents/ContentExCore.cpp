@@ -20,7 +20,12 @@ void UContentExCore::BeginPlay()
 
 	// 중요한건 크기가 아니라 비율
 	//MainWindow.SetWindowPosition({500, 100});
-	MainWindow.SetWindowScale({ 1280/* * 1.5f*/, 720/* * 1.5f*/ });
+	//                           1024                960
+	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
+	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
+	// 1200 
+
+	// 800 16
 
 	UEngineCore::BeginPlay();
 
@@ -41,7 +46,7 @@ void UContentExCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
 	}
 
-	UEngineResourcesManager::GetInst().CuttingImage("Player_Right.png", 13, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("TestPlayer_Right.png", 5, 8);
 	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("PlayLevel\\TestFolderAnimation"));
 
 	// 리로스를 여기서 로드할수도 있다.
