@@ -48,7 +48,7 @@ void UContentsCore::BeginPlay()
 
 	UEngineResourcesManager::GetInst().CuttingImage("Player_Right.png", 5, 8);
 	UEngineResourcesManager::GetInst().CuttingImage("Player_Left.png", 5, 8);
-	UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("PlayLevel\\TestFolderAnimation"));
+	//UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("PlayLevel\\TestFolderAnimation"));
 
 	// 리로스를 여기서 로드할수도 있다.
 
