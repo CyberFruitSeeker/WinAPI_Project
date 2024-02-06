@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{c8b8b54f-b951-4199-8c87-405c78656865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{ca17a187-f299-44d2-bdfe-cb19513364ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PlayLevel">
+      <UniqueIdentifier>{5efec64f-4229-4e4f-882a-63cedc37cda9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PlayLevel\Actor">
+      <UniqueIdentifier>{d427f0ca-2be3-40b8-b589-05213fe23852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\TitleLevel">
+      <UniqueIdentifier>{2974c071-3fe6-40cc-9905-80cf27fc01eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\TitleLevel\Actor">
+      <UniqueIdentifier>{2ea00fd6-0ec6-494d-9c30-a069da257253}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ContentsHelper.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsCore.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>Object\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object\PlayLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGroundMap.cpp">
+      <Filter>Object\PlayLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>Object\TitleLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Object\TitleLevel</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ContentsHelper.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsCore.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <Filter>Object\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object\PlayLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGroundMap.h">
+      <Filter>Object\PlayLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>Object\TitleLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Object\TitleLevel</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
