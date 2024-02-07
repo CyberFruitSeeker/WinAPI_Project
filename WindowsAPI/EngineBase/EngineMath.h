@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cmath>
 
 struct float4
 {
@@ -84,12 +85,12 @@ public:
 
 	int iX() const
 	{
-		return static_cast<int>(X);
+		return std::lround(X);
 	}
 
 	int iY() const
 	{
-		return static_cast<int>(Y);
+		return std::lround(Y);
 	}
 
 
@@ -106,12 +107,12 @@ public:
 
 	int ihY() const
 	{
-		return static_cast<int>(hY());
+		return std::lround(hY());
 	}
 
 	int ihX() const
 	{
-		return static_cast<int>(hX());
+		return std::lround(hX());
 	}
 
 	float4 operator+(const float4& _Other)
@@ -205,7 +206,7 @@ class Color8Bit
 	// 현실에서의 색상은
 	// 물감으로 치면 다섞으면 어두운색
 	// 빛으로 치면 다섞으면 흰색
-	// 컴퓨터는 빛의 삼원색을 사용합니다.
+	// 컴퓨터는 빛의 삼원색을 사용한다.
 public:
 	static const Color8Bit Black;
 	static const Color8Bit Red;
