@@ -16,11 +16,11 @@ void ATitleLogo::BeginPlay()
 
 	Renderer->SetImage("Title.png");
 	// 이미지가 나올 위치
-	SetActorLocation({ 50, 50 });
-	Renderer->SetTransform({ {50,50}, {100, 100} });
-	Renderer->SetImageCuttingTransform({ {0,0}, {200, 200} });
+	SetActorLocation({ 100, 100 });
+	Renderer->SetTransform({ {0,0}, {800, 600} });
+	Renderer->SetImageCuttingTransform({ {0,0}, {0, 0} });
 
-	// Renderer->SetImageToScale("Title.png");
+	//Renderer->SetImageToScale("Title.png");
 }
 
 void ATitleLogo::Tick(float _DeltaTime)

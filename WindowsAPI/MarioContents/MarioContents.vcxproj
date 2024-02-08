@@ -143,20 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BackGroundMap.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsHelper.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="TitleLogo.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BackGroundMap.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="ContentsHelper.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="TitleLogo.cpp" />
   </ItemGroup>

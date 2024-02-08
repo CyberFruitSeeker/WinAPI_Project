@@ -1,6 +1,5 @@
 #include "ContentsCore.h"
 #include "TitleLevel.h"
-#include "PlayLevel.h"
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include <EngineCore\EngineResourcesManager.h>
@@ -46,16 +45,11 @@ void UContentsCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
 	}
 
-	UEngineResourcesManager::GetInst().CuttingImage("Player_Right.png", 5, 8);
-	UEngineResourcesManager::GetInst().CuttingImage("Player_Left.png", 5, 8);
-	//UEngineResourcesManager::GetInst().LoadFolder(NewDir.AppendPath("PlayLevel\\TestFolderAnimation"));
-
-	// 리로스를 여기서 로드할수도 있다.
+	// 리소스를 여기서 로드할수도 있다.
 
 	// 우리가 제공하는건 Level
 	CreateLevel<UTitleLevel>("Title");
-	CreateLevel<UPlayLevel>("Play");
-	ChangeLevel("Play");
+	ChangeLevel("Title");
 }
 
 void UContentsCore::Tick(float _DeltaTime)
