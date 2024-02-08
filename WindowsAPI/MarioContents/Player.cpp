@@ -24,7 +24,7 @@ void APlayer::BeginPlay()
 	Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.1f, true);
 	Renderer->CreateAnimation("Move_Left", "Player_Left.png", 1, 3, 0.1f, true);
 
-	// Renderer->ChangeAnimation("Idle_Right");
+	Renderer->ChangeAnimation("Idle_Right");
 
 
 	StateChange(EPlayState::Idle);
@@ -308,6 +308,15 @@ void APlayer::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
+	if (EngineInput::IsAnyKeyDown())
+	{
+		int a = 0;
+	}
+
+	if (EngineInput::IsAnyKeyUp())
+	{
+		int a = 0;
+	}
 
 
 	StateUpdate(_DeltaTime);

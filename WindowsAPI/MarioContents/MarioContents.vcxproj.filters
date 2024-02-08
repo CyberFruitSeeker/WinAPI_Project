@@ -19,6 +19,9 @@
     <Filter Include="Object\TitleLevel\Actor">
       <UniqueIdentifier>{2ea00fd6-0ec6-494d-9c30-a069da257253}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TestLevel">
+      <UniqueIdentifier>{270c70e4-c3ac-4160-ae15-306dde45a2fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsHelper.cpp">

@@ -91,11 +91,37 @@ public:
 		return AllKeys[_Key].Free;
 	}
 
+	static bool IsAnyKeyDown()
+	{
+		return AnyKeyDown;
+	}
+
+	static bool IsAnyKeyPress()
+	{
+		return AnyKeyPress;
+	}
+
+	static bool IsAnyKeyUp()
+	{
+		return AnyKeyUp;
+	}
+
+	static bool IsAnyKeyFree()
+	{
+		return AnyKeyFree;
+	}
+
 	static void KeyCheckTick(float _DeltaTime);
 
 protected:
 	//              'A'  상태가 어때?
 	static std::map<int, EngineKey> AllKeys;
+
+	static bool AnyKeyDown;
+	static bool AnyKeyPress;
+	static bool AnyKeyUp;
+	static bool AnyKeyFree;
+
 
 	int Value;
 

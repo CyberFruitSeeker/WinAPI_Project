@@ -94,6 +94,12 @@ public:
 		return Image;
 	}
 
+	void CameraEffectOff()
+	{
+		CameraEffect = false;
+	}
+
+
 protected:
 	void BeginPlay() override;
 
@@ -102,6 +108,8 @@ private:
 	UWindowImage* Image = nullptr;
 	FTransform ImageCuttingTransform;
 	Color8Bit TransColor;
+
+	bool CameraEffect = true;
 
 	std::map<std::string, UAnimationInfo> AnimationInfos;
 	UAnimationInfo* CurAnimation = nullptr;

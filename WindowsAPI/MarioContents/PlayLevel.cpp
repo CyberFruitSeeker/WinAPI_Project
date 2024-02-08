@@ -18,7 +18,7 @@ void UPlayLevel::BeginPlay()
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("Stage1Map.png");
 	Map->SetColMapImage("Stage1Map_Col.png");
-	// Map->SwitchDebug();
+	Map->SwitchDebug();
 
 
 	APlayer* Player = SpawnActor<APlayer>();
