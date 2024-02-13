@@ -19,8 +19,11 @@
     <Filter Include="Object\TitleLevel\Actor">
       <UniqueIdentifier>{2ea00fd6-0ec6-494d-9c30-a069da257253}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TestLevel">
-      <UniqueIdentifier>{270c70e4-c3ac-4160-ae15-306dde45a2fd}</UniqueIdentifier>
+    <Filter Include="Object\MapLevel">
+      <UniqueIdentifier>{e8e66d5b-83a9-4d9e-8e5e-ac38401c0279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\MapLevel\Actor">
+      <UniqueIdentifier>{a652db4a-031e-4e2b-9339-43b2905c9aa5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +39,9 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Object\TitleLevel</Filter>
     </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>Object\PlayLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsHelper.h">
@@ -49,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Object\TitleLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <Filter>Object\PlayLevel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
