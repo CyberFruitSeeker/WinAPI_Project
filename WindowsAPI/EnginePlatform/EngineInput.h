@@ -26,7 +26,7 @@ private:
 
 		int Key = -1; // VK_LBUTTON
 
-		void KeyCheck();
+		void KeyCheck(float _DeltaTime);
 
 		EngineKey()
 		{

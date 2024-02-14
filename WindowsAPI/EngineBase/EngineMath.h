@@ -75,11 +75,11 @@ public:
 public:
 	float Size2D()
 	{
-		// sqrtf : 제곱근을 구해주는 함수
+		// sqrtf 제곱근 구해주는 함수
 		return std::sqrtf((X * X) + (Y * Y));
 	}
 
-	// 나 자신(빗변)의 길이가 1짜리로 변경되는 것
+	// 나 자신이 길이 1짜리로 변경되는 것.
 	void Normalize2D()
 	{
 		float Size = Size2D();
@@ -89,7 +89,7 @@ public:
 		W = 0.0f;
 	}
 
-	// 나는 변화하지 않고, 길이 1짜리로 변한 나와 방향이 같은 벡터를 리턴하는 함수
+	// 나는 변화하지 않고 길이 1짜리로 변한 나와 방향이 같은 벡터를 리턴하는 함수
 	float4 Normalize2DReturn()
 	{
 		float4 Result = *this;
@@ -139,7 +139,17 @@ public:
 		return std::lround(hX());
 	}
 
-	float4 operator+(const float4& _Other)
+	float4& operator=(const float4& _Other)
+	{
+		X = _Other.X;
+		Y = _Other.Y;
+		Z = _Other.Z;
+		W = _Other.W;
+		return *this;
+	}
+
+
+	float4 operator+(const float4& _Other) const
 	{
 		float4 Result = *this;
 		Result.X += _Other.X;
@@ -202,8 +212,7 @@ public:
 		return Result;
 	}
 
-
-	float4 operator-(const float4& _Other)
+	float4 operator-(const float4& _Other) const
 	{
 		float4 Result = *this;
 		Result.X -= _Other.X;
@@ -230,7 +239,7 @@ class Color8Bit
 	// 현실에서의 색상은
 	// 물감으로 치면 다섞으면 어두운색
 	// 빛으로 치면 다섞으면 흰색
-	// 컴퓨터는 빛의 삼원색을 사용한다.
+	// 컴퓨터는 빛의 삼원색을 사용합니다.
 public:
 	static const Color8Bit Black;
 	static const Color8Bit Red;

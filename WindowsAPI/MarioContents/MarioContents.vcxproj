@@ -145,6 +145,10 @@
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsHelper.h" />
+    <ClInclude Include="Map.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PlayLevel.h">
       <SubType>
       </SubType>
@@ -155,6 +159,10 @@
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="ContentsHelper.cpp" />
+    <ClCompile Include="Map.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
       <SubType>
       </SubType>

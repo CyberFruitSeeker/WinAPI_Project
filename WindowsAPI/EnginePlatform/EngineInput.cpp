@@ -7,7 +7,7 @@ bool UEngineInput::AnyKeyPress = false;
 bool UEngineInput::AnyKeyUp = false;
 bool UEngineInput::AnyKeyFree = true;
 
-void UEngineInput::EngineKey::KeyCheck()
+void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 {
 	// 이 키가 눌렸다는 거죠?
 	// if (0 != GetAsyncKeyState('A'))
@@ -175,7 +175,7 @@ void UEngineInput::KeyCheckTick(float _DeltaTime)
 	for (std::pair<const int, EngineKey>& Key : AllKeys)
 	{
 		EngineKey& CurKey = Key.second;
-		CurKey.KeyCheck();
+		CurKey.KeyCheck(_DeltaTime);
 
 		if (true == CurKey.Press)
 		{
