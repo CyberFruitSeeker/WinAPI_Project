@@ -1,17 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Contents">
-      <UniqueIdentifier>{c8b8b54f-b951-4199-8c87-405c78656865}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{ca17a187-f299-44d2-bdfe-cb19513364ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\PlayLevel">
-      <UniqueIdentifier>{5efec64f-4229-4e4f-882a-63cedc37cda9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\PlayLevel\Actor">
-      <UniqueIdentifier>{d427f0ca-2be3-40b8-b589-05213fe23852}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\TitleLevel">
       <UniqueIdentifier>{2974c071-3fe6-40cc-9905-80cf27fc01eb}</UniqueIdentifier>
@@ -19,19 +10,31 @@
     <Filter Include="Object\TitleLevel\Actor">
       <UniqueIdentifier>{2ea00fd6-0ec6-494d-9c30-a069da257253}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\MapLevel">
-      <UniqueIdentifier>{e8e66d5b-83a9-4d9e-8e5e-ac38401c0279}</UniqueIdentifier>
+    <Filter Include="ContentsCore">
+      <UniqueIdentifier>{c8b8b54f-b951-4199-8c87-405c78656865}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\MapLevel\Actor">
-      <UniqueIdentifier>{a652db4a-031e-4e2b-9339-43b2905c9aa5}</UniqueIdentifier>
+    <Filter Include="Object\PlayLevel">
+      <UniqueIdentifier>{bfbb0aa6-4632-45c9-a962-7f770684c618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PlayLevel\Actor">
+      <UniqueIdentifier>{7c773f1e-0555-47dc-8367-783b32db6f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\TestLevel">
+      <UniqueIdentifier>{e688cef4-96b1-44a6-aa89-51e1e1c31ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PlayLevel\Actor\Map%28BackGround%29">
+      <UniqueIdentifier>{754dea4d-59d9-4be4-a17a-d06cc68ceb1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PlayLevel\Actor\Mario%28Player%29">
+      <UniqueIdentifier>{3e8c4f9e-d6fc-4ac2-9139-665a1007373c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsHelper.cpp">
-      <Filter>Contents</Filter>
+      <Filter>ContentsCore</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
-      <Filter>Contents</Filter>
+      <Filter>ContentsCore</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
       <Filter>Object\TitleLevel\Actor</Filter>
@@ -42,16 +45,16 @@
     <ClCompile Include="PlayLevel.cpp">
       <Filter>Object\PlayLevel</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Object\MapLevel</Filter>
+    <ClCompile Include="MarioMap.cpp">
+      <Filter>Object\PlayLevel\Actor\Map%28BackGround%29</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsHelper.h">
-      <Filter>Contents</Filter>
+      <Filter>ContentsCore</Filter>
     </ClInclude>
     <ClInclude Include="ContentsCore.h">
-      <Filter>Contents</Filter>
+      <Filter>ContentsCore</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
       <Filter>Object\TitleLevel\Actor</Filter>
@@ -62,8 +65,8 @@
     <ClInclude Include="PlayLevel.h">
       <Filter>Object\PlayLevel</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Object\MapLevel</Filter>
+    <ClInclude Include="MarioMap.h">
+      <Filter>Object\PlayLevel\Actor\Map%28BackGround%29</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

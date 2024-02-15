@@ -145,7 +145,7 @@
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsHelper.h" />
-    <ClInclude Include="Map.h">
+    <ClInclude Include="MarioMap.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -159,7 +159,7 @@
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="ContentsHelper.cpp" />
-    <ClCompile Include="Map.cpp">
+    <ClCompile Include="MarioMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>
