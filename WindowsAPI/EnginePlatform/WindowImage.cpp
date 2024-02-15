@@ -146,7 +146,7 @@ bool UWindowImage::Load(UWindowImage* _Image)
 
 	// ImageDC를 만들면 내부에서 1,1크기의 HBITMAP을 만든다.
 
-	ImageInfo Info;
+	UImageInfo Info;
 	Info.hBitMap = hBitMap;
 	Info.ImageDC = ImageDC;
 	Info.CuttingTrans.SetPosition({ 0,0 });
@@ -214,7 +214,7 @@ bool UWindowImage::LoadFolder(UWindowImage* _Image)
 		DeleteObject(OldBitMap);
 		GetObject(hBitMap, sizeof(BITMAP), &BitMapInfo);
 
-		ImageInfo Info;
+		UImageInfo Info;
 		Info.hBitMap = hBitMap;
 		Info.ImageDC = ImageDC;
 		Info.CuttingTrans.SetPosition({ 0,0 });
@@ -309,6 +309,7 @@ void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 
 	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
 
+	// 위치를 넣어준다.
 	int RenderLeft = _Trans.iLeft();
 	int RenderTop = _Trans.iTop();
 	int RenderScaleX = _Trans.GetScale().iX();
@@ -336,6 +337,19 @@ void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 		_Color.Color						// DWORD rop => 이미지 그대로 고속 복사를 해라.
 	);
 	// 이미지의 어떤 부위를 그릴지를 정해줄수가 있다.
+}
+
+void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color/* = Color8Bit::Black*/)
+{
+	Gdiplus::Graphics graphics(ImageDC);
+	std::wstring WFont = UEngineString::AnsiToUniCode(_Font);
+	Gdiplus::Font fnt(WFont.c_str(), _Size, /*Gdiplus::FontStyleBold | Gdiplus::FontStyleItalic*/0, Gdiplus::UnitPixel);
+	// Gdiplus::HatchBrush hB(HatchStyle::HatchStyle05Percent, Gdiplus::Color(_Color.R, _Color.G, _Color.B), Gdiplus::Color::Transparent);
+	Gdiplus::SolidBrush hB(Gdiplus::Color(_Color.R, _Color.G, _Color.B));
+	FVector Pos = _Trans.GetPosition();
+	Gdiplus::PointF ptf(Pos.X, Pos.Y);
+	std::wstring WText = UEngineString::AnsiToUniCode(_Text);
+	graphics.DrawString(WText.c_str(), -1, &fnt, ptf, &hB);  //출력
 }
 
 void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color /*= Color8Bit::Black*/)
@@ -401,7 +415,7 @@ void UWindowImage::Cutting(int _X, int _Y)
 	{
 		for (int i = 0; i < _X; i++)
 		{
-			ImageInfo Info;
+			UImageInfo Info;
 			Info.ImageDC = ImageDC;
 			Info.CuttingTrans.SetPosition(CuttingPos);
 			Info.CuttingTrans.SetScale(CuttingScale);
@@ -444,4 +458,14 @@ Color8Bit UWindowImage::GetColor(int _X, int _Y, Color8Bit _DefaultColor)
 	Color.Color = ::GetPixel(ImageDC, _X, _Y);
 
 	return Color;
+}
+
+void UWindowImage::DrawRectangle(const FTransform& _Trans)
+{
+	Rectangle(ImageDC, _Trans.iLeft(), _Trans.iTop(), _Trans.iRight(), _Trans.iBottom());
+}
+
+void UWindowImage::DrawEllipse(const FTransform& _Trans)
+{
+	Ellipse(ImageDC, _Trans.iLeft(), _Trans.iTop(), _Trans.iRight(), _Trans.iBottom());
 }

@@ -22,7 +22,7 @@ enum class EWIndowImageType
 	IMG_PNG
 };
 
-class ImageInfo
+class UImageInfo
 {
 public:
 	HBITMAP hBitMap;
@@ -73,9 +73,14 @@ public:
 
 	void AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color = Color8Bit::Black);
 
+	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
+
 	bool Create(UWindowImage* _Image, const FVector& _Scale);
 
 	void Cutting(int _X, int _Y);
+
+	void DrawRectangle(const FTransform& _Trans);
+	void DrawEllipse(const FTransform& _Trans);
 
 	Color8Bit GetColor(int _X, int _Y, Color8Bit _DefaultColor);
 
@@ -96,7 +101,7 @@ private:
 	BITMAP BitMapInfo = BITMAP(); // 비트맵를 담는 구조체인데 이걸 얻어와야 합니다.
 	EWIndowImageType ImageType = EWIndowImageType::IMG_NONE;
 
-	std::vector<ImageInfo> Infos;
+	std::vector<UImageInfo> Infos;
 
 	bool Create(HDC _MainDC);
 };

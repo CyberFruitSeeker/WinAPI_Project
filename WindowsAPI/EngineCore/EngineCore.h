@@ -21,7 +21,7 @@ public:
 	UEngineCore& operator=(const UEngineCore& _Other) = delete;
 	UEngineCore& operator=(UEngineCore&& _Other) noexcept = delete;
 
-	// 하나는 무조건 만들어지고 사라질일이 없을것이므로
+	// 하나는 무조건 만들어지고 사라질일이 없을것이므ㅗ.
 	// 코어가 윈도우를 가지고
 	UEngineWindow MainWindow;
 	EngineTime MainTimer;
@@ -57,10 +57,20 @@ public:
 		FrameTime = 1 / static_cast<float>(Frame);
 	}
 
+	static bool IsDebug()
+	{
+		return IsDebugValue;
+	}
+	static void EngineDebugSwitch() {
+		IsDebugValue = !IsDebugValue;
+	}
+
 protected:
 	UEngineCore();
 
 private:
+	static bool IsDebugValue;
+
 	int Frame = -1;
 	float FrameTime = 0.0f;
 	float CurFrameTime = 0.0f;
