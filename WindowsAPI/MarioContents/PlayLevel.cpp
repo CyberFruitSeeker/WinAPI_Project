@@ -1,4 +1,5 @@
 #include "PlayLevel.h"
+#include "MarioMap.h"
 #include <EngineCore/EngineCore.h>
 
 PlayLevel::PlayLevel()
@@ -11,7 +12,12 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::BeginPlay()
 {
-	
+	ULevel::BeginPlay();
+
+	MarioMap* Map = SpawnActor<MarioMap>();
+	Map->SetMapImage("MarioWorld01");
+	Map->SetColMapImage("MarioWorld01_Col");
+	Map->SwitchDebug();
 }
 
 void PlayLevel::Tick(float _DeltaTime)

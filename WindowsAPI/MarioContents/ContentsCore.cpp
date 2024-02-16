@@ -49,6 +49,7 @@ void UContentsCore::BeginPlay()
 
 	// 우리가 제공하는건 Level
 	CreateLevel<UTitleLevel>("Title");
+	CreateLevel<UTitleLevel>("Play");
 	ChangeLevel("Title");
 }
 

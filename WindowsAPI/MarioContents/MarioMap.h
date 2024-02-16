@@ -15,8 +15,8 @@ public:
 	MarioMap& operator=(const MarioMap& _Other) = delete;
 	MarioMap& operator=(MarioMap&& _Other) noexcept = delete;
 
-	void SetMapImage(std::string_view _MarioMapImageName);
-	void SetColMapImage(std::string_view _MarioMapImageName);
+	void SetMapImage(std::string_view _MapImageName);
+	void SetColMapImage(std::string_view _MapImageName);
 
 	void SwitchDebug();
 
