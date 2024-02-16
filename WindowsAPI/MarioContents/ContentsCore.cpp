@@ -41,14 +41,16 @@ void UContentsCore::BeginPlay()
 
 	std::list<UEngineFile> NewList = NewDir.AllFile({ ".png", ".bmp" }, true);
 
-	// 엔진만의 규칙을 정할거냐.
+	// 경로에 있는 사진을 찾아서 자르는 것에 엔진만의 규칙을 정할 것인가
 	for (UEngineFile& File : NewList)
 	{
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
 	}
 
-	// 리소스를 여기서 로드할수도 있다.
+	UEngineResourcesManager::GetInst().CuttingImage("Player_Right.png", 5, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("Player_Left.png", 5, 8);
 
+	// 리소스를 여기서 로드할수도 있다.
 	// 우리가 제공하는건 Level
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");

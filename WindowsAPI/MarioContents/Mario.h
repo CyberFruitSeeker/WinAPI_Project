@@ -9,7 +9,7 @@ private:
 	static Mario* ItsMeMario;
 
 public:
-	static Mario* GetItsMeMario;
+	static Mario* GetItsMeMario();
 
 	// constrcuter destructer
 	Mario();

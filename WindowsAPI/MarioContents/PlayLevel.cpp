@@ -1,4 +1,5 @@
 #include "PlayLevel.h"
+#include "Mario.h"
 #include "MarioMap.h"
 #include <EngineCore/EngineCore.h>
 
@@ -18,6 +19,13 @@ void PlayLevel::BeginPlay()
 	Map->SetMapImage("MarioWorld01.png");
 	Map->SetColMapImage("MarioWorld01_Col.png");
 	Map->SwitchDebug();
+
+	//{
+	//	Mario* NewActor = SpawnActor<Mario>();
+	//	NewActor->SetName("Player");
+	//	NewActor->SetActorLocation({ 200,200 });
+	//}
+
 }
 
 void PlayLevel::Tick(float _DeltaTime)
