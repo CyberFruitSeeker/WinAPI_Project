@@ -15,8 +15,8 @@ void PlayLevel::BeginPlay()
 	ULevel::BeginPlay();
 
 	MarioMap* Map = SpawnActor<MarioMap>();
-	Map->SetMapImage("MarioWorld01");
-	Map->SetColMapImage("MarioWorld01_Col");
+	Map->SetMapImage("MarioWorld01.png");
+	Map->SetColMapImage("MarioWorld01_Col.png");
 	Map->SwitchDebug();
 }
 

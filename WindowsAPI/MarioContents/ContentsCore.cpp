@@ -1,5 +1,7 @@
 #include "ContentsCore.h"
 #include "TitleLevel.h"
+#include "PlayLevel.h"
+#include <EnginePlatform/EngineInput.h>
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include <EngineCore\EngineResourcesManager.h>
@@ -49,8 +51,9 @@ void UContentsCore::BeginPlay()
 
 	// 우리가 제공하는건 Level
 	CreateLevel<UTitleLevel>("Title");
-	CreateLevel<UTitleLevel>("Play");
+	CreateLevel<PlayLevel>("Play");
 	ChangeLevel("Title");
+	
 }
 
 void UContentsCore::Tick(float _DeltaTime)

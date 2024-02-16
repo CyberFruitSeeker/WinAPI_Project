@@ -47,7 +47,7 @@ void MarioMap::SwitchDebug()
 	else
 	{
 		Renderer->SetActive(true);
-		ColRenderer->SetActive(true);
+		ColRenderer->SetActive(false);
 	}
 }
 

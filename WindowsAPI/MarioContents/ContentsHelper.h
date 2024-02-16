@@ -6,9 +6,16 @@
 enum MarioRenderOrder
 {
 	Map,
+	Player,
+	Monster,
+	Text,
+};
+
+enum class MarioCollisionOrder
+{
+	MarioFireBall,
 	Monster,
 	Player,
-	Text,
 };
 
 enum class EActorDir

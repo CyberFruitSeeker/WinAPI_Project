@@ -145,6 +145,10 @@
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsHelper.h" />
+    <ClInclude Include="Mario.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MarioMap.h">
       <SubType>
       </SubType>
@@ -159,6 +163,10 @@
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="ContentsHelper.cpp" />
+    <ClCompile Include="Mario.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MarioMap.cpp">
       <SubType>
       </SubType>
