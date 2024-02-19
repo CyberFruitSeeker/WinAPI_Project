@@ -157,6 +157,10 @@
   <ItemGroup>
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsHelper.h" />
+    <ClInclude Include="Goomba.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Mario.h">
       <SubType>
       </SubType>
@@ -175,6 +179,10 @@
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="ContentsHelper.cpp" />
+    <ClCompile Include="Goomba.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Mario.cpp">
       <SubType>
       </SubType>

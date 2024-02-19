@@ -72,7 +72,7 @@ private:
 	FVector GravityVector = FVector::Zero;
 
 	// 점프, 나아갈 모든 방향의 힘의 합
-	FVector JumpPower = FVector::Up * 1000;
+	FVector JumpPower = FVector::Up * 750.0f;
 	FVector JumpVector = FVector::Zero;
 	FVector LastMoveVector = FVector::Zero;
 
@@ -83,5 +83,4 @@ private:
 	void CalGravityVector(float _DeltaTime);
 	void MoveLastMoveVector(float _DeltaTime);
 	void MoveUpdate(float _DeltaTime);
-	void GroundUp();
 };

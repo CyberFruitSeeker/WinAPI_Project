@@ -86,30 +86,14 @@ void Mario::CalLastMoveVector(float _DeltaTime)
 	LastMoveVector + JumpVector;
 }
 
-void Mario::GroundUp()
-{
-	while (true)
-	{
-		Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-		if (Color == Color8Bit(255, 0, 255, 0))
-		{
-			AddActorLocation(FVector::Up);
-		}
-		else
-		{
-			break;
-		}
-	}
-}
 
 void Mario::MoveUpdate(float _DeltaTime)
 {
+	// 이동을 하고 났더니 내가 땅에 처박힐 수 있는 것을 방지하기 위한 것
 	CalMoveVector(_DeltaTime);
 	CalGravityVector(_DeltaTime);
 	CalLastMoveVector(_DeltaTime);
 	MoveLastMoveVector(_DeltaTime);
-	GroundUp();
-	// 이동을 하고 났더니 내가 땅에 처박힐 수 있는 것을 방지하기 위한 것
 }
 
 /// ============== 이동에서 중력, 가속도 관련 기능 ==============
