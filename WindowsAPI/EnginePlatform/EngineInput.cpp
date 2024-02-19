@@ -2,13 +2,14 @@
 
 std::map<int, UEngineInput::EngineKey> UEngineInput::AllKeys;
 
-bool UEngineInput::AnyKeyDown = false;
-bool UEngineInput::AnyKeyPress = false;
-bool UEngineInput::AnyKeyUp = false;
-bool UEngineInput::AnyKeyFree = true;
+bool UEngineInput::AnykeyDown = false;
+bool UEngineInput::AnykeyPress = false;
+bool UEngineInput::AnykeyUp = false;
+bool UEngineInput::AnykeyFree = true;
 
 void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 {
+
 	// 이 키가 눌렸다는 거죠?
 	// if (0 != GetAsyncKeyState('A'))
 	// A키가 눌렸다면
@@ -16,6 +17,8 @@ void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 	{
 		if (true == Free)
 		{
+			UpTime;
+			PressTime = 0.0f;
 			// 이전까지 이 키는 눌리고 있지 않았다
 			Down = true;
 			Press = true;
@@ -24,6 +27,8 @@ void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 		}
 		else if (true == Down)
 		{
+			UpTime = 0.0f;
+			PressTime += _DeltaTime;
 			// 이전까지 이 키는 눌리고 있었다.
 			Down = false;
 			Press = true;
@@ -33,8 +38,10 @@ void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 	}
 	else
 	{
+		UpTime += _DeltaTime;
 		if (true == Press)
 		{
+			PressTime = 0.0f;
 			// 이전까지 이 키는 눌리고 있었다.
 			Down = false;
 			Press = false;
@@ -43,6 +50,7 @@ void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 		}
 		else if (true == Up)
 		{
+			PressTime = 0.0f;
 			// 이전까지 이 키는 안눌리고 있었고 앞으로도 안눌릴거다.
 			Down = false;
 			Press = false;
@@ -77,7 +85,7 @@ void UEngineInput::InputInit()
 	AllKeys[VK_MENU] = EngineKey(VK_MENU);
 	AllKeys[VK_PAUSE] = EngineKey(VK_PAUSE);
 	AllKeys[VK_CAPITAL] = EngineKey(VK_CAPITAL);
-	//AllKeys[VK_KANA] = EngineKey(VK_KANA);
+	// AllKeys[VK_KANA] = EngineKey(VK_KANA);
 	//AllKeys[VK_HANGEUL] = EngineKey(VK_HANGEUL);
 	//AllKeys[VK_HANGUL] = EngineKey(VK_HANGUL);
 	AllKeys[VK_IME_ON] = EngineKey(VK_IME_ON);
@@ -181,49 +189,48 @@ void UEngineInput::KeyCheckTick(float _DeltaTime)
 		{
 			KeyCheck = true;
 		}
-
 	}
 
-	// 어떤 키든 눌렸다는 것이다.
+	// 어떤키든 눌렸다는 이야기
 	if (true == KeyCheck)
 	{
-		if (true == AnyKeyFree)
+		if (true == AnykeyFree)
 		{
-			// 이전까지 이 키는 눌리고 있지 않았다.
-			AnyKeyDown = true;
-			AnyKeyPress = true;
-			AnyKeyUp = false;
-			AnyKeyFree = false;
+			// 이전까지 이 키는 눌리고 있지 않았다
+			AnykeyDown = true;
+			AnykeyPress = true;
+			AnykeyUp = false;
+			AnykeyFree = false;
 		}
-		else if (true == AnyKeyDown)
+		else if (true == AnykeyDown)
 		{
 			// 이전까지 이 키는 눌리고 있었다.
-			AnyKeyDown = false;
-			AnyKeyPress = true;
-			AnyKeyUp = false;
-			AnyKeyFree = false;
+			AnykeyDown = false;
+			AnykeyPress = true;
+			AnykeyUp = false;
+			AnykeyFree = false;
 		}
 	}
 	else
 	{
-		if (true == AnyKeyPress)
+		if (true == AnykeyPress)
 		{
 			// 이전까지 이 키는 눌리고 있었다.
-			AnyKeyDown = false;
-			AnyKeyPress = false;
-			AnyKeyUp = true;
-			AnyKeyFree = false;
+			AnykeyDown = false;
+			AnykeyPress = false;
+			AnykeyUp = true;
+			AnykeyFree = false;
 		}
-		else if (true == AnyKeyUp)
+		else if (true == AnykeyUp)
 		{
-			// 이전까지 이 키는 안눌리고 있었고, 앞으로도 눌리지 않을 것이다.
-			AnyKeyDown = false;
-			AnyKeyPress = false;
-			AnyKeyUp = false;
-			AnyKeyFree = true;
+			// 이전까지 이 키는 안눌리고 있었고 앞으로도 안눌릴거다.
+			AnykeyDown = false;
+			AnykeyPress = false;
+			AnykeyUp = false;
+			AnykeyFree = true;
 		}
-	}
 
+	}
 }
 
 class InputInitCreator

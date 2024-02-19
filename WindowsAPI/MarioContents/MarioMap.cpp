@@ -41,18 +41,20 @@ void MarioMap::SwitchDebug()
 {
 	if (true == Renderer->IsActive())
 	{
-		Renderer->SetActive(false);
-		ColRenderer->SetActive(true);
+		Renderer->SetActive(true);
+		ColRenderer->SetActive(false);
 	}
 	else
 	{
-		Renderer->SetActive(true);
-		ColRenderer->SetActive(false);
+		Renderer->SetActive(false);
+		ColRenderer->SetActive(true);
 	}
 }
 
 void MarioMap::BeginPlay()
 {
+	AActor::BeginPlay();
+
 	Renderer = CreateImageRenderer(MarioRenderOrder::Map);
 	ColRenderer = CreateImageRenderer(MarioRenderOrder::Map);
 	ColRenderer->SetActive(false);

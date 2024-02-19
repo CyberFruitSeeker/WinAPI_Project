@@ -31,11 +31,11 @@ void UTitleLevel::Tick(float _DeltaTime)
 	}
 
 }
-void UTitleLevel::LevelStart(ULevel* _Level)
+void UTitleLevel::LevelStart(ULevel* _PrevLevel)
 {
-	int a = 0;
+	ULevel::LevelStart(_PrevLevel);
 }
-void UTitleLevel::LevelEnd(ULevel* _Level)
+void UTitleLevel::LevelEnd(ULevel* _NextLevel)
 {
 	int a = 0;
 }

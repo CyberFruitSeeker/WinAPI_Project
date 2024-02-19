@@ -14,17 +14,19 @@ PlayLevel::~PlayLevel()
 void PlayLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
+	{
+		MarioMap* Map = SpawnActor<MarioMap>(MarioRenderOrder::Map);
+		Map->SetMapImage("MarioWorld01.png");
+		Map->SetColMapImage("MarioWorld01_Col.png");
+		Map->SwitchDebug();
 
-	MarioMap* Map = SpawnActor<MarioMap>();
-	Map->SetMapImage("MarioWorld01.png");
-	Map->SetColMapImage("MarioWorld01_Col.png");
-	Map->SwitchDebug();
+	}
 
-	//{
-	//	Mario* NewActor = SpawnActor<Mario>();
-	//	NewActor->SetName("Player");
-	//	NewActor->SetActorLocation({ 200,200 });
-	//}
+	{
+		Mario* NewActor = SpawnActor<Mario>();
+		NewActor->SetName("Player");
+		NewActor->SetActorLocation({ 200,200 });
+	}
 
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include "ContentsHelper.h"
+#include <EngineCore/Collision.h>
 
 // Ό³Έν :
 class Mario : public AActor

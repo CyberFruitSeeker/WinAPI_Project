@@ -28,6 +28,9 @@
     <Filter Include="Object\PlayLevel\Actor\Mario%28Player%29">
       <UniqueIdentifier>{3e8c4f9e-d6fc-4ac2-9139-665a1007373c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\PlayLevel\Actor\Monster">
+      <UniqueIdentifier>{2f9af87b-5589-453f-864d-467c87ad7226}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsHelper.cpp">

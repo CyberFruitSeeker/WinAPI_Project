@@ -6,8 +6,8 @@
 enum MarioRenderOrder
 {
 	Map,
-	Player,
 	Monster,
+	Player,
 	Text,
 };
 
@@ -30,7 +30,7 @@ enum class EPlayState
 	CameraFreeMove,
 	FreeMove,
 	Idle,
-	Move,
+	Run,
 	Jump,
 };
 
@@ -40,6 +40,7 @@ enum class EPlayState
 class UContentsHelper
 {
 public:
+	static class Mario* ItsMeMario;
 	static UWindowImage* ColMapImage;
 	static FVector GetMousePos();
 

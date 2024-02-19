@@ -30,18 +30,19 @@ void UContentsCore::BeginPlay()
 
 	UEngineCore::BeginPlay();
 
-	// D:\Project\GM\WIn\App
+	// 드라이브:\Project\파일명\WInAPI\App
 	UEngineDirectory NewDir;
 
-	// D:\Project\GM\WIn
+	// 드라이브:\Project\파일명\WInAPI
 	NewDir.MoveParent();
 
-	// D:\Project\GM\WIn\ContentsResources
+	// ContentsResources 폴더로 접근하기
 	NewDir.Move("ContentsResources");
 
 	std::list<UEngineFile> NewList = NewDir.AllFile({ ".png", ".bmp" }, true);
 
-	// 경로에 있는 사진을 찾아서 자르는 것에 엔진만의 규칙을 정할 것인가
+	// 엔진만의 규칙을 정할 것인가?
+	// Engine에 구현 되어있는 싱글톤 활용을 위해서 GetInst를 사용해본다.
 	for (UEngineFile& File : NewList)
 	{
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
@@ -61,4 +62,9 @@ void UContentsCore::BeginPlay()
 void UContentsCore::Tick(float _DeltaTime)
 {
 	UEngineCore::Tick(_DeltaTime);
+
+	if (true == UEngineInput::IsDown(VK_F2))
+	{
+		GEngine->EngineDebugSwitch();
+	}
 }
