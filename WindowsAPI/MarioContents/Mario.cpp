@@ -74,6 +74,8 @@ void Mario::MoveLastMoveVector(float _DeltaTime)
 	// 카메라는 x축으로만 움직이게 해본다.
 	GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
 	AddActorLocation(LastMoveVector * _DeltaTime);
+	// 원점(0, 0) 이하로 마이너스가 되어서 못나가게 하기 위한 코드가
+	// Map 혹은 PlayLevel에 구현되어있다.
 }
 
 void Mario::CalLastMoveVector(float _DeltaTime)
@@ -89,7 +91,7 @@ void Mario::CalLastMoveVector(float _DeltaTime)
 
 void Mario::MoveUpdate(float _DeltaTime)
 {
-	// 이동을 하고 났더니 내가 땅에 처박힐 수 있는 것을 방지하기 위한 것
+	// 이동을 하다가 마리오가 땅이나 오브젝트에 처박힐 수 있는 것을 방지하기 위한 것
 	CalMoveVector(_DeltaTime);
 	CalGravityVector(_DeltaTime);
 	CalLastMoveVector(_DeltaTime);
@@ -125,8 +127,8 @@ void Mario::BeginPlay()
 		SetName("Mario");
 		Renderer->SetImage("Player_Right.png");
 		Renderer->SetTransform({ {0,0}, {256, 256} });
-		Renderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.7f, true);
-		Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.7f, true);
+		Renderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.55f, true);
+		Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.55f, true);
 
 		Renderer->CreateAnimation("Run_Right", "Player_Right.png", { 1, 2, 3 }, 0.25f, true);
 		Renderer->CreateAnimation("Run_Left", "Player_Left.png", { 1, 2, 3 }, 0.25f, true);

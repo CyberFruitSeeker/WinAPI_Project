@@ -2,6 +2,7 @@
 #include <EngineCore/Level.h>
 
 // Ό³Έν :
+class MarioMap;
 class PlayLevel : public ULevel
 {
 public:
@@ -22,6 +23,6 @@ protected:
 	void LevelEnd(ULevel* _Level) override;
 
 private:
-
+	MarioMap* Map;
 };
 
