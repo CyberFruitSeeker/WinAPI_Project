@@ -42,7 +42,7 @@ class UContentsHelper
 public:
 	static class Mario* ItsMeMario;
 	static UWindowImage* ColMapImage;
-	static FVector GetMousePos();
+	//static FVector GetMousePos();
 
 private:
 	// constrcuter destructer

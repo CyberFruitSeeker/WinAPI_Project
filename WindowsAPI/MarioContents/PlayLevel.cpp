@@ -23,7 +23,7 @@ void PlayLevel::BeginPlay()
 
 	Mario* NewActor = SpawnActor<Mario>(MarioRenderOrder::Player);
 	NewActor->SetName("Player");
-	NewActor->SetActorLocation({ 200,200 });
+	NewActor->SetActorLocation({ 200,830 });
 
 
 }
@@ -35,12 +35,12 @@ void PlayLevel::Tick(float _DeltaTime)
 
 void PlayLevel::LevelStart(ULevel* _Level)
 {
-	// 리소스를 로드하고, 액터를 만드는 역할
+	// 리소스를 로드하고, 액터를 만드는 역할 우선 넣어준다.
 	int a = 0;
 }
 
 void PlayLevel::LevelEnd(ULevel* _Level)
 {
-	// 리소스를 날리고, 액터를 삭제하는 역할
+	// 리소스를 날리고, 액터를 삭제하는 역할 우선 넣어준다.
 	int a = 0;
 }

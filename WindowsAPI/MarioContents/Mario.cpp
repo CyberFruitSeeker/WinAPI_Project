@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-/// ============== 이동에서 중력, 가속도 관련 기능 ==============
+/// ============== 이동에서 중력, 카메라, 가속도 관련 기능 ==============
 
 void Mario::AddMoveVector(const FVector& _DirDelta)
 {
@@ -52,10 +52,10 @@ void Mario::CalMoveVector(float _DeltaTime)
 	}
 }
 
-void Mario::CalJumpVector(float _DeltaTime)
-{
-
-}
+//void Mario::CalJumpVector(float _DeltaTime)
+//{
+//
+//}
 
 void Mario::CalGravityVector(float _DeltaTime)
 {
@@ -71,7 +71,7 @@ void Mario::CalGravityVector(float _DeltaTime)
 
 void Mario::MoveLastMoveVector(float _DeltaTime)
 {
-	// 카메라는 x축으로만 움직여야 하니까.
+	// 카메라는 x축으로만 움직이게 해본다.
 	GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
 	AddActorLocation(LastMoveVector * _DeltaTime);
 }
@@ -125,11 +125,11 @@ void Mario::BeginPlay()
 		SetName("Mario");
 		Renderer->SetImage("Player_Right.png");
 		Renderer->SetTransform({ {0,0}, {256, 256} });
-		Renderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 5.0f, true);
-		Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.1f, true);
+		Renderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.7f, true);
+		Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.7f, true);
 
-		Renderer->CreateAnimation("Run_Right", "Player_Right.png", { 1, 2, 3 }, 1.0f, true);
-		Renderer->CreateAnimation("Run_Left", "Player_Left.png", 1, 3, 1.0f, true);
+		Renderer->CreateAnimation("Run_Right", "Player_Right.png", { 1, 2, 3 }, 0.25f, true);
+		Renderer->CreateAnimation("Run_Left", "Player_Left.png", { 1, 2, 3 }, 0.25f, true);
 
 		Renderer->CreateAnimation("Jump_Right", "Player_Right.png", 5, 5, 0.1f, true);
 		Renderer->CreateAnimation("Jump_Left", "Player_Left.png", 5, 5, 0.1f, true);

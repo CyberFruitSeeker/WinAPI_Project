@@ -10,7 +10,7 @@ UContentsHelper::~UContentsHelper()
 {
 }
 
-FVector UContentsHelper::GetMousePos()
-{
-	return GEngine->MainWindow.GetMousePosition();
-}
+//FVector UContentsHelper::GetMousePos()
+//{
+//	return GEngine->MainWindow.GetMousePosition();
+//}

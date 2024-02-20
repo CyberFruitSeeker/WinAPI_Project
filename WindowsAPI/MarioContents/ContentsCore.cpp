@@ -19,7 +19,7 @@ void UContentsCore::BeginPlay()
 	// 고전 게임의 일반적인 해상도인 800 / 600은 너무나도 작은 해상도이다.
 	// MainWindow.SetWindowScale({1280, 720});
 
-	// 중요한건 크기가 아니라 비율
+	// 중요한건 크기가 아니라 비율이다.
 	//MainWindow.SetWindowPosition({500, 100});
 	//                           1024                960
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
