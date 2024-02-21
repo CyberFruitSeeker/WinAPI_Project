@@ -284,7 +284,7 @@ void Mario::CameraFreeMove(float _DeltaTime)
 }
 
 
-// ====== 마리오 움직임 =======
+// ====== 키 입력으로 인한 마리오의 움직임 =======
 
 void Mario::FreeMove(float _DeltaTime)
 {
@@ -326,7 +326,7 @@ void Mario::Idle(float _DeltaTime)
 		int a = 0;
 	}
 
-	// 왼쪽 오른쪽도 안되고 있고.
+	// 왼쪽도, 오른쪽도 안가고 있고,
 	// 여기서는 가만히 있을때만 어떻게 할지 신경쓰면 된다.
 	if (true == UEngineInput::IsDown('1'))
 	{

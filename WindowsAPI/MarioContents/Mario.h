@@ -64,7 +64,7 @@ private:
 
 	FVector MoveVector = FVector::Zero;
 	FVector MoveAcc = FVector::Right * 500.0f;
-	float MoveMaxSpeed = 750.0f;
+	float MoveMaxSpeed = 700.0f;
 	void AddMoveVector(const FVector& _DirDelta);
 
 	// 마리오에게 적용되는 중력과 가속도

@@ -19,9 +19,6 @@
     <Filter Include="Object\PlayLevel\Actor">
       <UniqueIdentifier>{7c773f1e-0555-47dc-8367-783b32db6f07}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\TestLevel">
-      <UniqueIdentifier>{e688cef4-96b1-44a6-aa89-51e1e1c31ae9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\PlayLevel\Actor\Map%28BackGround%29">
       <UniqueIdentifier>{754dea4d-59d9-4be4-a17a-d06cc68ceb1d}</UniqueIdentifier>
     </Filter>
@@ -30,6 +27,9 @@
     </Filter>
     <Filter Include="Object\PlayLevel\Actor\Monster">
       <UniqueIdentifier>{2f9af87b-5589-453f-864d-467c87ad7226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestLevel">
+      <UniqueIdentifier>{e688cef4-96b1-44a6-aa89-51e1e1c31ae9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

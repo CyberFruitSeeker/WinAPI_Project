@@ -15,7 +15,7 @@ void PlayLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
 
-	// 카메라 범위 제한 1 : 맵을 통해 ImageScale을 이용할 것인가
+	// 카메라 범위 제한 1 : 맵 클래스에서 ImageScale을 이용할 것인가
 	//MarioMap* Map = SpawnActor<MarioMap>(MarioRenderOrder::Map);
 	Map = SpawnActor<MarioMap>();
 	Map->SetMapImage("MarioWorld01.png");
@@ -25,7 +25,7 @@ void PlayLevel::BeginPlay()
 	{
 		Mario* NewActor = SpawnActor<Mario>(MarioRenderOrder::Player);
 		NewActor->SetName("Player");
-		NewActor->SetActorLocation({ 200,832 });
+		NewActor->SetActorLocation({ 200,830 });
 	}
 
 }
@@ -52,7 +52,7 @@ void PlayLevel::Tick(float _DeltaTime)
 
 	FVector ImageScale = Map->GetImageScale();
 
-	// 맵의 바깥으로 못나가게 할것인가
+	// X축의 움직임을 기준으로 맵의 바깥으로 못나가게 할것인가
 	if (CameraPos.X >= ImageScale.X - GEngine->MainWindow.GetWindowScale().X)
 	{
 		CameraPos.X = ImageScale.X - GEngine->MainWindow.GetWindowScale().X;
@@ -70,12 +70,12 @@ void PlayLevel::Tick(float _DeltaTime)
 
 void PlayLevel::LevelStart(ULevel* _Level)
 {
-	// 리소스를 로드하고, 액터를 만드는 역할 우선 넣어준다.
+	// 리소스를 로드하고, 액터를 만드는 역할(우선 값을 넣어준다.)
 	int a = 0;
 }
 
 void PlayLevel::LevelEnd(ULevel* _Level)
 {
-	// 리소스를 날리고, 액터를 삭제하는 역할 우선 넣어준다.
+	// 리소스를 날리고, 액터를 삭제하는 역할(우선 값을넣어준다.)
 	int a = 0;
 }
