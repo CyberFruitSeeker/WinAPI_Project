@@ -24,7 +24,7 @@ enum class EActorDir
 	Right,
 };
 
-enum class EPlayState
+enum class PlayerState
 {
 	None,
 	CameraFreeMove,
@@ -34,6 +34,11 @@ enum class EPlayState
 	Jump,
 };
 
+enum class MonsterState
+{
+	None,
+	Idle,
+};
 
 
 // Ό³Έν :

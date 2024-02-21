@@ -18,15 +18,15 @@ void Mario::CalMoveVector(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X += 30;
+		CheckPos.X += 35;
 		break;
 	case EActorDir::Right:
-		CheckPos.X += 30;
+		CheckPos.X += 35;
 		break;
 	default:
 		break;
 	}
-	CheckPos.Y -= 30;
+	CheckPos.Y -= 15;
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
@@ -52,10 +52,10 @@ void Mario::CalMoveVector(float _DeltaTime)
 	}
 }
 
-//void Mario::CalJumpVector(float _DeltaTime)
-//{
-//
-//}
+void Mario::CalJumpVector(float _DeltaTime)
+{
+
+}
 
 void Mario::CalGravityVector(float _DeltaTime)
 {
@@ -127,11 +127,11 @@ void Mario::BeginPlay()
 		SetName("Mario");
 		Renderer->SetImage("Player_Right.png");
 		Renderer->SetTransform({ {0,0}, {256, 256} });
-		Renderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.55f, true);
-		Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.55f, true);
+		Renderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.45f, true);
+		Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.45f, true);
 
-		Renderer->CreateAnimation("Run_Right", "Player_Right.png", { 1, 2, 3 }, 0.25f, true);
-		Renderer->CreateAnimation("Run_Left", "Player_Left.png", { 1, 2, 3 }, 0.25f, true);
+		Renderer->CreateAnimation("Run_Right", "Player_Right.png", { 1, 2, 3 }, 0.1f, true);
+		Renderer->CreateAnimation("Run_Left", "Player_Left.png", { 1, 2, 3 }, 0.1f, true);
 
 		Renderer->CreateAnimation("Jump_Right", "Player_Right.png", 5, 5, 0.1f, true);
 		Renderer->CreateAnimation("Jump_Left", "Player_Left.png", 5, 5, 0.1f, true);
@@ -139,7 +139,7 @@ void Mario::BeginPlay()
 		Renderer->ChangeAnimation("Idle_Right");
 	}
 
-	// 일반적으로는 충돌(Collision)이라는 시점을 따로둔다.
+	// 충돌(Collision)이라는 시점을 따로둔다.
 	{
 		BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 		BodyCollision->SetScale({ 10, 100 });
@@ -147,7 +147,7 @@ void Mario::BeginPlay()
 	}
 
 
-	StateChange(EPlayState::Idle);
+	StateChange(PlayerState::Idle);
 }
 
 
@@ -201,7 +201,7 @@ std::string Mario::GetAnimationName(std::string _Name)
 	return _Name + DirName;
 }
 
-void Mario::StateChange(EPlayState _State)
+void Mario::StateChange(PlayerState _State)
 {
 	// 이전 상태와 지금의 상태가 같지 않다
 	// 어떤 상태 변화? : 이전에는 move, 현재는 Idle
@@ -209,13 +209,13 @@ void Mario::StateChange(EPlayState _State)
 	{
 		switch (_State)
 		{
-		case EPlayState::Idle:
+		case PlayerState::Idle:
 			IdleStart();
 			break;
-		case EPlayState::Run:
+		case PlayerState::Run:
 			RunStart();
 			break;
-		case EPlayState::Jump:
+		case PlayerState::Jump:
 			JumpStart();
 			break;
 		default:
@@ -230,19 +230,19 @@ void Mario::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
-	case EPlayState::CameraFreeMove:
+	case PlayerState::CameraFreeMove:
 		CameraFreeMove(_DeltaTime);
 		break;
-	case EPlayState::FreeMove:
+	case PlayerState::FreeMove:
 		FreeMove(_DeltaTime);
 		break;
-	case EPlayState::Idle:
+	case PlayerState::Idle:
 		Idle(_DeltaTime);
 		break;
-	case EPlayState::Run:
+	case PlayerState::Run:
 		Run(_DeltaTime);
 		break;
-	case EPlayState::Jump:
+	case PlayerState::Jump:
 		Jump(_DeltaTime);
 		break;
 	default:
@@ -279,7 +279,7 @@ void Mario::CameraFreeMove(float _DeltaTime)
 
 	if (UEngineInput::IsDown('2'))
 	{
-		StateChange(EPlayState::Idle);
+		StateChange(PlayerState::Idle);
 	}
 }
 
@@ -315,7 +315,7 @@ void Mario::FreeMove(float _DeltaTime)
 
 	if (UEngineInput::IsDown('1'))
 	{
-		StateChange(EPlayState::Idle);
+		StateChange(PlayerState::Idle);
 	}
 }
 
@@ -330,13 +330,13 @@ void Mario::Idle(float _DeltaTime)
 	// 여기서는 가만히 있을때만 어떻게 할지 신경쓰면 된다.
 	if (true == UEngineInput::IsDown('1'))
 	{
-		StateChange(EPlayState::FreeMove);
+		StateChange(PlayerState::FreeMove);
 		return;
 	}
 
 	if (true == UEngineInput::IsDown('2'))
 	{
-		StateChange(EPlayState::CameraFreeMove);
+		StateChange(PlayerState::CameraFreeMove);
 		return;
 	}
 
@@ -346,13 +346,13 @@ void Mario::Idle(float _DeltaTime)
 		true == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
-		StateChange(EPlayState::Run);
+		StateChange(PlayerState::Run);
 		return;
 	}
 
 	if (true == UEngineInput::IsDown(VK_SPACE))
 	{
-		StateChange(EPlayState::Jump);
+		StateChange(PlayerState::Jump);
 		return;
 	}
 
@@ -378,7 +378,7 @@ void Mario::Jump(float _DeltaTime)
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		JumpVector = FVector::Zero;
-		StateChange(EPlayState::Idle);
+		StateChange(PlayerState::Idle);
 		return;
 	}
 }
@@ -389,7 +389,7 @@ void Mario::Run(float _DeltaTime)
 
 	if (true == UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT))
 	{
-		StateChange(EPlayState::Idle);
+		StateChange(PlayerState::Idle);
 		return;
 	}
 
@@ -405,7 +405,7 @@ void Mario::Run(float _DeltaTime)
 
 	if (true == UEngineInput::IsDown(VK_SPACE))
 	{
-		StateChange(EPlayState::Jump);
+		StateChange(PlayerState::Jump);
 		return;
 	}
 

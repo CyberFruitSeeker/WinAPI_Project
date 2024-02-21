@@ -30,7 +30,7 @@ protected:
 
 	std::string GetAnimationName(std::string _Name);
 
-	void StateChange(EPlayState _State);
+	void StateChange(PlayerState _State);
 	void StateUpdate(float _DeltaTime);
 
 	void CameraFreeMove(float _DeltaTime);
@@ -45,7 +45,7 @@ protected:
 	void RunStart();
 	void JumpStart();
 
-	EPlayState State = EPlayState::None;
+	PlayerState State = PlayerState::None;
 	EActorDir DirState = EActorDir::Right;
 	std::string CurAnimationName = "None";
 	
@@ -64,22 +64,22 @@ private:
 
 	FVector MoveVector = FVector::Zero;
 	FVector MoveAcc = FVector::Right * 500.0f;
-	float MoveMaxSpeed = 700.0f;
+	float MoveMaxSpeed = 600.0f;
 	void AddMoveVector(const FVector& _DirDelta);
 
-	// 마리오에게 적용되는 중력과 가속도
-	FVector GravityAcc = FVector::Down * 750.0f;
+	// 마리오에게 적용되는 중력과 중력 가속도
+	FVector GravityAcc = FVector::Down * 1000.0f;
 	FVector GravityVector = FVector::Zero;
 
 	// 점프, 나아갈 모든 방향의 힘의 합
-	FVector JumpPower = FVector::Up * 750.0f;
+	FVector JumpPower = FVector::Up * 770.0f;
 	FVector JumpVector = FVector::Zero;
 	FVector LastMoveVector = FVector::Zero;
 
 	// 이동 관련 중력 연산
 	void CalLastMoveVector(float _DeltaTime);
 	void CalMoveVector(float _DeltaTime);
-	//void CalJumpVector(float _DeltaTime);
+	void CalJumpVector(float _DeltaTime);
 	void CalGravityVector(float _DeltaTime);
 	void MoveLastMoveVector(float _DeltaTime);
 	void MoveUpdate(float _DeltaTime);

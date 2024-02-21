@@ -11,11 +11,11 @@ private:
 	static Goomba* JustGoomba;
 
 public:
-	static Goomba* GetJustGoomba;
+	static Goomba* GetJustGoomba();
 
 	// constrcuter destructer
 	Goomba();
-	~Goomba();
+	virtual ~Goomba();
 
 	// delete Function
 	Goomba(const Goomba& _Other) = delete;
@@ -29,8 +29,24 @@ protected:
 
 	
 
-
 private:
+	
+	UImageRenderer* Renderer = nullptr;
+	
+	// 굼바에게 적용되는 중력과 중력 가속도
+	FVector GravityAcc = FVector::Down * 1000.0f;
+	FVector GravityVector = FVector::Zero;
+
+	FVector LastMoveVector = FVector::Zero;
+
+	MonsterState StateChange = MonsterState::None;
+
+
+	void CalGravityVector(float _DeltaTime);
+
+	void MoveLastMoveVector(float _DeltaTime);
+
+	void MoveUpdate(float _DeltaTime);
 
 };
 

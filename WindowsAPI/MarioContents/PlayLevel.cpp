@@ -1,6 +1,7 @@
 #include "PlayLevel.h"
 #include "Mario.h"
 #include "MarioMap.h"
+#include "Goomba.h"
 #include <EngineCore/EngineCore.h>
 
 PlayLevel::PlayLevel()
@@ -26,6 +27,12 @@ void PlayLevel::BeginPlay()
 		Mario* NewActor = SpawnActor<Mario>(MarioRenderOrder::Player);
 		NewActor->SetName("Player");
 		NewActor->SetActorLocation({ 200,830 });
+	}
+
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba.png");
+		NewActor->SetActorLocation({ 500,450 });
 	}
 
 }
