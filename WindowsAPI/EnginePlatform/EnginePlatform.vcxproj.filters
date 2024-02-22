@@ -7,6 +7,24 @@
     <Filter Include="Window">
       <UniqueIdentifier>{fac928cf-7590-44fd-a83d-bbd80a01ee90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{7c0754f4-749e-43cc-84e6-b54c06815c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{0f4fea87-88c9-4391-bd33-3c641d2c7af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FMOD">
+      <UniqueIdentifier>{1bbadc25-4aa7-4cf6-88c9-cd6a057a6655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FMOD\Debug">
+      <UniqueIdentifier>{3197bdb7-08b9-47c7-8aea-c3ea01ffa878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FMOD\inc">
+      <UniqueIdentifier>{52ac8ea4-4e8f-4edd-9320-8163e0145bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FMOD\Release">
+      <UniqueIdentifier>{bf496af1-e97e-43d4-9e52-17b180a7a813}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineWindow.cpp">

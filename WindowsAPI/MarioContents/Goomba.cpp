@@ -38,8 +38,13 @@ void Goomba::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-}
 
+
+
+
+
+
+}
 
 void Goomba::CalGravityVector(float _DeltaTime)
 {

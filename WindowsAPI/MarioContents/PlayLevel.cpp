@@ -31,7 +31,7 @@ void PlayLevel::BeginPlay()
 
 	{
 		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
-		NewActor->SetName("Goomba.png");
+		NewActor->SetName("Goomba");
 		NewActor->SetActorLocation({ 500,450 });
 	}
 
