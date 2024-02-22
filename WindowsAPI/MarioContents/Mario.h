@@ -76,11 +76,13 @@ private:
 	FVector JumpVector = FVector::Zero;
 	FVector LastMoveVector = FVector::Zero;
 
+	void MoveCameraPos();
+
 	// 이동 관련 중력 연산
 	void CalLastMoveVector(float _DeltaTime);
 	void CalMoveVector(float _DeltaTime);
 	void CalJumpVector(float _DeltaTime);
 	void CalGravityVector(float _DeltaTime);
-	void MoveLastMoveVector(float _DeltaTime);
+	void MoveLastCameraVector(float _DeltaTime);
 	void MoveUpdate(float _DeltaTime);
 };

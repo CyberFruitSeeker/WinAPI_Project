@@ -4,6 +4,7 @@
 #include "ContentsHelper.h"
 #include <string>
 #include <vector>
+#include <EngineCore/Collision.h>
 
 /// ============== 이동에서 중력, 카메라, 가속도 관련 기능 ==============
 
@@ -68,16 +69,6 @@ void Mario::CalGravityVector(float _DeltaTime)
 }
 
 
-
-void Mario::MoveLastMoveVector(float _DeltaTime)
-{
-	// 카메라는 x축으로만 움직이게 해본다.
-	GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
-	AddActorLocation(LastMoveVector * _DeltaTime);
-	// 원점(0, 0) 이하로 마이너스가 되어서 못나가게 하기 위한 코드가
-	// Map 혹은 PlayLevel에 구현되어있다.
-}
-
 void Mario::CalLastMoveVector(float _DeltaTime)
 {
 	// 제로로 만들어서 초기화 시킨다.
@@ -95,7 +86,7 @@ void Mario::MoveUpdate(float _DeltaTime)
 	CalMoveVector(_DeltaTime);
 	CalGravityVector(_DeltaTime);
 	CalLastMoveVector(_DeltaTime);
-	MoveLastMoveVector(_DeltaTime);
+	MoveLastCameraVector(_DeltaTime);
 }
 
 /// ============== 이동에서 중력, 가속도 관련 기능 ==============
@@ -121,7 +112,7 @@ Mario::~Mario()
 void Mario::BeginPlay()
 {
 	AActor::BeginPlay();
-	ItsMeMario = this;
+	//ItsMeMario = this;
 	{
 		Renderer = CreateImageRenderer(MarioRenderOrder::Player);
 		SetName("Mario");
@@ -183,7 +174,7 @@ void Mario::DirCheck()
 std::string Mario::GetAnimationName(std::string _Name)
 {
 	std::string DirName = "";
-	
+
 	switch (DirState)
 	{
 	case EActorDir::Left:
@@ -225,6 +216,41 @@ void Mario::StateChange(PlayerState _State)
 
 	State = _State;
 }
+
+
+// ====== 카메라 ======
+
+void Mario::MoveLastCameraVector(float _DeltaTime)
+{
+	// 카메라는 x축으로만 움직이게 해본다.
+	{
+		GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
+
+	}
+
+	AddActorLocation(LastMoveVector * _DeltaTime);
+
+
+
+	
+	// 
+	// 맵에서 원점(0, 0) 이하(마이너스)로 못나가게 하는 코드가
+	// Map 클래스 혹은 PlayLevel에 구현되어있다.
+}
+
+
+//void Mario::MoveLastCameraVector(float _DeltaTime)
+//{
+//	// 카메라는 x축으로만 움직이게 해본다.
+//	GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
+//	AddActorLocation(LastMoveVector * _DeltaTime);
+//	// 맵에서 원점(0, 0) 이하(마이너스)로 못나가게 하는 코드가
+//	// Map 클래스 혹은 PlayLevel에 구현되어있다.
+//}
+
+
+
+
 
 void Mario::StateUpdate(float _DeltaTime)
 {
@@ -284,8 +310,6 @@ void Mario::CameraFreeMove(float _DeltaTime)
 }
 
 
-// ====== 키 입력으로 인한 마리오의 움직임 =======
-
 void Mario::FreeMove(float _DeltaTime)
 {
 	FVector FreeMove = FVector::Zero;
@@ -318,6 +342,11 @@ void Mario::FreeMove(float _DeltaTime)
 		StateChange(PlayerState::Idle);
 	}
 }
+
+// ===== 카메라 ======
+
+
+// ====== 키 입력으로 인한 마리오의 움직임 =======
 
 void Mario::Idle(float _DeltaTime)
 {

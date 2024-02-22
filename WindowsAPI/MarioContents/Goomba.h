@@ -34,19 +34,11 @@ private:
 	UImageRenderer* Renderer = nullptr;
 	
 	// 굼바에게 적용되는 중력과 중력 가속도
-	FVector GravityAcc = FVector::Down * 1000.0f;
-	FVector GravityVector = FVector::Zero;
 
-	FVector LastMoveVector = FVector::Zero;
 
+	// 굼바의 상태가 어떠니?
 	MonsterState StateChange = MonsterState::None;
 
-
-	void CalGravityVector(float _DeltaTime);
-
-	void MoveLastMoveVector(float _DeltaTime);
-
-	void MoveUpdate(float _DeltaTime);
 
 };
 

@@ -38,6 +38,7 @@ enum class MonsterState
 {
 	None,
 	Idle,
+	Die,
 };
 
 
@@ -47,7 +48,13 @@ class UContentsHelper
 public:
 	static class Mario* ItsMeMario;
 	static UWindowImage* ColMapImage;
-	//static FVector GetMousePos();
+	static FVector Gravity;
+
+
+
+
+
+
 
 private:
 	// constrcuter destructer
