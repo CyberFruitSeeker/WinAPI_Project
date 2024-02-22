@@ -22,6 +22,7 @@ enum class MarioCollisionOrder
 enum class EActorDir
 {
 	Left,
+	None,
 	Right,
 };
 
