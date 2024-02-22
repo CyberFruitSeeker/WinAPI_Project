@@ -22,7 +22,7 @@ void MarioMap::SetColMapImage(std::string_view _MapImageName)
 {
 	ColRenderer->SetImage(_MapImageName);
 	UWindowImage* Image = ColRenderer->GetImage();
-	UContentsHelper::ColMapImage = Image;
+	ContentsHelper::ColMapImage = Image;
 	/*FVector */ImageScale = Image->GetScale();
 	ColRenderer->SetTransform({ ImageScale.Half2D(),ImageScale });
 }

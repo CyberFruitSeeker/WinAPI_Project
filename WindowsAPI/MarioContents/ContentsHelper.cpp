@@ -1,11 +1,30 @@
 #include "ContentsHelper.h"
 
-UWindowImage* UContentsHelper::ColMapImage = nullptr;
+UWindowImage* ContentsHelper::ColMapImage = nullptr;
+static std::map<PlayerState, std::string> StateList;
+FVector ContentsHelper::Gravity = { 0.f,1000.0f };
 
-UContentsHelper::UContentsHelper()
+ContentsHelper::ContentsHelper()
 {
 }
 
-UContentsHelper::~UContentsHelper()
+ContentsHelper::~ContentsHelper()
 {
 }
+
+
+bool ContentsHelper::DownCheck(FVector _NextVector)
+{
+	return false;
+}
+
+bool ContentsHelper::LeftCheck(FVector _NextVector)
+{
+	return false;
+}
+
+bool ContentsHelper::RightCheck(FVector _NextVector)
+{
+	return false;
+}
+

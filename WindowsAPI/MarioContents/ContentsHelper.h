@@ -2,6 +2,7 @@
 #include <EngineBase\EngineMath.h>
 #include <EngineCore\EngineCore.h>
 #include <EngineCore\ImageRenderer.h>
+#include <map>
 
 enum MarioRenderOrder
 {
@@ -43,22 +44,24 @@ enum class MonsterState
 
 
 // Ό³Έν :
-class UContentsHelper
+class ContentsHelper
 {
 public:
 	static class Mario* ItsMeMario;
 	static UWindowImage* ColMapImage;
 	static FVector Gravity;
 
+	static std::map<PlayerState, std::string> StateList;
 
-
-
+	static bool DownCheck(FVector _NextVector);
+	static bool LeftCheck(FVector _NextVector);
+	static bool RightCheck(FVector _NextVector);
 
 
 
 private:
 	// constrcuter destructer
-	UContentsHelper();
-	~UContentsHelper();
+	ContentsHelper();
+	~ContentsHelper();
 };
 

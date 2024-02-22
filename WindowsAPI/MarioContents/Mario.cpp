@@ -28,7 +28,7 @@ void Mario::CalMoveVector(float _DeltaTime)
 		break;
 	}
 	CheckPos.Y -= 15;
-	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
@@ -61,7 +61,7 @@ void Mario::CalJumpVector(float _DeltaTime)
 void Mario::CalGravityVector(float _DeltaTime)
 {
 	GravityVector += GravityAcc * _DeltaTime;
-	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		GravityVector = FVector::Zero;
@@ -223,16 +223,11 @@ void Mario::StateChange(PlayerState _State)
 void Mario::MoveLastCameraVector(float _DeltaTime)
 {
 	// 카메라는 x축으로만 움직이게 해본다.
-	{
-		GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
 
-	}
+	GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
 
 	AddActorLocation(LastMoveVector * _DeltaTime);
 
-
-
-	
 	// 
 	// 맵에서 원점(0, 0) 이하(마이너스)로 못나가게 하는 코드가
 	// Map 클래스 혹은 PlayLevel에 구현되어있다.
@@ -403,7 +398,7 @@ void Mario::Jump(float _DeltaTime)
 
 	MoveUpdate(_DeltaTime);
 
-	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		JumpVector = FVector::Zero;
