@@ -8,6 +8,7 @@
 class Mario : public Physics
 {
 public:
+	static FVector MarioLocation;
 	
 	// constrcuter destructer
 	Mario();
@@ -19,8 +20,6 @@ public:
 	Mario& operator=(const Mario& _Other) = delete;
 	Mario& operator=(Mario&& _Other) noexcept = delete;
 	void SetState(PlayerState _State);
-
-	static FVector MarioLocation;
 
 
 protected:
@@ -37,43 +36,35 @@ protected:
 	void DecreaseSpeed(float _DeltaTime, FVector _Fvector);
 
 
-
-
-
 	// 상태 시작의 기능이 담긴 함수들
 	// Fly도 필요한지는 추후 판별
 	void Idle(float _DeltaTime);
 	void Jump(float _DeltaTime);
 	void Run(float _DeltaTime);
+
 	void IdleStart();
 	void RunStart();
 	void JumpStart();
 
-	PlayerState State = PlayerState::None;
-	EActorDir DirState = EActorDir::Right;
-	std::string CurAnimationName = "None";
+	void DieStart();
+	void Die(float _DeltaTime);
+
+	void Interactive(float _DeltaTime);
+	void MoveFun(float _DeltaTime, FVector Accel);
+
+
+
+
+	
+	
 	
 	// Physics 클래스에
 	// UImageRenderer* Renderer = nullptr;
 	// UImageRenderer* ColRenderer = nullptr;
 	// 가 있다는 것에 주의
 
-	UCollision* BodyCollision = nullptr;
-	UImageRenderer* Renderer = nullptr;
-
-	float AnimationTime = 0.0f;
-	int AnimationFrame = 0;
-
-	float AlphaTime = 0.0f;
-	bool Dir = false;
-
-	float FreeMoveSpeed = 1500.0f;
-
-	FVector MoveVector = FVector::Zero;
-	FVector MoveAcc = FVector::Right * 500.0f;
-	float MoveMaxSpeed = 600.0f;
-	void AddMoveVector(const FVector& _DirDelta);
-
+	//UCollision* BodyCollision = nullptr;
+	//UImageRenderer* Renderer = nullptr;
 
 	// 마리오에게 적용되는 중력과 중력 가속도
 
@@ -82,13 +73,9 @@ protected:
 
 
 	// 이동 관련 중력 연산
-	void CalLastMoveVector(float _DeltaTime);
-	void CalMoveVector(float _DeltaTime);
-	void CalJumpVector(float _DeltaTime);
-	void CalGravityVector(float _DeltaTime);
-	void MoveUpdate(float _DeltaTime);
+
 
 private:
-
+	PlayerState State = PlayerState::None;
 
 };

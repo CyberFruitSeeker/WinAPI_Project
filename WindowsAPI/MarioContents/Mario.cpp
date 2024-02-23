@@ -59,12 +59,15 @@ void Mario::Tick(float _DeltaTime)
 
 }
 
+// ====== 마리오의 움직임에 따른 카메라 이동 ======
 
-
-void Mario::AddMoveVector(const FVector& _DirDelta)
+void Mario::MoveLastCamera()
 {
+	// 카메라는 x축으로만 움직이게 해본다.
 
 }
+ // =============================================
+
 
 void Mario::SetState(PlayerState _State)
 {
@@ -77,38 +80,17 @@ void Mario::StateUpdate(float _DeltaTime)
 
 }
 
-
-
-void Mario::CalMoveVector(float _DeltaTime)
+void Mario::IncreaseSpeed(float _DeltaTime, FVector _Fvector)
 {
-	
 }
 
-void Mario::CalJumpVector(float _DeltaTime)
+void Mario::DecreaseSpeed(float _DeltaTime, FVector _Fvector)
 {
-
-}
-
-void Mario::CalGravityVector(float _DeltaTime)
-{
-
 }
 
 
-void Mario::CalLastMoveVector(float _DeltaTime)
-{
-
-}
 
 
-void Mario::MoveUpdate(float _DeltaTime)
-{
-	// 이동을 하다가 마리오가 땅이나 오브젝트에 처박힐 수 있는 것을 방지하기 위한 것
-	CalMoveVector(_DeltaTime);
-	CalGravityVector(_DeltaTime);
-	CalLastMoveVector(_DeltaTime);
-	MoveLastCamera();
-}
 
 /// ============== 이동에서 중력, 가속도 관련 기능 ==============
 
@@ -125,18 +107,6 @@ void Mario::DirCheck()
 
 
 
-// ====== 카메라 ======
-
-void Mario::MoveLastCamera()
-{
-	// 카메라는 x축으로만 움직이게 해본다.
-
-	// 
-	// 맵에서 원점(0, 0) 이하(마이너스)로 못나가게 하는 코드가
-	// Map 클래스 혹은 PlayLevel에 구현되어있지만 주석처리
-}
-
-
 //void Mario::MoveLastCameraVector(float _DeltaTime)
 //{
 //	// 카메라는 x축으로만 움직이게 해본다.
@@ -150,11 +120,17 @@ void Mario::MoveLastCamera()
 
 
 
-// ===== 카메라? ======
+void Mario::Idle(float _DeltaTime)
+{
+}
 
+void Mario::Jump(float _DeltaTime)
+{
+}
 
-// ====== 키 입력으로 인한 마리오의 움직임 =======
-
+void Mario::Run(float _DeltaTime)
+{
+}
 
 void Mario::IdleStart()
 {
@@ -169,6 +145,22 @@ void Mario::RunStart()
 void Mario::JumpStart()
 {
 
+}
+
+void Mario::DieStart()
+{
+}
+
+void Mario::Die(float _DeltaTime)
+{
+}
+
+void Mario::Interactive(float _DeltaTime)
+{
+}
+
+void Mario::MoveFun(float _DeltaTime, FVector Accel)
+{
 }
 
 
