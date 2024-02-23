@@ -105,6 +105,18 @@ void Mario::DirCheck()
 	
 }
 
+void Mario::MarioColEffect(float _DeltaTime)
+{
+}
+
+void Mario::MoveResult(float _DeltaTime)
+{
+}
+
+void Mario::SetAnimation(std::string _Name)
+{
+}
+
 
 
 //void Mario::MoveLastCameraVector(float _DeltaTime)
