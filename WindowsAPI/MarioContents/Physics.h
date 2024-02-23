@@ -38,7 +38,7 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* ColRenderer = nullptr;
 	UCollision* BodyCollision = nullptr;
-	EActorDir State = EActorDir::Right;
+	EActorDir DirState = EActorDir::Right;
 
 
 	void InteractiveDirCheck();

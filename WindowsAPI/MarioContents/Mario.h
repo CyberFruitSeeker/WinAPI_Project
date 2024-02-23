@@ -44,11 +44,16 @@ protected:
 	void RunStart();
 	void JumpStart();
 
+	void DirChange(float _DeltaTime);
+	void DirChangeStart();
+
 	void DieStart();
 	void Die(float _DeltaTime);
 
 	void Interactive(float _DeltaTime);
-	void MoveFun(float _DeltaTime, FVector Accel);
+	void InteractiveStart();
+
+	void RunSmooth(float _DeltaTime, FVector Accel);
 
 	// 마리오가 맵의 컬리전에 끼이는 현상을 확인하면
 	// 엣지 체크 함수 추가 필요

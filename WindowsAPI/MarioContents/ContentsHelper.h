@@ -29,18 +29,19 @@ enum class EActorDir
 enum class PlayerState
 {
 	None,
-	Crouch,
 	Idle,
-	FreeMove,
 	Run,
 	Jump,
-
+	DirChange,
+	Interactive,
+	PlayerDie,
 };
 
 enum class MonsterState
 {
 	None,
 	Idle,
+	MonsterDie,
 
 };
 

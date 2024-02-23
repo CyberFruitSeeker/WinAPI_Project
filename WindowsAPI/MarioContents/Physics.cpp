@@ -23,11 +23,11 @@ void Physics::InteractiveDirCheck()
 
 	if (Mario::MarioLocation.X < GetActorLocation().X)
 	{
-		State = EActorDir::Right;
+		DirState = EActorDir::Right;
 	}
 	else
 	{
-		State = EActorDir::Left;
+		DirState = EActorDir::Left;
 	}
 
 
@@ -39,11 +39,11 @@ void Physics::AutoAnimation(UImageRenderer* _Renderer, std::string _Name, int _S
 {
 	std::string CurName = GetName();
 	if (NoDir) {
-		_Renderer->CreateAnimation(_Name, CurName + ".PNG", _Start, _End, _Time, _Routine);
+		_Renderer->CreateAnimation(_Name, CurName + ".png", _Start, _End, _Time, _Routine);
 		return;
 	}
-	_Renderer->CreateAnimation(_Name + "_Right", CurName + "_Right.PNG", _Start, _End, _Time, _Routine);
-	_Renderer->CreateAnimation(_Name + "_Left", CurName + "_Left.PNG", _Start, _End, _Time, _Routine);
+	_Renderer->CreateAnimation(_Name + "_Right", CurName + "_Right.png", _Start, _End, _Time, _Routine);
+	_Renderer->CreateAnimation(_Name + "_Left", CurName + "_Left.png", _Start, _End, _Time, _Routine);
 	return;
 }
 
@@ -51,7 +51,7 @@ std::string Physics::GetAniName(std::string _Name)
 {
 	std::string GoName = "";
 
-	switch (State)
+	switch (DirState)
 	{
 	case EActorDir::Left:
 		GoName = "_Left";

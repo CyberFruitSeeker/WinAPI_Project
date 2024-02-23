@@ -12,6 +12,7 @@ FVector Mario::MarioLocation = {};
 
 Mario::Mario()
 {
+	DirState = EActorDir::Right;
 }
 
 Mario::~Mario()
@@ -28,6 +29,12 @@ void Mario::BeginPlay()
 		Renderer->SetImage("Player_Right.png");
 		Renderer->SetTransform({ {0,0}, {256, 256} });
 
+		AutoAnimation(Renderer, "Idle", 0, 0);
+		AutoAnimation(Renderer, "Run", 1, 3);
+		AutoAnimation(Renderer, "Jump", 5, 5);
+
+
+
 		//Renderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.45f, true);
 		//Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.45f, true);
 
@@ -37,25 +44,19 @@ void Mario::BeginPlay()
 		//Renderer->CreateAnimation("Jump_Right", "Player_Right.png", 5, 5, 0.1f, true);
 		//Renderer->CreateAnimation("Jump_Left", "Player_Left.png", 5, 5, 0.1f, true);
 
-		//Renderer->ChangeAnimation("Idle_Right");
-	}
-
-	// 충돌(Collision)이라는 시점을 따로둔다.
-	{
-		//BodyCollision = CreateCollision(MarioCollisionOrder::Player);
-		//BodyCollision->SetScale({ 10, 100 });
-		//BodyCollision->SetColType(ECollisionType::CirCle);
+		SetAnimation("Idle");
+		SetState(PlayerState::Idle);
 	}
 
 
-	//SetState(PlayerState::Idle);
+
+	SetState(PlayerState::Idle);
 }
 
 
 void Mario::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-
 
 }
 
@@ -66,19 +67,239 @@ void Mario::MoveLastCamera()
 	// 카메라는 x축으로만 움직이게 해본다.
 
 }
- // =============================================
 
+
+
+ // ======== 마리오의 움직임 기능, 셋팅, 키입력 ===========
 
 void Mario::SetState(PlayerState _State)
 {
-
+	if (State != _State || _State==PlayerState::Interactive)
+	{
+		switch (_State)
+		{
+		case PlayerState::Idle:
+			IdleStart();
+			break;
+		case PlayerState::Run:
+			RunStart();
+			break;
+		case PlayerState::Jump:
+			JumpStart();
+			break;
+		case PlayerState::DirChange:
+			DirChangeStart();
+			break;
+		case PlayerState::Interactive:
+			InteractiveStart();
+			break;
+		case PlayerState::PlayerDie:
+			DieStart();
+			break;
+		default:
+			break;
+		}
+	}
+	State = _State;
 }
-
 
 void Mario::StateUpdate(float _DeltaTime)
 {
+	DirCheck();
+	switch (State)
+	{
+	case PlayerState::None:
+		break;
+	case PlayerState::Idle:
+		GravityCheck(_DeltaTime);
+		Idle(_DeltaTime);
+		break;
+	case PlayerState::Run:
+		GravityCheck(_DeltaTime);
+		Run(_DeltaTime);
+		break;
+	case PlayerState::Jump:
+		GravityCheck(_DeltaTime);
+		Jump(_DeltaTime);
+		break;
+	case PlayerState::DirChange:
+		GravityCheck(_DeltaTime);
+		DirChange(_DeltaTime);
+		break;
+	case PlayerState::Interactive:
+		GravityCheck(_DeltaTime);
+		Interactive(_DeltaTime);
+		break;
+	case PlayerState::PlayerDie:
+		GravityCheck(_DeltaTime);
+		Die(_DeltaTime);
+		break;
+	default:
+		break;
+	}
 
 }
+
+
+
+void Mario::Idle(float _DeltaTime)
+{
+	MoveResult(_DeltaTime);
+
+	if (0 == CurSpeedDir)
+	{
+		XSpeed.X = 0;
+	}
+
+	if (UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT))
+	{
+		return;
+	}
+
+	if (true == UEngineInput::IsPress(VK_LEFT) || true == UEngineInput::IsPress(VK_RIGHT))
+	{
+		SetState(PlayerState::Run);
+		return;
+	}
+
+	if (true == UEngineInput::IsUp(VK_LEFT) || true == UEngineInput::IsUp(VK_RIGHT))
+	{
+		SetState(PlayerState::Run);
+		return;
+	}
+
+	if (UEngineInput::IsDown(VK_SPACE) && false == Jumping)
+	{
+		SetState(PlayerState::Jump);
+		return;
+	}
+
+}
+
+void Mario::Run(float _DeltaTime)
+{
+	if (UEngineInput::IsDown(VK_SPACE) && false == Jumping)
+	{
+		SetState(PlayerState::Jump);
+		return;
+	}
+
+	if ((UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT)) || UEngineInput::IsPress(VK_LEFT) && UEngineInput::IsPress(VK_RIGHT))
+	{
+		if (CurSpeedDir == 0)
+		{
+			SetState(PlayerState::Idle);
+			return;
+		}
+		DecreaseSpeed(_DeltaTime, BreakAccelX);
+		MoveResult(_DeltaTime);
+		return;
+	}
+
+	if ((CurSpeed.X) > 300)
+	{
+		if (UEngineInput::IsPress(VK_LEFT) && CurSpeedDir == 1)
+		{
+			SetState(PlayerState::DirChange);
+			return;
+		}
+		if (UEngineInput::IsPress(VK_RIGHT) && CurSpeedDir == -1)
+		{
+			SetState(PlayerState::DirChange);
+			return;
+		}
+	}
+	RunSmooth(_DeltaTime, AccelX);
+}
+
+void Mario::Jump(float _DeltaTime)
+{
+	if (true == UEngineInput::IsUp(VK_SPACE) && CurSpeed.Y < 0.f)
+	{
+		YSpeed.Y = 0;
+		GravitySpeed.Y = 0;
+	}
+
+	RunSmooth(_DeltaTime, AccelX);
+	GravityCheck(_DeltaTime);
+
+	if (BreakSpeed.Y == YSpeed.Y && BreakSpeed.Y == GravitySpeed.Y)
+	{
+		if ((XSpeed.X) > 5)
+		{
+			SetState(PlayerState::Run);
+			Jumping = false;
+			return;
+		}
+		else
+		{
+			SetState(PlayerState::Idle);
+			Jumping = false;
+			return;
+		}
+	}
+}
+
+
+void Mario::IdleStart()
+{
+	SetAnimation("Idle");
+}
+
+void Mario::RunStart()
+{
+	SetAnimation("Run");
+}
+
+void Mario::JumpStart()
+{
+	Jumping = true;
+	YSpeed.Y = JumpPower;
+	GravitySpeed.Y = 0;
+	AddActorLocation({ 0.f,-5.f });
+	SetAnimation("Jump");
+}
+
+
+void Mario::Interactive(float _DeltaTime)
+{
+
+}
+
+void Mario::InteractiveStart()
+{
+	Jumping = true;
+	GravitySpeed.Y = 0;
+	YSpeed.Y = -300;
+	SetAnimation("Jump");
+}
+
+
+void Mario::DieStart()
+{
+}
+
+void Mario::Die(float _DeltaTime)
+{
+}
+
+
+void Mario::SetAnimation(std::string _Name)
+{
+	std::string Name = GetAniName(_Name);
+	Renderer->ChangeAnimation(Name);
+
+}
+
+
+void Mario::RunSmooth(float _DeltaTime, FVector Accel)
+{
+}
+
+
+
+
+/// ============== 이동 가속 & 감속 ==============
 
 void Mario::IncreaseSpeed(float _DeltaTime, FVector _Fvector)
 {
@@ -92,17 +313,18 @@ void Mario::DecreaseSpeed(float _DeltaTime, FVector _Fvector)
 
 
 
-/// ============== 이동에서 중력, 가속도 관련 기능 ==============
-
-
-/// ========= 마리오 이미지 셋, 애니메이션, 스테이트 =========
-
-
-
-
 void Mario::DirCheck()
 {
 	
+}
+
+void Mario::DirChange(float _DeltaTime)
+{
+
+}
+
+void Mario::DirChangeStart()
+{
 }
 
 void Mario::MarioColEffect(float _DeltaTime)
@@ -113,9 +335,6 @@ void Mario::MoveResult(float _DeltaTime)
 {
 }
 
-void Mario::SetAnimation(std::string _Name)
-{
-}
 
 
 
@@ -132,47 +351,5 @@ void Mario::SetAnimation(std::string _Name)
 
 
 
-void Mario::Idle(float _DeltaTime)
-{
-}
-
-void Mario::Jump(float _DeltaTime)
-{
-}
-
-void Mario::Run(float _DeltaTime)
-{
-}
-
-void Mario::IdleStart()
-{
-
-}
-
-void Mario::RunStart()
-{
-
-}
-
-void Mario::JumpStart()
-{
-
-}
-
-void Mario::DieStart()
-{
-}
-
-void Mario::Die(float _DeltaTime)
-{
-}
-
-void Mario::Interactive(float _DeltaTime)
-{
-}
-
-void Mario::MoveFun(float _DeltaTime, FVector Accel)
-{
-}
 
 
