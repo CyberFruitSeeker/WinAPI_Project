@@ -31,7 +31,7 @@
     <Filter Include="TestLevel">
       <UniqueIdentifier>{e688cef4-96b1-44a6-aa89-51e1e1c31ae9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Physics">
+    <Filter Include="ContentsCore\Physics">
       <UniqueIdentifier>{6fb4ba05-88ec-4e47-b73c-0a14ae78bca8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -61,7 +61,7 @@
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Physics.cpp">
-      <Filter>Physics</Filter>
+      <Filter>ContentsCore\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,7 +90,7 @@
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Physics.h">
-      <Filter>Physics</Filter>
+      <Filter>ContentsCore\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -17,6 +17,22 @@ void Physics::Tick(float _DeltaTime)
 
 }
 
+void Physics::InteractiveDirCheck()
+{
+	// Player에게 주고받는 네이밍 : ItsMeMario..?
+
+	if (Mario::MarioLocation.X < GetActorLocation().X)
+	{
+		State = EActorDir::Right;
+	}
+	else
+	{
+		State = EActorDir::Left;
+	}
+
+
+
+}
 
 
 void Physics::AutoAnimation(UImageRenderer* _Renderer, std::string _Name, int _Start, int _End, float _Time, bool _Routine)
@@ -31,7 +47,7 @@ void Physics::AutoAnimation(UImageRenderer* _Renderer, std::string _Name, int _S
 	return;
 }
 
-std::string Physics::GetAnimation(std::string _Name)
+std::string Physics::GetAniName(std::string _Name)
 {
 	std::string GoName = "";
 
@@ -61,10 +77,9 @@ std::string Physics::GetAnimation(std::string _Name)
 
 void Physics::SetAnimation(std::string _Name)
 {
-	std::string AniName = GetAnimation(_Name);
+	std::string AniName = GetAniName(_Name);
 	Renderer->ChangeAnimation(AniName);
 }
-
 
 
 bool Physics::GravityCheck(float _DeltaTime)
@@ -95,9 +110,7 @@ void Physics::MoveResult(float _DeltaTime)
 	AddActorLocation(CurSpeed * _DeltaTime);
 }
 
-void Physics::InteractiveDirCheck()
-{
-	// Player에게 주고받는 네이밍 : ItsMeMario
 
 
-}
+
+

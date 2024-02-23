@@ -20,7 +20,7 @@ public:
 protected:
 	// 어떤걸 마리오에게 쓰고, 몬스터에게 쓸 것인가?
 	void AutoAnimation(UImageRenderer* _Renderer, std::string _Name, int _Start = 0, int _End = 0, float _Time = 0.1f, bool _Routine = true);
-	virtual std::string GetAnimation(std::string _Name);
+	virtual std::string GetAniName(std::string _Name);
 	virtual void SetAnimation(std::string _Name);
 
 
@@ -30,6 +30,8 @@ protected:
 
 	virtual void StateUpdate(float _DeltaTime) {};
 	virtual void SetState(MonsterState _State) {};
+	// 블럭, 동전, 아이템에 대한 콜리전 이벤트는 나중에 추가해본다.
+
 
 
 	std::string CurAnimationName = "";

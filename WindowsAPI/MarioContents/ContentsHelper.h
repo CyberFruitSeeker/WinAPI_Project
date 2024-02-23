@@ -7,8 +7,8 @@
 enum MarioRenderOrder
 {
 	Map,
-	Monster,
 	Player,
+	Monster,
 	Text,
 };
 
@@ -29,18 +29,19 @@ enum class EActorDir
 enum class PlayerState
 {
 	None,
-	CameraFreeMove,
-	FreeMove,
+	Crouch,
 	Idle,
+	FreeMove,
 	Run,
 	Jump,
+
 };
 
 enum class MonsterState
 {
 	None,
 	Idle,
-	Die,
+
 };
 
 

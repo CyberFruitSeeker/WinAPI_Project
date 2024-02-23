@@ -2,16 +2,13 @@
 #include <EngineCore/Actor.h>
 #include "ContentsHelper.h"
 #include <EngineCore/Collision.h>
+#include "Physics.h"
 
 // 설명 :
-class Mario : public AActor
+class Mario : public Physics
 {
-private:
-	static Mario* ItsMeMario;
-
 public:
-	static Mario* GetItsMeMario();
-
+	
 	// constrcuter destructer
 	Mario();
 	~Mario();
@@ -21,26 +18,33 @@ public:
 	Mario(Mario&& _Other) noexcept = delete;
 	Mario& operator=(const Mario& _Other) = delete;
 	Mario& operator=(Mario&& _Other) noexcept = delete;
+	void SetState(PlayerState _State);
+
+	static FVector MarioLocation;
+
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void MoveLastCamera();
+
 	void DirCheck();
 
-	std::string GetAnimationName(std::string _Name);
-
-	void StateChange(PlayerState _State);
 	void StateUpdate(float _DeltaTime);
 
-	void CameraFreeMove(float _DeltaTime);
-	void FreeMove(float _DeltaTime);
+	void IncreaseSpeed(float _DeltaTime, FVector _Fvector);
+	void DecreaseSpeed(float _DeltaTime, FVector _Fvector);
+
+
+
+
+
+	// 상태 시작의 기능이 담긴 함수들
+	// Fly도 필요한지는 추후 판별
 	void Idle(float _DeltaTime);
 	void Jump(float _DeltaTime);
 	void Run(float _DeltaTime);
-	// Fly도 필요한지는 추후 판별
-
-	// 상태 시작의 기능이 담긴 함수들이다.
 	void IdleStart();
 	void RunStart();
 	void JumpStart();
@@ -49,11 +53,14 @@ protected:
 	EActorDir DirState = EActorDir::Right;
 	std::string CurAnimationName = "None";
 	
+	// Physics 클래스에
+	// UImageRenderer* Renderer = nullptr;
+	// UImageRenderer* ColRenderer = nullptr;
+	// 가 있다는 것에 주의
 
-private:
 	UCollision* BodyCollision = nullptr;
-
 	UImageRenderer* Renderer = nullptr;
+
 	float AnimationTime = 0.0f;
 	int AnimationFrame = 0;
 
@@ -67,14 +74,11 @@ private:
 	float MoveMaxSpeed = 600.0f;
 	void AddMoveVector(const FVector& _DirDelta);
 
+
 	// 마리오에게 적용되는 중력과 중력 가속도
-	FVector GravityAcc = FVector::Down * 1000.0f;
-	FVector GravityVector = FVector::Zero;
+
 
 	// 점프, 나아갈 모든 방향의 힘의 합
-	FVector JumpPower = FVector::Up * 770.0f;
-	FVector JumpVector = FVector::Zero;
-	FVector LastMoveVector = FVector::Zero;
 
 
 	// 이동 관련 중력 연산
@@ -82,6 +86,9 @@ private:
 	void CalMoveVector(float _DeltaTime);
 	void CalJumpVector(float _DeltaTime);
 	void CalGravityVector(float _DeltaTime);
-	void MoveLastCameraVector(float _DeltaTime);
 	void MoveUpdate(float _DeltaTime);
+
+private:
+
+
 };
