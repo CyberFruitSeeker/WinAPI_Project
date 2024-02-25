@@ -53,7 +53,7 @@ protected:
 	void Interactive(float _DeltaTime);
 	void InteractiveStart();
 
-	void RunSmooth(float _DeltaTime, FVector Accel);
+	void JustRun(float _DeltaTime, FVector Accel);
 
 	// 마리오가 맵의 컬리전에 끼이는 현상을 확인하면
 	// 엣지 체크 함수 추가 필요
@@ -63,7 +63,7 @@ protected:
 
 	void MoveResult(float _DeltaTime) override;
 
-	void SetAnimation(std::string _Name) override;
+	//void SetAnimation(std::string _Name) override;
 
 	const FVector AccelX = { 250.f,0.f,0.f,0.f };
 	const FVector AccelY = { 0.f,1000.f,0.f,0.f };

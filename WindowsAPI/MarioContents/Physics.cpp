@@ -35,17 +35,17 @@ void Physics::InteractiveDirCheck()
 }
 
 
-void Physics::AutoAnimation(UImageRenderer* _Renderer, std::string _Name, int _Start, int _End, float _Time, bool _Routine)
-{
-	std::string CurName = GetName();
-	if (NoDir) {
-		_Renderer->CreateAnimation(_Name, CurName + ".png", _Start, _End, _Time, _Routine);
-		return;
-	}
-	_Renderer->CreateAnimation(_Name + "_Right", CurName + "_Right.png", _Start, _End, _Time, _Routine);
-	_Renderer->CreateAnimation(_Name + "_Left", CurName + "_Left.png", _Start, _End, _Time, _Routine);
-	return;
-}
+//void Physics::AutoAnimation(UImageRenderer* _Renderer, std::string _Name, int _Start, int _End, float _Time, bool _Routine)
+//{
+//	std::string CurName = GetName();
+//	if (NoDir) {
+//		_Renderer->CreateAnimation(_Name, CurName + ".png", _Start, _End, _Time, _Routine);
+//		return;
+//	}
+//	_Renderer->CreateAnimation(_Name + "_Right", CurName + "_Right.png", _Start, _End, _Time, _Routine);
+//	_Renderer->CreateAnimation(_Name + "_Left", CurName + "_Left.png", _Start, _End, _Time, _Routine);
+//	return;
+//}
 
 std::string Physics::GetAniName(std::string _Name)
 {

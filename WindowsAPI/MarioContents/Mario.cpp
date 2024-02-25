@@ -29,22 +29,20 @@ void Mario::BeginPlay()
 		Renderer->SetImage("Player_Right.png");
 		Renderer->SetTransform({ {0,0}, {256, 256} });
 
-		AutoAnimation(Renderer, "Idle", 0, 0);
-		AutoAnimation(Renderer, "Run", 1, 3);
-		AutoAnimation(Renderer, "Jump", 5, 5);
+		
 
 
 
-		//Renderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.45f, true);
-		//Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.45f, true);
+		Renderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.45f, true);
+		Renderer->CreateAnimation("Idle_Left", "Player_Left.png", 0, 0, 0.45f, true);
 
-		//Renderer->CreateAnimation("Run_Right", "Player_Right.png", { 1, 2, 3 }, 0.1f, true);
-		//Renderer->CreateAnimation("Run_Left", "Player_Left.png", { 1, 2, 3 }, 0.1f, true);
+		Renderer->CreateAnimation("Run_Right", "Player_Right.png", { 1, 2, 3 }, 0.1f, true);
+		Renderer->CreateAnimation("Run_Left", "Player_Left.png", { 1, 2, 3 }, 0.1f, true);
 
-		//Renderer->CreateAnimation("Jump_Right", "Player_Right.png", 5, 5, 0.1f, true);
-		//Renderer->CreateAnimation("Jump_Left", "Player_Left.png", 5, 5, 0.1f, true);
+		Renderer->CreateAnimation("Jump_Right", "Player_Right.png", 5, 5, 0.1f, true);
+		Renderer->CreateAnimation("Jump_Left", "Player_Left.png", 5, 5, 0.1f, true);
 
-		SetAnimation("Idle");
+	
 		SetState(PlayerState::Idle);
 	}
 
@@ -209,7 +207,7 @@ void Mario::Run(float _DeltaTime)
 			return;
 		}
 	}
-	RunSmooth(_DeltaTime, AccelX);
+	JustRun(_DeltaTime, AccelX);
 }
 
 void Mario::Jump(float _DeltaTime)
@@ -220,7 +218,7 @@ void Mario::Jump(float _DeltaTime)
 		GravitySpeed.Y = 0;
 	}
 
-	RunSmooth(_DeltaTime, AccelX);
+	JustRun(_DeltaTime, AccelX);
 	GravityCheck(_DeltaTime);
 
 	if (BreakSpeed.Y == YSpeed.Y && BreakSpeed.Y == GravitySpeed.Y)
@@ -284,15 +282,15 @@ void Mario::Die(float _DeltaTime)
 }
 
 
-void Mario::SetAnimation(std::string _Name)
-{
-	std::string Name = GetAniName(_Name);
-	Renderer->ChangeAnimation(Name);
+//void Mario::SetAnimation(std::string _Name)
+//{
+//	std::string Name = GetAniName(_Name);
+//	Renderer->ChangeAnimation(Name);
+//
+//}
 
-}
 
-
-void Mario::RunSmooth(float _DeltaTime, FVector Accel)
+void Mario::JustRun(float _DeltaTime, FVector Accel)
 {
 }
 
