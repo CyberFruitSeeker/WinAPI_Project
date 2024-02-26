@@ -14,27 +14,38 @@ enum MarioRenderOrder
 
 enum class MarioCollisionOrder
 {
-	MarioFireBall,
+	Map,
+	FireBall,
 	Monster,
 	Player,
 };
 
 enum class EActorDir
 {
-	Left,
-	None,
-	Right,
+	Left = -1,
+	None = 0,
+	Right = 1,
 };
 
 enum class PlayerState
 {
 	None,
 	Idle,
-	Run,
+	Move,
 	Jump,
 	DirChange,
 	Interactive,
-	PlayerDie,
+	Dead,
+	End,
+	EndMove,
+	Changing,
+};
+
+enum class MarioModClass
+{
+	Small,
+	Big,
+	Fire,
 };
 
 enum class MonsterState
@@ -59,7 +70,7 @@ public:
 	static bool DownCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);
 	static bool RightCheck(FVector _NextVector);
-
+	static bool BottomCheck(FVector _NextVector);
 
 
 private:

@@ -13,17 +13,9 @@ Goomba::~Goomba()
 {
 }
 
-Goomba* Goomba::JustGoomba = nullptr;
-
-Goomba* Goomba::GetJustGoomba()
-{
-	return JustGoomba;
-}
-
 void Goomba::BeginPlay()
 {
 	AActor::BeginPlay();
-	JustGoomba = this;
 	{
 		SetName("Goomba");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
@@ -39,4 +31,9 @@ void Goomba::Tick(float _DeltaTime)
 	AActor::Tick(_DeltaTime);
 
 
+}
+
+void Goomba::Idle(float _DeltaTime)
+{
+	GravityCheck(_DeltaTime);
 }

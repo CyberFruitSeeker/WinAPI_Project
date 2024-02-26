@@ -2,16 +2,15 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/Collision.h>
 #include "ContentsHelper.h"
+#include "Physics.h"
 
 
 // 설명 :
-class Goomba : public AActor
+class Goomba : public Physics
 {
 private:
-	static Goomba* JustGoomba;
 
 public:
-	static Goomba* GetJustGoomba();
 
 	// constrcuter destructer
 	Goomba();
@@ -27,11 +26,15 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void Idle(float _DeltaTime);
+
+
+
 	
 
 private:
 	
-	UImageRenderer* Renderer = nullptr;
+	//UImageRenderer* Renderer = nullptr;
 	
 	// 굼바에게 적용되는 중력과 중력 가속도
 

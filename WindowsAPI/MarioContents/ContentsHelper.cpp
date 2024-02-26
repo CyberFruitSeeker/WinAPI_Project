@@ -28,3 +28,8 @@ bool ContentsHelper::RightCheck(FVector _NextVector)
 	return false;
 }
 
+bool ContentsHelper::BottomCheck(FVector _NextVector)
+{
+	return false;
+}
+

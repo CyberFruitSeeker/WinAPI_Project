@@ -48,8 +48,8 @@ void UContentsCore::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
 	}
 
-	UEngineResourcesManager::GetInst().CuttingImage("Player_Right.png", 5, 8);
-	UEngineResourcesManager::GetInst().CuttingImage("Player_Left.png", 5, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("Mario_Right.png", 5, 7);
+	UEngineResourcesManager::GetInst().CuttingImage("Mario_Left.png", 5, 7);
 	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 3, 1);
 
 	CreateLevel<UTitleLevel>("Title");
