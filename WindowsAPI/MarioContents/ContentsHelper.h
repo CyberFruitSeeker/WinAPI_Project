@@ -41,7 +41,7 @@ enum class PlayerState
 	Changing,
 };
 
-enum class MarioModClass
+enum class MarioMod
 {
 	Small,
 	Big,

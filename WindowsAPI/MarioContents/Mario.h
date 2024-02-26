@@ -9,6 +9,10 @@ class Mario : public Physics
 {
 public:
 	
+	static FVector MarioLocation;
+
+	static MarioMod PlayMarioClass;
+
 	// constrcuter destructer
 	Mario();
 	~Mario();
@@ -21,11 +25,8 @@ public:
 
 	void SetState(PlayerState _State);
 	
-	void SetMarioClassState(MarioModClass _MarioClass);
+	void SetMarioClassState(MarioMod _MarioClass);
 
-	static FVector MarioLocation;
-
-	static MarioModClass MyMarioClass;
 
 
 

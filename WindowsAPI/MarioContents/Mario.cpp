@@ -8,7 +8,7 @@
 #include "Physics.h"
 #include "ContentsHelper.h"
 
-MarioModClass Mario::MyMarioClass = MarioModClass::Small;
+MarioMod Mario::PlayMarioClass = MarioMod::Small;
 FVector Mario::MarioLocation = {};
 
 Mario::Mario()
@@ -35,10 +35,11 @@ void Mario::BeginPlay()
 	AnimationAuto(Renderer, "Dead", 6, 6);
 	AnimationAuto(Renderer, "End", 7, 7);
 
+	// collision은 따로 둔다.
 	{
 		BodyCollision = CreateCollision(MarioCollisionOrder::Player);
+		BodyCollision->SetTransform({ { 0,-32 }, { 128, 128 } });
 		BodyCollision->SetColType(ECollisionType::Rect);
-		BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
 	}
 
 
@@ -62,11 +63,12 @@ void Mario::Tick(float _DeltaTime)
 
 void Mario::SetCameraLastMovePos()
 {
-	FVector CurPos = GetActorLocation();
-	FVector CurCameraPos = GetWorld()->GetCameraPos();
+	FVector CurCamPos = GetWorld()->GetCameraPos();
+	FVector CurMarioPos = GetActorLocation();
 	float WindowCenter = GEngine->MainWindow.GetWindowScale().hX();
-	if (CurPos.X > WindowCenter + CurCameraPos.X) {
-		GetWorld()->SetCameraPos({ CurPos.X - WindowCenter,CurCameraPos.Y });
+
+	if (CurMarioPos.X > WindowCenter + CurCamPos.X) {
+		GetWorld()->SetCameraPos({ CurMarioPos.X - WindowCenter,CurCamPos.Y });
 	}
 }
 
@@ -194,31 +196,31 @@ void Mario::SpeedDown(float _DeltaTime, FVector _FVector)
 
 
 // 마리오가 어떤 모드인가?
-void Mario::SetMarioClassState(MarioModClass _MarioClass)
+void Mario::SetMarioClassState(MarioMod _MarioClass)
 {
-	if (MyMarioClass == _MarioClass) {
+	if (PlayMarioClass == _MarioClass) {
 		return;
 	}
 	ChangeTime = 1.f;
 	switch (_MarioClass)
 	{
-	case MarioModClass::Small:
+	case MarioMod::Small:
 		StatTime = 2.f;
 		SetAnimation("Smaller");
 		BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
 		break;
-	case MarioModClass::Big:
+	case MarioMod::Big:
 		SetAnimation("Bigger");
 		BodyCollision->SetTransform({ { 0,-64 }, { 64, 128 } });
 		break;
-	case MarioModClass::Fire:
+	case MarioMod::Fire:
 		SetAnimation("Fire");
 		BodyCollision->SetTransform({ { 0,-64 }, { 64, 128 } });
 		break;
 	default:
 		break;
 	}
-	MyMarioClass = _MarioClass;
+	PlayMarioClass = _MarioClass;
 	SetState(PlayerState::Changing);
 }
 
@@ -483,14 +485,14 @@ void Mario::DirChange(float _DeltaTime)
 void Mario::SetAnimation(std::string _Name)
 {
 	std::string Name = GetAnimationName(_Name);
-	switch (MyMarioClass)
+	switch (PlayMarioClass)
 	{
-	case MarioModClass::Small:
+	case MarioMod::Small:
 		break;
-	case MarioModClass::Big:
+	case MarioMod::Big:
 		Name = "Big_" + Name;
 		break;
-	case MarioModClass::Fire:
+	case MarioMod::Fire:
 		Name = "Fire_" + Name;
 		break;
 	default:
@@ -611,26 +613,26 @@ void Mario::Changing(float _DeltaTime)
 void Mario::MarioChange(bool _Positive)
 {
 	if (_Positive) {
-		switch (MyMarioClass)
+		switch (PlayMarioClass)
 		{
-		case MarioModClass::Small:
+		case MarioMod::Small:
 			break;
-		case MarioModClass::Big:
+		case MarioMod::Big:
 			break;
-		case MarioModClass::Fire:
+		case MarioMod::Fire:
 			break;
 		default:
 			break;
 		}
 	}
 	else {
-		switch (MyMarioClass)
+		switch (PlayMarioClass)
 		{
-		case MarioModClass::Small:
+		case MarioMod::Small:
 			break;
-		case MarioModClass::Big:
+		case MarioMod::Big:
 			break;
-		case MarioModClass::Fire:
+		case MarioMod::Fire:
 			break;
 		default:
 			break;

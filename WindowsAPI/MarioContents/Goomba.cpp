@@ -26,6 +26,15 @@ void Goomba::BeginPlay()
 	StateChange = MonsterState::Idle;
 }
 
+Goomba* Goomba::ItsGoomba = nullptr;
+
+Goomba* Goomba::JustGoomba()
+{
+	return ItsGoomba;
+}
+
+
+
 void Goomba::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
@@ -33,7 +42,19 @@ void Goomba::Tick(float _DeltaTime)
 
 }
 
-void Goomba::Idle(float _DeltaTime)
+void Goomba::CalGravityVector(float _DeltaTime)
 {
-	GravityCheck(_DeltaTime);
+	GravityVector += GravityAcc * _DeltaTime;
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	if (Color==Color8Bit(255, 0, 255, 0))
+	{
+		GravityVector = FVector::Zero;
+	}
+
 }
+
+void Goomba::CalLastMoveVector(float _DeltaTime)
+{
+
+}
+
