@@ -23,10 +23,15 @@ void Goomba::BeginPlay()
 		Renderer->SetTransform({ {0,0},{384,384} });
 	}
 
+	
+	// 굼바가 마리오랑 충돌 하는가?
+	{
+		GoombaCollision = CreateCollision(MonsterCollisionOreder::ColToMario);
+		GoombaCollision->SetTransform({ {0,-32},{64,64} });
+		GoombaCollision->SetColType(ECollisionType::Rect);
+	}
 
-
-
-
+	
 }
 
 
@@ -34,15 +39,19 @@ void Goomba::BeginPlay()
 void Goomba::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-
-	GravityVector += GravityAcc * _DeltaTime;
-	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-	if (Color == Color8Bit(255, 0, 255, 0))
 	{
-		GravityVector = FVector::Zero;
+		GravityVector += GravityAcc * _DeltaTime;
+		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+		if (Color == Color8Bit(255, 0, 255, 0))
+		{
+			GravityVector = FVector::Zero;
+		}
+
+		AddActorLocation(GravityVector);
 	}
 
-	AddActorLocation(GravityVector);
+
+	
 }
 
 

@@ -20,6 +20,13 @@ enum class MarioCollisionOrder
 	Player,
 };
 
+enum class MonsterCollisionOreder
+{
+	Map,
+	ColToMario,
+
+};
+
 enum class EActorDir
 {
 	Left = -1,

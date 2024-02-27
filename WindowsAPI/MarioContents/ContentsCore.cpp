@@ -51,6 +51,7 @@ void UContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Right.png", 5, 7);
 	UEngineResourcesManager::GetInst().CuttingImage("Mario_Left.png", 5, 7);
 	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 3, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("Troopa_Left.png", 5, 1);
 
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");

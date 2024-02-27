@@ -38,7 +38,7 @@ void Mario::BeginPlay()
 	// collisionÀº µû·Î µÐ´Ù.
 	{
 		BodyCollision = CreateCollision(MarioCollisionOrder::Player);
-		BodyCollision->SetTransform({ { 0,-32 }, { 128, 128 } });
+		BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
@@ -555,6 +555,7 @@ void Mario::Interactive(float _DeltaTime)
 bool Mario::LeftEdgeCheck()
 {
 
+
 	return true;
 }
 
@@ -643,12 +644,12 @@ void Mario::MarioChange(bool _Positive)
 
 void Mario::ResultMove(float _DeltaTime)
 {
-	/*if (1 == CurSpeedDir) {
+	if (1 == CurSpeedDir) {
 		RightEdgeCheck();
 	}
 	else if (-1 == CurSpeedDir) {
 		LeftEdgeCheck();
-	}*/
+	}
 
 	MarioCollision(_DeltaTime);
 

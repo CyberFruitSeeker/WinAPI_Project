@@ -34,7 +34,7 @@ protected:
 private:
 	
 	UImageRenderer* Renderer = nullptr;
-	UCollision* BodyCollision = nullptr;
+	UCollision* GoombaCollision = nullptr;
 
 	FVector GravityAcc = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
