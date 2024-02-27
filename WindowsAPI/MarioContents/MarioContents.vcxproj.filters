@@ -63,6 +63,9 @@
     <ClCompile Include="Physics.cpp">
       <Filter>ContentsCore &amp; Physics\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Troopa.cpp">
+      <Filter>Object\PlayLevel\Actor\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsHelper.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Physics.h">
       <Filter>ContentsCore &amp; Physics\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Troopa.h">
+      <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

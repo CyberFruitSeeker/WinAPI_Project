@@ -179,6 +179,10 @@
     </ClInclude>
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="TitleLogo.h" />
+    <ClInclude Include="Troopa.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -205,6 +209,10 @@
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="TitleLogo.cpp" />
+    <ClCompile Include="Troopa.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EngineBase\EngineBase.vcxproj">
