@@ -6,6 +6,65 @@
 #include <vector>
 #include <EngineCore/Collision.h>
 
+
+Mario* Mario::ItsMeMario = nullptr;
+
+Mario* Mario::GetItsMeMario()
+{
+	return ItsMeMario;
+}
+
+Mario::Mario()
+{
+}
+
+Mario::~Mario()
+{
+}
+
+void Mario::BeginPlay()
+{
+	AActor::BeginPlay();
+	//ItsMeMario = this;
+	{
+		Renderer = CreateImageRenderer(MarioRenderOrder::Player);
+		SetName("Mario");
+		Renderer->SetImage("Mario_Right.png");
+		Renderer->SetTransform({ {0,0}, {256, 256} });
+		Renderer->CreateAnimation("Idle_Right", "Mario_Right.png", 0, 0, 0.30f, true);
+		Renderer->CreateAnimation("Idle_Left", "Mario_Left.png", 0, 0, 0.30f, true);
+
+		Renderer->CreateAnimation("Run_Right", "Mario_Right.png", { 1, 2, 3 }, 0.1f, true);
+		Renderer->CreateAnimation("Run_Left", "Mario_Left.png", { 1, 2, 3 }, 0.1f, true);
+
+		Renderer->CreateAnimation("Jump_Right", "Mario_Right.png", 5, 5, 0.1f, true);
+		Renderer->CreateAnimation("Jump_Left", "Mario_Left.png", 5, 5, 0.1f, true);
+
+		Renderer->ChangeAnimation("Idle_Right");
+	}
+
+	// Collision은 따로둔다.
+	{
+		BodyCollision = CreateCollision(MarioCollisionOrder::Player);
+		BodyCollision->SetTransform({ {0,-32},{64,64} });
+		BodyCollision->SetColType(ECollisionType::Rect);
+	}
+
+
+	StateChange(PlayerState::Idle);
+}
+
+
+// StateUpdate 안에 들어있는 ESM이 Tick에서 돌아간다.
+void Mario::Tick(float _DeltaTime)
+{
+	AActor::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);
+}
+
+
+
 /// ============== 이동에서 중력, 카메라, 가속도 관련 기능 ==============
 
 void Mario::AddMoveVector(const FVector& _DirDelta)
@@ -95,61 +154,6 @@ void Mario::MoveUpdate(float _DeltaTime)
 
 /// ========= 마리오 이미지 셋, 애니메이션, 스테이트 =========
 
-Mario* Mario::ItsMeMario = nullptr;
-
-Mario* Mario::GetItsMeMario()
-{
-	return ItsMeMario;
-}
-
-Mario::Mario()
-{
-}
-
-Mario::~Mario()
-{
-}
-
-void Mario::BeginPlay()
-{
-	AActor::BeginPlay();
-	//ItsMeMario = this;
-	{
-		Renderer = CreateImageRenderer(MarioRenderOrder::Player);
-		SetName("Mario");
-		Renderer->SetImage("Mario_Right.png");
-		Renderer->SetTransform({ {0,0}, {256, 256} });
-		Renderer->CreateAnimation("Idle_Right", "Mario_Right.png", 0, 0, 0.30f, true);
-		Renderer->CreateAnimation("Idle_Left", "Mario_Left.png", 0, 0, 0.30f, true);
-
-		Renderer->CreateAnimation("Run_Right", "Mario_Right.png", { 1, 2, 3 }, 0.1f, true);
-		Renderer->CreateAnimation("Run_Left", "Mario_Left.png", { 1, 2, 3 }, 0.1f, true);
-
-		Renderer->CreateAnimation("Jump_Right", "Mario_Right.png", 5, 5, 0.1f, true);
-		Renderer->CreateAnimation("Jump_Left", "Mario_Left.png", 5, 5, 0.1f, true);
-
-		Renderer->ChangeAnimation("Idle_Right");
-	}
-
-	// Collision은 따로둔다.
-	{
-		BodyCollision = CreateCollision(MarioCollisionOrder::Player);
-		BodyCollision->SetTransform({ {0,-32},{64,64} });
-		BodyCollision->SetColType(ECollisionType::Rect);
-	}
-
-
-	StateChange(PlayerState::Idle);
-}
-
-
-void Mario::Tick(float _DeltaTime)
-{
-	AActor::Tick(_DeltaTime);
-
-	StateUpdate(_DeltaTime);
-}
-
 void Mario::DirCheck()
 {
 	EActorDir Dir = DirState;
@@ -220,6 +224,9 @@ void Mario::StateChange(PlayerState _State)
 
 // ====== 카메라 움직임 기능들 ======
 
+
+
+
 void Mario::MoveLastCameraPos(float _DeltaTime)
 {
 	// 카메라는 x축으로만 움직이게 해본다.
@@ -237,10 +244,10 @@ void Mario::MoveCameraMarioPos(float _DeltaTime)
 {
 	FVector CurCamPos = GetWorld()->GetCameraPos();
 	FVector MarioPos = GetActorLocation();
-	float WinCenter = GEngine->MainWindow.GetWindowScale().hX();
-	if (MarioPos.X > WinCenter + CurCamPos.X)
+	float GameCenter = GEngine->MainWindow.GetWindowScale().hX();
+	if (MarioPos.X > GameCenter + CurCamPos.X)
 	{
-		GetWorld()->SetCameraPos({ MarioPos.X - WinCenter,CurCamPos.Y });
+		GetWorld()->SetCameraPos({ MarioPos.X - GameCenter,CurCamPos.Y });
 	}
 }
 

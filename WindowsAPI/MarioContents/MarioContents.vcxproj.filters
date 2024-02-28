@@ -63,9 +63,6 @@
     <ClCompile Include="Goomba.cpp">
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>ContentsCore &amp; Physics\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Troopa.cpp">
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClCompile>
@@ -97,9 +94,6 @@
     </ClInclude>
     <ClInclude Include="Goomba.h">
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>ContentsCore &amp; Physics\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Troopa.h">
       <Filter>Object\PlayLevel\Actor\Monster</Filter>

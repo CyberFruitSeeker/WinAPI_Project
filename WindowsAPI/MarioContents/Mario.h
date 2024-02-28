@@ -6,11 +6,9 @@
 // Ό³Έν :
 class Mario : public AActor
 {
-private:
-	static Mario* ItsMeMario;
-
 public:
 	static Mario* GetItsMeMario();
+	static Mario* ItsMeMario;
 
 	// constrcuter destructer
 	Mario();

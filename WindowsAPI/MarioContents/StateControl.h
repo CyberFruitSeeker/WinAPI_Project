@@ -26,12 +26,13 @@ protected:
 
 	// 몬스터 혹은 마리리오에게 공통적으로 줘야 할 것은 무엇인가?
 	// 몬스터와 마리오에게 상속시켜줘야할 클래스를 따로 나눠야 할 것인가??
-	// 우선은 중력은 둘다 필요하니 공통으로 줘본다.
+	// 우선은 중력은 둘다 필요하니 공통으로 줘본다.(하지만 지금은 몬스터들한테만 준 상태)
 	FVector GravityAcc = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
 
 	void CalGravity(float _DeltaTime);
 
+	void MonsterAnimation(float _DeltaTime);
 
 
 
