@@ -20,7 +20,7 @@ enum class MarioCollisionOrder
 	Player,
 };
 
-enum class MonsterCollisionOreder
+enum class MonsterCollision
 {
 	Map,
 	ColToMario,
@@ -29,9 +29,9 @@ enum class MonsterCollisionOreder
 
 enum class EActorDir
 {
-	Left = -1,
-	None = 0,
-	Right = 1,
+	Left,
+	None,
+	Right,
 };
 
 enum class PlayerState
@@ -46,6 +46,19 @@ enum class PlayerState
 	End,
 	EndMove,
 	Changing,
+
+	CameraFreeMove,
+	FreeMove,
+	Run,
+
+};
+
+enum class MonsterState
+{
+	None,
+	Idle,
+	Die,
+
 };
 
 enum class MarioMod
@@ -55,24 +68,17 @@ enum class MarioMod
 	Fire,
 };
 
-enum class MonsterState
-{
-	None,
-	Idle,
-	MonsterDie,
-
-};
 
 
 // Ό³Έν :
 class ContentsHelper
 {
 public:
-	static class Mario* ItsMeMario;
+	static class Mario* MarioPlayer;
 	static UWindowImage* ColMapImage;
-	static FVector Gravity;
+	//static FVector Gravity;
 
-	static std::map<PlayerState, std::string> StateList;
+	//static std::map<PlayerState, std::string> StateList;
 
 	static bool DownCheck(FVector _NextVector);
 	static bool LeftCheck(FVector _NextVector);

@@ -2,9 +2,10 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/Collision.h>
 #include "ContentsHelper.h"
+#include "StateControl.h"
 
 // 설명 :
-class Troopa : public AActor
+class Troopa : public StateControl
 {
 public:
 	
@@ -27,13 +28,9 @@ protected:
 
 private:
 
-	UImageRenderer* Renderer = nullptr;
-	UCollision* TroopaCollision = nullptr;
+	
 
-	FVector GravityAcc = FVector::Down * 2.0f;
-	FVector GravityVector = FVector::Zero;
-
-
+	
 
 	// 트루파의 상태가 어떠니?
 

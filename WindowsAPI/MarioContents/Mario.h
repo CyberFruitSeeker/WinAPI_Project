@@ -2,16 +2,15 @@
 #include <EngineCore/Actor.h>
 #include "ContentsHelper.h"
 #include <EngineCore/Collision.h>
-#include "Physics.h"
 
 // 설명 :
-class Mario : public Physics
+class Mario : public AActor
 {
-public:
-	
-	static FVector MarioLocation;
+private:
+	static Mario* ItsMeMario;
 
-	static MarioMod PlayMarioClass;
+public:
+	static Mario* GetItsMeMario();
 
 	// constrcuter destructer
 	Mario();
@@ -23,87 +22,82 @@ public:
 	Mario& operator=(const Mario& _Other) = delete;
 	Mario& operator=(Mario&& _Other) noexcept = delete;
 
-	void SetState(PlayerState _State);
-	
-	void SetMarioClassState(MarioMod _MarioClass);
-
-
-
-
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void SetCameraLastMovePos();
-
-	void StateUpdate(float _DeltaTime) override;
-	void SpeedUp(float _DeltaTime, FVector _FVector);
-	void SpeedDown(float _DeltaTime, FVector _FVector);
-
-
-	void Idle(float _DeltaTime);
-	void Move(float _DeltaTime);
-	void Jump(float _DeltaTime);
-
-	void IdleStart();
-	void MoveStart();
-	void JumpStart();
-
-	void JustMove(float _DeltaTime, FVector Acclerate);
-
-	void DirChangeStart();
-	void InteractiveStart();
-	void Interactive(float _DeltaTime);
-
-	void Dead(float _DeltaTime);
-	void DeadStart();
-	void EndStart();
-	void EndMoveStart();
-
-	void ChangingStart();
-	void DirChange(float _DeltaTime);
-
-	void End(float _DeltaTime);
-	void EndMove(float _DeltaTime);
-	void Changing(float _DeltaTime);
-
-	bool LeftEdgeCheck();
-	bool RightEdgeCheck();
 	void DirCheck();
 
-	void MarioChange(bool _Positive);
+	std::string GetAnimationName(std::string _Name);
 
-	void MarioCollision(float _DeltaTime);
-
-	void ResultMove(float _DeltaTime) override;
-
-	void SetAnimation(std::string _Name) override;
-
-	const FVector AccelerateX = { 2500.f,0.f,0.f,0.f };
-	const FVector AccelerateY = { 0.f,3500.f,0.f,0.f };
-	const FVector StopAccelerateX = AccelerateX * 2;
-	const FVector DirChangeAccelerateX = StopAccelerateX * 2;
+	void StateChange(PlayerState _State);
+	void StateUpdate(float _DeltaTime);
 
 
-	bool DirChanging = false;
 
-	const float MinSpeed = 5.f;
-	const float MaxSpeedX = 700.f;
-	const float  MaxSpeedY = 1100.f;
-	int CurSpeedDir = 0;
 
-	const float JumpPower = -800.f;
-	bool Jumping = false;
+	void CameraFreeMove(float _DeltaTime);
+	void FreeMove(float _DeltaTime);
+	void Idle(float _DeltaTime);
+	void Jump(float _DeltaTime);
+	void Run(float _DeltaTime);
+	// Fly도 필요한지는 추후 판별
 
-	float DeadTime = .5f;
+	// 상태 시작의 기능이 담긴 함수들이다.
+	void IdleStart();
+	void RunStart();
+	void JumpStart();
 
-	float EndTime = 0.5f;
+	PlayerState State = PlayerState::None;
+	EActorDir DirState = EActorDir::Right;
+	std::string CurAnimationName = "None";
 
-	float ChangeTime = 0.6f;
-
-	float StatTime = 5.f;
 
 private:
-	PlayerState State = PlayerState::None;
-	PlayerState PrevState = PlayerState::None;
+	UCollision* BodyCollision = nullptr;
+
+	UImageRenderer* Renderer = nullptr;
+	float AnimationTime = 0.0f;
+	int AnimationFrame = 0;
+
+	float AlphaTime = 0.0f;
+	bool Dir = false;
+
+	float FreeMoveSpeed = 1500.0f;
+
+	FVector MoveVector = FVector::Zero;
+	FVector MoveAcc = FVector::Right * 500.0f;
+	float MoveMaxSpeed = 600.0f;
+	void AddMoveVector(const FVector& _DirDelta);
+
+	// 마리오에게 적용되는 중력과 중력 초기화
+	FVector GravityAcc = FVector::Down * 1000.0f;
+	FVector GravityVector = FVector::Zero;
+
+	// 점프, 나아갈 모든 방향의 힘의 합
+	FVector JumpPower = FVector::Up * 770.0f;
+	FVector JumpVector = FVector::Zero;
+	FVector LastMoveVector = FVector::Zero;
+
+
+	// 이동 관련 중력 연산
+	void CalLastMoveVector(float _DeltaTime);
+	void CalMoveVector(float _DeltaTime);
+	void CalJumpVector(float _DeltaTime);
+	void CalGravityVector(float _DeltaTime);
+
+	// 카메라에 따른 움직임
+	void MoveLastCameraPos(float _DeltaTime);
+	void MoveCameraMarioPos(float _DeltaTime);
+
+	void MoveUpdate(float _DeltaTime);
+
+
+
+	// 어떤 기능을 더 추가할 것인가?
+	// moveresult?  
+	
+
+
+
 };

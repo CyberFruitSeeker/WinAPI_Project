@@ -3,7 +3,7 @@
 #include <EngineBase/EngineDebug.h>
 #include <EngineCore/EngineResourcesManager.h>
 #include "ContentsHelper.h"
-#include <vector>
+#include <EngineCore/Actor.h>
 
 Goomba::Goomba()
 {
@@ -15,7 +15,7 @@ Goomba::~Goomba()
 
 void Goomba::BeginPlay()
 {
-	AActor::BeginPlay();
+	StateControl::BeginPlay();
 	{
 		SetName("Goomba");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
@@ -26,9 +26,9 @@ void Goomba::BeginPlay()
 	
 	// 굼바가 마리오랑 충돌 하는가?
 	{
-		GoombaCollision = CreateCollision(MonsterCollisionOreder::ColToMario);
-		GoombaCollision->SetTransform({ {0,-32},{64,64} });
-		GoombaCollision->SetColType(ECollisionType::Rect);
+		BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
+		BodyCollision->SetTransform({ {0,-32},{64,64} });
+		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
 	
@@ -38,17 +38,7 @@ void Goomba::BeginPlay()
 
 void Goomba::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
-	{
-		GravityVector += GravityAcc * _DeltaTime;
-		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-		if (Color == Color8Bit(255, 0, 255, 0))
-		{
-			GravityVector = FVector::Zero;
-		}
-
-		AddActorLocation(GravityVector);
-	}
+	StateControl::Tick(_DeltaTime);
 
 
 	

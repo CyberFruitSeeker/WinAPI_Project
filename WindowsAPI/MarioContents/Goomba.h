@@ -2,10 +2,10 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/Collision.h>
 #include "ContentsHelper.h"
-
+#include "StateControl.h"
 
 // Ό³Έν :
-class Goomba : public AActor
+class Goomba : public StateControl
 {
 public:
 
@@ -26,18 +26,16 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-
+	
 
 
 	
 
 private:
 	
-	UImageRenderer* Renderer = nullptr;
-	UCollision* GoombaCollision = nullptr;
+	
 
-	FVector GravityAcc = FVector::Down * 2.0f;
-	FVector GravityVector = FVector::Zero;
+
 	
 
 
