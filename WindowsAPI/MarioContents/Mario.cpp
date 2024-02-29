@@ -95,7 +95,7 @@ void Mario::MoveCameraMarioPos(float _DeltaTime)
 
 void Mario::AddMoveVector(const FVector& _DirDelta)
 {
-	MoveVector += _DirDelta * MoveAcc;
+	MoveVector += _DirDelta * MoveAccel;
 }
 
 void Mario::CalMoveVector(float _DeltaTime)
@@ -124,7 +124,7 @@ void Mario::CalMoveVector(float _DeltaTime)
 	{
 		if (0.001 <= MoveVector.Size2D())
 		{
-			MoveVector += (-MoveVector.Normalize2DReturn()) * _DeltaTime * MoveAcc;
+			MoveVector += (-MoveVector.Normalize2DReturn()) * _DeltaTime * MoveAccel;
 		}
 		else
 		{
@@ -298,7 +298,7 @@ void Mario::CalJumpVector(float _DeltaTime)
 
 void Mario::CalGravityVector(float _DeltaTime)
 {
-	GravityVector += GravityAcc * _DeltaTime;
+	GravityVector += GravityAccel * _DeltaTime;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{

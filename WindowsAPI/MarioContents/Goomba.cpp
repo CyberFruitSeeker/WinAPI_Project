@@ -4,6 +4,8 @@
 #include <EngineCore/EngineResourcesManager.h>
 #include "ContentsHelper.h"
 #include <EngineCore/Actor.h>
+#include <string>
+#include <vector>
 
 Goomba::Goomba()
 {
@@ -40,16 +42,21 @@ void Goomba::BeginPlay()
 void Goomba::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
+	{
+		CalGravity(_DeltaTime);
 
-	CalGravity(_DeltaTime);
+		CalMove(_DeltaTime);
+
+	}
 	
 }
+
 
 void Goomba::CalGravity(float _DeltaTime)
 {
 
 	{
-		GravityVector += GravityAcc * _DeltaTime;
+		GravityVector += GravityAccel * _DeltaTime;
 		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 		if (Color == Color8Bit(255, 0, 255, 0))
 		{
@@ -61,21 +68,66 @@ void Goomba::CalGravity(float _DeltaTime)
 
 }
 
-std::string Goomba::GetAnimationName(std::string _Name)
+
+// ================ 굼바를 땅에서 움직이게 해보기 ===============
+
+void Goomba::CalMove(float _DeltaTime)
 {
+	MoveVector += MoveAccel * _DeltaTime;
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		
+	}
 
-
-	return _Name;
+	AddActorLocation(MoveVector);
 }
+
+//std::string Goomba::GetAnimationName(std::string _Name)
+//{
+//
+//
+//	return _Name;
+//}
 
 void Goomba::StateUpdate(float _DeltaTime)
 {
-	
+
+	switch (State)
+	{
+	case MonsterState::Idle:
+		Idle(_DeltaTime);
+		break;
+	case MonsterState::Move:
+		Move(_DeltaTime);
+		break;
+	case MonsterState::Dead:
+		break;
+	default:
+		break;
+	}
 
 
 }
 
+void Goomba::Idle(float _DeltaTime)
+{
+	if (true == Renderer->IsCurAnimationEnd())
+	{
+		int a = 0;
+	}
 
+}
+
+void Goomba::Move(float _DeltaTime)
+{
+
+}
+
+void Goomba::Dead(float _DeltaTime)
+{
+
+}
 
 
 

@@ -22,8 +22,8 @@ void Troopa::BeginPlay()
 		SetName("Troopa");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 		Renderer->SetImage("Troopa_Left.png");
-		Renderer->CreateAnimation("Move", "Troopa_Left.png", 0, 1, 0.2f);
-		Renderer->ChangeAnimation("Move");
+		Renderer->CreateAnimation("Go", "Troopa_Left.png", 0, 1, 0.2f);
+		Renderer->ChangeAnimation("Go");
 		//Renderer->SetScale({ 512,384 });
 		Renderer->SetTransform({ {0,0},{512,384} });
 	}
@@ -31,7 +31,7 @@ void Troopa::BeginPlay()
 	// 트루파가 마리오랑 충돌하는가?
 	{
 		BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
-		BodyCollision->SetTransform({ { -32,-32 }, { 64, 64 } });
+		BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 }
