@@ -2,6 +2,7 @@
 #include "Mario.h"
 #include "MarioMap.h"
 #include "Goomba.h"
+#include "GoombaDark.h"
 #include "Troopa.h"
 #include <EngineCore/EngineCore.h>
 
@@ -29,6 +30,13 @@ void PlayLevel::BeginPlay()
 		Mario* NewActor = SpawnActor<Mario>(MarioRenderOrder::Player);
 		NewActor->SetName("Mario");
 		NewActor->SetActorLocation({ 200,300 });
+	}
+
+	// 실험용 굼바 다크
+	{
+		GoombaDark* NewActor = SpawnActor<GoombaDark>(MarioRenderOrder::Monster);
+		NewActor->SetName("GoombaDark");
+		NewActor->SetActorLocation({ 400,300 });
 	}
 
 	{

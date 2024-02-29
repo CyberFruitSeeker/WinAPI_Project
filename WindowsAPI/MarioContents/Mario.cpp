@@ -64,8 +64,34 @@ void Mario::Tick(float _DeltaTime)
 }
 
 
+// ====== 카메라 움직임 기능들 ======
 
-/// ============== 이동에서 중력, 카메라, 가속도 관련 기능 ==============
+void Mario::MoveLastCameraPos(float _DeltaTime)
+{
+	// 카메라는 x축으로만 움직이게 해본다.
+	GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
+	AddActorLocation(LastMoveVector * _DeltaTime);
+
+	// 
+	// 맵에서 원점(0, 0) 이하(마이너스)로 못나가게 하는 코드가
+	// Map 클래스 혹은 PlayLevel에 구현되어있다.
+	// 하지만 충돌 우려 때문에 우선 주석처리
+}
+
+// 마리오의 움직임에 따른 카메라 위치 세팅
+void Mario::MoveCameraMarioPos(float _DeltaTime)
+{
+	FVector CurCamPos = GetWorld()->GetCameraPos();
+	FVector MarioPos = GetActorLocation();
+	float GameCenter = GEngine->MainWindow.GetWindowScale().hX();
+	if (MarioPos.X > GameCenter + CurCamPos.X)
+	{
+		GetWorld()->SetCameraPos({ MarioPos.X - GameCenter,CurCamPos.Y });
+	}
+}
+
+
+/// ============== 마리오의 이동에서 키입력과 관련된 기능들 ==============
 
 void Mario::AddMoveVector(const FVector& _DirDelta)
 {
@@ -220,43 +246,6 @@ void Mario::StateChange(PlayerState _State)
 
 	State = _State;
 }
-
-
-// ====== 카메라 움직임 기능들 ======
-
-
-
-
-void Mario::MoveLastCameraPos(float _DeltaTime)
-{
-	// 카메라는 x축으로만 움직이게 해본다.
-	GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
-	AddActorLocation(LastMoveVector * _DeltaTime);
-
-	// 
-	// 맵에서 원점(0, 0) 이하(마이너스)로 못나가게 하는 코드가
-	// Map 클래스 혹은 PlayLevel에 구현되어있다.
-	// 하지만 충돌 우려 때문에 우선 주석처리
-}
-
-// 마리오의 움직임에 따른 카메라 위치 세팅
-void Mario::MoveCameraMarioPos(float _DeltaTime)
-{
-	FVector CurCamPos = GetWorld()->GetCameraPos();
-	FVector MarioPos = GetActorLocation();
-	float GameCenter = GEngine->MainWindow.GetWindowScale().hX();
-	if (MarioPos.X > GameCenter + CurCamPos.X)
-	{
-		GetWorld()->SetCameraPos({ MarioPos.X - GameCenter,CurCamPos.Y });
-	}
-}
-
-
-
-
-
-
-
 
 
 

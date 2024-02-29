@@ -72,6 +72,9 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Object\Title &amp; Ending Level\TitleLevel</Filter>
     </ClCompile>
+    <ClCompile Include="GoombaDark.cpp">
+      <Filter>Object\PlayLevel\Actor\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsHelper.h">
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Object\Title &amp; Ending Level\TitleLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="GoombaDark.h">
+      <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
