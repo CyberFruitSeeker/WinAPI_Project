@@ -49,7 +49,7 @@ protected:
 	FVector GravityVector = FVector::Zero;
 
 	FVector MoveVector = FVector::Zero;
-	FVector MoveAccel = FVector::Left * 0.3f;
+	FVector MoveAccel = FVector::Left * 0.1f;
 
 	void CalMove(float _DeltaTime);
 

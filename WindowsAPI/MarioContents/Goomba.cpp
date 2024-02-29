@@ -73,7 +73,7 @@ void Goomba::CalGravity(float _DeltaTime)
 
 void Goomba::CalMove(float _DeltaTime)
 {
-	MoveVector += MoveAccel * _DeltaTime;
+	MoveVector += MoveAccel;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
