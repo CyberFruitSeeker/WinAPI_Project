@@ -16,7 +16,7 @@ Troopa::~Troopa()
 
 void Troopa::BeginPlay()
 {
-	StateControl::BeginPlay();
+	AActor::BeginPlay();
 	{
 		SetName("Troopa");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
@@ -36,6 +36,23 @@ void Troopa::BeginPlay()
 
 void Troopa::Tick(float _DeltaTime)
 {
-	StateControl::Tick(_DeltaTime);
+	AActor::Tick(_DeltaTime);
+
+	CalGravity(_DeltaTime);
+}
+
+void Troopa::CalGravity(float _DeltaTime)
+{
+
+	{
+		GravityVector += GravityAcc * _DeltaTime;
+		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+		if (Color == Color8Bit(255, 0, 255, 0))
+		{
+			GravityVector = FVector::Zero;
+		}
+
+		AddActorLocation(GravityVector);
+	}
 
 }

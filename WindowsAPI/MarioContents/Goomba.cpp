@@ -15,7 +15,7 @@ Goomba::~Goomba()
 
 void Goomba::BeginPlay()
 {
-	StateControl::BeginPlay();
+	AActor::BeginPlay();
 	{
 		SetName("Goomba");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
@@ -35,15 +35,29 @@ void Goomba::BeginPlay()
 }
 
 
-
 void Goomba::Tick(float _DeltaTime)
 {
-	StateControl::Tick(_DeltaTime);
+	AActor::Tick(_DeltaTime);
 
-
+	CalGravity(_DeltaTime);
 	
 }
 
+void Goomba::CalGravity(float _DeltaTime)
+{
+
+	{
+		GravityVector += GravityAcc * _DeltaTime;
+		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+		if (Color == Color8Bit(255, 0, 255, 0))
+		{
+			GravityVector = FVector::Zero;
+		}
+
+		AddActorLocation(GravityVector);
+	}
+
+}
 
 
 

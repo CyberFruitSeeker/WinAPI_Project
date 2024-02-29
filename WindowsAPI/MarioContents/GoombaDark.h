@@ -19,7 +19,7 @@ public:
 
 protected:
 	void BeginPlay() override;
-	void Tick(float _DeltTime) override;
+	void Tick(float _DeltaTime) override;
 
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BodyCollision = nullptr;

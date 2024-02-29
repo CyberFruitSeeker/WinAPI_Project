@@ -138,12 +138,164 @@ void Mario::CalMoveVector(float _DeltaTime)
 	}
 }
 
+
+// ====== 키 입력으로 인한 마리오의 움직임 =======
+
+void Mario::Idle(float _DeltaTime)
+{
+	if (true == Renderer->IsCurAnimationEnd())
+	{
+		int a = 0;
+	}
+
+	// 왼쪽도, 오른쪽도 안가고 있고,
+	// 여기서는 가만히 있을때만 어떻게 할지 신경쓰면 된다.
+	if (true == UEngineInput::IsDown('1'))
+	{
+		StateChange(PlayerState::FreeMove);
+		return;
+	}
+
+	if (true == UEngineInput::IsDown('2'))
+	{
+		StateChange(PlayerState::CameraFreeMove);
+		return;
+	}
+
+
+	if (
+		true == UEngineInput::IsPress(VK_LEFT) ||
+		true == UEngineInput::IsPress(VK_RIGHT)
+		)
+	{
+		StateChange(PlayerState::Run);
+		return;
+	}
+
+	if (true == UEngineInput::IsDown(VK_SPACE))
+	{
+		StateChange(PlayerState::Jump);
+		return;
+	}
+
+	MoveUpdate(_DeltaTime);
+
+}
+
+void Mario::Jump(float _DeltaTime)
+{
+	if (UEngineInput::IsPress(VK_LEFT))
+	{
+		AddMoveVector(FVector::Left * _DeltaTime);
+	}
+
+	if (UEngineInput::IsPress(VK_RIGHT))
+	{
+		AddMoveVector(FVector::Right * _DeltaTime);
+	}
+
+	MoveUpdate(_DeltaTime);
+
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		JumpVector = FVector::Zero;
+		StateChange(PlayerState::Idle);
+		return;
+	}
+}
+
+void Mario::Run(float _DeltaTime)
+{
+	DirCheck();
+
+	if (true == UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT))
+	{
+		StateChange(PlayerState::Idle);
+		return;
+	}
+
+	if (UEngineInput::IsPress(VK_LEFT))
+	{
+		AddMoveVector(FVector::Left * _DeltaTime);
+	}
+
+	if (UEngineInput::IsPress(VK_RIGHT))
+	{
+		AddMoveVector(FVector::Right * _DeltaTime);
+	}
+
+	if (true == UEngineInput::IsDown(VK_SPACE))
+	{
+		StateChange(PlayerState::Jump);
+		return;
+	}
+
+
+	MoveUpdate(_DeltaTime);
+}
+
+void Mario::IdleStart()
+{
+	Renderer->ChangeAnimation(GetAnimationName("Idle"));
+	DirCheck();
+}
+
+void Mario::RunStart()
+{
+	Renderer->ChangeAnimation(GetAnimationName("Run"));
+	DirCheck();
+}
+
+void Mario::JumpStart()
+{
+	JumpVector = JumpPower;
+	Renderer->ChangeAnimation(GetAnimationName("Jump"));
+	DirCheck();
+}
+
+
+void Mario::FreeMove(float _DeltaTime)
+{
+	FVector FreeMove = FVector::Zero;
+
+	if (UEngineInput::IsPress(VK_LEFT))
+	{
+		FreeMove += FVector::Left * _DeltaTime * FreeMoveSpeed;
+	}
+
+	if (UEngineInput::IsPress(VK_RIGHT))
+	{
+		FreeMove += FVector::Right * _DeltaTime * FreeMoveSpeed;
+	}
+
+	if (UEngineInput::IsPress(VK_UP))
+	{
+		FreeMove += FVector::Up * _DeltaTime * FreeMoveSpeed;
+	}
+
+	if (UEngineInput::IsPress(VK_DOWN))
+	{
+		FreeMove += FVector::Down * _DeltaTime * FreeMoveSpeed;
+	}
+
+	AddActorLocation(FreeMove * _DeltaTime);
+	GetWorld()->AddCameraPos(FreeMove * _DeltaTime);
+
+	if (UEngineInput::IsDown('1'))
+	{
+		StateChange(PlayerState::Idle);
+	}
+}
+
+
+// ====== 마리오의 중력, 가속도 관련된 벡터 기능들 =========
+
 void Mario::CalJumpVector(float _DeltaTime)
 {
 
 }
 
-// 마리오 중력 적용 함수
 void Mario::CalGravityVector(float _DeltaTime)
 {
 	GravityVector += GravityAcc * _DeltaTime;
@@ -175,7 +327,6 @@ void Mario::MoveUpdate(float _DeltaTime)
 	MoveLastCameraPos(_DeltaTime);
 }
 
-/// ============== 이동에서 중력, 가속도 관련 기능 ==============
 
 
 /// ========= 마리오 이미지 셋, 애니메이션, 스테이트 =========
@@ -307,155 +458,5 @@ void Mario::CameraFreeMove(float _DeltaTime)
 }
 
 
-void Mario::FreeMove(float _DeltaTime)
-{
-	FVector FreeMove = FVector::Zero;
-
-	if (UEngineInput::IsPress(VK_LEFT))
-	{
-		FreeMove += FVector::Left * _DeltaTime * FreeMoveSpeed;
-	}
-
-	if (UEngineInput::IsPress(VK_RIGHT))
-	{
-		FreeMove += FVector::Right * _DeltaTime * FreeMoveSpeed;
-	}
-
-	if (UEngineInput::IsPress(VK_UP))
-	{
-		FreeMove += FVector::Up * _DeltaTime * FreeMoveSpeed;
-	}
-
-	if (UEngineInput::IsPress(VK_DOWN))
-	{
-		FreeMove += FVector::Down * _DeltaTime * FreeMoveSpeed;
-	}
-
-	AddActorLocation(FreeMove * _DeltaTime);
-	GetWorld()->AddCameraPos(FreeMove * _DeltaTime);
-
-	if (UEngineInput::IsDown('1'))
-	{
-		StateChange(PlayerState::Idle);
-	}
-}
-
-
-
-
-// ====== 키 입력으로 인한 마리오의 움직임 =======
-
-void Mario::Idle(float _DeltaTime)
-{
-	if (true == Renderer->IsCurAnimationEnd())
-	{
-		int a = 0;
-	}
-
-	// 왼쪽도, 오른쪽도 안가고 있고,
-	// 여기서는 가만히 있을때만 어떻게 할지 신경쓰면 된다.
-	if (true == UEngineInput::IsDown('1'))
-	{
-		StateChange(PlayerState::FreeMove);
-		return;
-	}
-
-	if (true == UEngineInput::IsDown('2'))
-	{
-		StateChange(PlayerState::CameraFreeMove);
-		return;
-	}
-
-
-	if (
-		true == UEngineInput::IsPress(VK_LEFT) ||
-		true == UEngineInput::IsPress(VK_RIGHT)
-		)
-	{
-		StateChange(PlayerState::Run);
-		return;
-	}
-
-	if (true == UEngineInput::IsDown(VK_SPACE))
-	{
-		StateChange(PlayerState::Jump);
-		return;
-	}
-
-	MoveUpdate(_DeltaTime);
-
-}
-
-void Mario::Jump(float _DeltaTime)
-{
-	if (UEngineInput::IsPress(VK_LEFT))
-	{
-		AddMoveVector(FVector::Left * _DeltaTime);
-	}
-
-	if (UEngineInput::IsPress(VK_RIGHT))
-	{
-		AddMoveVector(FVector::Right * _DeltaTime);
-	}
-
-	MoveUpdate(_DeltaTime);
-
-	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-	if (Color == Color8Bit(255, 0, 255, 0))
-	{
-		JumpVector = FVector::Zero;
-		StateChange(PlayerState::Idle);
-		return;
-	}
-}
-
-void Mario::Run(float _DeltaTime)
-{
-	DirCheck();
-
-	if (true == UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT))
-	{
-		StateChange(PlayerState::Idle);
-		return;
-	}
-
-	if (UEngineInput::IsPress(VK_LEFT))
-	{
-		AddMoveVector(FVector::Left * _DeltaTime);
-	}
-
-	if (UEngineInput::IsPress(VK_RIGHT))
-	{
-		AddMoveVector(FVector::Right * _DeltaTime);
-	}
-
-	if (true == UEngineInput::IsDown(VK_SPACE))
-	{
-		StateChange(PlayerState::Jump);
-		return;
-	}
-
-
-	MoveUpdate(_DeltaTime);
-}
-
-void Mario::IdleStart()
-{
-	Renderer->ChangeAnimation(GetAnimationName("Idle"));
-	DirCheck();
-}
-
-void Mario::RunStart()
-{
-	Renderer->ChangeAnimation(GetAnimationName("Run"));
-	DirCheck();
-}
-
-void Mario::JumpStart()
-{
-	JumpVector = JumpPower;
-	Renderer->ChangeAnimation(GetAnimationName("Jump"));
-	DirCheck();
-}
 
 

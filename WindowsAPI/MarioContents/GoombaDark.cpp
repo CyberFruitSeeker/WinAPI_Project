@@ -34,11 +34,11 @@ void GoombaDark::BeginPlay()
 
 }
 
-void GoombaDark::Tick(float _DeltTime)
+void GoombaDark::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltTime);
+	AActor::Tick(_DeltaTime);
 
-	CalGravity(_DeltTime);
+	CalGravity(_DeltaTime);
 
 
 }

@@ -53,6 +53,7 @@ void UContentsCore::BeginPlay()
 
 	// 몬스터 기능 실험용 굼바 다크
 	UEngineResourcesManager::GetInst().CuttingImage("GoombaDark.png", 3, 1);
+
 	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 3, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Troopa_Left.png", 5, 1);
 

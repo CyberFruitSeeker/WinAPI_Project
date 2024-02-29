@@ -15,16 +15,8 @@ enum MarioRenderOrder
 enum class MarioCollisionOrder
 {
 	Map,
-	FireBall,
 	Monster,
 	Player,
-};
-
-enum class MonsterCollision
-{
-	Map,
-	ColToMario,
-
 };
 
 enum class EActorDir
@@ -41,12 +33,7 @@ enum class PlayerState
 	Move,
 	Jump,
 	DirChange,
-	Interactive,
 	Dead,
-	End,
-	EndMove,
-	Changing,
-
 	CameraFreeMove,
 	FreeMove,
 	Run,
@@ -57,8 +44,7 @@ enum class MonsterState
 {
 	None,
 	Idle,
-	Die,
-
+	Dead,
 };
 
 enum class MarioMod
@@ -80,10 +66,10 @@ public:
 
 	//static std::map<PlayerState, std::string> StateList;
 
-	static bool DownCheck(FVector _NextVector);
-	static bool LeftCheck(FVector _NextVector);
-	static bool RightCheck(FVector _NextVector);
-	static bool BottomCheck(FVector _NextVector);
+	//static bool DownCheck(FVector _NextVector);
+	//static bool LeftCheck(FVector _NextVector);
+	//static bool RightCheck(FVector _NextVector);
+	//static bool BottomCheck(FVector _NextVector);
 
 
 private:
