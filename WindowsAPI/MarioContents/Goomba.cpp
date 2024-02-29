@@ -20,7 +20,9 @@ void Goomba::BeginPlay()
 		SetName("Goomba");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 		Renderer->SetImage("Goomba.png");
-		Renderer->SetTransform({ {0,0},{384,384} });
+		Renderer->SetScale({384, 384});
+		Renderer->CreateAnimation("Move", "Goomba.png", 0, 1, 0.2f);
+		Renderer->ChangeAnimation("Move");
 	}
 
 	
@@ -56,6 +58,20 @@ void Goomba::CalGravity(float _DeltaTime)
 
 		AddActorLocation(GravityVector);
 	}
+
+}
+
+std::string Goomba::GetAnimationName(std::string _Name)
+{
+
+
+	return _Name;
+}
+
+void Goomba::StateUpdate(float _DeltaTime)
+{
+	
+
 
 }
 

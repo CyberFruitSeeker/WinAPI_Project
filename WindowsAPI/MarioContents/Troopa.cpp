@@ -18,9 +18,13 @@ void Troopa::BeginPlay()
 {
 	AActor::BeginPlay();
 	{
+		// 트루파 셋트랜스폼 크기 : 512, 384
 		SetName("Troopa");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 		Renderer->SetImage("Troopa_Left.png");
+		Renderer->CreateAnimation("Move", "Troopa_Left.png", 0, 1, 0.2f);
+		Renderer->ChangeAnimation("Move");
+		//Renderer->SetScale({ 512,384 });
 		Renderer->SetTransform({ {0,0},{512,384} });
 	}
 

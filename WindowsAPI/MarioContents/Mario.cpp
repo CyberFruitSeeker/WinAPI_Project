@@ -139,7 +139,7 @@ void Mario::CalMoveVector(float _DeltaTime)
 }
 
 
-// ====== 키 입력으로 인한 마리오의 움직임 =======
+// ====== 키 입력으로 인한 마리오의 움직임과 애니메이션 =======
 
 void Mario::Idle(float _DeltaTime)
 {
@@ -289,7 +289,7 @@ void Mario::FreeMove(float _DeltaTime)
 }
 
 
-// ====== 마리오의 중력, 가속도 관련된 벡터 기능들 =========
+// ====== 마리오의 중력, 가속도 물리 구현과 계산 =========
 
 void Mario::CalJumpVector(float _DeltaTime)
 {

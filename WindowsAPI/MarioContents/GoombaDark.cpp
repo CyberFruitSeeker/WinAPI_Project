@@ -22,6 +22,9 @@ void GoombaDark::BeginPlay()
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 		Renderer->SetImage("GoombaDark.png");
 		Renderer->SetTransform({ {0,0},{424,424} });
+
+
+
 	}
 
 	// 굼바가 마리오랑 충돌 하는가?

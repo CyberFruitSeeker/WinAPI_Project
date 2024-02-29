@@ -35,6 +35,14 @@ protected:
 	void CalGravity(float _DeltaTime);
 
 
+	// 몬스터 애니메이션 : 굼바
+	std::string GetAnimationName(std::string _Name);
+
+	std::string CurAnimationName = "None";
+
+	void StateUpdate(float _DeltaTime);
+
+
 
 	
 
