@@ -30,9 +30,6 @@ protected:
 	UCollision* BodyCollision = nullptr;
 
 	// 몬스터 애니메이션 : 굼바
-	//std::string GetAnimationName(std::string _Name);
-	//std::string CurAnimationName = "None";
-
 	void StateUpdate(float _DeltaTime);
 
 	void Idle(float _DeltaTime);
@@ -48,8 +45,11 @@ protected:
 	FVector GravityAccel = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
 
-	FVector MoveVector = FVector::Zero;
-	FVector MoveAccel = FVector::Left * 0.1f;
+	FVector MoveVector = FVector::Left * 0.1;
+	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
+
+	float MaxMoveSpeed = 350.0f;
+	float MoveSpeed = 300.0f;
 
 	void CalMove(float _DeltaTime);
 

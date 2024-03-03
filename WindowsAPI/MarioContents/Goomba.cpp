@@ -55,16 +55,18 @@ void Goomba::Tick(float _DeltaTime)
 void Goomba::CalGravity(float _DeltaTime)
 {
 
-	{
-		GravityVector += GravityAccel * _DeltaTime;
-		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-		if (Color == Color8Bit(255, 0, 255, 0))
-		{
-			GravityVector = FVector::Zero;
-		}
 
-		AddActorLocation(GravityVector);
+
+	
+	GravityVector += GravityAccel * _DeltaTime;
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		GravityVector = FVector::Zero;
 	}
+
+	AddActorLocation(GravityVector);
+
 
 }
 
@@ -73,22 +75,14 @@ void Goomba::CalGravity(float _DeltaTime)
 
 void Goomba::CalMove(float _DeltaTime)
 {
-	MoveVector += MoveAccel;
+	
+	MoveVector * _DeltaTime;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-	if (Color == Color8Bit(255, 0, 255, 0))
-	{
-		
-	}
-
+	
 	AddActorLocation(MoveVector);
+
 }
 
-//std::string Goomba::GetAnimationName(std::string _Name)
-//{
-//
-//
-//	return _Name;
-//}
 
 void Goomba::StateUpdate(float _DeltaTime)
 {
