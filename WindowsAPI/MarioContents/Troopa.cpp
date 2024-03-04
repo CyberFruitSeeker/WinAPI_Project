@@ -4,7 +4,7 @@
 #include <EngineCore/EngineResourcesManager.h>
 #include "ContentsHelper.h"
 #include <EngineCore/Collision.h>
-#include "StateControl.h"
+//#include "StateControl.h"
 
 Troopa::Troopa()
 {
@@ -43,6 +43,19 @@ void Troopa::Tick(float _DeltaTime)
 	AActor::Tick(_DeltaTime);
 
 	CalGravity(_DeltaTime);
+
+	CalMove(_DeltaTime);
+
+}
+
+void Troopa::CalMove(float _DeltaTime)
+{
+	// 트루파가 땅에서 움직이니?
+	MoveVector * _DeltaTime;
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+
+	AddActorLocation(MoveVector);
+
 }
 
 void Troopa::CalGravity(float _DeltaTime)

@@ -36,6 +36,10 @@ protected:
 	void Move(float _DeltaTime);
 	void Dead(float _DeltaTime);
 
+	FVector MoveVector = FVector::Left * 0.1;
+	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
+
+
 	// Tick에 돌리기 위한 StateUpdate 함수를 만들기 위한 것들
 	MonsterState State = MonsterState::None;
 	EActorDir DirState = EActorDir::Left;
@@ -45,8 +49,6 @@ protected:
 	FVector GravityAccel = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
 
-	FVector MoveVector = FVector::Left * 0.1;
-	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
 
 	float MaxMoveSpeed = 350.0f;
 	float MoveSpeed = 300.0f;

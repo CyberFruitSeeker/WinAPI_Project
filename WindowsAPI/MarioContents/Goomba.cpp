@@ -96,6 +96,7 @@ void Goomba::StateUpdate(float _DeltaTime)
 		Move(_DeltaTime);
 		break;
 	case MonsterState::Dead:
+		Dead(_DeltaTime);
 		break;
 	default:
 		break;
