@@ -40,6 +40,9 @@
     <Filter Include="Object\Title &amp; Ending Level\TitleLevel\Actor">
       <UniqueIdentifier>{2ea00fd6-0ec6-494d-9c30-a069da257253}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\PlayLevel\Actor\Monster\MonsterController">
+      <UniqueIdentifier>{b4a3fd68-a1fb-4f66-adfa-98954bb2a39d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsHelper.cpp">
@@ -66,14 +69,14 @@
     <ClCompile Include="Troopa.cpp">
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="StateControl.cpp">
-      <Filter>ObjectStateController</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Object\Title &amp; Ending Level\TitleLevel</Filter>
     </ClCompile>
     <ClCompile Include="GoombaDark.cpp">
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Object\PlayLevel\Actor\Monster\MonsterController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,14 +104,14 @@
     <ClInclude Include="Troopa.h">
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="StateControl.h">
-      <Filter>ObjectStateController</Filter>
-    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Object\Title &amp; Ending Level\TitleLevel</Filter>
     </ClInclude>
     <ClInclude Include="GoombaDark.h">
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Object\PlayLevel\Actor\Monster\MonsterController</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

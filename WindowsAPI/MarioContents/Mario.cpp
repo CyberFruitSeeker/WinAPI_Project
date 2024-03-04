@@ -2,6 +2,7 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineBase/EngineDebug.h>
 #include "ContentsHelper.h"
+#include "Monster.h"
 #include <string>
 #include <vector>
 #include <EngineCore/Collision.h>
@@ -190,16 +191,16 @@ void Mario::Idle(float _DeltaTime)
 }
 
 // JumpDown 이라는 별도의 함수로 두지 않고, Jump 함수에서 if문을 이용해본다.
-void Mario::JumpDown()
-{
-
-}
+//void Mario::JumpDown()
+//{
+//
+//}
 
 void Mario::Jump(float _DeltaTime)
 {
 	// EnumType _Order, std::vector<UCollision*>& _Result;
 
-	// 상승할때는 하면 안된다.
+	// 상승할때는 점프킬이 발동하면 안되니깐, 이를 위한 조건문을 만든다.
 	if (IsJumpDown())
 	{
 		std::vector<UCollision*> _Result;
@@ -207,9 +208,10 @@ void Mario::Jump(float _DeltaTime)
 		{
 			for (size_t i = 0; i < _Result.size(); i++)
 			{
-				// AMonster* Monster = dynamic_cast<AMonster*>(_Result[i]->GetOwner());
+				AMonster* Monster = dynamic_cast<AMonster*>(_Result[i]->GetOwner());
+				Monster->MarioJumpAttack();
 
-				_Result[i]->GetOwner()->Destroy();
+				// _Result[i]->GetOwner();/*->Destroy();*/
 			}
 		}
 
@@ -421,8 +423,6 @@ void Mario::StateChange(PlayerState _State)
 			break;
 		case PlayerState::Jump:
 			JumpStart();
-			break;
-		case PlayerState::JumpDown:
 			break;
 		default:
 			break;

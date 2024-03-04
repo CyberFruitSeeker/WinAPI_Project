@@ -31,7 +31,7 @@ enum class PlayerState
 	None,
 	Idle,
 	Jump,
-	JumpDown,
+	//JumpDown,
 	DirChange,
 	Dead,
 	CameraFreeMove,

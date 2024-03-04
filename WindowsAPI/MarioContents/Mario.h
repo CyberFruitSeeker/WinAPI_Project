@@ -38,7 +38,7 @@ protected:
 	void FreeMove(float _DeltaTime);
 	void Idle(float _DeltaTime);
 	void Jump(float _DeltaTime);
-	void JumpDown();
+	//void JumpDown();
 	void Run(float _DeltaTime);
 	// Fly도 필요한지는 추후 판별
 

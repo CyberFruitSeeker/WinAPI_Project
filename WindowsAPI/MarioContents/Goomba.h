@@ -2,10 +2,12 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/Collision.h>
 #include "ContentsHelper.h"
-//#include "StateControl.h"
+#include "Monster.h"
+#include "Mario.h"
+
 
 // 설명 :
-class Goomba : public AActor
+class Goomba : public AMonster
 {
 public:
 
@@ -31,11 +33,26 @@ protected:
 	UCollision* UpCollision = nullptr;
 
 	// 몬스터 애니메이션 : 굼바
-	void StateChange(float _DeltaTime);
+	void StateChange(MonsterState _State);
 
-	void Idle(float _DeltaTime);
+	void StateUpdate(float _DeltaTime);
+	void MoveUpdate(float _DeltaTime);
+
+	void CalMove(float _DeltaTime);
+	void CalGravity(float _DeltaTime);
+
+	void MoveStart();
+	void DeadStart();
+
 	void Move(float _DeltaTime);
 	void Dead(float _DeltaTime);
+
+	void DirCheck();
+
+	std::string GetAnimation(std::string _Name);
+ 	
+	void MarioJumpAttack() override;
+
 
 	FVector MoveVector = FVector::Left * 0.1;
 	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
@@ -52,16 +69,7 @@ protected:
 	FVector GravityVector = FVector::Zero;
 
 
-	float MaxMoveSpeed = 350.0f;
-	float MoveSpeed = 300.0f;
 
-	void CalMove(float _DeltaTime);
-
-	void CalGravity(float _DeltaTime);
-
-	void StateUpdate(float _DeltaTime);
-
-	
 
 
 
