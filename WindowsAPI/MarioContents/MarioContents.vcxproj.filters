@@ -22,15 +22,6 @@
     <Filter Include="TestLevel">
       <UniqueIdentifier>{e688cef4-96b1-44a6-aa89-51e1e1c31ae9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ContentsCore &amp; Physics">
-      <UniqueIdentifier>{c8b8b54f-b951-4199-8c87-405c78656865}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContentsCore &amp; Physics\Physics">
-      <UniqueIdentifier>{6fb4ba05-88ec-4e47-b73c-0a14ae78bca8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ObjectStateController">
-      <UniqueIdentifier>{8b6868f4-7d7f-494d-9c86-dbbd536fd27c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Title &amp; Ending Level">
       <UniqueIdentifier>{2974c071-3fe6-40cc-9905-80cf27fc01eb}</UniqueIdentifier>
     </Filter>
@@ -40,16 +31,19 @@
     <Filter Include="Object\Title &amp; Ending Level\TitleLevel\Actor">
       <UniqueIdentifier>{2ea00fd6-0ec6-494d-9c30-a069da257253}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\PlayLevel\Actor\Monster\MonsterController">
+    <Filter Include="Object\PlayLevel\Actor\Monster\MonsterStateController">
       <UniqueIdentifier>{b4a3fd68-a1fb-4f66-adfa-98954bb2a39d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsCore &amp; Helper">
+      <UniqueIdentifier>{c8b8b54f-b951-4199-8c87-405c78656865}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsHelper.cpp">
-      <Filter>ContentsCore &amp; Physics</Filter>
+      <Filter>ContentsCore &amp; Helper</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
-      <Filter>ContentsCore &amp; Physics</Filter>
+      <Filter>ContentsCore &amp; Helper</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
       <Filter>Object\Title &amp; Ending Level\TitleLevel\Actor</Filter>
@@ -76,15 +70,15 @@
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Object\PlayLevel\Actor\Monster\MonsterController</Filter>
+      <Filter>Object\PlayLevel\Actor\Monster\MonsterStateController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsHelper.h">
-      <Filter>ContentsCore &amp; Physics</Filter>
+      <Filter>ContentsCore &amp; Helper</Filter>
     </ClInclude>
     <ClInclude Include="ContentsCore.h">
-      <Filter>ContentsCore &amp; Physics</Filter>
+      <Filter>ContentsCore &amp; Helper</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
       <Filter>Object\Title &amp; Ending Level\TitleLevel\Actor</Filter>
@@ -111,7 +105,7 @@
       <Filter>Object\PlayLevel\Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Object\PlayLevel\Actor\Monster\MonsterController</Filter>
+      <Filter>Object\PlayLevel\Actor\Monster\MonsterStateController</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

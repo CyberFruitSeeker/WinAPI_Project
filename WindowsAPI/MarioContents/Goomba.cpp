@@ -26,6 +26,9 @@ void Goomba::BeginPlay()
 		Renderer->SetScale({384, 384});
 		Renderer->CreateAnimation("Move", "Goomba.png", 0, 1, 0.2f, true);
 		Renderer->ChangeAnimation("Move");
+		// GetAnimation을 쓰지 않으니깐 StateChange를 바로 써본다.
+		StateChange(MonsterState::Move);
+
 
 		// 굼바 Dead 애니메이션이 작동되니?
 		Renderer->CreateAnimation("Dead", "Goomba.png", 2, 2, 0.1f, true);
@@ -41,9 +44,6 @@ void Goomba::BeginPlay()
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
-	{
-
-	}
 
 }
 
@@ -52,8 +52,6 @@ void Goomba::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 	{
-		/*CalGravity(_DeltaTime);
-		CalMove(_DeltaTime);*/
 		StateUpdate(_DeltaTime);
 	}
 	
@@ -86,15 +84,9 @@ void Goomba::CalMove(float _DeltaTime)
 }
 
 
-void Goomba::MoveUpdate(float _DeltaTime)
-{
-
-	CalGravity(_DeltaTime);
-}
 
 
 // ========= 스테이트, 무브 업데이트 ==========
-
 void Goomba::StateUpdate(float _DeltaTime)
 {
 	switch (State)
@@ -108,24 +100,20 @@ void Goomba::StateUpdate(float _DeltaTime)
 	default:
 		break;
 	}
-	
-
 }
 
 void Goomba::Move(float _DeltaTime)
 {
-
-
-
-	MoveUpdate(_DeltaTime);
+	// 굼바의 움직임과 중력이 적용되는가?
+	CalMove(_DeltaTime);
+	CalGravity(_DeltaTime);
 }
 
 void Goomba::Dead(float _DeltaTime)
 {
 
 
-
-	MoveUpdate(_DeltaTime);
+	
 }
 
 
@@ -142,9 +130,23 @@ void Goomba::StateChange(MonsterState _State)
 	default:
 		break;
 	}
-	
+	State = _State;
 
 }
+
+void Goomba::MoveStart()
+{
+	Renderer->ChangeAnimation("Move");
+
+
+}
+
+void Goomba::DeadStart()
+{
+	Renderer->ChangeAnimation("Dead");
+	Destroy(1.0f);
+}
+
 
 // 마리오의 점프어택과 굼바간의 상호작용이 일어났음을 알려주는 함수?
 void Goomba::MarioJumpAttack()
@@ -152,42 +154,5 @@ void Goomba::MarioJumpAttack()
 	StateChange(MonsterState::Dead);
 
 }
-
-void Goomba::MoveStart()
-{
-	Renderer->ChangeAnimation(GetAnimation("Move"));
-
-
-}
-
-void Goomba::DeadStart()
-{
-	Renderer->ChangeAnimation(GetAnimation("Dead"));
-	
-
-}
-
-void Goomba::DirCheck()
-{
-
-
-}
-
-std::string Goomba::GetAnimation(std::string _Name)
-{
-	// 굼바가 움직이거나, 마리오의 점프킬로 죽어있니?
-	
-	//std::string DirChange;
-
-
-
-
-
-
-
-
-	return std::string();
-}
-
 
 
