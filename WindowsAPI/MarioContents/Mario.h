@@ -51,6 +51,8 @@ protected:
 	EActorDir DirState = EActorDir::Right;
 	std::string CurAnimationName = "None";
 
+
+	// 점프를 한다음 떨어지고 있다는 것은 중력과 점프력이 동시에 작용하고 있기에
 	bool IsJumpDown()
 	{
 		FVector JPos = (GravityVector + JumpVector);
