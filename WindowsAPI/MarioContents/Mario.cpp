@@ -54,7 +54,7 @@ void Mario::BeginPlay()
 	// 굼바와 트루파를 Jump Kill 하기 위한 별도의 Collision
 	{
 		DownCollision = CreateCollision(MarioCollisionOrder::Player);
-		DownCollision->SetTransform({ {0,0},{64,30} });
+		DownCollision->SetTransform({ {0,0},{64,15} });
 		DownCollision->SetColType(ECollisionType::Rect);
 	}
 

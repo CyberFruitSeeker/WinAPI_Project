@@ -48,8 +48,8 @@ protected:
 	void MarioJumpAttack() override;
 
 
-	FVector MoveVector = FVector::Left * 0.1;
 	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
+	FVector MoveVector = FVector::Left * 0.1;
 
 	// 굼바에게 적용되는 중력, 가속도 등등의 물리효과
 	FVector GravityAccel = FVector::Down * 2.0f;

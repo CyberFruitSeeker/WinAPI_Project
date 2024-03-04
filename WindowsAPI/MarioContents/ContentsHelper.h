@@ -43,7 +43,6 @@ enum class PlayerState
 enum class MonsterState
 {
 	None,
-	Idle,
 	Move,
 	Dead,
 };
