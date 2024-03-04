@@ -33,11 +33,11 @@ void PlayLevel::BeginPlay()
 	}
 
 	// 실험용 굼바 다크
-	{
-		GoombaDark* NewActor = SpawnActor<GoombaDark>(MarioRenderOrder::Monster);
-		NewActor->SetName("GoombaDark");
-		NewActor->SetActorLocation({ 400,550 });
-	}
+	//{
+	//	GoombaDark* NewActor = SpawnActor<GoombaDark>(MarioRenderOrder::Monster);
+	//	NewActor->SetName("GoombaDark");
+	//	NewActor->SetActorLocation({ 400,550 });
+	//}
 
 	{
 		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);

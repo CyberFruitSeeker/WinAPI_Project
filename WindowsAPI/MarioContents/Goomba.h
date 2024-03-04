@@ -28,9 +28,10 @@ protected:
 
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BodyCollision = nullptr;
+	UCollision* UpCollision = nullptr;
 
 	// 몬스터 애니메이션 : 굼바
-	void StateUpdate(float _DeltaTime);
+	void StateChange(float _DeltaTime);
 
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
@@ -41,6 +42,7 @@ protected:
 
 
 	// Tick에 돌리기 위한 StateUpdate 함수를 만들기 위한 것들
+	// 굼바의 상태가 어떠니?
 	MonsterState State = MonsterState::None;
 	EActorDir DirState = EActorDir::Left;
 
@@ -57,6 +59,9 @@ protected:
 
 	void CalGravity(float _DeltaTime);
 
+	void StateUpdate(float _DeltaTime);
+
+	
 
 
 
@@ -65,10 +70,6 @@ private:
 
 
 
-
-
-	// 굼바의 상태가 어떠니?
-	//MonsterState State = MonsterState::None;
 
 };
 

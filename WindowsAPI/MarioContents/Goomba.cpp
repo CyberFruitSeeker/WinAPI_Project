@@ -36,6 +36,11 @@ void Goomba::BeginPlay()
 	}
 
 	
+	{
+
+	}
+
+	
 }
 
 
@@ -71,6 +76,7 @@ void Goomba::CalGravity(float _DeltaTime)
 }
 
 
+
 // ================ 굼바를 땅에서 움직이게 해보기 ===============
 
 void Goomba::CalMove(float _DeltaTime)
@@ -83,8 +89,13 @@ void Goomba::CalMove(float _DeltaTime)
 
 }
 
-
 void Goomba::StateUpdate(float _DeltaTime)
+{
+
+}
+
+
+void Goomba::StateChange(float _DeltaTime)
 {
 
 	switch (State)

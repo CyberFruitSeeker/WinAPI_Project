@@ -38,6 +38,7 @@ protected:
 	void FreeMove(float _DeltaTime);
 	void Idle(float _DeltaTime);
 	void Jump(float _DeltaTime);
+	void JumpDown();
 	void Run(float _DeltaTime);
 	// Fly도 필요한지는 추후 판별
 
@@ -50,9 +51,15 @@ protected:
 	EActorDir DirState = EActorDir::Right;
 	std::string CurAnimationName = "None";
 
+	bool IsJumpDown()
+	{
+		FVector JPos = (GravityVector + JumpVector);
+		return 0 < JPos.Y;
+	}
 
 private:
 	UCollision* BodyCollision = nullptr;
+	UCollision* DownCollision = nullptr;
 
 	UImageRenderer* Renderer = nullptr;
 	float AnimationTime = 0.0f;

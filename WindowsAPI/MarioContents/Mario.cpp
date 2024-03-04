@@ -50,6 +50,13 @@ void Mario::BeginPlay()
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
+	// 굼바와 트루파를 Jump Kill 하기 위한 별도의 Collision
+	{
+		DownCollision = CreateCollision(MarioCollisionOrder::Player);
+		DownCollision->SetTransform({ {0,0},{64,30} });
+		DownCollision->SetColType(ECollisionType::Rect);
+	}
+
 
 	StateChange(PlayerState::Idle);
 }
@@ -83,10 +90,10 @@ void Mario::MoveCameraMarioPos(float _DeltaTime)
 {
 	FVector CurCamPos = GetWorld()->GetCameraPos();
 	FVector MarioPos = GetActorLocation();
-	float GameCenter = GEngine->MainWindow.GetWindowScale().hX();
-	if (MarioPos.X > GameCenter + CurCamPos.X)
+	float SceneCenter = GEngine->MainWindow.GetWindowScale().hX();
+	if (MarioPos.X > SceneCenter + CurCamPos.X)
 	{
-		GetWorld()->SetCameraPos({ MarioPos.X - GameCenter,CurCamPos.Y });
+		GetWorld()->SetCameraPos({ MarioPos.X - SceneCenter,CurCamPos.Y });
 	}
 }
 
@@ -182,8 +189,33 @@ void Mario::Idle(float _DeltaTime)
 
 }
 
+// JumpDown 이라는 별도의 함수로 두지 않고, Jump 함수에서 if문을 이용해본다.
+void Mario::JumpDown()
+{
+
+}
+
 void Mario::Jump(float _DeltaTime)
 {
+	// EnumType _Order, std::vector<UCollision*>& _Result;
+
+	// 상승할때는 하면 안된다.
+	if (IsJumpDown())
+	{
+		std::vector<UCollision*> _Result;
+		if (true == DownCollision->CollisionCheck(MarioCollisionOrder::Monster, _Result))
+		{
+			for (size_t i = 0; i < _Result.size(); i++)
+			{
+				// AMonster* Monster = dynamic_cast<AMonster*>(_Result[i]->GetOwner());
+
+				_Result[i]->GetOwner()->Destroy();
+			}
+		}
+
+	}
+
+
 	if (UEngineInput::IsPress(VK_LEFT))
 	{
 		AddMoveVector(FVector::Left * _DeltaTime);
@@ -204,6 +236,7 @@ void Mario::Jump(float _DeltaTime)
 		return;
 	}
 }
+
 
 void Mario::Run(float _DeltaTime)
 {
@@ -314,7 +347,6 @@ void Mario::CalLastMoveVector(float _DeltaTime)
 	LastMoveVector = LastMoveVector + MoveVector;
 	LastMoveVector = LastMoveVector + JumpVector;
 	LastMoveVector = LastMoveVector + GravityVector;
-	LastMoveVector + JumpVector;
 }
 
 
@@ -389,6 +421,8 @@ void Mario::StateChange(PlayerState _State)
 			break;
 		case PlayerState::Jump:
 			JumpStart();
+			break;
+		case PlayerState::JumpDown:
 			break;
 		default:
 			break;
