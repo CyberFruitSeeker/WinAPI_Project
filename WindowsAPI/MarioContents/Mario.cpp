@@ -208,7 +208,7 @@ void Mario::Jump(float _DeltaTime)
 		{
 			for (size_t i = 0; i < _Result.size(); i++)
 			{
-				AMonster* Monster = dynamic_cast<AMonster*>(_Result[i]->GetOwner());
+				AMonsterSetting* Monster = dynamic_cast<AMonsterSetting*>(_Result[i]->GetOwner());
 				Monster->MarioJumpAttack();
 
 				// _Result[i]->GetOwner();/*->Destroy();*/

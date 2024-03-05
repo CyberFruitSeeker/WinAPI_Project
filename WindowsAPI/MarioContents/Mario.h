@@ -52,18 +52,19 @@ protected:
 	std::string CurAnimationName = "None";
 
 
-	// 점프를 한다음 떨어지고 있다는 것은 중력과 점프력이 동시에 작용하고 있기에
+	// 점프를 한다음 떨어지고 있다는 것은 중력과 점프력이 동시에 작용하고 있는 것이기 때문에
 	bool IsJumpDown()
 	{
 		FVector JPos = (GravityVector + JumpVector);
 		return 0 < JPos.Y;
 	}
 
+
 private:
 	UCollision* BodyCollision = nullptr;
 	UCollision* DownCollision = nullptr;
-
 	UImageRenderer* Renderer = nullptr;
+
 	float AnimationTime = 0.0f;
 	int AnimationFrame = 0;
 

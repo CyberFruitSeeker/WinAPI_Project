@@ -2,20 +2,20 @@
 #include <EngineCore/Actor.h>
 
 // 설명 :
-class AMonster : public AActor
+class AMonsterSetting : public AActor
 {
 public:
 	// constrcuter destructer
-	AMonster();
-	~AMonster();
+	AMonsterSetting();
+	~AMonsterSetting();
 
 	// delete Function
-	AMonster(const AMonster& _Other) = delete;
-	AMonster(AMonster&& _Other) noexcept = delete;
-	AMonster& operator=(const AMonster& _Other) = delete;
-	AMonster& operator=(AMonster&& _Other) noexcept = delete;
+	AMonsterSetting(const AMonsterSetting& _Other) = delete;
+	AMonsterSetting(AMonsterSetting&& _Other) noexcept = delete;
+	AMonsterSetting& operator=(const AMonsterSetting& _Other) = delete;
+	AMonsterSetting& operator=(AMonsterSetting&& _Other) noexcept = delete;
 
-	// 마리오가 몬스터를 밟았다.
+	// 마리오가 몬스터를 밟았다 == 점프어택을 했다.
 	virtual void MarioJumpAttack() 
 	{
 

@@ -1,9 +1,9 @@
 #include "Monster.h"
 
-AMonster::AMonster()
+AMonsterSetting::AMonsterSetting()
 {
 }
 
-AMonster::~AMonster()
+AMonsterSetting::~AMonsterSetting()
 {
 }

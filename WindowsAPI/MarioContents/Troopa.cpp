@@ -27,6 +27,12 @@ void Troopa::BeginPlay()
 		Renderer->ChangeAnimation("Move");
 		//Renderer->SetScale({ 512,384 });
 		Renderer->SetTransform({ {0,0},{512,384} });
+
+
+		// 트루파 Dead 애니메이션이 작동되니?
+		Renderer->CreateAnimation("Dead_Left", "Troopa_Left.png", 4, 4, 0.1f, true);
+		Renderer->CreateAnimation("Dead_Right", "Troopa_Left.png", 4, 4, 0.1f, true);
+
 	}
 
 	// 트루파가 마리오랑 충돌하는가?
@@ -42,9 +48,7 @@ void Troopa::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-	CalGravity(_DeltaTime);
-
-	CalMove(_DeltaTime);
+	StateUpdate(_DeltaTime);
 
 }
 
@@ -53,11 +57,26 @@ void Troopa::Tick(float _DeltaTime)
 void Troopa::CalMove(float _DeltaTime)
 {
 	// 트루파가 땅에서 움직이니?
+	
+	FVector CheckPos = GetActorLocation();
+	switch (DirState)
+	{
+	case EActorDir::Left:
+		CheckPos.X += 35;
+		break;;
+	case EActorDir::Right:
+		CheckPos.X += 35;
+		break;
+	default:
+		break;
+	}
+	
 	MoveVector * _DeltaTime;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 
 	AddActorLocation(MoveVector);
 
+	
 }
 
 void Troopa::CalGravity(float _DeltaTime)
@@ -76,23 +95,93 @@ void Troopa::CalGravity(float _DeltaTime)
 
 }
 
+
+// 트루파에게 필요한 방향 체크(DirCheck)
+void Troopa::DirCheck()
+{
+	EActorDir Dir = DirState;
+	Dir = EActorDir::Left;
+	Dir = EActorDir::Right;
+
+	if (Dir != DirState)
+	{
+		DirState = Dir;
+		std::string Name = GetAnimationName(CurAnimationName);
+		Renderer->ChangeAnimation(Name, true, Renderer->GetCurAnimationFrame(), Renderer->GetCurAnimationTime());
+
+	}
+
+
+}
+
+// 이미지부터 좌우 방향이 있는 트루파에게 필요한 애니메이션 함수
+std::string Troopa::GetAnimationName(std::string _Name)
+{
+	std::string DirName = "";
+
+	switch (DirState)
+	{
+	case EActorDir::Left:
+		DirName = "_Left";
+		break;
+	case EActorDir::Right:
+		DirName = "_Right";
+		break;
+	default:
+		break;
+	}
+
+	CurAnimationName = _Name;
+
+	return _Name + DirName;
+}
+
+
+
 void Troopa::MoveStart()
 {
-
+	Renderer->ChangeAnimation(GetAnimationName("Move"));
+	DirCheck();
 }
 
 void Troopa::DeadStart()
 {
-
+	Renderer->ChangeAnimation(GetAnimationName("Dead"));
+	DirCheck();
 }
 
 void Troopa::Move(float _DeltaTime)
 {
+	DirCheck();
+
+	{
+		StateChange(MonsterState::Move);
+		return;
+	}
+
+	{
+		(FVector::Left * _DeltaTime);
+	}
+
+	{
+		(FVector::Right * _DeltaTime);
+	}
+
+	{
+		
+	}
 
 }
 
 void Troopa::Dead(float _DeltaTime)
 {
+	DirCheck();
+
+	{
+		StateChange(MonsterState::Dead);
+		return;
+	}
+
 
 }
 
@@ -103,23 +192,36 @@ void Troopa::MarioJumpAttack()
 }
 
 
+
 void Troopa::StateChange(MonsterState _State)
 {
+	if (State != _State)
+	{
+		switch (_State)
+		{
+		case MonsterState::Move:
+			MoveStart();
+			break;
+		case MonsterState::Dead:
+			DeadStart();
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	State = _State;
 }
 
 void Troopa::StateUpdate(float _DeltaTime)
 {
+	CalGravity(_DeltaTime);
+	CalMove(_DeltaTime);
+
 }
 
 
-// 이미지부터 좌우 방향이 있는 트루파에게 필요한 애니메이션 함수
-std::string Troopa::GetAnimationName(std::string _Name)
-{
-
-
-
-	return std::string();
-}
 
 
 

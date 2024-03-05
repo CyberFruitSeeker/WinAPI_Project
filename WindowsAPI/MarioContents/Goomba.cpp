@@ -148,7 +148,7 @@ void Goomba::DeadStart()
 }
 
 
-// 마리오의 점프어택과 굼바간의 상호작용이 일어났음을 알려주는 함수?
+// 마리오의 점프어택이 굼바한테 상호작용을 일으키게 하는 함수
 void Goomba::MarioJumpAttack()
 {
 	StateChange(MonsterState::Dead);

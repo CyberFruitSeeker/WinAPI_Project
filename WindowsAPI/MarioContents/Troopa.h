@@ -6,7 +6,7 @@
 #include "Mario.h"
 
 // 설명 :
-class Troopa : public AMonster
+class Troopa : public AMonsterSetting
 {
 public:
 	
@@ -29,11 +29,23 @@ protected:
 	UCollision* UpCollision = nullptr;
 
 	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
-	FVector MoveVector = FVector::Left * 0.1;
+	FVector MoveVector = FVector::Left * 0.1f;
 	// 하지만? : 트루파는 굼바와 달리 Left, Right가 있다.
+
+	MonsterState State = MonsterState::None;
+	EActorDir DirState = EActorDir::Left;
+
+	std::string CurAnimationName = "None";
 
 	FVector GravityAcc = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
+
+	float AnimationTime = 0.0f;
+	int AnimationFrame = 0;
+
+	float AlphaTime = 0.0f;
+	bool Dir = false;
+
 
 
 	// 몬스터 애니메이션 : 트루파
@@ -51,13 +63,12 @@ protected:
 
 	void MarioJumpAttack() override;
 
-
 	// 트루파에게 더 필요한 함수 == 기능이 무엇인가? : 우선 GetAnimation
+	std::string GetAnimationName(std::string _Name);
 	// 껍데기 상태가 되는 것에 필요한 것들 : FSM과 관련된 세세한 CollisionCheck 정도??
 
 	// Dir을 체크하고, 전환하는 함수 및 기능들도 가져와야 한다.
-	std::string GetAnimationName(std::string _Name);
-
+	void DirCheck();
 
 
 
