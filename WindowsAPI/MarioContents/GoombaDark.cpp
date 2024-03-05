@@ -50,7 +50,7 @@ void GoombaDark::CalGravity(float _DeltaTime)
 {
 
 	{
-		GravityVector += GravityAcc * _DeltaTime;
+		GravityVector += GravityAccel * _DeltaTime;
 		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 		if (Color == Color8Bit(255, 0, 255, 0))
 		{

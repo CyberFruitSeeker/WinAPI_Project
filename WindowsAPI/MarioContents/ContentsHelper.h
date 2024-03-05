@@ -9,6 +9,7 @@ enum MarioRenderOrder
 	Map,
 	Player,
 	Monster,
+	Item,
 	Text,
 };
 

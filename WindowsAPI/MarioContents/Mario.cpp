@@ -112,7 +112,7 @@ void Mario::CalMoveVector(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X += 35;
+		CheckPos.X -= 35;
 		break;
 	case EActorDir::Right:
 		CheckPos.X += 35;
@@ -120,7 +120,7 @@ void Mario::CalMoveVector(float _DeltaTime)
 	default:
 		break;
 	}
-	CheckPos.Y -= 15;
+	CheckPos.Y -= 35;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
@@ -464,7 +464,7 @@ void Mario::CameraFreeMove(float _DeltaTime)
 	if (UEngineInput::IsPress(VK_LEFT))
 	{
 		GetWorld()->AddCameraPos(FVector::Left * _DeltaTime * 500.0f);
-		// AddActorLocation(FVector::Left * _DeltaTime * 500.0f);
+		//AddActorLocation(FVector::Left * _DeltaTime * 500.0f);
 	}
 
 	if (UEngineInput::IsPress(VK_RIGHT))
@@ -476,13 +476,13 @@ void Mario::CameraFreeMove(float _DeltaTime)
 	if (UEngineInput::IsPress(VK_UP))
 	{
 		GetWorld()->AddCameraPos(FVector::Up * _DeltaTime * 500.0f);
-		// AddActorLocation(FVector::Up * _DeltaTime * 500.0f);
+		//AddActorLocation(FVector::Up * _DeltaTime * 500.0f);
 	}
 
 	if (UEngineInput::IsPress(VK_DOWN))
 	{
 		GetWorld()->AddCameraPos(FVector::Down * _DeltaTime * 500.0f);
-		// AddActorLocation(FVector::Down * _DeltaTime * 500.0f);
+		//AddActorLocation(FVector::Down * _DeltaTime * 500.0f);
 	}
 
 	if (UEngineInput::IsDown('2'))

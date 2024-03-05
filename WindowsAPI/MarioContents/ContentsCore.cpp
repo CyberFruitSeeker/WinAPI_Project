@@ -56,7 +56,7 @@ void UContentsCore::BeginPlay()
 
 	UEngineResourcesManager::GetInst().CuttingImage("Goomba.png", 3, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Troopa_Left.png", 6, 1);
-
+	UEngineResourcesManager::GetInst().CuttingImage("Item.png", 5, 2);
 
 
 

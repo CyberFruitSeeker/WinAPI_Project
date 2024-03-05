@@ -24,7 +24,7 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BodyCollision = nullptr;
 
-	FVector GravityAcc = FVector::Down * 2.0f;
+	FVector GravityAccel = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
 
 	void CalGravity(float _DeltaTime);

@@ -62,20 +62,25 @@ void Troopa::CalMove(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X += 35;
+		CheckPos.X -= 40;
 		break;;
 	case EActorDir::Right:
-		CheckPos.X += 35;
+		CheckPos.X += 40;
 		break;
 	default:
 		break;
 	}
 	
-	MoveVector * _DeltaTime;
-	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	CheckPos.Y -= 20;
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
+	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		MoveVector = FVector::Zero;
+	}
 
+	//MoveVector * _DeltaTime;
 	AddActorLocation(MoveVector);
-
+	
 	
 }
 
@@ -83,7 +88,7 @@ void Troopa::CalGravity(float _DeltaTime)
 {
 
 	{
-		GravityVector += GravityAcc * _DeltaTime;
+		GravityVector += GravityAccel * _DeltaTime;
 		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 		if (Color == Color8Bit(255, 0, 255, 0))
 		{
@@ -148,6 +153,9 @@ void Troopa::DeadStart()
 {
 	Renderer->ChangeAnimation(GetAnimationName("Dead"));
 	DirCheck();
+	
+
+	
 }
 
 void Troopa::Move(float _DeltaTime)
@@ -167,9 +175,6 @@ void Troopa::Move(float _DeltaTime)
 		(FVector::Right * _DeltaTime);
 	}
 
-	{
-		
-	}
 
 }
 
@@ -188,6 +193,7 @@ void Troopa::Dead(float _DeltaTime)
 void Troopa::MarioJumpAttack()
 {
 	StateChange(MonsterState::Dead);
+
 
 }
 

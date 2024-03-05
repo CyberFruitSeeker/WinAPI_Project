@@ -76,10 +76,28 @@ void Goomba::CalGravity(float _DeltaTime)
 void Goomba::CalMove(float _DeltaTime)
 {
 	
-	MoveVector * _DeltaTime;
-	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-	AddActorLocation(MoveVector);
+	FVector CheckPos = GetActorLocation();
+	switch (DirState)
+	{
+	case EActorDir::Left:
+		CheckPos.X -= 40;
+		break;
+	case EActorDir::Right:
+		CheckPos.X += 40;
+		break;
+	default:
+		break;
+	}
+	CheckPos.Y -= 20;
 
+	MoveVector * _DeltaTime;
+	AddActorLocation(MoveVector);
+	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
+
+	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		GravityVector = FVector::Zero;
+	}
 
 }
 

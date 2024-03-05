@@ -4,6 +4,7 @@
 #include "Goomba.h"
 #include "GoombaDark.h"
 #include "Troopa.h"
+#include "Mushroom.h"
 #include <EngineCore/EngineCore.h>
 
 PlayLevel::PlayLevel()
@@ -43,6 +44,12 @@ void PlayLevel::BeginPlay()
 		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
 		NewActor->SetName("Goomba");
 		NewActor->SetActorLocation({ 650,150 });
+	}
+
+	{
+		Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);
+		NewActor->SetName("Mushroom");
+		NewActor->SetActorLocation({ 850,350 });
 	}
 
 	{

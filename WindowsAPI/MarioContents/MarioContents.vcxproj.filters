@@ -37,6 +37,9 @@
     <Filter Include="ContentsCore &amp; Helper">
       <UniqueIdentifier>{c8b8b54f-b951-4199-8c87-405c78656865}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\PlayLevel\Actor\Item">
+      <UniqueIdentifier>{525965e8-6e4c-472e-b792-43a46fbc3194}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsHelper.cpp">
@@ -72,6 +75,9 @@
     <ClCompile Include="Monster.cpp">
       <Filter>Object\PlayLevel\Actor\Monster\MonsterStateController</Filter>
     </ClCompile>
+    <ClCompile Include="Mushroom.cpp">
+      <Filter>Object\PlayLevel\Actor\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsHelper.h">
@@ -106,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Object\PlayLevel\Actor\Monster\MonsterStateController</Filter>
+    </ClInclude>
+    <ClInclude Include="Mushroom.h">
+      <Filter>Object\PlayLevel\Actor\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
