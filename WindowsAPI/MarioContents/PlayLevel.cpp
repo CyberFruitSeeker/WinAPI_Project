@@ -77,7 +77,7 @@ void PlayLevel::BeginPlay()
 	{
 		Troopa* NewActor = SpawnActor<Troopa>(MarioRenderOrder::Monster);
 		NewActor->SetName("Troopa");
-		NewActor->SetActorLocation({ 2000,500 });
+		NewActor->SetActorLocation({ 2350,500 });
 	}
 
 }

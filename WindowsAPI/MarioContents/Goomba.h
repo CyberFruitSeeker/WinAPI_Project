@@ -32,6 +32,22 @@ protected:
 	UCollision* BodyCollision = nullptr;
 	UCollision* UpCollision = nullptr;
 
+	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
+	FVector MoveVector = FVector::Right;
+
+	// 굼바에게 적용되는 중력, 가속도 등등의 물리효과
+	FVector GravityAccel = FVector::Down * 2.0f;
+	FVector GravityVector = FVector::Zero;
+
+	// Tick에 돌리기 위한 StateUpdate 함수를 만들기 위한 것들
+	// 굼바의 State가 어떠니?
+	GoombaState State = GoombaState::None;
+	EActorDir DirState = EActorDir::None;
+	
+	float MoveSpeed = 200.0f;
+	float MaxMoveSpeed = 500.0f;
+	
+	
 	// 몬스터 애니메이션 : 굼바
 	void StateChange(GoombaState _State);
 	void StateUpdate(float _DeltaTime);
@@ -48,18 +64,7 @@ protected:
 	void MarioJumpAttack() override;
 
 
-	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
-	// 그에 따라서 FVector Left 뿐만이 아니라, Right도 필요하겠네?
-	FVector MoveVector = FVector::Right * 0.5f;
-
-	// 굼바에게 적용되는 중력, 가속도 등등의 물리효과
-	FVector GravityAccel = FVector::Down * 2.0f;
-	FVector GravityVector = FVector::Zero;
-
-	// Tick에 돌리기 위한 StateUpdate 함수를 만들기 위한 것들
-	// 굼바의 State가 어떠니?
-	GoombaState State = GoombaState::None;
-	EActorDir DirState = EActorDir::None;
+	
 
 
 

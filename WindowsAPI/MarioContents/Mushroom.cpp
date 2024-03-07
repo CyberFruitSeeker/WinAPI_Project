@@ -36,8 +36,7 @@ void Mushroom::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-	CalGravity(_DeltaTime);
-	CalMove(_DeltaTime);
+	StateUpdate(_DeltaTime);
 
 }
 
@@ -45,6 +44,10 @@ void Mushroom::Tick(float _DeltaTime)
 void Mushroom::StateUpdate(float _DeltaTime)
 {
 
+
+
+	CalGravity(_DeltaTime);
+	CalMove(_DeltaTime);
 }
 
 void Mushroom::CalMove(float _DeltaTime)

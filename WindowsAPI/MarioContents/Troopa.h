@@ -29,7 +29,7 @@ protected:
 	UCollision* UpCollision = nullptr;
 
 	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
-	FVector MoveVector = FVector::Right;
+	FVector MoveVector = FVector::Left;
 	// 하지만? : 트루파는 굼바와 달리 Left, Right가 있다.
 
 	TroopaState State = TroopaState::None;
@@ -38,6 +38,11 @@ protected:
 	FVector GravityAccel = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
 	
+	float MoveSpeed = 150.0f;
+	//float MaxMoveSpeed = 500.0f;
+
+
+
 	std::string CurAnimationName = "None";
 
 	/*float AnimationTime = 0.0f;

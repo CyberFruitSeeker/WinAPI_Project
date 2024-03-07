@@ -30,7 +30,6 @@ protected:
 	FVector GravityAccel = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
 	
-	
 	EActorDir DirState = EActorDir::None;
 
 	float MoveSpeed = 200.0f;

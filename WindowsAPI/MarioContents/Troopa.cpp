@@ -44,7 +44,7 @@ void Troopa::BeginPlay()
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
-
+	DirState = EActorDir::Left;
 	StateChange(TroopaState::Move);
 }
 
@@ -66,10 +66,10 @@ void Troopa::CalMove(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X -= 3;
+		CheckPos.X -= 30;
 		break;;
 	case EActorDir::Right:
-		CheckPos.X += 3;
+		CheckPos.X += 30;
 		break;
 	default:
 		break;
@@ -79,12 +79,23 @@ void Troopa::CalMove(float _DeltaTime)
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
-		MoveVector = FVector::Zero;
+		switch (DirState)
+		{
+		case EActorDir::Left:
+			DirState = EActorDir::Right;
+			break;;
+		case EActorDir::Right:
+			DirState = EActorDir::Left;
+			break;
+		default:
+			break;
+		}
+
+		DirCheck();
+		MoveVector.X *= -1.0f;
 	}
 
-	MoveVector * _DeltaTime;
-	AddActorLocation(MoveVector);
-
+	AddActorLocation(MoveVector * _DeltaTime * MoveSpeed);
 
 }
 
@@ -108,19 +119,8 @@ void Troopa::CalGravity(float _DeltaTime)
 // 트루파에게 필요한 방향 체크(DirCheck)
 void Troopa::DirCheck()
 {
-	EActorDir Dir = DirState;
-	Dir = EActorDir::Left;
-	Dir = EActorDir::Right;
-
-	if (Dir != DirState)
-	{
-		DirState = Dir;
-		std::string Name = GetAnimationName(CurAnimationName);
-		Renderer->ChangeAnimation(Name, true, Renderer->GetCurAnimationFrame(), Renderer->GetCurAnimationTime());
-
-	}
-
-
+	std::string Name = GetAnimationName(CurAnimationName);
+	Renderer->ChangeAnimation(Name, true, Renderer->GetCurAnimationFrame(), Renderer->GetCurAnimationTime());
 }
 
 // 이미지부터 좌우 방향이 있는 트루파에게 필요한 애니메이션 함수
