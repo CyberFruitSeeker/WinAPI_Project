@@ -22,6 +22,11 @@ public:
 	}
 
 protected:
+	// 굼바와 트루파에게 공통적으로 필요한 것이 무엇인가?
+
+
+
+
 
 private:
 

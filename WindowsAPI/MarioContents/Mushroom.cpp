@@ -23,7 +23,7 @@ void Mushroom::BeginPlay()
 
 	// 머쉬룸이 마리오랑 충돌하는가?
 	{
-		BodyCollision = CreateCollision(MarioCollisionOrder::Mushroom);
+		BodyCollision = CreateCollision(MarioCollisionOrder::Item);
 		BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
@@ -49,30 +49,33 @@ void Mushroom::StateUpdate(float _DeltaTime)
 
 void Mushroom::CalMove(float _DeltaTime)
 {
-	
 	FVector CheckPos = GetActorLocation();
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X -= 5;
+		CheckPos.X -= 80;
 		break;
 	case EActorDir::Right:
-		CheckPos.X += 5;
+		CheckPos.X += 80;
 		break;
 	default:
 		break;
 	}
 	CheckPos.Y -= 20;
 
-	MoveVector* _DeltaTime;
-	AddActorLocation(MoveVector);
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
-		MoveVector = FVector::Zero;
+		MoveVector.X *= -1.0f;
 	}
 
+	AddActorLocation(MoveVector * _DeltaTime * MoveSpeed);
+
+	/*if (MaxMoveSpeed <= MoveVector.Size2D())
+	{
+		MoveVector = MoveVector.Normalize2DReturn() * MaxMoveSpeed;
+	}*/
 
 }
 

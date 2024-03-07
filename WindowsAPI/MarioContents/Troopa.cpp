@@ -23,9 +23,10 @@ void Troopa::BeginPlay()
 		SetName("Troopa");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 		Renderer->SetImage("Troopa_Left.png");
+		Renderer->SetImage("Troopa_Right.png");
+		//Renderer->ChangeAnimation("Move");
 		Renderer->CreateAnimation("Move_Left", "Troopa_Left.png", 0, 1, 0.2f);
 		Renderer->CreateAnimation("Move_Right", "Troopa_Right.png", 0, 1, 0.2f);
-		//Renderer->ChangeAnimation("Move");
 		//Renderer->SetScale({ 512,384 });
 		Renderer->SetTransform({ {0,0},{512,384} });
 
@@ -43,6 +44,8 @@ void Troopa::BeginPlay()
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
+
+	StateChange(TroopaState::Move);
 }
 
 void Troopa::Tick(float _DeltaTime)
@@ -58,7 +61,7 @@ void Troopa::Tick(float _DeltaTime)
 void Troopa::CalMove(float _DeltaTime)
 {
 	// 트루파가 땅에서 움직이니?
-	
+
 	FVector CheckPos = GetActorLocation();
 	switch (DirState)
 	{
@@ -71,7 +74,7 @@ void Troopa::CalMove(float _DeltaTime)
 	default:
 		break;
 	}
-	
+
 	CheckPos.Y -= 20;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
@@ -79,10 +82,10 @@ void Troopa::CalMove(float _DeltaTime)
 		MoveVector = FVector::Zero;
 	}
 
-	//MoveVector * _DeltaTime;
+	MoveVector * _DeltaTime;
 	AddActorLocation(MoveVector);
-	
-	
+
+
 }
 
 void Troopa::CalGravity(float _DeltaTime)
@@ -154,28 +157,23 @@ void Troopa::DeadStart()
 {
 	Renderer->ChangeAnimation(GetAnimationName("Dead"));
 	DirCheck();
-	
 
+}
+
+void Troopa::DirChangeStart()
+{
 	
 }
+
+
 
 void Troopa::Move(float _DeltaTime)
 {
 	DirCheck();
 
-	{
-		StateChange(MonsterState::Move);
-		return;
-	}
-
-	{
-		(FVector::Left * _DeltaTime);
-	}
-
-	{
-		(FVector::Right * _DeltaTime);
-	}
-
+	// 그래비티 & 무브 계산 기능은 움직임 함수 안에서 한번에 돌아가는 것이 맞다.
+	CalGravity(_DeltaTime);
+	CalMove(_DeltaTime);
 
 }
 
@@ -183,33 +181,37 @@ void Troopa::Dead(float _DeltaTime)
 {
 	DirCheck();
 
-	{
-		StateChange(MonsterState::Dead);
-		return;
-	}
 
 
 }
+
+void Troopa::DirChange(float _DeltaTime)
+{
+	DirCheck();
+
+
+}
+
 
 void Troopa::MarioJumpAttack()
 {
-	StateChange(MonsterState::Dead);
+	StateChange(TroopaState::Dead);
 
 
 }
 
 
 
-void Troopa::StateChange(MonsterState _State)
+void Troopa::StateChange(TroopaState _State)
 {
 	if (State != _State)
 	{
 		switch (_State)
 		{
-		case MonsterState::Move:
+		case TroopaState::Move:
 			MoveStart();
 			break;
-		case MonsterState::Dead:
+		case TroopaState::Dead:
 			DeadStart();
 			break;
 		default:
@@ -223,8 +225,19 @@ void Troopa::StateChange(MonsterState _State)
 
 void Troopa::StateUpdate(float _DeltaTime)
 {
-	CalGravity(_DeltaTime);
-	CalMove(_DeltaTime);
+	switch (State)
+	{
+	case TroopaState::Move:
+		Move(_DeltaTime);
+		break;
+	case TroopaState::Dead:
+		Dead(_DeltaTime);
+		break;
+	default:
+		break;
+	}
+
+
 
 }
 

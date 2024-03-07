@@ -25,13 +25,16 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BodyCollision = nullptr;
 
-	FVector MoveVector = FVector::Right * 0.5;
+	FVector MoveVector = FVector::Right;
 
 	FVector GravityAccel = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
 	
 	
 	EActorDir DirState = EActorDir::None;
+
+	float MoveSpeed = 200.0f;
+	float MaxMoveSpeed = 500.0f;
 
 	void StateUpdate(float _DeltaTime);
 

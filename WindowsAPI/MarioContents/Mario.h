@@ -28,7 +28,7 @@ protected:
 
 	std::string GetAnimationName(std::string _Name);
 
-	void StateChange(PlayerState _State);
+	void StateChange(MarioState _State);
 	void StateUpdate(float _DeltaTime);
 
 
@@ -47,7 +47,7 @@ protected:
 	void RunStart();
 	void JumpStart();
 
-	PlayerState State = PlayerState::None;
+	MarioState State = MarioState::None;
 	EActorDir DirState = EActorDir::Right;
 	std::string CurAnimationName = "None";
 
@@ -58,6 +58,11 @@ protected:
 		FVector JPos = (GravityVector + JumpVector);
 		return 0 < JPos.Y;
 	}
+
+	// 마리오가 버섯을 먹었다.
+	virtual void MarioMushroomEat(float _DeltaTime);
+
+
 
 
 private:
@@ -76,7 +81,7 @@ private:
 	FVector MoveVector = FVector::Zero;
 	FVector MoveAccel = FVector::Right * 500.0f;
 	float MoveMaxSpeed = 600.0f;
-	void AddMoveVector(const FVector& _DirDelta);
+	void AddMoveVector(const FVector& _DeltaTime);
 
 	// 마리오에게 적용되는 중력과 중력 초기화
 	FVector GravityAccel = FVector::Down * 1000.0f;
@@ -104,10 +109,6 @@ private:
 	// 어떤 기능을 더 추가할 것인가?
 	// moveresult?  
 	
-
-	// 마리오가 버섯을 먹었다.
-	virtual void MarioMushroomEat(float _DeltaTime);
-
 
 
 

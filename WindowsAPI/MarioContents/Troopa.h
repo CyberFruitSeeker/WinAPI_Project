@@ -29,27 +29,27 @@ protected:
 	UCollision* UpCollision = nullptr;
 
 	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
-	FVector MoveVector = FVector::Right * 0.5f;
+	FVector MoveVector = FVector::Right;
 	// 하지만? : 트루파는 굼바와 달리 Left, Right가 있다.
 
-	MonsterState State = MonsterState::None;
+	TroopaState State = TroopaState::None;
 	EActorDir DirState = EActorDir::Left;
-
-	std::string CurAnimationName = "None";
 
 	FVector GravityAccel = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
+	
+	std::string CurAnimationName = "None";
 
-	float AnimationTime = 0.0f;
+	/*float AnimationTime = 0.0f;
 	int AnimationFrame = 0;
 
 	float AlphaTime = 0.0f;
-	bool Dir = false;
+	bool Dir = false;*/
 
 
 
 	// 몬스터 애니메이션 : 트루파
-	void StateChange(MonsterState _State);
+	void StateChange(TroopaState _State);
 	void StateUpdate(float _DeltaTime);
 
 	void CalMove(float _DeltaTime);
@@ -57,9 +57,11 @@ protected:
 
 	void MoveStart();
 	void DeadStart();
+	void DirChangeStart();
 
 	void Move(float _DeltaTime);
 	void Dead(float _DeltaTime);
+	void DirChange(float _DeltaTime);
 
 	void MarioJumpAttack() override;
 

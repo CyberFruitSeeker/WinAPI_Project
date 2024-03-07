@@ -18,7 +18,7 @@ enum class MarioCollisionOrder
 	Map,
 	Monster,
 	Player,
-	Mushroom,
+	Item,
 };
 
 enum class EActorDir
@@ -28,13 +28,11 @@ enum class EActorDir
 	Right,
 };
 
-enum class PlayerState
+enum class MarioState
 {
 	None,
 	Idle,
 	Jump,
-	//JumpDown,
-	DirChange,
 	Dead,
 	CameraFreeMove,
 	FreeMove,
@@ -42,12 +40,33 @@ enum class PlayerState
 
 };
 
-enum class MonsterState
+// 굼바와 트루파의 애니메이션은 다르게 작동해서 enum class 구분이 필요하다.
+// 머쉬룸도 우선 구분해주자
+enum class GoombaState
+{
+	None,
+	Move,
+	//DirChange,
+	Dead,
+};
+
+enum class MushroomState
+{
+	None,
+	Move,
+	//DirChange,
+	Dead,
+};
+
+enum class TroopaState
 {
 	None,
 	Move,
 	Dead,
 };
+
+
+
 
 enum class MarioMod
 {

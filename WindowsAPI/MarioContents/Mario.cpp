@@ -59,7 +59,7 @@ void Mario::BeginPlay()
 	}
 
 
-	StateChange(PlayerState::Idle);
+	StateChange(MarioState::Idle);
 }
 
 
@@ -109,9 +109,9 @@ void Mario::MoveCameraMarioPos(float _DeltaTime)
 
 /// ============== 마리오의 이동에서 키입력과 관련된 기능들 ==============
 
-void Mario::AddMoveVector(const FVector& _DirDelta)
+void Mario::AddMoveVector(const FVector& _DeltaTime)
 {
-	MoveVector += _DirDelta * MoveAccel;
+	MoveVector += _DeltaTime * MoveAccel;
 }
 
 void Mario::CalMoveVector(float _DeltaTime)
@@ -168,13 +168,13 @@ void Mario::Idle(float _DeltaTime)
 	// 여기서는 가만히 있을때만 어떻게 할지 신경쓰면 된다.
 	if (true == UEngineInput::IsDown('1'))
 	{
-		StateChange(PlayerState::FreeMove);
+		StateChange(MarioState::FreeMove);
 		return;
 	}
 
 	if (true == UEngineInput::IsDown('2'))
 	{
-		StateChange(PlayerState::CameraFreeMove);
+		StateChange(MarioState::CameraFreeMove);
 		return;
 	}
 
@@ -184,13 +184,13 @@ void Mario::Idle(float _DeltaTime)
 		true == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
-		StateChange(PlayerState::Run);
+		StateChange(MarioState::Run);
 		return;
 	}
 
 	if (true == UEngineInput::IsDown(VK_SPACE))
 	{
-		StateChange(PlayerState::Jump);
+		StateChange(MarioState::Jump);
 		return;
 	}
 
@@ -242,7 +242,7 @@ void Mario::Jump(float _DeltaTime)
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		JumpVector = FVector::Zero;
-		StateChange(PlayerState::Idle);
+		StateChange(MarioState::Idle);
 		return;
 	}
 }
@@ -254,7 +254,7 @@ void Mario::Run(float _DeltaTime)
 
 	if (true == UEngineInput::IsFree(VK_LEFT) && UEngineInput::IsFree(VK_RIGHT))
 	{
-		StateChange(PlayerState::Idle);
+		StateChange(MarioState::Idle);
 		return;
 	}
 
@@ -270,7 +270,7 @@ void Mario::Run(float _DeltaTime)
 
 	if (true == UEngineInput::IsDown(VK_SPACE))
 	{
-		StateChange(PlayerState::Jump);
+		StateChange(MarioState::Jump);
 		return;
 	}
 
@@ -327,7 +327,7 @@ void Mario::FreeMove(float _DeltaTime)
 
 	if (UEngineInput::IsDown('1'))
 	{
-		StateChange(PlayerState::Idle);
+		StateChange(MarioState::Idle);
 	}
 }
 
@@ -417,20 +417,20 @@ std::string Mario::GetAnimationName(std::string _Name)
 	return _Name + DirName;
 }
 
-void Mario::StateChange(PlayerState _State)
+void Mario::StateChange(MarioState _State)
 {
 	// 마리오의 상태가 변하는 것에 대응하는 함수
 	if (State != _State)
 	{
 		switch (_State)
 		{
-		case PlayerState::Idle:
+		case MarioState::Idle:
 			IdleStart();
 			break;
-		case PlayerState::Run:
+		case MarioState::Run:
 			RunStart();
 			break;
-		case PlayerState::Jump:
+		case MarioState::Jump:
 			JumpStart();
 			break;
 		default:
@@ -447,19 +447,19 @@ void Mario::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
-	case PlayerState::CameraFreeMove:
+	case MarioState::CameraFreeMove:
 		CameraFreeMove(_DeltaTime);
 		break;
-	case PlayerState::FreeMove:
+	case MarioState::FreeMove:
 		FreeMove(_DeltaTime);
 		break;
-	case PlayerState::Idle:
+	case MarioState::Idle:
 		Idle(_DeltaTime);
 		break;
-	case PlayerState::Run:
+	case MarioState::Run:
 		Run(_DeltaTime);
 		break;
-	case PlayerState::Jump:
+	case MarioState::Jump:
 		Jump(_DeltaTime);
 		break;
 	default:
@@ -496,7 +496,7 @@ void Mario::CameraFreeMove(float _DeltaTime)
 
 	if (UEngineInput::IsDown('2'))
 	{
-		StateChange(PlayerState::Idle);
+		StateChange(MarioState::Idle);
 	}
 }
 

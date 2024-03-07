@@ -27,7 +27,7 @@ void Goomba::BeginPlay()
 		Renderer->CreateAnimation("Move", "Goomba.png", 0, 1, 0.2f, true);
 		Renderer->ChangeAnimation("Move");
 		// GetAnimation을 쓰지 않으니깐 StateChange를 바로 써본다.
-		StateChange(MonsterState::Move);
+		StateChange(GoombaState::Move);
 
 
 		// 굼바 Dead 애니메이션이 작동되니?
@@ -90,7 +90,7 @@ void Goomba::CalMove(float _DeltaTime)
 	}
 	CheckPos.Y -= 20;
 
-	MoveVector* _DeltaTime;
+	//MoveVector* _DeltaTime;
 	AddActorLocation(MoveVector);
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
@@ -108,22 +108,33 @@ void Goomba::StateUpdate(float _DeltaTime)
 {
 	switch (State)
 	{
-	case MonsterState::Move:
+	case GoombaState::Move:
 		Move(_DeltaTime);
 		break;
-	case MonsterState::Dead:
+	case GoombaState::Dead:
 		Dead(_DeltaTime);
 		break;
 	default:
 		break;
 	}
+
+
+
+	CalMove(_DeltaTime);
+	CalGravity(_DeltaTime);
 }
 
 void Goomba::Move(float _DeltaTime)
 {
-	// 굼바의 움직임과 중력이 적용되는가?
-	CalMove(_DeltaTime);
-	CalGravity(_DeltaTime);
+	{
+		StateChange(GoombaState::Move);
+		return;
+	}
+
+
+
+	
+	
 }
 
 void Goomba::Dead(float _DeltaTime)
@@ -134,14 +145,14 @@ void Goomba::Dead(float _DeltaTime)
 }
 
 
-void Goomba::StateChange(MonsterState _State)
+void Goomba::StateChange(GoombaState _State)
 {
 	switch (_State)
 	{
-	case MonsterState::Move:
+	case GoombaState::Move:
 		MoveStart();
 		break;
-	case MonsterState::Dead:
+	case GoombaState::Dead:
 		DeadStart();
 		break;
 	default:
@@ -168,7 +179,7 @@ void Goomba::DeadStart()
 // 마리오의 점프어택이 굼바한테 상호작용을 일으키게 하는 함수
 void Goomba::MarioJumpAttack()
 {
-	StateChange(MonsterState::Dead);
+	StateChange(GoombaState::Dead);
 
 }
 

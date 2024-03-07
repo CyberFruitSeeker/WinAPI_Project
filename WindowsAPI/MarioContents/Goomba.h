@@ -33,7 +33,7 @@ protected:
 	UCollision* UpCollision = nullptr;
 
 	// 몬스터 애니메이션 : 굼바
-	void StateChange(MonsterState _State);
+	void StateChange(GoombaState _State);
 	void StateUpdate(float _DeltaTime);
 
 	void CalMove(float _DeltaTime);
@@ -58,8 +58,8 @@ protected:
 
 	// Tick에 돌리기 위한 StateUpdate 함수를 만들기 위한 것들
 	// 굼바의 State가 어떠니?
-	MonsterState State = MonsterState::None;
-	EActorDir DirState = EActorDir::Left;
+	GoombaState State = GoombaState::None;
+	EActorDir DirState = EActorDir::None;
 
 
 
