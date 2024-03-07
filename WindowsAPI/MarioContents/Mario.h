@@ -59,10 +59,6 @@ protected:
 		return 0 < JPos.Y;
 	}
 
-	// ¸¶¸®¿À°¡ ¹ö¼¸À» ¸Ô¾ú´Ù.
-	virtual void MarioMushroomEat(float _DeltaTime);
-
-
 
 
 private:

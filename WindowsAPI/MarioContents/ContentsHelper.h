@@ -46,7 +46,6 @@ enum class GoombaState
 {
 	None,
 	Move,
-	//DirChange,
 	Dead,
 };
 
@@ -54,7 +53,6 @@ enum class MushroomState
 {
 	None,
 	Move,
-	//DirChange,
 	Dead,
 };
 

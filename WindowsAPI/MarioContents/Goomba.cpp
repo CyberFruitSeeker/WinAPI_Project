@@ -51,9 +51,9 @@ void Goomba::BeginPlay()
 void Goomba::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	{
-		StateUpdate(_DeltaTime);
-	}
+	
+	StateUpdate(_DeltaTime);
+	
 	
 }
 
@@ -100,9 +100,9 @@ void Goomba::CalMove(float _DeltaTime)
 
 	AddActorLocation(MoveVector * _DeltaTime * MoveSpeed);
 
+	
 
-
-
+	
 }
 
 
@@ -123,8 +123,6 @@ void Goomba::StateUpdate(float _DeltaTime)
 		break;
 	}
 
-
-
 	CalMove(_DeltaTime);
 	CalGravity(_DeltaTime);
 }
@@ -137,8 +135,6 @@ void Goomba::Move(float _DeltaTime)
 	}
 
 
-
-	
 	
 }
 

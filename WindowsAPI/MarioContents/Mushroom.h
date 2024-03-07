@@ -23,7 +23,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	UImageRenderer* Renderer = nullptr;
-	UCollision* BodyCollision = nullptr;
+	UCollision* MushroomEatCollision = nullptr;
 
 	FVector MoveVector = FVector::Right;
 
@@ -41,13 +41,13 @@ protected:
 	void CalGravity(float _DeltaTime);
 
 
-
 	// 머쉬룸에게 필요한 것은?
-	void DirCheck();
 
-	void MushroomMoveUp();
+	// 1. 머쉬룸이 박스에서 솟아난다.
+	void MushroomMoveUp(float _DeltaTime);
 
-
+	// 2. 마리오가 버섯을 먹었다.
+	void MarioMushroomEat();
 
 
 

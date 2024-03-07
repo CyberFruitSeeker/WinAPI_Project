@@ -38,8 +38,8 @@ protected:
 	FVector GravityAccel = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
 	
-	float MoveSpeed = 150.0f;
-	//float MaxMoveSpeed = 500.0f;
+	float MoveSpeed = 170.0f;
+	
 
 
 

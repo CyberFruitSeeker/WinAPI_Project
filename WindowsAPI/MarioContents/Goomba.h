@@ -33,7 +33,7 @@ protected:
 	UCollision* UpCollision = nullptr;
 
 	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
-	FVector MoveVector = FVector::Right;
+	FVector MoveVector = FVector::Left;
 
 	// 굼바에게 적용되는 중력, 가속도 등등의 물리효과
 	FVector GravityAccel = FVector::Down * 2.0f;
@@ -45,8 +45,9 @@ protected:
 	EActorDir DirState = EActorDir::None;
 	
 	float MoveSpeed = 200.0f;
-	float MaxMoveSpeed = 500.0f;
 	
+	FVector DeadVector = FVector::Zero;
+
 	
 	// 몬스터 애니메이션 : 굼바
 	void StateChange(GoombaState _State);

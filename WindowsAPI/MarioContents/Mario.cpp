@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <EngineCore/Collision.h>
+#include "Mushroom.h"
 
 
 Mario* Mario::ItsMeMario = nullptr;
@@ -58,6 +59,11 @@ void Mario::BeginPlay()
 		DownCollision->SetColType(ECollisionType::Rect);
 	}
 
+	{
+		
+	}
+
+
 
 	StateChange(MarioState::Idle);
 }
@@ -73,10 +79,10 @@ void Mario::Tick(float _DeltaTime)
 
 
 // ¸¶¸®¿À°¡ ¹ö¼¸À» ¸Ô¾ú´Ù.
-void Mario::MarioMushroomEat(float _DeltaTime)
-{
-
-}
+//void Mario::MarioMushroomEat(float _DeltaTime)
+//{
+//
+//}
 
 
 

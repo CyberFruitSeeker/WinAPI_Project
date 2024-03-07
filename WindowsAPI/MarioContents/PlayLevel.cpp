@@ -50,11 +50,12 @@ void PlayLevel::BeginPlay()
 	//	NewActor->SetName("Goomba");
 	//	NewActor->SetActorLocation({ 1600,500 });
 	//}
-	//{
-	//	Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
-	//	NewActor->SetName("Goomba");
-	//	NewActor->SetActorLocation({ 1600,500 });
-	//}
+	
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 2400,500 });
+	}
 
 	{
 		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);

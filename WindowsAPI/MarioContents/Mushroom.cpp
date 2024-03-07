@@ -21,11 +21,11 @@ void Mushroom::BeginPlay()
 	Renderer->SetScale({ 128,128 });
 
 
-	// 머쉬룸이 마리오랑 충돌하는가?
+	// 마리오사 머쉬룸을 먹을 수 있는가?
 	{
-		BodyCollision = CreateCollision(MarioCollisionOrder::Item);
-		BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
-		BodyCollision->SetColType(ECollisionType::Rect);
+		MushroomEatCollision = CreateCollision(MarioCollisionOrder::Item);
+		MushroomEatCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
+		MushroomEatCollision->SetColType(ECollisionType::Rect);
 	}
 
 
@@ -95,12 +95,14 @@ void Mushroom::CalGravity(float _DeltaTime)
 
 }
 
-void Mushroom::DirCheck()
+void Mushroom::MushroomMoveUp(float _DeltaTime)
 {
 
 }
 
-void Mushroom::MushroomMoveUp()
+void Mushroom::MarioMushroomEat()
 {
+
+
 
 }
