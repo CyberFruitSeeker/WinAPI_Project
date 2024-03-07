@@ -18,6 +18,7 @@ enum class MarioCollisionOrder
 	Map,
 	Monster,
 	Player,
+	Mushroom,
 };
 
 enum class EActorDir

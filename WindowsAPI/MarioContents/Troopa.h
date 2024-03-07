@@ -29,7 +29,7 @@ protected:
 	UCollision* UpCollision = nullptr;
 
 	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
-	FVector MoveVector = FVector::Left * 0.2f;
+	FVector MoveVector = FVector::Right * 0.5f;
 	// 하지만? : 트루파는 굼바와 달리 Left, Right가 있다.
 
 	MonsterState State = MonsterState::None;

@@ -50,7 +50,7 @@ protected:
 
 	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
 	// 그에 따라서 FVector Left 뿐만이 아니라, Right도 필요하겠네?
-	FVector MoveVector = FVector::Right * 0.2f;
+	FVector MoveVector = FVector::Right * 0.5f;
 
 	// 굼바에게 적용되는 중력, 가속도 등등의 물리효과
 	FVector GravityAccel = FVector::Down * 2.0f;

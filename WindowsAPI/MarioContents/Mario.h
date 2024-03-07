@@ -101,10 +101,15 @@ private:
 	void MoveUpdate(float _DeltaTime);
 
 
-
 	// 어떤 기능을 더 추가할 것인가?
 	// moveresult?  
 	
+
+	// 마리오가 버섯을 먹었다.
+	virtual void MarioMushroomEat(float _DeltaTime);
+
+
+
 
 
 

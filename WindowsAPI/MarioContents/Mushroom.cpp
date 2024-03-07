@@ -21,6 +21,15 @@ void Mushroom::BeginPlay()
 	Renderer->SetScale({ 128,128 });
 
 
+	// 머쉬룸이 마리오랑 충돌하는가?
+	{
+		BodyCollision = CreateCollision(MarioCollisionOrder::Mushroom);
+		BodyCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
+		BodyCollision->SetColType(ECollisionType::Rect);
+	}
+
+
+
 }
 
 void Mushroom::Tick(float _DeltaTime)
@@ -45,10 +54,10 @@ void Mushroom::CalMove(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X -= 40;
+		CheckPos.X -= 5;
 		break;
 	case EActorDir::Right:
-		CheckPos.X += 40;
+		CheckPos.X += 5;
 		break;
 	default:
 		break;
@@ -85,7 +94,7 @@ void Mushroom::DirCheck()
 
 }
 
-void Mushroom::MushroomUp()
+void Mushroom::MushroomMoveUp()
 {
 
 }

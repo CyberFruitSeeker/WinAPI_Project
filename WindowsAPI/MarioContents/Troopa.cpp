@@ -23,15 +23,16 @@ void Troopa::BeginPlay()
 		SetName("Troopa");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 		Renderer->SetImage("Troopa_Left.png");
-		Renderer->CreateAnimation("Move", "Troopa_Left.png", 0, 1, 0.2f);
-		Renderer->ChangeAnimation("Move");
+		Renderer->CreateAnimation("Move_Left", "Troopa_Left.png", 0, 1, 0.2f);
+		Renderer->CreateAnimation("Move_Right", "Troopa_Right.png", 0, 1, 0.2f);
+		//Renderer->ChangeAnimation("Move");
 		//Renderer->SetScale({ 512,384 });
 		Renderer->SetTransform({ {0,0},{512,384} });
 
 
 		// 트루파 Dead 애니메이션이 작동되니?
 		Renderer->CreateAnimation("Dead_Left", "Troopa_Left.png", 4, 4, 0.1f, true);
-		Renderer->CreateAnimation("Dead_Right", "Troopa_Left.png", 4, 4, 0.1f, true);
+		Renderer->CreateAnimation("Dead_Right", "Troopa_Right.png", 4, 4, 0.1f, true);
 
 	}
 
@@ -62,10 +63,10 @@ void Troopa::CalMove(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X -= 40;
+		CheckPos.X -= 3;
 		break;;
 	case EActorDir::Right:
-		CheckPos.X += 40;
+		CheckPos.X += 3;
 		break;
 	default:
 		break;

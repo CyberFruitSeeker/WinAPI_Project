@@ -25,7 +25,7 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BodyCollision = nullptr;
 
-	FVector MoveVector = FVector::Right * 0.2;
+	FVector MoveVector = FVector::Right * 0.5;
 
 	FVector GravityAccel = FVector::Down * 2.0f;
 	FVector GravityVector = FVector::Zero;
@@ -43,7 +43,7 @@ protected:
 	// 머쉬룸에게 필요한 것은?
 	void DirCheck();
 
-	void MushroomUp();
+	void MushroomMoveUp();
 
 
 

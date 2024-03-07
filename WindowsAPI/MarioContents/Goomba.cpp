@@ -80,25 +80,24 @@ void Goomba::CalMove(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X -= 40;
+		CheckPos.X -= 5;
 		break;
 	case EActorDir::Right:
-		CheckPos.X += 40;
+		CheckPos.X += 5;
 		break;
 	default:
 		break;
 	}
 	CheckPos.Y -= 20;
 
-	MoveVector * _DeltaTime;
+	MoveVector* _DeltaTime;
 	AddActorLocation(MoveVector);
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
-		GravityVector = FVector::Zero;
+		MoveVector = FVector::Zero;
 	}
-
 }
 
 

@@ -51,7 +51,7 @@ void Mario::BeginPlay()
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
-	// 굼바와 트루파를 Jump Kill 하기 위한 별도의 Collision
+	// 굼바와 트루파를 Jump Kill 하기 위한 별도의 DownCollision
 	{
 		DownCollision = CreateCollision(MarioCollisionOrder::Player);
 		DownCollision->SetTransform({ {0,0},{64,15} });
@@ -70,6 +70,14 @@ void Mario::Tick(float _DeltaTime)
 
 	StateUpdate(_DeltaTime);
 }
+
+
+// 마리오가 버섯을 먹었다.
+void Mario::MarioMushroomEat(float _DeltaTime)
+{
+
+}
+
 
 
 // ====== 카메라 움직임 기능들 ======
@@ -360,6 +368,7 @@ void Mario::MoveUpdate(float _DeltaTime)
 	CalLastMoveVector(_DeltaTime);
 	MoveLastCameraPos(_DeltaTime);
 }
+
 
 
 
