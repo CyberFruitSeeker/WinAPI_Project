@@ -151,11 +151,6 @@ void Mario::FireMario()
 
 
 
-
-
-
-
-
 // ====== 카메라 움직임 기능들 ======
 
 void Mario::MoveLastCameraPos(float _DeltaTime)
@@ -350,6 +345,7 @@ void Mario::Run(float _DeltaTime)
 
 void Mario::IdleStart()
 {
+	JumpVector = FVector::Zero;
 	Renderer->ChangeAnimation(GetAnimationName("Idle"));
 	DirCheck();
 }

@@ -172,6 +172,7 @@ void Goomba::MoveStart()
 
 void Goomba::DeadStart()
 {
+	MoveVector = FVector::Zero;
 	Renderer->ChangeAnimation("Dead");
 	Destroy(1.0f);
 }
