@@ -66,6 +66,12 @@ void PlayLevel::BeginPlay()
 	{
 		Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);
 		NewActor->SetName("Mushroom");
+		NewActor->SetActorLocation({ 600,350 });
+	}
+	
+	{
+		Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);
+		NewActor->SetName("Mushroom");
 		NewActor->SetActorLocation({ 1800,350 });
 	}
 

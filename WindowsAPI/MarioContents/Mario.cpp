@@ -44,13 +44,22 @@ void Mario::BeginPlay()
 		Renderer->CreateAnimation("Jump_Right_Small", "Mario_Right.png", 5, 5, 0.1f, true);
 		Renderer->CreateAnimation("Jump_Left_Small", "Mario_Left.png", 5, 5, 0.1f, true);
 
+		//Renderer = CreateImageRenderer(MarioMode::BigMario);
+		SetName("BigMario");
+		Renderer->CreateAnimation("Idle_Right_Big", "Mario_Right.png", 9, 9, 0.3f, true);
+		Renderer->CreateAnimation("Idle_Left_Big", "Mario_Left.png", 9, 9, 0.3f, true);
 
+		Renderer->CreateAnimation("Run_Right_Big", "Mario_Right.png", { 10, 11, 12 }, 0.1f, true);
+		Renderer->CreateAnimation("Run_Left_Big", "Mario_Left.png", { 10, 11, 12 }, 0.1f, true);
 
+		Renderer->CreateAnimation("Jump_Right_Big", "Mario_Right.png", 14, 14, 0.1f, true);
+		Renderer->CreateAnimation("Jump_Left_Big", "Mario_Left.png", 14, 14, 0.1f, true);
 
 
 
 		// Renderer->ChangeAnimation("Idle_Right");
 	}
+
 
 	// Small Mario 일때 Collision
 	{
@@ -77,6 +86,8 @@ void Mario::BeginPlay()
 		
 	}
 
+	
+
 
 	MarioModeChange(MarioMode::SmallMario);
 	StateChange(MarioState::Idle);
@@ -92,14 +103,15 @@ void Mario::Tick(float _DeltaTime)
 }
 
 
-// ========== 마리오 모드 ===========
+// ==================== 마리오 모드 체인지 =====================
 
 // 마리오의 모드가 바뀐다.
 // 하지만 기본(시작)상태는 SmallMario 이다.
 void Mario::MarioModeChange(MarioMode _Mode)
 {
+	Mode = _Mode;
 
-	switch (Mode)
+	switch (_Mode)
 	{
 	case MarioMode::SmallMario:
 		SmallMario();
@@ -114,6 +126,7 @@ void Mario::MarioModeChange(MarioMode _Mode)
 		break;
 	}
 
+
 	StateChange(MarioState::Idle);
 }
 
@@ -124,8 +137,10 @@ void Mario::SmallMario()
 
 void Mario::BigMario()
 {
-
-
+	//Renderer->CreateAnimation("Idle_Right_Big", "Mario_Right.png", { 0, 19, 9 }, 0.3f, true);
+	//Renderer->CreateAnimation("Idle_Left_Big", "Mario_Left.png", { 0, 19, 9 }, 0.3f, true);
+	
+	Renderer->ChangeAnimation(GetAnimationName("Idle"));
 
 }
 

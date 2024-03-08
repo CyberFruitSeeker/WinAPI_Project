@@ -104,7 +104,7 @@ void Mushroom::MarioMushroomEat()
 	{
 		Mario* Player = dynamic_cast<Mario*>(Result[0]->GetOwner());
 
-		Player->MarioModeChange(MarioMode::SmallMario);
+		Player->MarioModeChange(MarioMode::BigMario);
 
 		Destroy(0.002f);
 	}

@@ -16,17 +16,14 @@ UContentsCore::~UContentsCore()
 
 void UContentsCore::BeginPlay()
 {
-	// 고전 게임의 일반적인 해상도인 800 / 600은 너무나도 작은 해상도이다.
-	// MainWindow.SetWindowScale({1280, 720});
-
-	// 중요한건 해상도의 크기가 아니라 비율이다.
+	// 레트로 게임의 일반적인 해상도인 800 x 600은 현재로서는 너무나도 작은 해상도이다.
+	// 하지만? 그렇다고 해서 MainWindow.SetWindowScale({1280, 720}); 로 할 수는 없다.
+	// 그러므로 중요한건 해상도의 크기가 아니라 '비율'이다.
 	//MainWindow.SetWindowPosition({500, 100});
+	// 
 	//                           1024                960
 	MainWindow.SetWindowScale({ 256 * 4/* * 1.5f*/, 240 * 4/* * 1.5f*/ });
 	MainWindow.SetWindowPosition({ 800/* * 1.5f*/, 0/* * 1.5f*/ });
-	// 1200 
-
-	// 800 16
 
 	UEngineCore::BeginPlay();
 

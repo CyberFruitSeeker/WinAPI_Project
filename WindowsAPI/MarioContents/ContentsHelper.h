@@ -64,8 +64,6 @@ enum class TroopaState
 };
 
 
-
-
 enum class MarioMode
 {
 	SmallMario,
