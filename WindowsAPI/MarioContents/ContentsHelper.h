@@ -66,11 +66,11 @@ enum class TroopaState
 
 
 
-enum class MarioMod
+enum class MarioMode
 {
-	Small,
-	Big,
-	Fire,
+	SmallMario,
+	BigMario,
+	FireMario,
 };
 
 

@@ -11,9 +11,6 @@ class Goomba : public AMonsterSetting
 {
 public:
 
-	//static FVector GoombaLocation;
-	//static MonsterState GoombaState;
-
 	// constrcuter destructer
 	Goomba();
 	~Goomba();

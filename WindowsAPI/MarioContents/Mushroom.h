@@ -23,7 +23,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	UImageRenderer* Renderer = nullptr;
-	UCollision* MushroomEatCollision = nullptr;
+	UCollision* MushroomCollision = nullptr;
+	
 
 	FVector MoveVector = FVector::Right;
 
@@ -46,7 +47,7 @@ protected:
 	// 1. ¸Ó½¬·ëÀÌ ¹Ú½º¿¡¼­ ¼Ú¾Æ³­´Ù.
 	void MushroomMoveUp(float _DeltaTime);
 
-	// 2. ¸¶¸®¿À°¡ ¹ö¼¸À» ¸Ô¾ú´Ù.
+	// 2. ¹ö¼¸ÀÌ ¸¶¸®¿ÀÇÑÅ× ¸ÔÇû´Ù.
 	void MarioMushroomEat();
 
 

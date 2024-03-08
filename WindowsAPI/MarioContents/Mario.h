@@ -20,6 +20,10 @@ public:
 	Mario& operator=(const Mario& _Other) = delete;
 	Mario& operator=(Mario&& _Other) noexcept = delete;
 
+	// 마리오의 small, big, fire(flower)모드
+	void MarioModeChange(MarioMode _Mode);
+
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -58,6 +62,13 @@ protected:
 		FVector JPos = (GravityVector + JumpVector);
 		return 0 < JPos.Y;
 	}
+
+
+	MarioMode Mode = MarioMode::SmallMario;
+	
+	void SmallMario();
+	void BigMario();
+	void FireMario();
 
 
 
@@ -105,6 +116,8 @@ private:
 	// 어떤 기능을 더 추가할 것인가?
 	// moveresult?  
 	
+
+
 
 
 

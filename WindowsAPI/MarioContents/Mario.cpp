@@ -28,31 +28,45 @@ void Mario::BeginPlay()
 {
 	AActor::BeginPlay();
 	//ItsMeMario = this;
+
+	// Small Mario 애니메이션
 	{
 		Renderer = CreateImageRenderer(MarioRenderOrder::Player);
-		SetName("Mario");
+		SetName("SmallMario");
 		Renderer->SetImage("Mario_Right.png");
 		Renderer->SetTransform({ {0,0}, {256, 256} });
-		Renderer->CreateAnimation("Idle_Right", "Mario_Right.png", 0, 0, 0.30f, true);
-		Renderer->CreateAnimation("Idle_Left", "Mario_Left.png", 0, 0, 0.30f, true);
+		Renderer->CreateAnimation("Idle_Right_Small", "Mario_Right.png", 0, 0, 0.30f, true);
+		Renderer->CreateAnimation("Idle_Left_Small", "Mario_Left.png", 0, 0, 0.30f, true);
 
-		Renderer->CreateAnimation("Run_Right", "Mario_Right.png", { 1, 2, 3 }, 0.1f, true);
-		Renderer->CreateAnimation("Run_Left", "Mario_Left.png", { 1, 2, 3 }, 0.1f, true);
+		Renderer->CreateAnimation("Run_Right_Small", "Mario_Right.png", { 1, 2, 3 }, 0.1f, true);
+		Renderer->CreateAnimation("Run_Left_Small", "Mario_Left.png", { 1, 2, 3 }, 0.1f, true);
 
-		Renderer->CreateAnimation("Jump_Right", "Mario_Right.png", 5, 5, 0.1f, true);
-		Renderer->CreateAnimation("Jump_Left", "Mario_Left.png", 5, 5, 0.1f, true);
+		Renderer->CreateAnimation("Jump_Right_Small", "Mario_Right.png", 5, 5, 0.1f, true);
+		Renderer->CreateAnimation("Jump_Left_Small", "Mario_Left.png", 5, 5, 0.1f, true);
 
-		Renderer->ChangeAnimation("Idle_Right");
+
+
+
+
+
+		// Renderer->ChangeAnimation("Idle_Right");
 	}
 
-	// Collision은 따로둔다.
+	// Small Mario 일때 Collision
 	{
 		BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 		BodyCollision->SetTransform({ {0,-32},{64,64} });
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
+	// Big Mario 일때 Coliision => Small Mario 보다 y축으로만 길게 하면 된다.
+	// 그리고 이 마리오의 Collision은 Block을 격파시킬 수 있다.
+	{
+
+	}
+
 	// 굼바와 트루파를 Jump Kill 하기 위한 별도의 DownCollision
+	// 마리오 모드가 달라져도 x축 범위는 변함이 없으니깐 공용으로 사용함
 	{
 		DownCollision = CreateCollision(MarioCollisionOrder::Player);
 		DownCollision->SetTransform({ {0,0},{64,15} });
@@ -64,12 +78,12 @@ void Mario::BeginPlay()
 	}
 
 
-
+	MarioModeChange(MarioMode::SmallMario);
 	StateChange(MarioState::Idle);
 }
 
 
-// StateUpdate 안에 들어있는 ESM이 Tick에서 돌아간다.
+// StateUpdate 안에 들어있는 FSM이 Tick에서 돌아간다.
 void Mario::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
@@ -78,11 +92,52 @@ void Mario::Tick(float _DeltaTime)
 }
 
 
-// 마리오가 버섯을 먹었다.
-//void Mario::MarioMushroomEat(float _DeltaTime)
-//{
-//
-//}
+// ========== 마리오 모드 ===========
+
+// 마리오의 모드가 바뀐다.
+// 하지만 기본(시작)상태는 SmallMario 이다.
+void Mario::MarioModeChange(MarioMode _Mode)
+{
+
+	switch (Mode)
+	{
+	case MarioMode::SmallMario:
+		SmallMario();
+		break;
+	case MarioMode::BigMario:
+		BigMario();
+		break;
+	case MarioMode::FireMario:
+		FireMario();
+		break;
+	default:
+		break;
+	}
+
+	StateChange(MarioState::Idle);
+}
+
+void Mario::SmallMario()
+{
+
+}
+
+void Mario::BigMario()
+{
+
+
+
+}
+
+void Mario::FireMario()
+{
+
+}
+
+
+
+
+
 
 
 
@@ -203,12 +258,6 @@ void Mario::Idle(float _DeltaTime)
 	MoveUpdate(_DeltaTime);
 
 }
-
-// JumpDown 이라는 별도의 함수로 두지 않고, Jump 함수에서 if문을 이용해본다.
-//void Mario::JumpDown()
-//{
-//
-//}
 
 void Mario::Jump(float _DeltaTime)
 {
@@ -418,9 +467,24 @@ std::string Mario::GetAnimationName(std::string _Name)
 		break;
 	}
 
+	std::string ModeName = "";
+
+	switch (Mode)
+	{
+	case MarioMode::SmallMario:
+		ModeName = "_Small";
+		break;
+	case MarioMode::BigMario:
+		ModeName = "_Big";
+		break;
+	default:
+		break;
+	}
+
+
 	CurAnimationName = _Name;
 
-	return _Name + DirName;
+	return _Name + DirName + ModeName;
 }
 
 void Mario::StateChange(MarioState _State)

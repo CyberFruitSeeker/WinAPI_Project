@@ -21,11 +21,11 @@ void Mushroom::BeginPlay()
 	Renderer->SetScale({ 128,128 });
 
 
-	// 마리오사 머쉬룸을 먹을 수 있는가?
+	// 마리오가 머쉬룸을 먹을 수 있는가?
 	{
-		MushroomEatCollision = CreateCollision(MarioCollisionOrder::Item);
-		MushroomEatCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
-		MushroomEatCollision->SetColType(ECollisionType::Rect);
+		MushroomCollision = CreateCollision(MarioCollisionOrder::Item);
+		MushroomCollision->SetTransform({ { 0,-32 }, { 64, 64 } });
+		MushroomCollision->SetColType(ECollisionType::Rect);
 	}
 
 
@@ -45,7 +45,7 @@ void Mushroom::StateUpdate(float _DeltaTime)
 {
 
 
-
+	MarioMushroomEat();
 	CalGravity(_DeltaTime);
 	CalMove(_DeltaTime);
 }
@@ -95,14 +95,24 @@ void Mushroom::CalGravity(float _DeltaTime)
 
 }
 
-void Mushroom::MushroomMoveUp(float _DeltaTime)
+
+// 버섯이 마리오한테 먹혔다.
+void Mushroom::MarioMushroomEat()
 {
+	std::vector<UCollision*> Result;
+	if (true == MushroomCollision->CollisionCheck(MarioCollisionOrder::Player, Result))
+	{
+		Mario* Player = dynamic_cast<Mario*>(Result[0]->GetOwner());
+
+		Player->MarioModeChange(MarioMode::SmallMario);
+
+		Destroy(0.002f);
+	}
 
 }
 
-void Mushroom::MarioMushroomEat()
+
+void Mushroom::MushroomMoveUp(float _DeltaTime)
 {
-
-
 
 }
