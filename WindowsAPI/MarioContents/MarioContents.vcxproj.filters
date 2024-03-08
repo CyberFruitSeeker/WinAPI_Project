@@ -84,9 +84,6 @@
     <ClCompile Include="Mushroom.cpp">
       <Filter>Object\PlayLevel\Actor\Item</Filter>
     </ClCompile>
-    <ClCompile Include="BlockHelper.cpp">
-      <Filter>Object\PlayLevel\Actor\Block\Helper</Filter>
-    </ClCompile>
     <ClCompile Include="BrickBlock.cpp">
       <Filter>Object\PlayLevel\Actor\Block</Filter>
     </ClCompile>
@@ -95,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="CoinBlock.cpp">
       <Filter>Object\PlayLevel\Actor\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockCommonClass.cpp">
+      <Filter>Object\PlayLevel\Actor\Block\Helper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,9 +134,6 @@
     <ClInclude Include="Mushroom.h">
       <Filter>Object\PlayLevel\Actor\Item</Filter>
     </ClInclude>
-    <ClInclude Include="BlockHelper.h">
-      <Filter>Object\PlayLevel\Actor\Block\Helper</Filter>
-    </ClInclude>
     <ClInclude Include="BrickBlock.h">
       <Filter>Object\PlayLevel\Actor\Block</Filter>
     </ClInclude>
@@ -145,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="CoinBlock.h">
       <Filter>Object\PlayLevel\Actor\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockCommonClass.h">
+      <Filter>Object\PlayLevel\Actor\Block\Helper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

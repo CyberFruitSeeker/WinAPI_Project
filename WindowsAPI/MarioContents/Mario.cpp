@@ -60,13 +60,6 @@ void Mario::BeginPlay()
 		// Renderer->ChangeAnimation("Idle_Right");
 	}
 
-	// Mode에 따른 마리오 collision의 변화
-	{
-
-
-
-	}
-
 	// Small Mario 일때 Collision
 	{
 		//BodyCollision = CreateCollision(MarioCollisionOrder::Player);

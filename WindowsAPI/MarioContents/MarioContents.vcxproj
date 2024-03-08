@@ -155,7 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BlockHelper.h">
+    <ClInclude Include="BlockCommonClass.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -209,7 +209,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BlockHelper.cpp">
+    <ClCompile Include="BlockCommonClass.cpp">
       <SubType>
       </SubType>
     </ClCompile>

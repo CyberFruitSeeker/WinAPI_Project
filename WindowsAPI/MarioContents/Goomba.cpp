@@ -140,7 +140,7 @@ void Goomba::Move(float _DeltaTime)
 
 void Goomba::Dead(float _DeltaTime)
 {
-
+	int a = 0;
 
 	
 }

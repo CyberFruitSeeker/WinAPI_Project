@@ -21,6 +21,7 @@ public:
 	Mario& operator=(Mario&& _Other) noexcept = delete;
 
 	// 마리오의 small, big, fire(flower)모드
+	// Mushroom 클래스에서 알기 위해서 public으로 해둔 상태
 	void MarioModeChange(MarioMode _MarioMode);
 
 

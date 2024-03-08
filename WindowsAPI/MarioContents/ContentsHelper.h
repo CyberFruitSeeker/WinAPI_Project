@@ -40,16 +40,20 @@ enum class MarioState
 
 };
 
-// 굼바와 트루파의 애니메이션은 다르게 작동해서 enum class 구분이 필요하다.
-// 머쉬룸도 우선 구분해주자
-enum class GoombaState
+enum class ItemState
 {
-	None,
-	Move,
-	Dead,
+	Idle,
+	MoveUp,
 };
 
-enum class MushroomState
+enum class BlockState
+{
+	Idle,
+	MoveUp,
+};
+
+// 굼바와 트루파의 애니메이션은 다르게 작동해서 enum class 구분이 필요하다.
+enum class GoombaState
 {
 	None,
 	Move,
