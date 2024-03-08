@@ -159,6 +159,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="BrickBlock.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="CoinBlock.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsHelper.h" />
     <ClInclude Include="Goomba.h">
@@ -166,6 +174,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GoombaDark.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ItemBlock.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -201,6 +213,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="BrickBlock.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CoinBlock.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="ContentsHelper.cpp" />
     <ClCompile Include="Goomba.cpp">
@@ -208,6 +228,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GoombaDark.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ItemBlock.cpp">
       <SubType>
       </SubType>
     </ClCompile>

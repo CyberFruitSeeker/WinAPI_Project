@@ -40,39 +40,10 @@ void PlayLevel::BeginPlay()
 	//	NewActor->SetActorLocation({ 400,550 });
 	//}
 
-	//{
-	//	Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
-	//	NewActor->SetName("Goomba");
-	//	NewActor->SetActorLocation({ 1600,500 });
-	//}
-	//{
-	//	Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
-	//	NewActor->SetName("Goomba");
-	//	NewActor->SetActorLocation({ 1600,500 });
-	//}
-	
-	{
-		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
-		NewActor->SetName("Goomba");
-		NewActor->SetActorLocation({ 2400,500 });
-	}
-
-	{
-		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
-		NewActor->SetName("Goomba");
-		NewActor->SetActorLocation({ 2000,500 });
-	}
-
 	{
 		Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);
 		NewActor->SetName("Mushroom");
 		NewActor->SetActorLocation({ 600,350 });
-	}
-	
-	{
-		Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);
-		NewActor->SetName("Mushroom");
-		NewActor->SetActorLocation({ 1800,350 });
 	}
 
 	{
@@ -82,10 +53,71 @@ void PlayLevel::BeginPlay()
 	}
 
 	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 2000,500 });
+	}
+
+	{
 		Troopa* NewActor = SpawnActor<Troopa>(MarioRenderOrder::Monster);
 		NewActor->SetName("Troopa");
-		NewActor->SetActorLocation({ 2350,500 });
+		NewActor->SetActorLocation({ 2200,500 });
 	}
+
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 2650,500 });
+	}
+
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 2800,500 });
+	}
+
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 2650,500 });
+	}
+
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 2850,500 });
+	}
+
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 3000,500 });
+	}
+
+	{
+		Troopa* NewActor = SpawnActor<Troopa>(MarioRenderOrder::Monster);
+		NewActor->SetName("Troopa");
+		NewActor->SetActorLocation({ 2850,500 });
+	}
+
+	{
+		Troopa* NewActor = SpawnActor<Troopa>(MarioRenderOrder::Monster);
+		NewActor->SetName("Troopa");
+		NewActor->SetActorLocation({ 2700,500 });
+	}
+
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 2500,500 });
+	}
+
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 5500,500 });
+	}
+
 
 }
 

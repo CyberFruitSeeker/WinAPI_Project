@@ -21,7 +21,7 @@ public:
 	Mario& operator=(Mario&& _Other) noexcept = delete;
 
 	// 마리오의 small, big, fire(flower)모드
-	void MarioModeChange(MarioMode _Mode);
+	void MarioModeChange(MarioMode _MarioMode);
 
 
 protected:
@@ -64,6 +64,7 @@ protected:
 	}
 
 
+	// 마리오 모드
 	MarioMode Mode = MarioMode::SmallMario;
 	
 	void SmallMario();

@@ -43,6 +43,9 @@
     <Filter Include="Object\PlayLevel\Actor\Block">
       <UniqueIdentifier>{82a4d64b-d266-472e-a5dd-8cebe5086146}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\PlayLevel\Actor\Block\Helper">
+      <UniqueIdentifier>{f4d18c3c-8d6e-4e25-810f-a1bce4b94c05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsHelper.cpp">
@@ -82,6 +85,15 @@
       <Filter>Object\PlayLevel\Actor\Item</Filter>
     </ClCompile>
     <ClCompile Include="BlockHelper.cpp">
+      <Filter>Object\PlayLevel\Actor\Block\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="BrickBlock.cpp">
+      <Filter>Object\PlayLevel\Actor\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBlock.cpp">
+      <Filter>Object\PlayLevel\Actor\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinBlock.cpp">
       <Filter>Object\PlayLevel\Actor\Block</Filter>
     </ClCompile>
   </ItemGroup>
@@ -123,6 +135,15 @@
       <Filter>Object\PlayLevel\Actor\Item</Filter>
     </ClInclude>
     <ClInclude Include="BlockHelper.h">
+      <Filter>Object\PlayLevel\Actor\Block\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="BrickBlock.h">
+      <Filter>Object\PlayLevel\Actor\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBlock.h">
+      <Filter>Object\PlayLevel\Actor\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinBlock.h">
       <Filter>Object\PlayLevel\Actor\Block</Filter>
     </ClInclude>
   </ItemGroup>

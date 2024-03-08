@@ -60,18 +60,18 @@ void Mario::BeginPlay()
 		// Renderer->ChangeAnimation("Idle_Right");
 	}
 
+	// Mode에 따른 마리오 collision의 변화
+	{
+
+
+
+	}
 
 	// Small Mario 일때 Collision
 	{
-		BodyCollision = CreateCollision(MarioCollisionOrder::Player);
-		BodyCollision->SetTransform({ {0,-32},{64,64} });
-		BodyCollision->SetColType(ECollisionType::Rect);
-	}
-
-	// Big Mario 일때 Coliision => Small Mario 보다 y축으로만 길게 하면 된다.
-	// 그리고 이 마리오의 Collision은 Block을 격파시킬 수 있다.
-	{
-
+		//BodyCollision = CreateCollision(MarioCollisionOrder::Player);
+		//BodyCollision->SetTransform({ {0,-32},{64,64} });
+		//BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
 	// 굼바와 트루파를 Jump Kill 하기 위한 별도의 DownCollision
@@ -82,11 +82,10 @@ void Mario::BeginPlay()
 		DownCollision->SetColType(ECollisionType::Rect);
 	}
 
-	{
-		
-	}
 
-	
+
+	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
+	BodyCollision->SetColType(ECollisionType::Rect);
 
 
 	MarioModeChange(MarioMode::SmallMario);
@@ -105,13 +104,13 @@ void Mario::Tick(float _DeltaTime)
 
 // ==================== 마리오 모드 체인지 =====================
 
-// 마리오의 모드가 바뀐다.
+// 마리오의 모드가 바뀐다.(컬리전의 y축 크기도 늘어난다.)
 // 하지만 기본(시작)상태는 SmallMario 이다.
-void Mario::MarioModeChange(MarioMode _Mode)
+void Mario::MarioModeChange(MarioMode _MarioMode)
 {
-	Mode = _Mode;
+	Mode = _MarioMode;
 
-	switch (_Mode)
+	switch (_MarioMode)
 	{
 	case MarioMode::SmallMario:
 		SmallMario();
@@ -121,6 +120,21 @@ void Mario::MarioModeChange(MarioMode _Mode)
 		break;
 	case MarioMode::FireMario:
 		FireMario();
+		break;
+	default:
+		break;
+	}
+
+
+	switch (_MarioMode)
+	{
+	case MarioMode::SmallMario:
+		BodyCollision->SetTransform({ {0,-32},{64,64} });
+		break;
+	case MarioMode::BigMario:
+		BodyCollision->SetTransform({ {0,-64},{64,128} });
+		break;
+	case MarioMode::FireMario:
 		break;
 	default:
 		break;
