@@ -54,6 +54,13 @@ void PlayLevel::BeginPlay()
 
 
 
+
+	//{
+	//	BrickBlockBreaking* NewActor = SpawnActor<BrickBlockBreaking>(MarioRenderOrder::BreakingBlock);
+	//	NewActor->SetActorLocation({ 450,550 });
+
+	//}
+
 	// 블럭
 	// 붙어있는 블럭끼리의 추천 간격 : x축 62, y축 
 	// x축이 62 간격으로 있으면 너무 빽빽해서 그런지 문제가 살짝 있음

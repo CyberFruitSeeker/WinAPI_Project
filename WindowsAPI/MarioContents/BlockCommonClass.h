@@ -31,6 +31,7 @@ public:
 		MarioCol = true;
 	}
 
+	
 
 
 protected:
@@ -38,6 +39,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	UCollision* BlockCollision = nullptr;
+	UCollision* BlockUpCollision = nullptr;
 
 
 	// 마리오가 어떤 상태일때도 블록에서 공통적인 요소 : 박스가 위로 올라가서 다시 돌아온다.
@@ -50,9 +52,12 @@ protected:
 	// 마리오가 블럭을 들이받았다는 것에 상호작용을 할 수 있는 함수
 	void MarioBlockCol(float _DeltaTime);
 
+	// 스몰 마리오, 빅 마리오에 따른 콜리전 나누기
 	MarioMode Mode = MarioMode::BigMario;
 	bool MarioCol = false;
 	bool IsColEnd = false;
+
+	// 박스의 원래 위치로 돌아가게 해주는 기능
 	FVector OriginPos;
 
 private:

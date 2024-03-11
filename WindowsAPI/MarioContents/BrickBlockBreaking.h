@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/Collision.h>
 #include "Mario.h"
+#include "BrickBlock.h"
 
 // Ό³Έν :
 class BrickBlockBreaking : public AActor

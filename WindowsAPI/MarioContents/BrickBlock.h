@@ -27,6 +27,7 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BlockCollision = nullptr;
 
+
 	//FVector BlockMoveVector = FVector::Up;
 	float BlockMoveSpeed = 300.0f;
 

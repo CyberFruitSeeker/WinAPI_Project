@@ -5,7 +5,7 @@
 #include "ContentsHelper.h"
 #include "Mario.h"
 #include "BlockCommonClass.h"
-
+#include "BrickBlockBreaking.h"
 
 BrickBlock::BrickBlock()
 {
@@ -33,8 +33,12 @@ void BrickBlock::BeginPlay()
 		BlockCollision->SetColType(ECollisionType::Rect);
 	}
 
-	// Brick Block에만 있는 Brick Block Break 애니메이션
+	// block up collision
 	{
+		
+		BlockUpCollision = CreateCollision(MarioCollisionOrder::Block);
+		BlockUpCollision->SetTransform({ { 0,-16 }, { 64,16 } });
+		BlockUpCollision->SetColType(ECollisionType::Rect);
 
 	}
 
@@ -76,12 +80,14 @@ void BrickBlock::BlockMove(float _DeltaTime)
 	if (Time < 0.0f)
 	{
 		SetActorLocation(OriginPos);
+		
 
 		if (Mode == MarioMode::BigMario)
 		{
-			Destroy(0.0001f);
-			//IsColEnd = true;
-			//return;
+			Time = 0.00001f;
+			Destroy();
+			BrickBlockBreaking* NewActor = GetWorld()->SpawnActor<BrickBlockBreaking>(MarioRenderOrder::BreakingBlock);
+			NewActor->SetActorLocation(GetActorLocation());
 		}
 
 		if (Mode == MarioMode::SmallMario)
