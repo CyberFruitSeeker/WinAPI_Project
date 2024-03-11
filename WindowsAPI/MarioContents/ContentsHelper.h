@@ -50,15 +50,14 @@ enum class BrickBlockState
 	Break,
 };
 
-enum class ItemCoinBlockState
+enum class CoinFromBlockState
 {
-	Idle,
-	MoveUpDown,
+	CoinMoveUp,
 };
 
 enum class ItemFromBlockState
 {
-	MoveUp,
+	ItemMoveUp,
 	Idle,
 };
 

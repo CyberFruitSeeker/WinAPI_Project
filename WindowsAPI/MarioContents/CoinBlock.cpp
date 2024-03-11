@@ -4,6 +4,7 @@
 #include <EngineCore/EngineResourcesManager.h>
 #include "ContentsHelper.h"
 #include "Mario.h"
+#include "BlockCommonClass.h"
 
 CoinBlock::CoinBlock()
 {
@@ -32,13 +33,45 @@ void CoinBlock::BeginPlay()
 
 void CoinBlock::Tick(float _DeltaTime)
 {
-	if (true == PlayerCol)
-	{
-		int a = 0;
-	}
+	BlockStateUpdate(_DeltaTime);
+}
+
+void CoinBlock::BlockStateUpdate(float _DeltaTime)
+{
+	BlockMove(_DeltaTime);
+	MarioGetCoin(_DeltaTime);
 }
 
 void CoinBlock::BlockMove(float _DeltaTime)
+{
+
+	// 다시는 충돌하지 않게 할려고 반환해주는 조건문
+	if (IsColEnd == true)
+	{
+		return;
+	}
+
+	if (Time < 0.0f)
+	{
+		IsColEnd = true;
+		return;
+	}
+
+	if (true == MarioCol)
+	{
+		Time -= _DeltaTime;
+		if (Time >= 0.2f)
+		{
+			AddActorLocation(FVector::Up * _DeltaTime * BlockMoveSpeed);
+		}
+		else
+		{
+			AddActorLocation(FVector::Down * _DeltaTime * BlockMoveSpeed);
+		}
+	}
+}
+
+void CoinBlock::MarioGetCoin(float _DeltaTime)
 {
 
 }

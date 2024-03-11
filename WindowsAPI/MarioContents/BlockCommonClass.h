@@ -20,7 +20,7 @@ public:
 
 	void BlockColOn()
 	{
-		PlayerCol = true;
+		MarioCol = true;
 	}
 
 
@@ -43,7 +43,7 @@ protected:
 	void MarioBlockCol(float _DeltaTime);
 
 
-	bool PlayerCol = false;
+	bool MarioCol = false;
 	bool IsColEnd = false;
 
 private:

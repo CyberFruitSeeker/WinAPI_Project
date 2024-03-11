@@ -123,10 +123,10 @@ void Mario::MarioModeChange(MarioMode _MarioMode)
 	switch (_MarioMode)
 	{
 	case MarioMode::SmallMario:
-		BodyCollision->SetTransform({ {0,-32},{40,64} });
+		BodyCollision->SetTransform({ {0,-32},{50,64} });
 		break;
 	case MarioMode::BigMario:
-		BodyCollision->SetTransform({ {0,-64},{40,128} });
+		BodyCollision->SetTransform({ {0,-64},{50,128} });
 		break;
 	case MarioMode::FireMario:
 		break;
@@ -318,6 +318,8 @@ void Mario::Jump(float _DeltaTime)
 		return;
 	}
 
+
+	// 마리오가 점프했을때 Block과 Collision 상호작용을 발생시켜주는 조건문
 	std::vector<UCollision*> Collsion;
 	if (BodyCollision->CollisionCheck(MarioCollisionOrder::Block,Collsion))
 	{

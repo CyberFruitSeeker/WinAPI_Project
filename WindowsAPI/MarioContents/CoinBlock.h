@@ -28,14 +28,18 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BlockCollision = nullptr;
 
+	float BlockMoveSpeed = 100.0f;
+
+	void BlockStateUpdate(float _DeltaTime);
 
 	void BlockMove(float _DeltaTime);
 
+	void MarioGetCoin(float _DeltaTime);
 
 
 
 
 private:
-
+	float Time = 0.4f;
 };
 

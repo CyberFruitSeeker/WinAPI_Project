@@ -46,6 +46,7 @@ void PlayLevel::BeginPlay()
 
 	// 블럭
 	// 벽돌 블럭
+	// 블럭끼리의 간격 : x축 62, y축 
 	{
 		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
 		NewActor->SetName("BrickBlock");
@@ -58,11 +59,11 @@ void PlayLevel::BeginPlay()
 		NewActor->SetActorLocation({ 800,550 });
 	}
 
-	{
-		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
-		NewActor->SetName("BrickBlock");
-		NewActor->SetActorLocation({ 862,550 });
-	}
+	//{
+	//	BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+	//	NewActor->SetName("BrickBlock");
+	//	NewActor->SetActorLocation({ 862,550 });
+	//}
 
 	{
 		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
@@ -95,6 +96,13 @@ void PlayLevel::BeginPlay()
 		NewActor->SetActorLocation({ 550,600 });
 	}
 
+	{
+		ItemBlock* NewActor = SpawnActor<ItemBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("ItemBlock");
+		NewActor->SetActorLocation({ 862,550 });
+	}
+
+
 	// 코인 블럭
 	{
 		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
@@ -102,8 +110,14 @@ void PlayLevel::BeginPlay()
 		NewActor->SetActorLocation({ 674,600 });
 	}
 
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 924,550 });
+	}
 
 	
+
 	// 머쉬룸
 	{
 		Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);

@@ -26,12 +26,18 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BlockCollision = nullptr;
 
+	FVector BlockMoveVector = FVector::Zero;
+	float BlockMoveSpeed = 100.0f;
+
+	void BlockStateUpdate(float _DeltaTime);
 
 	void BlockMove(float _DeltaTime);
+
+	void ItemMoveUp(float _DeltaTime);
 
 
 
 private:
-
+	float Time = 0.4f;
 };
 

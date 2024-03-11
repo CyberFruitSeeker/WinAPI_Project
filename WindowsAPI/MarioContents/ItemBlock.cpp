@@ -4,6 +4,7 @@
 #include <EngineCore/EngineResourcesManager.h>
 #include "ContentsHelper.h"
 #include "Mario.h"
+#include "BlockCommonClass.h"
 
 ItemBlock::ItemBlock()
 {
@@ -37,20 +38,46 @@ void ItemBlock::BeginPlay()
 
 void ItemBlock::Tick(float _DeltaTime)
 {
+	BlockStateUpdate(_DeltaTime);
+
+}
+
+void ItemBlock::BlockStateUpdate(float _DeltaTime)
+{
+	BlockMove(_DeltaTime);
+	ItemMoveUp(_DeltaTime);
+
+}
+
+void ItemBlock::BlockMove(float _DeltaTime)
+{
+	// 다시는 충돌하지 않게 할려고 반환해주는 조건문
 	if (IsColEnd == true)
 	{
 		return;
 	}
 
-	if (true == PlayerCol)
+	if (Time < 0.0f)
 	{
-		int a = 0;
-
-		// 다시는 충돌하지 않게 하려는것.
 		IsColEnd = true;
+		return;
+	}
+
+	if (true == MarioCol)
+	{
+		Time -= _DeltaTime;
+		if (Time >= 0.2f)
+		{
+			AddActorLocation(FVector::Up * _DeltaTime * BlockMoveSpeed);
+		}
+		else
+		{
+			AddActorLocation(FVector::Down * _DeltaTime * BlockMoveSpeed);
+		}
 	}
 }
 
-void ItemBlock::BlockMove(float _DeltaTime)
+// 버섯이나 꽃이 블럭에서 나온다.
+void ItemBlock::ItemMoveUp(float _DeltaTime)
 {
 }

@@ -28,7 +28,7 @@ void Troopa::BeginPlay()
 		Renderer->CreateAnimation("Move_Left", "Troopa_Left.png", 0, 1, 0.2f);
 		Renderer->CreateAnimation("Move_Right", "Troopa_Right.png", 0, 1, 0.2f);
 		//Renderer->SetScale({ 512,384 });
-		Renderer->SetTransform({ {0,0},{512,384} });
+		Renderer->SetTransform({ {0,0},{615,465} });
 
 
 		// 트루파 Dead 애니메이션이 작동되니?
