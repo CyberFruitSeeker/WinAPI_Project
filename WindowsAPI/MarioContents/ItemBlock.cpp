@@ -40,6 +40,7 @@ void ItemBlock::Tick(float _DeltaTime)
 {
 	BlockStateUpdate(_DeltaTime);
 
+
 }
 
 void ItemBlock::BlockStateUpdate(float _DeltaTime)
