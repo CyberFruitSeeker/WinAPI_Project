@@ -11,6 +11,7 @@ enum MarioRenderOrder
 	Monster,
 	Item,
 	Block,
+	BreakingBlock,
 	Text,
 };
 

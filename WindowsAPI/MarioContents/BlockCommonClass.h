@@ -18,8 +18,16 @@ public:
 	BlockCommonClass& operator=(BlockCommonClass&& _Other) noexcept = delete;
 
 
-	void BlockColOn()
+	void BlockColOn(MarioMode _Mode)
 	{
+		// 블럭이 움직이는중에 마리오가 계속 쳐서 위치가 어긋나게 하는 것을 방지하기 위한 조건문
+		if (true == MarioCol)
+		{
+			return;
+		}
+
+		OriginPos = GetActorLocation();
+		Mode = _Mode;
 		MarioCol = true;
 	}
 
@@ -42,9 +50,10 @@ protected:
 	// 마리오가 블럭을 들이받았다는 것에 상호작용을 할 수 있는 함수
 	void MarioBlockCol(float _DeltaTime);
 
-
+	MarioMode Mode = MarioMode::BigMario;
 	bool MarioCol = false;
 	bool IsColEnd = false;
+	FVector OriginPos;
 
 private:
 

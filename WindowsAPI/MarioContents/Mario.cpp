@@ -326,7 +326,7 @@ void Mario::Jump(float _DeltaTime)
 		AActor* Owner = Collsion[0]->GetOwner();
 
 		BlockCommonClass* Block = dynamic_cast<BlockCommonClass*>(Owner);
-		Block->BlockColOn();
+		Block->BlockColOn(Mode);
 
 		JumpVector = FVector::Zero;
 	}

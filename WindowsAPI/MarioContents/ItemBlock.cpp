@@ -67,7 +67,7 @@ void ItemBlock::BlockMove(float _DeltaTime)
 	if (true == MarioCol)
 	{
 		Time -= _DeltaTime;
-		if (Time >= 0.2f)
+		if (Time >= 0.125f)
 		{
 			AddActorLocation(FVector::Up * _DeltaTime * BlockMoveSpeed);
 		}

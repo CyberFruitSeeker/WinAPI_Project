@@ -9,6 +9,7 @@
 #include "BrickBlock.h"
 #include "ItemBlock.h"
 #include "CoinBlock.h"
+#include "BrickBlockBreaking.h"
 
 PlayLevel::PlayLevel()
 {
@@ -43,15 +44,33 @@ void PlayLevel::BeginPlay()
 	//	NewActor->SetActorLocation({ 400,550 });
 	//}
 
+	// 블럭 브레이킹
+	// 하지만, 스폰액터로 나오게 하지는 않는다.
+	//{
+	//	BrickBlockBreaking* NewActor = SpawnActor<BrickBlockBreaking>(MarioRenderOrder::BreakingBlock);
+	//	NewActor->SetName("BrickBlockBreaking");
+	//	NewActor->SetActorLocation({ 612,600 });
+	//}
+
+
 
 	// 블럭
+	// 붙어있는 블럭끼리의 추천 간격 : x축 62, y축 
+	// x축이 62 간격으로 있으면 너무 빽빽해서 그런지 문제가 살짝 있음
+	// 
 	// 벽돌 블럭
-	// 블럭끼리의 간격 : x축 62, y축 
 	{
 		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
 		NewActor->SetName("BrickBlock");
-		NewActor->SetActorLocation({ 1300,550 });
+		NewActor->SetActorLocation({ 1286,550 });
 	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 1162,550 });
+	}
+
 
 	{
 		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
@@ -68,7 +87,7 @@ void PlayLevel::BeginPlay()
 	{
 		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
 		NewActor->SetName("BrickBlock");
-		NewActor->SetActorLocation({ 1050,550 });
+		NewActor->SetActorLocation({ 1100,550 });
 	}
 
 	{
@@ -102,6 +121,11 @@ void PlayLevel::BeginPlay()
 		NewActor->SetActorLocation({ 862,550 });
 	}
 
+	{
+		ItemBlock* NewActor = SpawnActor<ItemBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("ItemBlock");
+		NewActor->SetActorLocation({ 1224,550 });
+	}
 
 	// 코인 블럭
 	{
@@ -116,7 +140,15 @@ void PlayLevel::BeginPlay()
 		NewActor->SetActorLocation({ 924,550 });
 	}
 
-	
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 1349,550 });
+	}
+
+	// ==================== 블럭 ====================
+
+
 
 	// 머쉬룸
 	{

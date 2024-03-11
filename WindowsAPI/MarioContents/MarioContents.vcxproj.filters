@@ -96,6 +96,9 @@
     <ClCompile Include="BlockCommonClass.cpp">
       <Filter>Object\PlayLevel\Actor\Block\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="BrickBlockBreaking.cpp">
+      <Filter>Object\PlayLevel\Actor\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsHelper.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="BlockCommonClass.h">
       <Filter>Object\PlayLevel\Actor\Block\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="BrickBlockBreaking.h">
+      <Filter>Object\PlayLevel\Actor\Block</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -59,6 +59,7 @@ void UContentsCore::BeginPlay()
 
 	UEngineResourcesManager::GetInst().CuttingImage("BrickBlock.png", 5, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("ItemCoinBlock.png", 5, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("BrickBlockBreaking.png", 5, 3);
 
 
 
