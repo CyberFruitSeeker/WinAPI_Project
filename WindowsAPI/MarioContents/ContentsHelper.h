@@ -10,6 +10,7 @@ enum MarioRenderOrder
 	Player,
 	Monster,
 	Item,
+	Block,
 	Text,
 };
 
@@ -19,6 +20,7 @@ enum class MarioCollisionOrder
 	Monster,
 	Player,
 	Item,
+	Block,
 };
 
 enum class EActorDir
@@ -37,10 +39,9 @@ enum class MarioState
 	CameraFreeMove,
 	FreeMove,
 	Run,
-
 };
 
-enum class ItemState
+enum class BoxItemState
 {
 	Idle,
 	MoveUp,
@@ -50,6 +51,7 @@ enum class BlockState
 {
 	Idle,
 	MoveUp,
+	BlockBreak,
 };
 
 // 굼바와 트루파의 애니메이션은 다르게 작동해서 enum class 구분이 필요하다.

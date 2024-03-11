@@ -1,7 +1,10 @@
 #pragma once
+#include <EngineCore/Actor.h>
+#include <EngineCore/Collision.h>
+#include "Mario.h"
 
 // Ό³Έν :
-class BrickBlock
+class BrickBlock : public AActor
 {
 public:
 	// constrcuter destructer
@@ -14,7 +17,24 @@ public:
 	BrickBlock& operator=(const BrickBlock& _Other) = delete;
 	BrickBlock& operator=(BrickBlock&& _Other) noexcept = delete;
 
+
+
+
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+
+	UImageRenderer* Renderer = nullptr;
+	UCollision* BlockCollision = nullptr;
+
+
+	void BlockMove(float _DeltaTime);
+	void BlockBreak(float _DeltaTime);
+
+
+
+
 
 private:
 

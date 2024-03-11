@@ -1,3 +1,4 @@
+#include <EngineCore/EngineCore.h>
 #include "PlayLevel.h"
 #include "Mario.h"
 #include "MarioMap.h"
@@ -5,7 +6,7 @@
 #include "GoombaDark.h"
 #include "Troopa.h"
 #include "Mushroom.h"
-#include <EngineCore/EngineCore.h>
+#include "BrickBlock.h"
 
 PlayLevel::PlayLevel()
 {
@@ -42,7 +43,29 @@ void PlayLevel::BeginPlay()
 
 
 	// 블럭
+	// 벽돌 블럭
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 1300,300 });
+	}
 
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 950,650 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 800,550 });
+	}
+
+	// 아이템 블럭
+
+
+	// 코인 블럭
 
 
 	
