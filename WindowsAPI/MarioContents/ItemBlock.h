@@ -27,7 +27,7 @@ protected:
 	UCollision* BlockCollision = nullptr;
 
 	FVector BlockMoveVector = FVector::Zero;
-	float BlockMoveSpeed = 170.0f;
+	float BlockMoveSpeed = 300.0f;
 
 	void BlockStateUpdate(float _DeltaTime);
 

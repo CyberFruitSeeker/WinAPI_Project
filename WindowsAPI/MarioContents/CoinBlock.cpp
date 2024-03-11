@@ -44,8 +44,7 @@ void CoinBlock::BlockStateUpdate(float _DeltaTime)
 
 void CoinBlock::BlockMove(float _DeltaTime)
 {
-
-	// 다시는 충돌하지 않게 할려고 반환해주는 조건문
+	// 다시 충돌하지 않게 할려고 값을 반환해주고, 블럭 충돌을 끝내는 조건문
 	if (IsColEnd == true)
 	{
 		return;
@@ -53,8 +52,20 @@ void CoinBlock::BlockMove(float _DeltaTime)
 
 	if (Time < 0.0f)
 	{
-		IsColEnd = true;
-		return;
+		SetActorLocation(OriginPos);
+
+		if (Mode == MarioMode::BigMario)
+		{
+			//Destroy(0.0001f);
+			IsColEnd = true;
+			return;
+		}
+
+		if (Mode == MarioMode::SmallMario)
+		{
+			IsColEnd = true;
+			return;
+		}
 	}
 
 	if (true == MarioCol)
@@ -69,6 +80,7 @@ void CoinBlock::BlockMove(float _DeltaTime)
 			AddActorLocation(FVector::Down * _DeltaTime * BlockMoveSpeed);
 		}
 	}
+	
 }
 
 void CoinBlock::MarioGetCoin(float _DeltaTime)

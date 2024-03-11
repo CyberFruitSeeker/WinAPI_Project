@@ -28,7 +28,7 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UCollision* BlockCollision = nullptr;
 
-	float BlockMoveSpeed = 170.0f;
+	float BlockMoveSpeed = 300.0f;
 
 	void BlockStateUpdate(float _DeltaTime);
 

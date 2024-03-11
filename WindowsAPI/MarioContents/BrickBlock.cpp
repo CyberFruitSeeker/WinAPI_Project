@@ -66,7 +66,7 @@ void BrickBlock::BlockStateChange(BrickBlockState _BlockState)
 
 void BrickBlock::BlockMove(float _DeltaTime)
 {
-	// 블럭이 위로 갔다가, 다시 아래로 가서 돌아오게 하는 조건문
+	// 다시는 충돌하지 않게 할려고 반환해주고, 블럭 충돌을 끝내는 조건문
 	if (IsColEnd == true)
 	{
 		return;
