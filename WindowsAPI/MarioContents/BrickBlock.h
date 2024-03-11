@@ -1,10 +1,10 @@
 #pragma once
-#include <EngineCore/Actor.h>
+#include "BlockCommonClass.h"
 #include <EngineCore/Collision.h>
 #include "Mario.h"
 
 // Ό³Έν :
-class BrickBlock : public AActor
+class BrickBlock : public BlockCommonClass
 {
 public:
 	// constrcuter destructer

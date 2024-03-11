@@ -41,18 +41,27 @@ enum class MarioState
 	Run,
 };
 
-enum class BoxItemState
+// 블럭과 블럭에서 나오는 아이템
+// Brick Block과 Item & Coin Block 분리가 필요한가? : 필요하다.
+enum class BrickBlockState
 {
 	Idle,
-	MoveUp,
+	MoveUpDown,
+	Break,
 };
 
-enum class BlockState
+enum class ItemCoinBlockState
 {
 	Idle,
-	MoveUp,
-	BlockBreak,
+	MoveUpDown,
 };
+
+enum class ItemFromBlockState
+{
+	MoveUp,
+	Idle,
+};
+
 
 // 굼바와 트루파의 애니메이션은 다르게 작동해서 enum class 구분이 필요하다.
 enum class GoombaState

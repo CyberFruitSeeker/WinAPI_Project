@@ -20,7 +20,7 @@ void BrickBlock::BeginPlay()
 		SetName("BrickBlock");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Block);
 		Renderer->SetImage("BrickBlock.png");
-		Renderer->SetScale({ 384,384 });
+		Renderer->SetScale({ 500,500 });
 
 	}
 
@@ -41,7 +41,10 @@ void BrickBlock::BeginPlay()
 
 void BrickBlock::Tick(float _DeltaTime)
 {
-
+	if (true == PlayerCol)
+	{
+		int a = 0;
+	}
 }
 
 void BrickBlock::BlockMove(float _DeltaTime)

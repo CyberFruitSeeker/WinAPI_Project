@@ -1,7 +1,11 @@
 #pragma once
+#include "BlockCommonClass.h"
+#include <EngineCore/Collision.h>
+#include "Mario.h"
+
 
 // Ό³Έν :
-class ItemBlock
+class ItemBlock : public BlockCommonClass
 {
 public:
 	// constrcuter destructer
@@ -15,6 +19,17 @@ public:
 	ItemBlock& operator=(ItemBlock&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+
+	UImageRenderer* Renderer = nullptr;
+	UCollision* BlockCollision = nullptr;
+
+
+	void BlockMove(float _DeltaTime);
+
+
 
 private:
 

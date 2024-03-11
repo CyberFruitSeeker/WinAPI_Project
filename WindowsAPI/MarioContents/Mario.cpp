@@ -7,6 +7,7 @@
 #include <vector>
 #include <EngineCore/Collision.h>
 #include "Mushroom.h"
+#include "BlockCommonClass.h"
 
 
 Mario* Mario::ItsMeMario = nullptr;
@@ -122,10 +123,10 @@ void Mario::MarioModeChange(MarioMode _MarioMode)
 	switch (_MarioMode)
 	{
 	case MarioMode::SmallMario:
-		BodyCollision->SetTransform({ {0,-32},{64,64} });
+		BodyCollision->SetTransform({ {0,-32},{40,64} });
 		break;
 	case MarioMode::BigMario:
-		BodyCollision->SetTransform({ {0,-64},{64,128} });
+		BodyCollision->SetTransform({ {0,-64},{40,128} });
 		break;
 	case MarioMode::FireMario:
 		break;
@@ -294,7 +295,6 @@ void Mario::Jump(float _DeltaTime)
 				// _Result[i]->GetOwner();/*->Destroy();*/
 			}
 		}
-
 	}
 
 
@@ -316,6 +316,17 @@ void Mario::Jump(float _DeltaTime)
 		JumpVector = FVector::Zero;
 		StateChange(MarioState::Idle);
 		return;
+	}
+
+	std::vector<UCollision*> Collsion;
+	if (BodyCollision->CollisionCheck(MarioCollisionOrder::Block,Collsion))
+	{
+		AActor* Owner = Collsion[0]->GetOwner();
+
+		BlockCommonClass* Block = dynamic_cast<BlockCommonClass*>(Owner);
+		Block->BlockColOn();
+
+		JumpVector = FVector::Zero;
 	}
 }
 

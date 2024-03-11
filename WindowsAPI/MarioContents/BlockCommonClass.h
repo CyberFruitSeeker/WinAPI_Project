@@ -17,6 +17,14 @@ public:
 	BlockCommonClass& operator=(const BlockCommonClass& _Other) = delete;
 	BlockCommonClass& operator=(BlockCommonClass&& _Other) noexcept = delete;
 
+
+	void BlockColOn()
+	{
+		PlayerCol = true;
+	}
+
+
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -29,18 +37,14 @@ protected:
 	// 박스가 올라가는 애니메이션만 있으면 되는데 FVector가 필요한가??
 	//FVector BlockMoveVector = FVector::None;
 
-	
-
-
-
-
 
 
 	// 마리오가 블럭을 들이받았다는 것에 상호작용을 할 수 있는 함수
 	void MarioBlockCol(float _DeltaTime);
 
 
-
+	bool PlayerCol = false;
+	bool IsColEnd = false;
 
 private:
 

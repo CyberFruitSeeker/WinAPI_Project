@@ -7,6 +7,8 @@
 #include "Troopa.h"
 #include "Mushroom.h"
 #include "BrickBlock.h"
+#include "ItemBlock.h"
+#include "CoinBlock.h"
 
 PlayLevel::PlayLevel()
 {
@@ -47,13 +49,7 @@ void PlayLevel::BeginPlay()
 	{
 		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
 		NewActor->SetName("BrickBlock");
-		NewActor->SetActorLocation({ 1300,300 });
-	}
-
-	{
-		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
-		NewActor->SetName("BrickBlock");
-		NewActor->SetActorLocation({ 950,650 });
+		NewActor->SetActorLocation({ 1300,550 });
 	}
 
 	{
@@ -62,10 +58,49 @@ void PlayLevel::BeginPlay()
 		NewActor->SetActorLocation({ 800,550 });
 	}
 
-	// 아이템 블럭
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 862,550 });
+	}
 
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 1050,550 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 612,600 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 488,600 });
+	}
+
+	/*{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 950,650 });
+	}*/
+
+	// 아이템 블럭
+	{
+		ItemBlock* NewActor = SpawnActor<ItemBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("ItemBlock");
+		NewActor->SetActorLocation({ 550,600 });
+	}
 
 	// 코인 블럭
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 674,600 });
+	}
 
 
 	
