@@ -8,7 +8,10 @@
 #include <EngineCore/Collision.h>
 #include "Mushroom.h"
 #include "BlockCommonClass.h"
-
+#include "EngineCore/EngineCore.h"
+#include "MarioMap.h"
+#include "PlayLevel.h"
+#include <EngineCore/Level.h>
 
 Mario* Mario::ItsMeMario = nullptr;
 
@@ -91,8 +94,8 @@ void Mario::BeginPlay()
 void Mario::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-
 	StateUpdate(_DeltaTime);
+	MoveCameraMarioPos(_DeltaTime);
 }
 
 
@@ -161,7 +164,8 @@ void Mario::FireMario()
 
 // ====== 카메라 움직임 기능들 ======
 
-void Mario::MoveLastCameraPos(float _DeltaTime)
+// 마리오에게 FVector를 적용하게 하고, 카메라를 움직이게 해준다.
+void Mario::MarioVectorMoveCameraPos(float _DeltaTime)
 {
 	// 카메라는 x축으로만 움직이게 해본다.
 	GetWorld()->AddCameraPos(MoveVector * _DeltaTime);
@@ -179,10 +183,23 @@ void Mario::MoveCameraMarioPos(float _DeltaTime)
 	FVector CurCamPos = GetWorld()->GetCameraPos();
 	FVector MarioPos = GetActorLocation();
 	float SceneCenter = GEngine->MainWindow.GetWindowScale().hX();
-	if (MarioPos.X > SceneCenter + CurCamPos.X)
+	GetWorld()->SetCameraPos({ MarioPos.X - 300.0f,CurCamPos.Y });
+
+	FVector CameraPos = GetWorld()->GetCameraPos();
+	if (CameraPos.X < 0.0f)
 	{
-		GetWorld()->SetCameraPos({ MarioPos.X - SceneCenter,CurCamPos.Y });
+		CameraPos.X = 0.0f;
+		GetWorld()->SetCameraPos(CameraPos);
 	}
+	
+	//if (CameraPos.X > 13504.0f)
+	//{
+	//	CameraPos.X = 0.0f;
+	//	GetWorld()->SetCameraPos(CameraPos);
+	//}
+
+
+
 }
 
 
@@ -452,7 +469,7 @@ void Mario::MoveUpdate(float _DeltaTime)
 	CalMoveVector(_DeltaTime);
 	CalGravityVector(_DeltaTime);
 	CalLastMoveVector(_DeltaTime);
-	MoveLastCameraPos(_DeltaTime);
+	MarioVectorMoveCameraPos(_DeltaTime);
 }
 
 

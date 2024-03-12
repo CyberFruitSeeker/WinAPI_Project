@@ -61,6 +61,8 @@ void UContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("ItemCoinBlock.png", 5, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("BrickBlockBreaking.png", 5, 3);
 
+	UEngineResourcesManager::GetInst().CuttingImage("Flag.png", 1, 1);
+
 
 
 	CreateLevel<UTitleLevel>("Title");

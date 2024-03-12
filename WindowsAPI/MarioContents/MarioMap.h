@@ -19,10 +19,10 @@ public:
 	void SetColMapImage(std::string_view _MapImageName);
 	void SwitchDebug();
 
-	//FVector GetImageScale()
-	//{
-	//	return ImageScale;
-	//}
+	FVector GetImageScale()
+	{
+		return ImageScale;
+	}
 
 protected:
 	void BeginPlay() override;
@@ -32,6 +32,6 @@ protected:
 private:
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* ColRenderer = nullptr;
-	//FVector ImageScale;
+	FVector ImageScale;
 };
 

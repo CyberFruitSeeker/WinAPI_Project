@@ -1,7 +1,7 @@
 #pragma once
 #include "BlockCommonClass.h"
 #include <EngineCore/Collision.h>
-#include "Mario.h"
+//#include "Mario.h"
 
 // Ό³Έν :
 class BrickBlock : public BlockCommonClass

@@ -108,6 +108,9 @@
     <ClCompile Include="BrickBlockBreaking.cpp">
       <Filter>Object\PlayLevel\Actor\Block</Filter>
     </ClCompile>
+    <ClCompile Include="Flag.cpp">
+      <Filter>Object\PlayLevel\Actor\Flag</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsHelper.h">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="BrickBlockBreaking.h">
       <Filter>Object\PlayLevel\Actor\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Flag.h">
+      <Filter>Object\PlayLevel\Actor\Flag</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

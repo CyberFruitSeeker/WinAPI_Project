@@ -14,7 +14,8 @@ void MarioMap::SetMapImage(std::string_view _MapImageName)
 {
 	Renderer->SetImage(_MapImageName);
 	UWindowImage* Image = Renderer->GetImage();
-	FVector ImageScale = Image->GetScale();
+	//FVector ImageScale = Image->GetScale();
+	ImageScale = Image->GetScale();
 	Renderer->SetTransform({ ImageScale.Half2D(), ImageScale });
 }
 
@@ -23,7 +24,8 @@ void MarioMap::SetColMapImage(std::string_view _MapImageName)
 	ColRenderer->SetImage(_MapImageName);
 	UWindowImage* Image = ColRenderer->GetImage();
 	ContentsHelper::ColMapImage = Image;
-	FVector ImageScale = Image->GetScale();
+	//FVector ImageScale = Image->GetScale();
+	ImageScale = Image->GetScale();
 	ColRenderer->SetTransform({ ImageScale.Half2D(),ImageScale });
 }
 

@@ -109,7 +109,7 @@ private:
 	void CalGravityVector(float _DeltaTime);
 
 	// 카메라에 따른 움직임
-	void MoveLastCameraPos(float _DeltaTime);
+	void MarioVectorMoveCameraPos(float _DeltaTime);
 	void MoveCameraMarioPos(float _DeltaTime);
 
 	void MoveUpdate(float _DeltaTime);
@@ -118,7 +118,7 @@ private:
 	// 어떤 기능을 더 추가할 것인가?
 	// moveresult?  
 	
-
+	//MarioMap* Map;
 
 
 
