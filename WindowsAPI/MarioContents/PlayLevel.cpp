@@ -52,9 +52,6 @@ void PlayLevel::BeginPlay()
 	//	NewActor->SetActorLocation({ 612,600 });
 	//}
 
-
-
-
 	//{
 	//	BrickBlockBreaking* NewActor = SpawnActor<BrickBlockBreaking>(MarioRenderOrder::BreakingBlock);
 	//	NewActor->SetActorLocation({ 450,550 });
@@ -157,12 +154,12 @@ void PlayLevel::BeginPlay()
 
 
 
-	// ¸Ó½¬·ë
-	{
-		Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);
-		NewActor->SetName("Mushroom");
-		NewActor->SetActorLocation({ 600,350 });
-	}
+	//// ¸Ó½¬·ë
+	//{
+	//	Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);
+	//	NewActor->SetName("Mushroom");
+	//	NewActor->SetActorLocation({ 600,350 });
+	//}
 
 
 

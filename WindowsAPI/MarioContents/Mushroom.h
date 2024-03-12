@@ -33,7 +33,7 @@ protected:
 	
 	EActorDir DirState = EActorDir::None;
 
-	float MoveSpeed = 200.0f;
+	float MoveSpeed = 222.2f;
 	float MaxMoveSpeed = 500.0f;
 
 	void StateUpdate(float _DeltaTime);
