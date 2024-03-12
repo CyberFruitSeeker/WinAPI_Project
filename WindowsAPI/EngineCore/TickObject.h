@@ -26,11 +26,11 @@ public:
 		IsActiveValue = false;
 	}
 
-	void SetActive(bool _Active, float _ActiveTime = 0.0f)
+	virtual void SetActive(bool _Active, float _ActiveTime = 0.0f)
 	{
 		ActiveTime = _ActiveTime;
 
-		if (true == _Active && 0.0f == _ActiveTime)
+		if (true == _Active && 0.0f == ActiveTime)
 		{
 			IsActiveValue = _Active;
 			return;
@@ -54,7 +54,7 @@ public:
 	{
 		IsDestroyUpdate = true;
 		DestroyTime = _DestroyTime;
-		if (0.0f >= _DestroyTime)
+		if (0.0f>= _DestroyTime)
 		{
 			this->IsDestroyValue = true;
 		}
@@ -107,14 +107,27 @@ public:
 	virtual void BeginPlay();
 	virtual void Tick(float _DeltaTime);
 
+	void DebugCheckOn()
+	{
+		IsDebugCheck = true;
+	}
+
+	void DebugCheck()
+	{
+		if (true == IsDebugCheck)
+		{
+			int a = 0;
+		}
+	}
+
 protected:
 
 private:
+	bool IsDebugCheck = false;
 	int Order = 0;
+
 	bool IsDestroyUpdate = false;
-
 	float DestroyTime = 0.0f;
-
 	bool IsDestroyValue = false;
 
 	bool IsActiveUpdate = false;

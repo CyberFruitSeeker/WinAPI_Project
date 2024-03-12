@@ -34,11 +34,11 @@ void UEngineWindow::Init(HINSTANCE _hInst)
 
 
 
-UEngineWindow::UEngineWindow()
+UEngineWindow::UEngineWindow() 
 {
 }
 
-UEngineWindow::~UEngineWindow()
+UEngineWindow::~UEngineWindow() 
 {
 	if (nullptr != BackBufferImage)
 	{
@@ -51,7 +51,7 @@ UEngineWindow::~UEngineWindow()
 		delete WindowImage;
 		WindowImage = nullptr;
 	}
-
+	
 }
 
 void UEngineWindow::Open(std::string_view _Title /*= "Title"*/)
@@ -131,6 +131,11 @@ unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)(
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+
+			if (false == WindowLive)
+			{
+				break;
+			}
 		}
 
 		// 메세지 루프의 데드타임이라는 곳에서 실행됩니다.
@@ -168,7 +173,7 @@ void UEngineWindow::SetWindowPosition(const FVector& _Pos)
 void UEngineWindow::SetWindowScale(const FVector& _Scale)
 {
 	Scale = _Scale;
-
+	
 
 	// window크기만한 이미지를 만들거라고 했는데.
 	// Load랑 다르다.
@@ -197,8 +202,15 @@ void UEngineWindow::SetWindowScale(const FVector& _Scale)
 
 void UEngineWindow::ScreenClear()
 {
-	// 1280 720
+	HBRUSH myBrush = (HBRUSH)CreateSolidBrush(ClearColor.Color);
+	HBRUSH oldBrush = (HBRUSH)SelectObject(BackBufferImage->ImageDC, myBrush);
 	Rectangle(BackBufferImage->ImageDC, -1, -1, Scale.iX() + 1, Scale.iY() + 1);
+	SelectObject(BackBufferImage->ImageDC, oldBrush);
+	DeleteObject(myBrush);
+
+
+	// 1280 720
+
 	// 1282 722
 	// Rectangle(BackBufferImage->ImageDC, -1, -1, 1281, 721);
 }
@@ -206,7 +218,7 @@ void UEngineWindow::ScreenClear()
 void UEngineWindow::ScreenUpdate()
 {
 	FTransform CopyTrans;
-	CopyTrans.SetPosition({ Scale.ihX(), Scale.ihY() });
+	CopyTrans.SetPosition({Scale.ihX(), Scale.ihY()});
 	CopyTrans.SetScale({ Scale.iX(), Scale.iY() });
 
 	WindowImage->BitCopy(BackBufferImage, CopyTrans);

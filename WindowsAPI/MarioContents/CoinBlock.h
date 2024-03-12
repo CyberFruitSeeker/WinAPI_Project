@@ -26,7 +26,7 @@ protected:
 
 
 	UImageRenderer* Renderer = nullptr;
-	UCollision* BlockCollision = nullptr;
+	//UCollision* BlockCollision = nullptr;
 
 	float BlockMoveSpeed = 300.0f;
 

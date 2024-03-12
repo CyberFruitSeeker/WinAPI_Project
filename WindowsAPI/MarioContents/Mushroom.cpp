@@ -28,6 +28,11 @@ void Mushroom::BeginPlay()
 		MushroomCollision->SetColType(ECollisionType::Rect);
 	}
 
+	// 아이템 박스에서 머쉬룸이 나오는 애니메이션
+	{
+
+	}
+
 
 
 }
@@ -111,8 +116,7 @@ void Mushroom::MarioMushroomEat()
 
 }
 
-//
-
+// 머쉬룸이 아이템 블럭에서 나온다.
 void Mushroom::MushroomMoveUp(float _DeltaTime)
 {
 

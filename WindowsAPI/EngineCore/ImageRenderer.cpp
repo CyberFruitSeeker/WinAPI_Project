@@ -30,6 +30,11 @@ void UImageRenderer::SetOrder(int _Order)
 
 int UAnimationInfo::Update(float _DeltaTime)
 {
+	if (false == Loop && true == IsEnd)
+	{
+		return Indexs[CurFrame];
+	}
+
 	IsEnd = false;
 	CurTime -= _DeltaTime;
 
@@ -42,9 +47,14 @@ int UAnimationInfo::Update(float _DeltaTime)
 		{
 			IsEnd = true;
 		}
+
+		if (false == Loop && Indexs.size() <= CurFrame)
+		{
+			IsEnd = true;
+		}
 	}
 
-	//  6                 6
+
 	if (Indexs.size() <= CurFrame)
 	{
 		if (1 < Indexs.size())
@@ -53,15 +63,10 @@ int UAnimationInfo::Update(float _DeltaTime)
 		}
 		if (true == Loop)
 		{
-			// //            0  1  2  3  4  5 
-			//    Indexs => 20 21 22 23 24 25
 			CurFrame = 0;
 		}
 		else
 		{
-			//                               
-			//               0  1  2  3  4  5 
-			//    Indexs => 20 21 22 23 24 25
 			--CurFrame;
 		}
 	}
@@ -88,6 +93,17 @@ void UImageRenderer::BeginPlay()
 {
 	// 부모것을 실행시켜주는 습관을 들이자.
 	USceneComponent::BeginPlay();
+}
+
+void UImageRenderer::Tick(float _DeltaTime)
+{
+	USceneComponent::Tick(_DeltaTime);
+
+	if (nullptr != CurAnimation)
+	{
+		Image = CurAnimation->Image;
+		InfoIndex = CurAnimation->Update(_DeltaTime);
+	}
 }
 
 void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex /*= 0*/)
@@ -125,13 +141,33 @@ void UImageRenderer::CreateAnimation(
 
 }
 
-
 void UImageRenderer::CreateAnimation(
 	std::string_view _AnimationName,
 	std::string_view _ImageName,
 	std::vector<int> _Indexs,
 	float _Inter,
 	bool _Loop/* = true*/
+)
+{
+	
+	std::vector<float> Inters;
+	//          12         0
+	int Size = static_cast<int>(_Indexs.size());
+	Inters.reserve(Size);
+	for (int i = 0; i <= Size; i++)
+	{
+		Inters.push_back(_Inter);
+	}
+
+	CreateAnimation(_AnimationName, _ImageName, _Indexs, Inters, _Loop);
+}
+
+void UImageRenderer::CreateAnimation(
+	std::string_view _AnimationName,
+	std::string_view _ImageName,
+	std::vector<int> _Indexs,
+	std::vector<float> _Inters,
+	bool _Loop /*= true*/
 )
 {
 	UWindowImage* FindImage = UEngineResourcesManager::GetInst().FindImg(_ImageName);
@@ -156,15 +192,7 @@ void UImageRenderer::CreateAnimation(
 	Info.CurFrame = 0;
 	Info.CurTime = 0.0f;
 	Info.Loop = _Loop;
-
-	//          12         0
-	int Size = static_cast<int>(_Indexs.size());
-	Info.Times.reserve(Size);
-	for (int i = 0; i <= Size; i++)
-	{
-		Info.Times.push_back(_Inter);
-	}
-
+	Info.Times = _Inters;
 	Info.Indexs = _Indexs;
 }
 
@@ -220,13 +248,25 @@ void UImageRenderer::TextRender(float _DeltaTime)
 {
 	FTransform RendererTrans = GetRenderTransForm();
 
-	// 글자 수
-	float TextCount = static_cast<float>(Text.size());
+	switch (TextEffect)
+	{
+	case 1:
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor, TextColor2);
+		break;
+	case 2:
+		GEngine->MainWindow.GetBackBufferImage()->TextCopyBold(Text, Font, Size, RendererTrans, TextColor);
+		break;
+	default:
+		GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, SortOption1, SortOption1, TextColor);
+		break;
+	}
+}
 
-	//RendererTrans.AddPosition(float4::Up * Size * 0.5f);
-	// RendererTrans.AddPosition(float4::Left * (Size * 0.5f) * (TextCount * 0.5f));
+bool UImageRenderer::IsAnimation(std::string_view _Name)
+{
+	std::string UpperAniName = UEngineString::ToUpper(_Name);
 
-	GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor);
+	return AnimationInfos.contains(UpperAniName);
 }
 
 void UImageRenderer::ImageRender(float _DeltaTime)
@@ -237,15 +277,31 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
 	}
 
-	if (nullptr != CurAnimation)
-	{
-		Image = CurAnimation->Image;
-		InfoIndex = CurAnimation->Update(_DeltaTime);
-	}
-
 	FTransform RendererTrans = GetRenderTransForm();
 
 	EWIndowImageType ImageType = Image->GetImageType();
+	const UImageInfo& Info = Image->ImageInfo(InfoIndex);
+
+	switch (SortType)
+	{
+	case EImageSortType::Left:
+	{
+		RendererTrans.AddPosition({ RendererTrans.GetScale().hX() , 0.0f});
+		break;
+	}
+	case EImageSortType::Right:
+	{
+		RendererTrans.AddPosition({ -RendererTrans.GetScale().hX() , 0.0f });
+		break;
+	}
+	default:
+		break;
+	}
+
+	if (true == AutoImageScaleValue)
+	{
+		RendererTrans.SetScale(Info.CuttingTrans.GetScale() * AutoImageScaleRatio);
+	}
 
 	switch (ImageType)
 	{
@@ -258,7 +314,7 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		{
 			GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
 		}
-		else
+		else 
 		{
 			GEngine->MainWindow.GetBackBufferImage()->PlgCopy(Image, RendererTrans, InfoIndex, Angle * UEngineMath::DToR);
 		}

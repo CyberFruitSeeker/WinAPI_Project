@@ -46,6 +46,15 @@
     <Filter Include="Object\PlayLevel\Actor\Block\CommonClass">
       <UniqueIdentifier>{f4d18c3c-8d6e-4e25-810f-a1bce4b94c05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Title &amp; Ending Level\EndingLevel">
+      <UniqueIdentifier>{8874f504-a5b4-42f2-9d11-37c53dd922e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Title &amp; Ending Level\EndingLevel\Actor">
+      <UniqueIdentifier>{b39876b1-1ca4-4afa-b291-2fee0fc6ca3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PlayLevel\Actor\Flag">
+      <UniqueIdentifier>{072f3ec1-375a-4864-82b9-c5ff383c845b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsHelper.cpp">

@@ -32,14 +32,14 @@ public:
 	}
 
 	
+	UCollision* BlockCollision = nullptr;
+	UCollision* BlockUpCollision = nullptr;
 
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	UCollision* BlockCollision = nullptr;
-	UCollision* BlockUpCollision = nullptr;
 
 
 	// 마리오가 어떤 상태일때도 블록에서 공통적인 요소 : 박스가 위로 올라가서 다시 돌아온다.

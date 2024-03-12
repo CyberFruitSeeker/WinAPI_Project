@@ -35,12 +35,14 @@ void UCollision::BeginPlay()
 }
 
 // true 충돌한 객체가 있다.
-bool UCollision::CollisionCheck(int _Order, std::vector<UCollision*>& _Result)
+bool UCollision::CollisionCheck(int _Order, std::vector<UCollision*>& _Result, FVector _NextPos)
 {
 	if (false == IsActive())
 	{
 		return false;
 	}
+
+	_Result.clear();
 
 	// 나랑 특정개수의 콜리전이랑 충돌해야 한다.
 	AActor* Owner = GetOwner();
@@ -49,11 +51,10 @@ bool UCollision::CollisionCheck(int _Order, std::vector<UCollision*>& _Result)
 	std::list<UCollision*>& Collisions = Level->Collisions[_Order];
 
 	FTransform ThisTransform = GetActorBaseTransform();
-
+	ThisTransform.AddPosition(_NextPos);
 	for (UCollision* _OtherCollision : Collisions)
 	{
-		if (this == _OtherCollision)
-		{
+		if (this == _OtherCollision) {
 			continue;
 		}
 
@@ -82,7 +83,7 @@ void UCollision::DebugRender(FVector _CameraPos)
 	{
 	case ECollisionType::Point:
 	{
-		ThisTransform.SetScale({ 10, 10 });
+		ThisTransform.SetScale({10, 10});
 		GEngine->MainWindow.GetBackBufferImage()->DrawEllipse(ThisTransform);
 		break;
 	}
