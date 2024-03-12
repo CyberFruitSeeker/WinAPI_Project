@@ -236,15 +236,15 @@ void Mario::CalMoveVector(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X -= 35;
+		CheckPos.X -= 45;
 		break;
 	case EActorDir::Right:
-		CheckPos.X += 35;
+		CheckPos.X += 45;
 		break;
 	default:
 		break;
 	}
-	CheckPos.Y -= 35;
+	CheckPos.Y -= 45;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
