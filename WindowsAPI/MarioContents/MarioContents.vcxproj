@@ -177,6 +177,14 @@
     </ClInclude>
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsHelper.h" />
+    <ClInclude Include="EndingLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EndingLogo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Flag.h">
       <SubType>
       </SubType>
@@ -239,6 +247,14 @@
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="ContentsHelper.cpp" />
+    <ClCompile Include="EndingLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EndingLogo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Flag.cpp">
       <SubType>
       </SubType>

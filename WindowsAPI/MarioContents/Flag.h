@@ -21,8 +21,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	UImageRenderer* Renderer = nullptr;
-	UCollision* FlagCollision = nullptr;
-	UCollision* DownFlagCollision = nullptr;
+	UCollision* FlagUpCollision = nullptr;
+	UCollision* FlagDownCollision = nullptr;
 
 	void GoToLextLevel(float _DeltaTime);
 

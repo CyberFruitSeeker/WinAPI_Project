@@ -29,6 +29,8 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void MarioFlagCollision(float _DeltaTime);
+
 	void DirCheck();
 
 	std::string GetAnimationName(std::string _Name);

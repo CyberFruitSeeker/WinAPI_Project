@@ -15,17 +15,17 @@ void Flag::BeginPlay()
 {
 
 	SetName("Flag");
-	Renderer = CreateImageRenderer(MarioRenderOrder::Item);
+	Renderer = CreateImageRenderer(MarioRenderOrder::FlagEnum);
 	Renderer->SetImage("Flag.png");
 	Renderer->SetScale({ 64,688 });
 
-	FlagCollision = CreateCollision(MarioCollisionOrder::Item);
-	FlagCollision->SetTransform({ { 0,0 }, { 16,688 } });
-	FlagCollision->SetColType(ECollisionType::Rect);
+	FlagUpCollision = CreateCollision(MarioCollisionOrder::FlagUp);
+	FlagUpCollision->SetTransform({ { 0,0 }, { 16,688 } });
+	FlagUpCollision->SetColType(ECollisionType::Rect);
 
-	DownFlagCollision = CreateCollision(MarioCollisionOrder::Item);
-	DownFlagCollision->SetTransform({ { 0,312 }, { 64,64 } });
-	DownFlagCollision->SetColType(ECollisionType::Rect);
+	FlagDownCollision = CreateCollision(MarioCollisionOrder::FlagDown);
+	FlagDownCollision->SetTransform({ { 0,312 }, { 64,64 } });
+	FlagDownCollision->SetColType(ECollisionType::Rect);
 
 }
 

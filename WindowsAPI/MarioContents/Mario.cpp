@@ -93,10 +93,30 @@ void Mario::BeginPlay()
 // StateUpdate 안에 들어있는 FSM이 Tick에서 돌아간다.
 void Mario::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
+	
+	//AActor::Tick(_DeltaTime);
 	StateUpdate(_DeltaTime);
 	MoveCameraMarioPos(_DeltaTime);
+	MarioFlagCollision(_DeltaTime);
 }
+
+
+
+// 마리오가 Flag와 Collision 상호작용을 일어나게 해주는 함수
+void Mario::MarioFlagCollision(float _DeltaTime)
+{
+	std::vector<UCollision*> Result;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::FlagUp, Result))
+	{
+		int a = 0;
+	}
+
+
+}
+
+
+
+
 
 
 // ==================== 마리오 모드 체인지 =====================

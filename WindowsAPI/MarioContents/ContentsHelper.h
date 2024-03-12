@@ -12,8 +12,8 @@ enum MarioRenderOrder
 	Item,
 	Block,
 	BreakingBlock,
-	//Flag,
 	Text,
+	FlagEnum,
 };
 
 enum class MarioCollisionOrder
@@ -23,7 +23,8 @@ enum class MarioCollisionOrder
 	Player,
 	Item,
 	Block,
-	//Flag,
+	FlagUp,
+	FlagDown,
 };
 
 enum class EActorDir

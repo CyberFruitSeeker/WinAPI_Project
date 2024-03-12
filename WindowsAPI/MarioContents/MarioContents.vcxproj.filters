@@ -111,6 +111,12 @@
     <ClCompile Include="Flag.cpp">
       <Filter>Object\PlayLevel\Actor\Flag</Filter>
     </ClCompile>
+    <ClCompile Include="EndingLevel.cpp">
+      <Filter>Object\Title &amp; Ending Level\EndingLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingLogo.cpp">
+      <Filter>Object\Title &amp; Ending Level\EndingLevel\Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsHelper.h">
@@ -166,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="Flag.h">
       <Filter>Object\PlayLevel\Actor\Flag</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingLevel.h">
+      <Filter>Object\Title &amp; Ending Level\EndingLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingLogo.h">
+      <Filter>Object\Title &amp; Ending Level\EndingLevel\Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
