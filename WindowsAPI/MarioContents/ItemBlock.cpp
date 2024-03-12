@@ -5,6 +5,7 @@
 #include "ContentsHelper.h"
 #include "Mario.h"
 #include "BlockCommonClass.h"
+#include "Mushroom.h"
 
 ItemBlock::ItemBlock()
 {
@@ -64,13 +65,22 @@ void ItemBlock::BlockMove(float _DeltaTime)
 
 		if (Mode == MarioMode::BigMario)
 		{
-			//Destroy(0.0001f);
+			Time = _DeltaTime;
+			
+			Mushroom* NewActor = GetWorld()->SpawnActor<Mushroom>(MarioRenderOrder::Item);
+			NewActor->SetActorLocation(GetActorLocation());
+
 			IsColEnd = true;
 			return;
 		}
 
 		if (Mode == MarioMode::SmallMario)
 		{
+			Time = _DeltaTime;
+
+			Mushroom* NewActor = GetWorld()->SpawnActor<Mushroom>(MarioRenderOrder::Item);
+			NewActor->SetActorLocation(GetActorLocation());
+
 			IsColEnd = true;
 			return;
 		}
@@ -90,7 +100,8 @@ void ItemBlock::BlockMove(float _DeltaTime)
 	}
 }
 
-// 버섯이나 꽃이 블럭에서 나온다.
+// 우선, 버섯이 블럭에서 나온다.
+// 하지만 BlockMove 안에다가 만들어본다.
 void ItemBlock::ItemMoveUp(float _DeltaTime)
 {
 

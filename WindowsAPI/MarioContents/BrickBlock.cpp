@@ -83,7 +83,7 @@ void BrickBlock::BlockMove(float _DeltaTime)
 
 		if (Mode == MarioMode::BigMario)
 		{
-			Time = 0.00001f;
+			Time = _DeltaTime;
 			Destroy();
 			BrickBlockBreaking* NewActor = GetWorld()->SpawnActor<BrickBlockBreaking>(MarioRenderOrder::BreakingBlock);
 			NewActor->SetActorLocation(GetActorLocation());
