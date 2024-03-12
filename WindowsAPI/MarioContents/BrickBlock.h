@@ -25,12 +25,14 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	UImageRenderer* Renderer = nullptr;
-	UCollision* BlockCollision = nullptr;
+	//UCollision* BlockCollision = nullptr;
 
+	FVector UpCollisionVector = FVector::Zero;
 
 	//FVector BlockMoveVector = FVector::Up;
 	float BlockMoveSpeed = 300.0f;
 
+	float BlockVector = 1.5f;
 	
 
 

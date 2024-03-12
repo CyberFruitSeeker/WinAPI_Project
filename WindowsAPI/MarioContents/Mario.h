@@ -85,7 +85,7 @@ private:
 	float AlphaTime = 0.0f;
 	bool Dir = false;
 
-	float FreeMoveSpeed = 1500.0f;
+	float FreeMoveSpeed = 750.0f;
 
 	FVector MoveVector = FVector::Zero;
 	FVector MoveAccel = FVector::Right * 500.0f;
@@ -93,11 +93,11 @@ private:
 	void AddMoveVector(const FVector& _DeltaTime);
 
 	// 마리오에게 적용되는 중력과 중력 초기화
-	FVector GravityAccel = FVector::Down * 1000.0f;
+	FVector GravityAccel = FVector::Down * 1500.0f;
 	FVector GravityVector = FVector::Zero;
 
 	// 점프, 나아갈 모든 방향의 힘의 합
-	FVector JumpPower = FVector::Up * 770.0f;
+	FVector JumpPower = FVector::Up * 875.0f;
 	FVector JumpVector = FVector::Zero;
 	FVector LastMoveVector = FVector::Zero;
 

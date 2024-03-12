@@ -33,13 +33,12 @@ void BrickBlock::BeginPlay()
 		BlockCollision->SetColType(ECollisionType::Rect);
 	}
 
-	// block up collision
+	// BlockUp collision
 	{
 		
 		BlockUpCollision = CreateCollision(MarioCollisionOrder::Block);
 		BlockUpCollision->SetTransform({ { 0,-16 }, { 64,16 } });
 		BlockUpCollision->SetColType(ECollisionType::Rect);
-
 	}
 
 

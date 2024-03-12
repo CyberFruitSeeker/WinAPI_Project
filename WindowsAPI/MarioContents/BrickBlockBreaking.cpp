@@ -20,8 +20,8 @@ void BrickBlockBreaking::BeginPlay()
 	SetName("BreakingBlock");
 	Renderer = CreateImageRenderer(MarioRenderOrder::BreakingBlock);
 	Renderer->SetImage("BrickBlockBreaking.png");
-	Renderer->CreateAnimation("BreakBlock", "BrickBlockBreaking.png", 0, 14, 0.010f, false);
-	Renderer->SetScale({ 600,600 });
+	Renderer->CreateAnimation("BreakBlock", "BrickBlockBreaking.png", 0, 14, 0.009f, false);
+	Renderer->SetScale({ 625,625 });
 	Renderer->ChangeAnimation("BreakBlock");
 
 }
