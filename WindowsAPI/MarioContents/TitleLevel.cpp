@@ -1,6 +1,7 @@
 #include "TitleLevel.h"
 #include "TitleLogo.h"
 #include "EngineCore\EngineCore.h"
+#include <EnginePlatform/EngineInput.h>
 
 UTitleLevel::UTitleLevel()
 {
