@@ -97,19 +97,31 @@ void Mario::Tick(float _DeltaTime)
 	//AActor::Tick(_DeltaTime);
 	StateUpdate(_DeltaTime);
 	MoveCameraMarioPos(_DeltaTime);
-	MarioFlagCollision(_DeltaTime);
+	MarioFlagInteractive(_DeltaTime);
 }
 
+void Mario::MarioFlagInteractive(float _DeltaTime)
+{
+	MarioFlagCollision(_DeltaTime);
+	MarioFlagAnimation(_DeltaTime);
+}
 
-
-// 마리오가 Flag와 Collision 상호작용을 일어나게 해주는 함수
+// 마리오가 Flag와 Collision 상호작용을 발생시킨 다음, Flag Animation을 실행시켜주는 함수들
 void Mario::MarioFlagCollision(float _DeltaTime)
 {
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::FlagUp, Result))
 	{
-		int a = 0;
+		Mario* Player = dynamic_cast<Mario*>(Result[0]->GetOwner());
+		Player->MarioFlagAnimation(_DeltaTime);
+
 	}
+
+}
+
+void Mario::MarioFlagAnimation(float _DeltaTime)
+{
+
 
 
 }
@@ -457,10 +469,11 @@ void Mario::FreeMove(float _DeltaTime)
 
 // ====== 마리오의 중력, 가속도 물리 구현과 계산 =========
 
-void Mario::CalJumpVector(float _DeltaTime)
-{
-
-}
+// 점프시 중력 가속도는 점프함수에 이미 구현되어있는거나 마찬가지이다.
+//void Mario::CalJumpVector(float _DeltaTime)
+//{
+//
+//}
 
 void Mario::CalGravityVector(float _DeltaTime)
 {

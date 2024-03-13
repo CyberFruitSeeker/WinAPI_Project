@@ -28,7 +28,7 @@ protected:
 
 	FVector MoveVector = FVector::Right;
 
-	FVector GravityAccel = FVector::Down * 2.0f;
+	FVector GravityAccel = FVector::Down * 3.5f;
 	FVector GravityVector = FVector::Zero;
 	
 	EActorDir DirState = EActorDir::None;

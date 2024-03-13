@@ -34,9 +34,9 @@ void PlayLevel::BeginPlay()
 
 	{
 		Mario* NewActor = SpawnActor<Mario>(MarioRenderOrder::Player);
-		//NewActor->SetName("Mario");
-		//NewActor->SetActorLocation({ 12404.f,172.f });
-		NewActor->SetActorLocation({ 185.f,827.f });
+		NewActor->SetName("Mario");
+		NewActor->SetActorLocation({ 12404.f,172.f });
+		//NewActor->SetActorLocation({ 185.f,827.f });
 	}
 
 	// Ending Title로 이어지는 Flag의 소환 위치 : 12704.f, 485.f

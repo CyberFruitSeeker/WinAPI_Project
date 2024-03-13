@@ -29,37 +29,39 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	// 마리오가 Flag와 상호작용하는 함수들
+	void MarioFlagInteractive(float _DeltaTime);
 	void MarioFlagCollision(float _DeltaTime);
+	void MarioFlagAnimation(float _DeltaTime);
+
 
 	void DirCheck();
 
-	std::string GetAnimationName(std::string _Name);
 
 	void StateChange(MarioState _State);
 	void StateUpdate(float _DeltaTime);
-
-
 
 
 	void CameraFreeMove(float _DeltaTime);
 	void FreeMove(float _DeltaTime);
 	void Idle(float _DeltaTime);
 	void Jump(float _DeltaTime);
-	//void JumpDown();
+	//void JumpDown(float _DeltaTime);
 	void Run(float _DeltaTime);
-	// Fly도 필요한지는 추후 판별
 
 	// 상태 시작의 기능이 담긴 함수들이다.
 	void IdleStart();
 	void RunStart();
 	void JumpStart();
 
+	std::string GetAnimationName(std::string _Name);
+
 	MarioState State = MarioState::None;
 	EActorDir DirState = EActorDir::Right;
 	std::string CurAnimationName = "None";
 
 
-	// 점프를 한다음 떨어지고 있다는 것은 중력과 점프력이 동시에 작용하고 있는 것이기 때문에
+	// 점프를 한다음 떨어지고 있다는 것은 중력과 점프력이 동시에 작용하고있는 상태이다.
 	bool IsJumpDown()
 	{
 		FVector JPos = (GravityVector + JumpVector);
