@@ -1,4 +1,6 @@
 #include "EndingLevel.h"
+#include "EndingLogo.h"
+#include <EngineCore/EngineCore.h>
 
 EndingLevel::EndingLevel()
 {
@@ -6,4 +8,16 @@ EndingLevel::EndingLevel()
 
 EndingLevel::~EndingLevel()
 {
+}
+
+void EndingLevel::BeginPlay()
+{
+	EndingLogo* Ending = SpawnActor<EndingLogo>();
+
+
+}
+
+void EndingLevel::Tick(float _DeltaTime)
+{
+
 }

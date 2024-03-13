@@ -62,7 +62,7 @@ protected:
 	FVector MarioFlagDown = FVector::Down;
 
 	float MarioFlagDownSpeed = 300.0f;
-	float AutoMoveSpeed = 300.0f;
+	float AutoMoveSpeed = 1.0f;
 
 	std::string GetAnimationName(std::string _Name);
 
@@ -90,7 +90,7 @@ protected:
 
 private:
 	
-	float Time = 1.0f;
+	float Time = 1.8f;
 	
 	UCollision* BodyCollision = nullptr;
 	UCollision* DownCollision = nullptr;
@@ -122,7 +122,7 @@ private:
 	// 이동 관련 중력 연산
 	void CalLastMoveVector(float _DeltaTime);
 	void CalMoveVector(float _DeltaTime);
-	void CalJumpVector(float _DeltaTime);
+	//void CalJumpVector(float _DeltaTime);
 	void CalGravityVector(float _DeltaTime);
 
 	// 카메라에 따른 움직임

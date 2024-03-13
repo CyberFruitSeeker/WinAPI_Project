@@ -245,9 +245,9 @@ void Mario::MoveCameraMarioPos(float _DeltaTime)
 
 /// ============== 마리오의 이동에서 키입력과 관련된 기능들 ==============
 
-void Mario::AddMoveVector(const FVector& _DeltaTime)
+void Mario::AddMoveVector(const FVector& _Value)
 {
-	MoveVector += _DeltaTime * MoveAccel;
+	MoveVector += _Value * MoveAccel;
 }
 
 void Mario::CalMoveVector(float _DeltaTime)
@@ -437,20 +437,29 @@ void Mario::FlagStop(float _DeltaTime)
 		StateChange(MarioState::FlagAutoMove);
 	}
 
-
-
-
-
-
-
 	//DirCheck();
 }
 
 void Mario::FlagAutoMove(float _DeltaTime)
 {
-
-	AddActorLocation(float4::Right * 200.0f * _DeltaTime);
 	
+	JumpVector = FVector::Zero;
+	//AddMoveVector(FVector::Right * 0.76f * _DeltaTime);
+	AddActorLocation(float4::Right * 80.0f * _DeltaTime);
+	MoveUpdate(_DeltaTime);
+
+	// 측정된 x축 위치 : 13090
+	{
+		FVector MarioPos = GetActorLocation();
+		if (MarioPos.X > 13088)
+		{
+			FVector::Zero;
+			Destroy(_DeltaTime);
+			//GEngine->ChangeLevel("Ending");
+		}
+
+	}
+
 
 }
 

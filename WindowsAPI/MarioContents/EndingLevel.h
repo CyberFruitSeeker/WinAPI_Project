@@ -1,7 +1,8 @@
 #pragma once
+#include <EngineCore/Level.h>
 
 // Ό³Έν :
-class EndingLevel
+class EndingLevel : public ULevel
 {
 public:
 	// constrcuter destructer
@@ -15,6 +16,10 @@ public:
 	EndingLevel& operator=(EndingLevel&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+
 
 private:
 

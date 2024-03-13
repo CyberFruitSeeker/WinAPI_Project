@@ -10,7 +10,7 @@ ATitleLogo::~ATitleLogo()
 
 void ATitleLogo::BeginPlay()
 {
-	AActor::BeginPlay();
+	//AActor::BeginPlay();
 
 	UImageRenderer* Renderer = CreateImageRenderer();
 

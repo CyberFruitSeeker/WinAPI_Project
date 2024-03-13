@@ -1,7 +1,8 @@
 #pragma once
+#include <EngineCore/Actor.h>
 
 // Ό³Έν :
-class EndingLogo
+class EndingLogo : public AActor
 {
 public:
 	// constrcuter destructer
@@ -15,6 +16,9 @@ public:
 	EndingLogo& operator=(EndingLogo&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
 
 private:
 

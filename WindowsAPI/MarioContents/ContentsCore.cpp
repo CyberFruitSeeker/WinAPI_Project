@@ -1,6 +1,7 @@
 #include "ContentsCore.h"
 #include "TitleLevel.h"
 #include "PlayLevel.h"
+#include "EndingLevel.h"
 #include <EnginePlatform/EngineInput.h>
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
@@ -67,6 +68,7 @@ void UContentsCore::BeginPlay()
 
 	CreateLevel<UTitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");
+	CreateLevel<EndingLevel>("Ending");
 	ChangeLevel("Title");
 	
 }
