@@ -12,6 +12,7 @@
 #include "MarioMap.h"
 #include "PlayLevel.h"
 #include <EngineCore/Level.h>
+#include "Flag.h"
 
 Mario* Mario::ItsMeMario = nullptr;
 
@@ -48,6 +49,12 @@ void Mario::BeginPlay()
 		Renderer->CreateAnimation("Jump_Right_Small", "Mario_Right.png", 5, 5, 0.1f, true);
 		Renderer->CreateAnimation("Jump_Left_Small", "Mario_Left.png", 5, 5, 0.1f, true);
 
+		Renderer->CreateAnimation("FlagStop_Right_Small", "Mario_Right.png", 8, 8, 0.1f, true);
+		Renderer->CreateAnimation("FlagStop_Left_Small", "Mario_Left.png", 8, 8, 0.1f, true);
+
+		Renderer->CreateAnimation("FlagAutoMove_Right_Small", "Mario_Right.png", { 1, 2, 3 }, 0.1f, true);
+		Renderer->CreateAnimation("FlagAutoMove_Left_Small", "Mario_Left.png", { 1, 2, 3 }, 0.1f, true);
+
 		//Renderer = CreateImageRenderer(MarioMode::BigMario);
 		SetName("BigMario");
 		Renderer->CreateAnimation("Idle_Right_Big", "Mario_Right.png", 9, 9, 0.3f, true);
@@ -59,6 +66,11 @@ void Mario::BeginPlay()
 		Renderer->CreateAnimation("Jump_Right_Big", "Mario_Right.png", 14, 14, 0.1f, true);
 		Renderer->CreateAnimation("Jump_Left_Big", "Mario_Left.png", 14, 14, 0.1f, true);
 
+		Renderer->CreateAnimation("FlagStop_Right_Big", "Mario_Right.png", 17, 17, 0.1f, true);
+		Renderer->CreateAnimation("FlagStop_Left_Big", "Mario_Left.png", 17, 17, 0.1f, true);
+
+		Renderer->CreateAnimation("FlagAutoMove_Right_Big", "Mario_Right.png", { 10, 11, 12 }, 0.1f, true);
+		Renderer->CreateAnimation("FlagAutoMove_Left_Big", "Mario_Left.png", { 10, 11, 12 }, 0.1f, true);
 
 
 		// Renderer->ChangeAnimation("Idle_Right");
@@ -93,41 +105,37 @@ void Mario::BeginPlay()
 // StateUpdate 안에 들어있는 FSM이 Tick에서 돌아간다.
 void Mario::Tick(float _DeltaTime)
 {
-	
+
 	//AActor::Tick(_DeltaTime);
 	StateUpdate(_DeltaTime);
 	MoveCameraMarioPos(_DeltaTime);
-	MarioFlagInteractive(_DeltaTime);
 }
 
 void Mario::MarioFlagInteractive(float _DeltaTime)
 {
 	MarioFlagCollision(_DeltaTime);
-	MarioFlagAnimation(_DeltaTime);
+	//MarioFlagAnimation(_DeltaTime);
 }
 
-// 마리오가 Flag와 Collision 상호작용을 발생시킨 다음, Flag Animation을 실행시켜주는 함수들
+// 마리오가 Flag와 Collision 상호작용이 발생했다는 것을 알려준다.
 void Mario::MarioFlagCollision(float _DeltaTime)
 {
 	std::vector<UCollision*> Result;
 	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::FlagUp, Result))
 	{
-		Mario* Player = dynamic_cast<Mario*>(Result[0]->GetOwner());
-		Player->MarioFlagAnimation(_DeltaTime);
-
+		StateChange(MarioState::FlagStop);
 	}
 
 }
 
-void Mario::MarioFlagAnimation(float _DeltaTime)
-{
-
-
-
-}
-
-
-
+// 마리오가 깃대에서 떨어진다.
+// 하지만... 이 함수가 아닌, 이미 구현해놓은 FSM 안에다가 해본다.
+//void Mario::MarioFlagAnimation(float _DeltaTime)
+//{
+//	Renderer->ChangeAnimation(GetAnimationName("MarioFlagDown"));
+//
+//
+//}
 
 
 
@@ -182,7 +190,7 @@ void Mario::BigMario()
 {
 	//Renderer->CreateAnimation("Idle_Right_Big", "Mario_Right.png", { 0, 19, 9 }, 0.3f, true);
 	//Renderer->CreateAnimation("Idle_Left_Big", "Mario_Left.png", { 0, 19, 9 }, 0.3f, true);
-	
+
 	Renderer->ChangeAnimation(GetAnimationName("Idle"));
 
 }
@@ -223,7 +231,7 @@ void Mario::MoveCameraMarioPos(float _DeltaTime)
 		CameraPos.X = 0.0f;
 		GetWorld()->SetCameraPos(CameraPos);
 	}
-	
+
 	//if (CameraPos.X > 13504.0f)
 	//{
 	//	CameraPos.X = 0.0f;
@@ -285,6 +293,7 @@ void Mario::CalMoveVector(float _DeltaTime)
 
 // ====== 키 입력으로 인한 마리오의 움직임과 애니메이션 =======
 
+// 마리오가 기본 상태에서 각동 동작들을 하기 위한 조건문들이 담긴 함수
 void Mario::Idle(float _DeltaTime)
 {
 	if (true == Renderer->IsCurAnimationEnd())
@@ -292,8 +301,7 @@ void Mario::Idle(float _DeltaTime)
 		int a = 0;
 	}
 
-	// 왼쪽도, 오른쪽도 안가고 있고,
-	// 여기서는 가만히 있을때만 어떻게 할지 신경쓰면 된다.
+	// 마리오가 하고자 하는 동작에 대한 키입력
 	if (true == UEngineInput::IsDown('1'))
 	{
 		StateChange(MarioState::FreeMove);
@@ -330,6 +338,10 @@ void Mario::Jump(float _DeltaTime)
 {
 	// EnumType _Order, std::vector<UCollision*>& _Result;
 
+	// 마리오 깃발 상호작용
+	MarioFlagInteractive(_DeltaTime);
+
+	// 마리오 점프킬
 	// 상승할때는 점프킬이 발동하면 안되니깐, 이를 위한 조건문을 만든다.
 	if (IsJumpDown())
 	{
@@ -345,6 +357,19 @@ void Mario::Jump(float _DeltaTime)
 			}
 		}
 	}
+
+	// 마리오가 점프했을때 Block과 Collision 상호작용을 발생시켜주는 조건문
+	std::vector<UCollision*> Collsion;
+	if (BodyCollision->CollisionCheck(MarioCollisionOrder::Block, Collsion))
+	{
+		AActor* Owner = Collsion[0]->GetOwner();
+
+		BlockCommonClass* Block = dynamic_cast<BlockCommonClass*>(Owner);
+		Block->BlockColOn(Mode);
+
+		JumpVector = FVector::Zero;
+	}
+
 
 
 	if (UEngineInput::IsPress(VK_LEFT))
@@ -368,17 +393,7 @@ void Mario::Jump(float _DeltaTime)
 	}
 
 
-	// 마리오가 점프했을때 Block과 Collision 상호작용을 발생시켜주는 조건문
-	std::vector<UCollision*> Collsion;
-	if (BodyCollision->CollisionCheck(MarioCollisionOrder::Block,Collsion))
-	{
-		AActor* Owner = Collsion[0]->GetOwner();
 
-		BlockCommonClass* Block = dynamic_cast<BlockCommonClass*>(Owner);
-		Block->BlockColOn(Mode);
-
-		JumpVector = FVector::Zero;
-	}
 }
 
 
@@ -412,6 +427,33 @@ void Mario::Run(float _DeltaTime)
 	MoveUpdate(_DeltaTime);
 }
 
+void Mario::FlagStop(float _DeltaTime)
+{
+	AddActorLocation(float4::Down * _DeltaTime * 200.0f);
+
+	std::vector<UCollision*> Result;
+	if (true == BodyCollision->CollisionCheck(MarioCollisionOrder::FlagDown, Result))
+	{
+		StateChange(MarioState::FlagAutoMove);
+	}
+
+
+
+
+
+
+
+	//DirCheck();
+}
+
+void Mario::FlagAutoMove(float _DeltaTime)
+{
+
+	AddActorLocation(float4::Right * 200.0f * _DeltaTime);
+	
+
+}
+
 void Mario::IdleStart()
 {
 	JumpVector = FVector::Zero;
@@ -430,6 +472,18 @@ void Mario::JumpStart()
 	JumpVector = JumpPower;
 	Renderer->ChangeAnimation(GetAnimationName("Jump"));
 	DirCheck();
+}
+
+void Mario::FlagStopStart()
+{
+	Renderer->ChangeAnimation(GetAnimationName("FlagStop"));
+	//DirCheck();
+}
+
+void Mario::FlagAutoMoveStart()
+{
+	Renderer->ChangeAnimation(GetAnimationName("FlagAutoMove"));
+
 }
 
 
@@ -584,6 +638,12 @@ void Mario::StateChange(MarioState _State)
 		case MarioState::Jump:
 			JumpStart();
 			break;
+		case MarioState::FlagStop:
+			FlagStopStart();
+			break;
+		case MarioState::FlagAutoMove:
+			FlagAutoMoveStart();
+			break;
 		default:
 			break;
 		}
@@ -612,6 +672,12 @@ void Mario::StateUpdate(float _DeltaTime)
 		break;
 	case MarioState::Jump:
 		Jump(_DeltaTime);
+		break;
+	case MarioState::FlagStop:
+		FlagStop(_DeltaTime);
+		break;
+	case MarioState::FlagAutoMove:
+		FlagAutoMove(_DeltaTime);
 		break;
 	default:
 		break;

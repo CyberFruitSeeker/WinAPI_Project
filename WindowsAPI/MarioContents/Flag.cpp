@@ -23,6 +23,8 @@ void Flag::BeginPlay()
 	FlagUpCollision->SetTransform({ { 0,0 }, { 16,688 } });
 	FlagUpCollision->SetColType(ECollisionType::Rect);
 
+	FlagUpCollision->GetOwner();
+
 	FlagDownCollision = CreateCollision(MarioCollisionOrder::FlagDown);
 	FlagDownCollision->SetTransform({ { 0,312 }, { 64,64 } });
 	FlagDownCollision->SetColType(ECollisionType::Rect);

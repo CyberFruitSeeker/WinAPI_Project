@@ -48,11 +48,21 @@ protected:
 	void Jump(float _DeltaTime);
 	//void JumpDown(float _DeltaTime);
 	void Run(float _DeltaTime);
+	void FlagStop(float _DeltaTime);
+	void FlagAutoMove(float _DeltaTime);
 
 	// 상태 시작의 기능이 담긴 함수들이다.
 	void IdleStart();
 	void RunStart();
 	void JumpStart();
+	void FlagStopStart();
+	void FlagAutoMoveStart();
+
+	FVector MarioFlagStopVector = FVector::Zero;
+	FVector MarioFlagDown = FVector::Down;
+
+	float MarioFlagDownSpeed = 300.0f;
+	float AutoMoveSpeed = 300.0f;
 
 	std::string GetAnimationName(std::string _Name);
 
@@ -79,6 +89,9 @@ protected:
 
 
 private:
+	
+	float Time = 1.0f;
+	
 	UCollision* BodyCollision = nullptr;
 	UCollision* DownCollision = nullptr;
 	UImageRenderer* Renderer = nullptr;

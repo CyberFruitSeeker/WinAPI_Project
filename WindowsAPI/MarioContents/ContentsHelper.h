@@ -43,6 +43,8 @@ enum class MarioState
 	CameraFreeMove,
 	FreeMove,
 	Run,
+	FlagStop,
+	FlagAutoMove,
 };
 
 // 블럭과 블럭에서 나오는 아이템
