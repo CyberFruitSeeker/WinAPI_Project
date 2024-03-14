@@ -193,10 +193,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GoombaDark.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="ItemBlock.h">
       <SubType>
       </SubType>
@@ -264,10 +260,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Goomba.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GoombaDark.cpp">
       <SubType>
       </SubType>
     </ClCompile>

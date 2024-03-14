@@ -14,6 +14,7 @@ enum MarioRenderOrder
 	BreakingBlock,
 	Text,
 	FlagEnum,
+	UI,
 };
 
 enum class MarioCollisionOrder

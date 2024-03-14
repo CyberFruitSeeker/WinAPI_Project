@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 #include "ContentsHelper.h"
 #include <EngineCore/Collision.h>
+#include <EnginePlatform/EngineSound.h>
 
 // 설명 :
 class Mario : public AActor
@@ -87,6 +88,21 @@ protected:
 	void FireMario();
 
 
+	// 사운드 관련 기능들은 우선 여기에
+	UEngineSoundPlayer BGMPlay;
+
+	float BGMVolume = 1.0f;
+	float JumpAttackSound = 1.0f;
+	float FlagDownSound = 1.0f;
+	float StageClearMusic = 1.0f;
+	float TroopaShellMoveSound = 1.0f;
+	float BlockBreakingSound = 1.0f;
+
+	float TimeFlow = 0.1f;
+
+
+
+
 
 private:
 	
@@ -137,6 +153,7 @@ private:
 	
 	//MarioMap* Map;
 
+	// 마리오가 파이프나 벽에 빠지는 것을 방지하기 위한 좌우아래에 있는 별도의 컬리전
 
 
 

@@ -23,6 +23,7 @@ protected:
 	void LevelEnd(ULevel* _Level) override;
 
 private:
-	MarioMap* Map;
+	//MarioMap* Map;
+	//MarioUI* ActorUI;
 };
 

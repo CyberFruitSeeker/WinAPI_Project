@@ -58,6 +58,7 @@ void MarioMap::BeginPlay()
 	AActor::BeginPlay();
 
 	Renderer = CreateImageRenderer(MarioRenderOrder::Map);
+	Renderer->SetImage("MarioWorld01.png");
 	ColRenderer = CreateImageRenderer(MarioRenderOrder::Map);
 	ColRenderer->SetActive(false);
 }

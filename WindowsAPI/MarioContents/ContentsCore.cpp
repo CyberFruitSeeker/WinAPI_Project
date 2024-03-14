@@ -64,6 +64,7 @@ void UContentsCore::BeginPlay()
 
 	UEngineResourcesManager::GetInst().CuttingImage("Flag.png", 1, 1);
 
+	UEngineResourcesManager::GetInst().CuttingImage("UIBar.png", 1, 1);
 
 
 	CreateLevel<UTitleLevel>("Title");
