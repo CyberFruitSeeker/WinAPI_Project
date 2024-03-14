@@ -209,6 +209,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MarioUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Monster.h">
       <SubType>
       </SubType>
@@ -276,6 +280,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MarioMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MarioUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -8,11 +8,11 @@
 //UEngineResourcesManager UEngineResourcesManager::Inst;
 //UEngineResourcesManager* UEngineResourcesManager::pInst = nullptr;
 
-UEngineResourcesManager::UEngineResourcesManager() 
+UEngineResourcesManager::UEngineResourcesManager()
 {
 }
 
-UEngineResourcesManager::~UEngineResourcesManager() 
+UEngineResourcesManager::~UEngineResourcesManager()
 {
 	for (std::pair<const std::string, UWindowImage*>& Pair : Images)
 	{
@@ -73,6 +73,12 @@ void UEngineResourcesManager::UnloadImg(std::string_view _Name)
 	UWindowImage* Image = Images[UpperName];
 	Images.erase(UpperName);
 	delete Image;
+}
+
+bool UEngineResourcesManager::IsImage(std::string_view _Name)
+{
+	std::string UpperName = UEngineString::ToUpper(_Name);
+	return Images.contains(UpperName);
 }
 
 UWindowImage* UEngineResourcesManager::FindImg(std::string_view _Name)

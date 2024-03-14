@@ -128,16 +128,6 @@ void Mario::MarioFlagCollision(float _DeltaTime)
 
 }
 
-// 마리오가 깃대에서 떨어진다.
-// 하지만... 이 함수가 아닌, 이미 구현해놓은 FSM 안에다가 해본다.
-//void Mario::MarioFlagAnimation(float _DeltaTime)
-//{
-//	Renderer->ChangeAnimation(GetAnimationName("MarioFlagDown"));
-//
-//
-//}
-
-
 
 // ==================== 마리오 모드 체인지 =====================
 
@@ -232,13 +222,11 @@ void Mario::MoveCameraMarioPos(float _DeltaTime)
 		GetWorld()->SetCameraPos(CameraPos);
 	}
 
-	//if (CameraPos.X > 13504.0f)
-	//{
-	//	CameraPos.X = 0.0f;
-	//	GetWorld()->SetCameraPos(CameraPos);
-	//}
-
-
+	if (CameraPos.X > 12445.0f)
+	{
+		CameraPos.X = 12445.0f;
+		GetWorld()->SetCameraPos(CameraPos);
+	}
 
 }
 
@@ -338,7 +326,7 @@ void Mario::Jump(float _DeltaTime)
 {
 	// EnumType _Order, std::vector<UCollision*>& _Result;
 
-	// 마리오 깃발 상호작용
+	// 마리오가 점프할때만 깃발과 상호작용 하기 위한 것
 	MarioFlagInteractive(_DeltaTime);
 
 	// 마리오 점프킬
@@ -442,10 +430,10 @@ void Mario::FlagStop(float _DeltaTime)
 
 void Mario::FlagAutoMove(float _DeltaTime)
 {
-	
+
 	JumpVector = FVector::Zero;
 	//AddMoveVector(FVector::Right * 0.76f * _DeltaTime);
-	AddActorLocation(float4::Right * 80.0f * _DeltaTime);
+	AddActorLocation(float4::Right * 90.0f * _DeltaTime);
 	MoveUpdate(_DeltaTime);
 
 	// 측정된 x축 위치 : 13090
@@ -453,14 +441,23 @@ void Mario::FlagAutoMove(float _DeltaTime)
 		FVector MarioPos = GetActorLocation();
 		if (MarioPos.X > 13088)
 		{
-			FVector::Zero;
-			Destroy(_DeltaTime);
-			//GEngine->ChangeLevel("Ending");
+			MoveVector = FVector::Zero;
+			//Destroy(_DeltaTime);
+			Renderer->ActiveOff();
+			ChangeLevelTime -= _DeltaTime;
 		}
-
+		
+		// 마리오가 사라진 뒤에 엔딩 레벨로 간다.(2초 뒤) <= 조건
+		// 시간 => float Time 같은 것이 필요하다.
+		// 그것이 바로 ChangeLevelTime 이다.
+		if (0.0f >= ChangeLevelTime)
+		{
+			GEngine->ChangeLevel("Ending");
+		}
+		// 이 원리를 이해하겠는가?
 	}
 
-
+	//DirCheck();
 }
 
 void Mario::IdleStart()
@@ -492,7 +489,7 @@ void Mario::FlagStopStart()
 void Mario::FlagAutoMoveStart()
 {
 	Renderer->ChangeAnimation(GetAnimationName("FlagAutoMove"));
-
+	//DirCheck();
 }
 
 

@@ -40,6 +40,13 @@ void PlayLevel::BeginPlay()
 		//NewActor->SetActorLocation({ 13090.f,827.f });
 	}
 
+	// 머쉬룸
+	{
+		Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);
+		NewActor->SetName("Mushroom");
+		NewActor->SetActorLocation({ 12350,560 });
+	}
+
 	// Ending Title로 이어지는 Flag의 소환 위치 : 12704.f, 485.f
 	{
 		Flag* NewActor = SpawnActor<Flag>(MarioRenderOrder::FlagEnum);
@@ -162,16 +169,6 @@ void PlayLevel::BeginPlay()
 	}
 
 	// ==================== 블럭 ====================
-
-
-
-	//// 머쉬룸
-	//{
-	//	Mushroom* NewActor = SpawnActor<Mushroom>(MarioRenderOrder::Item);
-	//	NewActor->SetName("Mushroom");
-	//	NewActor->SetActorLocation({ 600,350 });
-	//}
-
 
 
 
@@ -315,16 +312,16 @@ void PlayLevel::Tick(float _DeltaTime)
 
 	//FVector ImageScale = Map->GetImageScale();
 
-	// X축의 움직임을 기준으로 맵의 바깥으로 못나가게 할것인가
-	//if (CameraPos.X >= ImageScale.X - GEngine->MainWindow.GetWindowScale().X)
-	//{
-	//	CameraPos.X = ImageScale.X - GEngine->MainWindow.GetWindowScale().X;
-	//}
+	//X축의 움직임을 기준으로 맵의 바깥으로 못나가게 할것인가
+	/*if (CameraPos.X >= ImageScale.X - GEngine->MainWindow.GetWindowScale().X)
+	{
+		CameraPos.X = ImageScale.X - GEngine->MainWindow.GetWindowScale().X;
+	}
 
-	//if (true == UEngineInput::IsDown(VK_ESCAPE))
-	//{
-	//	GEngine->MainWindow.Off();
-	//}
+	if (true == UEngineInput::IsDown(VK_ESCAPE))
+	{
+		GEngine->MainWindow.Off();
+	}*/
 
 
 	//SetCameraPos(CameraPos);

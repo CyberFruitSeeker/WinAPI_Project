@@ -54,7 +54,7 @@ public:
 	{
 		IsDestroyUpdate = true;
 		DestroyTime = _DestroyTime;
-		if (0.0f>= _DestroyTime)
+		if (0.0f >= _DestroyTime)
 		{
 			this->IsDestroyValue = true;
 		}
@@ -106,6 +106,7 @@ public:
 
 	virtual void BeginPlay();
 	virtual void Tick(float _DeltaTime);
+	virtual void End();
 
 	void DebugCheckOn()
 	{
