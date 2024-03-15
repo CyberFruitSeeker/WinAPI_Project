@@ -98,8 +98,6 @@ protected:
 	float TroopaShellMoveSound = 1.0f;
 	float BlockBreakingSound = 1.0f;
 
-	float TimeFlow = 0.1f;
-
 
 
 

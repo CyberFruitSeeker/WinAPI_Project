@@ -1,6 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
-#include <EnginePlatform/EngineSound.h>
+//#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class MarioUI : public AActor
@@ -16,25 +16,33 @@ public:
 	MarioUI& operator=(const MarioUI& _Other) = delete;
 	MarioUI& operator=(MarioUI&& _Other) noexcept = delete;
 
-	void SetMarioWorldUI(std::string_view _UIImageName);
+	void SetUIBar(std::string_view _UIImageName);
+	void SetMarioScroeUI(std::string_view _UIImageName);
 	void SetMarioTimeUI(std::string_view _UIImageName);
-	void SetMarioCoinUI(std::string_view _UIImageName);
+	void SetCoinScoreUI(std::string_view _UIImageName);
+	void SetCoinUI(std::string_view _UIImageName);
+	void CoinTwinkleAnimation();
+	void SetWolrdStageUI(std::string_view _UIImageName);
 
 
 
 protected:
+
+
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 	UImageRenderer* Renderer = nullptr;
-	UImageRenderer* ColRenderer = nullptr;
+	//UImageRenderer* ColRenderer = nullptr;
+
 	FVector UIScale;
-
-
+	FVector UINumber;
+	FVector UITime;
 
 
 
 private:
+	float TimeFlow = 1.0f;
 
 
 

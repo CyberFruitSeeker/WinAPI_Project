@@ -65,6 +65,21 @@ void UContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Flag.png", 1, 1);
 
 	UEngineResourcesManager::GetInst().CuttingImage("UIBar.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("0.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("1.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("2.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("3.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("4.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("5.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("6.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("7.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("8.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("9.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("100.png", 1, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("Coin_UI.png", 6, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("Number_UI.png", 10, 1);
+
+
 
 
 	CreateLevel<UTitleLevel>("Title");
