@@ -74,9 +74,17 @@ void MarioUI::BeginPlay()
 
 	// Wolrd Stage UI
 	{
-		//Renderer = CreateImageRenderer(MarioRenderOrder::UI);
+		Renderer = CreateImageRenderer(MarioRenderOrder::UI);
+		Renderer->SetImage("1.png");
+		Renderer->SetTransform({ {635,120}, {30, 30} });
+		Renderer->CameraEffectOff();
+	}
 
-
+	{
+		Renderer = CreateImageRenderer(MarioRenderOrder::UI);
+		Renderer->SetImage("1.png");
+		Renderer->SetTransform({ {715,120}, {30, 30} });
+		Renderer->CameraEffectOff();
 	}
 
 	// Coin UI(Twinkle Animation)
@@ -84,7 +92,7 @@ void MarioUI::BeginPlay()
 		Renderer = CreateImageRenderer(MarioRenderOrder::UI);
 		Renderer->SetImage("Coin_UI.png");
 		Renderer->SetTransform({ {375,120}, {140, 140} });
-		Renderer->CreateAnimation("Twninkle", "Coin_Ui.png", { 0,1,2,3,4,5 }, 3.0f, true);
+		Renderer->CreateAnimation("Twninkle", "Coin_Ui.png", { 3,4 }, 3.0f, true);
 		Renderer->CameraEffectOff();
 	}
 
@@ -97,16 +105,35 @@ void MarioUI::BeginPlay()
 	}
 
 	// World Time UI
+	// 백의 자리 수
 	{
-		//Renderer = CreateImageRenderer(MarioRenderOrder::UI);
+		Renderer = CreateImageRenderer(MarioRenderOrder::UI);
+		Renderer->SetImage("4.png");
+		Renderer->SetTransform({ {860,120}, {30, 30} });
+		Renderer->CameraEffectOff();
 	}
 
-	//Renderer->CameraEffectOff();
+	// 십의 자리 수
+	{
+		Renderer = CreateImageRenderer(MarioRenderOrder::UI);
+		Renderer->SetImage("0.png");
+		Renderer->SetTransform({ {893,120}, {30, 30} });
+		Renderer->CameraEffectOff();
+	}
+
+	// 일의 자리 수
+	{
+		Renderer = CreateImageRenderer(MarioRenderOrder::UI);
+		Renderer->SetImage("0.png");
+		Renderer->SetTransform({ {926,120}, {30, 30} });
+		Renderer->CameraEffectOff();
+	}
 
 }
 
 void MarioUI::Tick(float _DeltaTime)
 {
+	
 
 }
 

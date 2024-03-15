@@ -26,22 +26,22 @@ void PlayLevel::BeginPlay()
 
 
 	// UI
-
 	MarioUI* UI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
 	UI = SpawnActor<MarioUI>();
-	UI->SetUIBar("UIBar.png");
-	UI->SetMarioScroeUI("0.png");
-	UI->SetMarioScroeUI("1.png");
-	UI->SetMarioScroeUI("2.png");
-	UI->SetMarioScroeUI("3.png");
-	UI->SetMarioScroeUI("4.png");
-	UI->SetMarioScroeUI("5.png");
-	UI->SetMarioScroeUI("6.png");
-	UI->SetMarioScroeUI("7.png");
-	UI->SetMarioScroeUI("8.png");
-	UI->SetMarioScroeUI("9.png");
-	UI->SetCoinScoreUI("0.png");
+	//UI->SetUIBar("UIBar.png");
+	//UI->SetMarioScroeUI("0.png");
+	//UI->SetMarioScroeUI("1.png");
+	//UI->SetMarioScroeUI("2.png");
+	//UI->SetMarioScroeUI("3.png");
+	//UI->SetMarioScroeUI("4.png");
+	//UI->SetMarioScroeUI("5.png");
+	//UI->SetMarioScroeUI("6.png");
+	//UI->SetMarioScroeUI("7.png");
+	//UI->SetMarioScroeUI("8.png");
+	//UI->SetMarioScroeUI("9.png");
+	//UI->SetCoinScoreUI("0.png");
 	//UI->SetCoinUI("Coin_UI.png");
+	//UI->SetMarioTimeUI("1.png");
 
 
 	
