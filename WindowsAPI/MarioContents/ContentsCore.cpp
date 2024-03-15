@@ -6,6 +6,7 @@
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include <EngineCore\EngineResourcesManager.h>
+#include <EnginePlatform/EngineSound.h>
 
 UContentsCore::UContentsCore()
 {
@@ -87,6 +88,15 @@ void UContentsCore::BeginPlay()
 		UIDir.Move("PlayLevel/UI/Number");
 
 		UEngineResourcesManager::GetInst().LoadFolder(UIDir.GetFullPath(), "Numbers");
+	}
+
+	// 사운드 로드
+	{
+		std::list<UEngineFile>NewList = NewDir.AllFile({ ".wav",".mp3" }, true);
+		for (UEngineFile& File : NewList)
+		{
+			UEngineSound::Load(File.GetFullPath());
+		}
 	}
 
 

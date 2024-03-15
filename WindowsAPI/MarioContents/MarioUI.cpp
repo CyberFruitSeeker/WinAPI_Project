@@ -141,7 +141,7 @@ void MarioUI::BeginPlay()
 
 void MarioUI::Tick(float _DeltaTime)
 {
-	// Time을 흐르게 하기 위한 것
+	// Time을 흐르게 하기 위한 기능들
 	TimeFlow -= _DeltaTime * 0.5f;
 	int TimeFlowInt = TimeFlow;
 

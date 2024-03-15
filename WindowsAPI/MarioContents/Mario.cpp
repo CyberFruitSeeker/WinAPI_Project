@@ -78,20 +78,38 @@ void Mario::BeginPlay()
 
 	// Small & Big Mario 일때 Collision 변화는 이곳 BeginPlay가 아니라
 	// 아래에 있는 FSM에서 관리하게 한다.
-	
+
 
 	// 굼바와 트루파를 Jump Kill 하기 위한 별도의 DownCollision
-	// 마리오 모드가 달라져도 x축 범위는 변함이 없으니깐 공용으로 사용함
+	// 마리오 모드가 달라져도 x축 범위는 변함이 없다는 것에 유의
 	{
 		DownCollision = CreateCollision(MarioCollisionOrder::Player);
 		DownCollision->SetTransform({ {0,0},{64,15} });
 		DownCollision->SetColType(ECollisionType::Rect);
 	}
 
+	// 마리오가 파이프나 계단에서 끼이는 것을 방지하기 위한 별도의 Collision
+	// 마리오한테 잘 작동한다면, 파이프에 밥먹듯이 끼는 굼바한테도 적용해본다.
+	{
+		//LeftMagentaShield->SetTransform({ {-30,-20},{15,64} });
+		//LeftMagentaShield->SetColType(ECollisionType::Rect);
+
+		//RightMagentaShield->SetTransform({ {30,-20},{15,64} });
+		//RightMagentaShield->SetColType(ECollisionType::Rect);
+	}
+
+
+	LeftMagentaShield = CreateCollision(MarioCollisionOrder::Player);
+	LeftMagentaShield->SetColType(ECollisionType::Rect);
+	RightMagentaShield = CreateCollision(MarioCollisionOrder::Player);
+	RightMagentaShield->SetColType(ECollisionType::Rect);
+	BottomMagentaShield = CreateCollision(MarioCollisionOrder::Player);
+	BottomMagentaShield->SetColType(ECollisionType::Rect);
 
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 	BodyCollision->SetColType(ECollisionType::Rect);
+
 
 
 	MarioModeChange(MarioMode::SmallMario);
@@ -107,6 +125,16 @@ void Mario::Tick(float _DeltaTime)
 	StateUpdate(_DeltaTime);
 	MoveCameraMarioPos(_DeltaTime);
 }
+
+// 마리오가 지형에 끼이는 것을 방지
+void Mario::MarioMagentaShiled(float _DeltaTime)
+{
+
+
+
+}
+
+
 
 void Mario::MarioFlagInteractive(float _DeltaTime)
 {
@@ -154,9 +182,15 @@ void Mario::MarioModeChange(MarioMode _MarioMode)
 	{
 	case MarioMode::SmallMario:
 		BodyCollision->SetTransform({ {0,-32},{50,64} });
+		LeftMagentaShield->SetTransform({ {-30,-20},{15,64} });
+		RightMagentaShield->SetTransform({ {30,-20},{15,64} });
+		BottomMagentaShield->SetTransform({ {0,4},{64,15} });
 		break;
 	case MarioMode::BigMario:
 		BodyCollision->SetTransform({ {0,-64},{50,128} });
+		LeftMagentaShield->SetTransform({ {-30,-60},{15,128} });
+		RightMagentaShield->SetTransform({ {30,-60},{15,128} });
+		BottomMagentaShield->SetTransform({ {0,4},{64,15} });
 		break;
 	case MarioMode::FireMario:
 		break;
@@ -241,15 +275,15 @@ void Mario::CalMoveVector(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X -= 45;
+		CheckPos.X -= 35;
 		break;
 	case EActorDir::Right:
-		CheckPos.X += 45;
+		CheckPos.X += 35;
 		break;
 	default:
 		break;
 	}
-	CheckPos.Y -= 45;
+	CheckPos.Y -= 35;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
@@ -321,7 +355,7 @@ void Mario::Idle(float _DeltaTime)
 
 void Mario::Jump(float _DeltaTime)
 {
-	
+
 	// 마리오가 점프할때만 깃발과 상호작용 하기 위한 것
 	MarioFlagInteractive(_DeltaTime);
 
@@ -441,7 +475,7 @@ void Mario::FlagAutoMove(float _DeltaTime)
 			Renderer->ActiveOff();
 			ChangeLevelTime -= _DeltaTime;
 		}
-		
+
 		// 마리오가 사라진 뒤에 엔딩 레벨로 간다.(3초 뒤) <= 조건
 		// 시간에 대한 지역변수 == float Time 같은 것이 필요하다.
 		// hedder에 구현해놓은 그런 것이 바로 ChangeLevelTime 이다.

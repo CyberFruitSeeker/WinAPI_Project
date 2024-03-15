@@ -1,4 +1,7 @@
 #include <EngineCore/EngineCore.h>
+#include <EngineBase/EngineFile.h>
+#include <EngineBase/EngineSerializer.h>
+#include <EnginePlatform/EngineSound.h>
 #include "PlayLevel.h"
 #include "Mario.h"
 #include "MarioMap.h"
@@ -10,7 +13,7 @@
 #include "CoinBlock.h"
 #include "BrickBlockBreaking.h"
 #include "Flag.h"
-#include "MarioUI.h"
+#include "MarioUI.h" 
 
 PlayLevel::PlayLevel()
 {
@@ -23,6 +26,10 @@ PlayLevel::~PlayLevel()
 void PlayLevel::BeginPlay()
 {
 	//ULevel::BeginPlay();
+
+	// BGM
+	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
+	BGMPlayer.Loop();
 
 
 	// UI

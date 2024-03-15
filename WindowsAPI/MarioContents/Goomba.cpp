@@ -40,7 +40,7 @@ void Goomba::BeginPlay()
 	// 굼바가 마리오랑 충돌 하는가? => Jump Attack 으로 된다.
 	{
 		BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
-		BodyCollision->SetTransform({ {0,-32},{64,64} });
+		BodyCollision->SetTransform({ {0,-32},{ 64, 64} });
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
@@ -88,11 +88,10 @@ void Goomba::CalMove(float _DeltaTime)
 	default:
 		break;
 	}
-	CheckPos.Y -= 20;
 
 	//MoveVector* _DeltaTime;
+	CheckPos.Y -= 20;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
-
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		MoveVector.X *= -1.0f;

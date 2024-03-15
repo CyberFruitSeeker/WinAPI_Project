@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Level.h>
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class MarioMap;
@@ -25,5 +26,9 @@ protected:
 private:
 	//MarioMap* Map;
 	//MarioUI* ActorUI;
+	
+	UEngineSoundPlayer BGMPlayer;
+
+
 };
 

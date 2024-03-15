@@ -110,6 +110,13 @@ private:
 	UCollision* DownCollision = nullptr;
 	UImageRenderer* Renderer = nullptr;
 
+	// 마리오가 지형에 끼이는 것을 방지
+	UCollision* LeftMagentaShield = nullptr;
+	UCollision* RightMagentaShield = nullptr;
+	UCollision* BottomMagentaShield = nullptr;
+
+	void MarioMagentaShiled(float _DeltaTime);
+
 	float AnimationTime = 0.0f;
 	int AnimationFrame = 0;
 
