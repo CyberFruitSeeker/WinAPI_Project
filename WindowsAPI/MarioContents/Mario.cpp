@@ -98,14 +98,12 @@ void Mario::BeginPlay()
 		//RightMagentaShield->SetColType(ECollisionType::Rect);
 	}
 
-
 	LeftMagentaShield = CreateCollision(MarioCollisionOrder::Player);
 	LeftMagentaShield->SetColType(ECollisionType::Rect);
 	RightMagentaShield = CreateCollision(MarioCollisionOrder::Player);
 	RightMagentaShield->SetColType(ECollisionType::Rect);
 	BottomMagentaShield = CreateCollision(MarioCollisionOrder::Player);
 	BottomMagentaShield->SetColType(ECollisionType::Rect);
-
 
 	BodyCollision = CreateCollision(MarioCollisionOrder::Player);
 	BodyCollision->SetColType(ECollisionType::Rect);

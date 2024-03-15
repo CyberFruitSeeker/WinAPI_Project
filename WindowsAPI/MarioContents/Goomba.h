@@ -29,9 +29,6 @@ protected:
 	UCollision* BodyCollision = nullptr;
 	UCollision* UpCollision = nullptr;
 
-	// 파이프에 끼이는 현상을 해결하기 위한 컬리전
-
-
 
 	// 파이프에 닿으면 움직임의 좌우가 변경되니깐 그에 대한 함수도 필요
 	FVector MoveVector = FVector::Left;

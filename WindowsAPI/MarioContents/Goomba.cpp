@@ -23,7 +23,7 @@ void Goomba::BeginPlay()
 		SetName("Goomba");
 		Renderer = CreateImageRenderer(MarioRenderOrder::Monster);
 		Renderer->SetImage("Goomba.png");
-		Renderer->SetScale({384, 384});
+		Renderer->SetScale({ 384, 384 });
 		Renderer->CreateAnimation("Move", "Goomba.png", 0, 1, 0.2f, true);
 		Renderer->ChangeAnimation("Move");
 		// GetAnimation을 쓰지 않으니깐 StateChange를 바로 써본다.
@@ -36,7 +36,7 @@ void Goomba::BeginPlay()
 
 	}
 
-	
+
 	// 굼바가 마리오랑 충돌 하는가? => Jump Attack 으로 된다.
 	{
 		BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
@@ -44,17 +44,16 @@ void Goomba::BeginPlay()
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
-
 }
 
 
 void Goomba::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	
+
 	StateUpdate(_DeltaTime);
-	
-	
+
+
 }
 
 
@@ -75,7 +74,7 @@ void Goomba::CalGravity(float _DeltaTime)
 
 void Goomba::CalMove(float _DeltaTime)
 {
-	
+
 	FVector CheckPos = GetActorLocation();
 	switch (DirState)
 	{
@@ -89,19 +88,36 @@ void Goomba::CalMove(float _DeltaTime)
 		break;
 	}
 
+
 	//MoveVector* _DeltaTime;
+
+
 	CheckPos.Y -= 20;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		MoveVector.X *= -1.0f;
+
 	}
+
+	{
+		// 굼바가 끼었다면 밀어내는 코드도 + 한다.
+		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
+		if (Color == Color8Bit(255, 0, 255, 0))
+		{
+			MoveVector.X *= 1.0f;
+		}
+
+	}
+
+
+
 
 	AddActorLocation(MoveVector * _DeltaTime * MoveSpeed);
 
-	
 
-	
+
+
 }
 
 
@@ -134,14 +150,14 @@ void Goomba::Move(float _DeltaTime)
 	}
 
 
-	
+
 }
 
 void Goomba::Dead(float _DeltaTime)
 {
 	int a = 0;
 
-	
+
 }
 
 
