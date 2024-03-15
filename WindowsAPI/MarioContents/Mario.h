@@ -104,7 +104,7 @@ protected:
 
 private:
 	
-	float ChangeLevelTime = 3.0f;
+	float ChangeLevelTime = 6.0f;
 	
 	UCollision* BodyCollision = nullptr;
 	UCollision* DownCollision = nullptr;

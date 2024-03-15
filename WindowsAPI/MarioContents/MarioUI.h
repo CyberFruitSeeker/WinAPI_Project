@@ -42,8 +42,9 @@ protected:
 
 
 private:
-	float TimeFlow = 1.0f;
+	float TimeFlow = 400.0f;
 
+	std::vector<UImageRenderer*> NumberRenderer;
 
 
 };

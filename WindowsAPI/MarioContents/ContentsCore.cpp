@@ -75,11 +75,19 @@ void UContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("7.png", 1, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("8.png", 1, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("9.png", 1, 1);
-	UEngineResourcesManager::GetInst().CuttingImage("100.png", 1, 1);
+	//UEngineResourcesManager::GetInst().CuttingImage("100.png", 1, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Coin_UI.png", 6, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Number_UI.png", 10, 1);
 
+	// UI 폴더를 추적해서 알게 해주는 기능, 싱글톤 방식이다.
+	{
+		UEngineDirectory UIDir;
+		UIDir.MoveParent();
+		UIDir.Move("ContentsResources");
+		UIDir.Move("PlayLevel/UI/Number");
 
+		UEngineResourcesManager::GetInst().LoadFolder(UIDir.GetFullPath(), "Numbers");
+	}
 
 
 	CreateLevel<UTitleLevel>("Title");
