@@ -40,7 +40,7 @@ void Goomba::BeginPlay()
 	// 굼바가 마리오랑 충돌 하는가? => Jump Attack 으로 된다.
 	{
 		BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
-		BodyCollision->SetTransform({ {0,-32},{ 64, 64} });
+		BodyCollision->SetTransform({ {0,-32},{ 80, 80} });
 		BodyCollision->SetColType(ECollisionType::Rect);
 	}
 
