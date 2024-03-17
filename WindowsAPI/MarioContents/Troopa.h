@@ -4,6 +4,7 @@
 #include "ContentsHelper.h"
 #include "Monster.h"
 #include "Mario.h"
+#include <EnginePlatform/EngineSound.h>
 
 // 설명 :
 class Troopa : public AMonsterSetting
@@ -85,12 +86,8 @@ protected:
 
 
 private:
-
+	UEngineSoundPlayer DeadSound;
 	
-
-	
-
-	// 트루파의 상태가 어떠니?
 
 
 };

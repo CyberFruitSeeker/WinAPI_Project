@@ -366,7 +366,7 @@ void Mario::Jump(float _DeltaTime)
 				AMonsterSetting* Monster = dynamic_cast<AMonsterSetting*>(_Result[i]->GetOwner());
 				Monster->MarioJumpAttack();
 
-				JumpAttackSound = UEngineSound::SoundPlay("CrouchMoveAttack.wav");
+				//JumpAttackSound = UEngineSound::SoundPlay("CrouchMoveAttack.wav");
 				
 
 				// _Result[i]->GetOwner();/*->Destroy();*/

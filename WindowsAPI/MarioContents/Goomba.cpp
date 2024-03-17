@@ -142,7 +142,7 @@ void Goomba::Move(float _DeltaTime)
 
 void Goomba::Dead(float _DeltaTime)
 {
-	int a = 0;
+	//int a = 0;
 
 
 }
@@ -174,7 +174,8 @@ void Goomba::MoveStart()
 
 void Goomba::DeadStart()
 {
-	//DeadSound = UEngineSound::SoundPlay("CrouchMoveAttack.wav");
+	DeadSound = UEngineSound::SoundPlay("CrouchMoveAttack.wav");
+	DeadSound.On();
 	MoveVector = FVector::Zero;
 	Renderer->ChangeAnimation("Dead");
 	Destroy(1.0f);

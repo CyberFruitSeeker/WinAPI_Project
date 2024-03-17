@@ -6,6 +6,7 @@
 #include <EngineCore/Collision.h>
 #include "Monster.h"
 #include "Mario.h"
+#include <EnginePlatform/EngineSound.h>
 
 Troopa::Troopa()
 {
@@ -158,6 +159,8 @@ void Troopa::DeadStart()
 	Renderer->ChangeAnimation(GetAnimationName("Dead"));
 	DirCheck();
 
+	DeadSound = UEngineSound::SoundPlay("CrouchMoveAttack.wav");
+	DeadSound.On();
 }
 
 void Troopa::DirChangeStart()
