@@ -90,14 +90,17 @@ protected:
 
 	// 사운드 관련 기능들은 우선 여기에
 	UEngineSoundPlayer BGMPlay;
-
 	float BGMVolume = 1.0f;
-	float JumpAttackSound = 1.0f;
-	float FlagDownSound = 1.0f;
-	float StageClearMusic = 1.0f;
-	float TroopaShellMoveSound = 1.0f;
-	float BlockBreakingSound = 1.0f;
+	
+	UEngineSoundPlayer FlagDownSound;
 
+	UEngineSoundPlayer JumpAttackSound;
+
+	UEngineSoundPlayer StageClearMusic;
+
+	UEngineSoundPlayer BlockBreakingSound;
+
+	float TroopaShellMoveSound = 1.0f;
 
 
 
@@ -156,9 +159,6 @@ private:
 	// 어떤 기능을 더 추가할 것인가?
 	// moveresult?  
 	
-	//MarioMap* Map;
-
-	// 마리오가 파이프나 벽에 빠지는 것을 방지하기 위한 좌우아래에 있는 별도의 컬리전
 
 
 

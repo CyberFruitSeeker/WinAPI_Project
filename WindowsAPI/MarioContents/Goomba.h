@@ -4,7 +4,7 @@
 #include "ContentsHelper.h"
 #include "Monster.h"
 #include "Mario.h"
-
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class Goomba : public AMonsterSetting
@@ -42,7 +42,7 @@ protected:
 	GoombaState State = GoombaState::None;
 	EActorDir DirState = EActorDir::None;
 	
-	float MoveSpeed = 185.0f;
+	float MoveSpeed = 140.0f;
 	
 	FVector DeadVector = FVector::Zero;
 
@@ -74,7 +74,7 @@ protected:
 
 
 private:
-
+	UEngineSoundPlayer DeadSound;
 
 
 

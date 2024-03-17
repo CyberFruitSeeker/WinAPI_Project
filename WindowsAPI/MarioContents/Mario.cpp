@@ -273,15 +273,15 @@ void Mario::CalMoveVector(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X -= 35;
+		CheckPos.X -= 45;
 		break;
 	case EActorDir::Right:
-		CheckPos.X += 35;
+		CheckPos.X += 45;
 		break;
 	default:
 		break;
 	}
-	CheckPos.Y -= 35;
+	CheckPos.Y -= 50;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
@@ -369,6 +369,9 @@ void Mario::Jump(float _DeltaTime)
 				AMonsterSetting* Monster = dynamic_cast<AMonsterSetting*>(_Result[i]->GetOwner());
 				Monster->MarioJumpAttack();
 
+				JumpAttackSound = UEngineSound::SoundPlay("CrouchMoveAttack.wav");
+				
+
 				// _Result[i]->GetOwner();/*->Destroy();*/
 			}
 		}
@@ -452,6 +455,10 @@ void Mario::FlagStop(float _DeltaTime)
 		StateChange(MarioState::FlagAutoMove);
 	}
 
+	//FlagDownSound = UEngineSound::SoundPlay("FlagTouch.wav");
+
+
+
 	//DirCheck();
 }
 
@@ -505,10 +512,12 @@ void Mario::JumpStart()
 	JumpVector = JumpPower;
 	Renderer->ChangeAnimation(GetAnimationName("Jump"));
 	DirCheck();
+	FlagDownSound = UEngineSound::SoundPlay("SmallJump.wav");
 }
 
 void Mario::FlagStopStart()
 {
+	FlagDownSound = UEngineSound::SoundPlay("FlagTouch.wav");
 	Renderer->ChangeAnimation(GetAnimationName("FlagStop"));
 	//DirCheck();
 }

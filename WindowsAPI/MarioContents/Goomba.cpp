@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include "Mario.h"
+#include <EnginePlatform/EngineSound.h>
 
 Goomba::Goomba()
 {
@@ -42,6 +43,11 @@ void Goomba::BeginPlay()
 		BodyCollision = CreateCollision(MarioCollisionOrder::Monster);
 		BodyCollision->SetTransform({ {0,-32},{ 80, 80} });
 		BodyCollision->SetColType(ECollisionType::Rect);
+
+		
+		
+
+
 	}
 
 }
@@ -88,9 +94,8 @@ void Goomba::CalMove(float _DeltaTime)
 		break;
 	}
 
-
+	
 	//MoveVector* _DeltaTime;
-
 
 	CheckPos.Y -= 20;
 	Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
@@ -100,15 +105,22 @@ void Goomba::CalMove(float _DeltaTime)
 
 	}
 
+
+
 	{
 		// 굼바가 끼었다면 밀어내는 코드도 + 한다.
-		Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
-		if (Color == Color8Bit(255, 0, 255, 0))
-		{
-			MoveVector.X *= 1.0f;
-		}
+		//Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
+		//if (Color == Color8Bit(255, 0, 255, 0))
+		//{
+		//	MoveVector.X *= 1.0f;
+		//}
 
 	}
+
+	
+
+
+
 
 
 
@@ -187,6 +199,7 @@ void Goomba::MoveStart()
 
 void Goomba::DeadStart()
 {
+	//DeadSound = UEngineSound::SoundPlay("CrouchMoveAttack.wav");
 	MoveVector = FVector::Zero;
 	Renderer->ChangeAnimation("Dead");
 	Destroy(1.0f);
