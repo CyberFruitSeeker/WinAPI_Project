@@ -63,7 +63,7 @@ void PlayLevel::BeginPlay()
 		NewActor->SetName("Mario");
 		//NewActor->SetActorLocation({ 12404.f,172.f });
 		NewActor->SetActorLocation({ 185.f,827.f });
-		//NewActor->SetActorLocation({ 13090.f,827.f });
+		//NewActor->SetActorLocation({ 4676.f,827.f });
 	}
 
 	// 머쉬룸
@@ -79,20 +79,6 @@ void PlayLevel::BeginPlay()
 		NewActor->SetName("Flag");
 		NewActor->SetActorLocation({ 12704,485 });
 	}
-
-	// 블럭 브레이킹
-	// 하지만, 스폰액터로 나오게 하지는 않는다.
-	//{
-	//	BrickBlockBreaking* NewActor = SpawnActor<BrickBlockBreaking>(MarioRenderOrder::BreakingBlock);
-	//	NewActor->SetName("BrickBlockBreaking");
-	//	NewActor->SetActorLocation({ 612,600 });
-	//}
-
-	//{
-	//	BrickBlockBreaking* NewActor = SpawnActor<BrickBlockBreaking>(MarioRenderOrder::BreakingBlock);
-	//	NewActor->SetActorLocation({ 450,550 });
-
-	//}
 
 	// 블럭
 	// 바로 옆으로 붙어있는 블럭끼리의 추천 간격 : x축 62
@@ -111,11 +97,11 @@ void PlayLevel::BeginPlay()
 	}
 
 
-	{
-		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
-		NewActor->SetName("BrickBlock");
-		NewActor->SetActorLocation({ 800,550 });
-	}
+	//{
+	//	BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+	//	NewActor->SetName("BrickBlock");
+	//	NewActor->SetActorLocation({ 800,550 });
+	//}
 
 	//{
 	//	BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
@@ -141,29 +127,174 @@ void PlayLevel::BeginPlay()
 		NewActor->SetActorLocation({ 488,600 });
 	}
 
+
+	
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 5000,600 });
+	}
+	
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 5062,600 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 5124,600 });
+	}
+
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 5186,600 });
+	}
+
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 4862,600 });
+	}
+
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 4800,600 });
+	}
+
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 4738,600 });
+	}
+
 	/*{
 		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
 		NewActor->SetName("BrickBlock");
-		NewActor->SetActorLocation({ 950,650 });
+		NewActor->SetActorLocation({ 4676,600 });
 	}*/
 
-	// 아이템 블럭
+
 	{
-		ItemBlock* NewActor = SpawnActor<ItemBlock>(MarioRenderOrder::Block);
-		NewActor->SetName("ItemBlock");
-		NewActor->SetActorLocation({ 550,600 });
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 6438,450 });
 	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 6500,450 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 6562,450 });
+	}
+	
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 6624,450 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 6686,450 });
+	}
+
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 6748,450 });
+	}
+
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 6810,450 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 6872,450 });
+	}
+	
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 6934,450 });
+	}
+
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 7500,500 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 7562,500 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 7624,500 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 7686,500 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 7748,500 });
+	}
+
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 7810,500 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 7872,500 });
+	}
+
+	{
+		CoinBlock* NewActor = SpawnActor<CoinBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("CoinBlock");
+		NewActor->SetActorLocation({ 7934,500 });
+	}
+
+	{
+		BrickBlock* NewActor = SpawnActor<BrickBlock>(MarioRenderOrder::Block);
+		NewActor->SetName("BrickBlock");
+		NewActor->SetActorLocation({ 7996,500 });
+	}
+
+
+	// 아이템 블럭
 
 	{
 		ItemBlock* NewActor = SpawnActor<ItemBlock>(MarioRenderOrder::Block);
 		NewActor->SetName("ItemBlock");
 		NewActor->SetActorLocation({ 862,550 });
-	}
-
-	{
-		ItemBlock* NewActor = SpawnActor<ItemBlock>(MarioRenderOrder::Block);
-		NewActor->SetName("ItemBlock");
-		NewActor->SetActorLocation({ 1224,550 });
 	}
 
 	// 코인 블럭
@@ -190,6 +321,13 @@ void PlayLevel::BeginPlay()
 
 
 	// 굼바
+
+	{
+		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
+		NewActor->SetName("Goomba");
+		NewActor->SetActorLocation({ 900,826 });
+	}
+
 	{
 		Goomba* NewActor = SpawnActor<Goomba>(MarioRenderOrder::Monster);
 		NewActor->SetName("Goomba");
@@ -261,7 +399,7 @@ void PlayLevel::BeginPlay()
 	{
 		Troopa* NewActor = SpawnActor<Troopa>(MarioRenderOrder::Monster);
 		//NewActor->SetName("Troopa");
-		NewActor->SetActorLocation({ 500,500 });
+		NewActor->SetActorLocation({ 500,826 });
 	}
 
 	{
