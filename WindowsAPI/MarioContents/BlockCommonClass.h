@@ -44,8 +44,6 @@ protected:
 
 	// 마리오가 어떤 상태일때도 블록에서 공통적인 요소 : 박스가 위로 올라가서 다시 돌아온다.
 	// (아이템 박스도 마찬가지이다.)
-	// 박스가 올라가는 애니메이션만 있으면 되는데 FVector가 필요한가??
-	//FVector BlockMoveVector = FVector::None;
 
 
 

@@ -6,6 +6,7 @@
 #include "Mario.h"
 #include "BlockCommonClass.h"
 #include "BrickBlockBreaking.h"
+#include <EnginePlatform/EngineSound.h>
 
 BrickBlock::BrickBlock()
 {
@@ -83,6 +84,9 @@ void BrickBlock::BlockMove(float _DeltaTime)
 
 		if (Mode == MarioMode::BigMario)
 		{
+			BlockMoveSound = UEngineSound::SoundPlay("BrickBreak.wav");
+			BlockMoveSound.On();
+
 			Time = _DeltaTime;
 			Destroy();
 			BrickBlockBreaking* NewActor = GetWorld()->SpawnActor<BrickBlockBreaking>(MarioRenderOrder::BreakingBlock);
@@ -91,6 +95,9 @@ void BrickBlock::BlockMove(float _DeltaTime)
 
 		if (Mode == MarioMode::SmallMario)
 		{
+			BlockMoveSound = UEngineSound::SoundPlay("Interactive.wav");
+			BlockMoveSound.On();
+
 			MarioCol = false;
 			Time = 0.25f;
 			return;
@@ -110,6 +117,9 @@ void BrickBlock::BlockMove(float _DeltaTime)
 			AddActorLocation(FVector::Down * _DeltaTime * BlockMoveSpeed);
 		}
 	}
+
+	
+
 
 
 }

@@ -31,8 +31,10 @@ Mario::~Mario()
 
 void Mario::BeginPlay()
 {
-	AActor::BeginPlay();
-	//ItsMeMario = this;
+	
+	/*BGMPlay = UEngineSound::SoundPlay("Level1.mp3");
+	BGMPlay.Loop();*/
+
 
 	// Small Mario 애니메이션
 	{
@@ -88,16 +90,6 @@ void Mario::BeginPlay()
 		DownCollision->SetColType(ECollisionType::Rect);
 	}
 
-	// 마리오가 파이프나 계단에서 끼이는 것을 방지하기 위한 별도의 Collision
-	// 마리오한테 잘 작동한다면, 파이프에 밥먹듯이 끼는 굼바한테도 적용해본다.
-	{
-		//LeftMagentaShield->SetTransform({ {-30,-20},{15,64} });
-		//LeftMagentaShield->SetColType(ECollisionType::Rect);
-
-		//RightMagentaShield->SetTransform({ {30,-20},{15,64} });
-		//RightMagentaShield->SetColType(ECollisionType::Rect);
-	}
-
 	LeftMagentaShield = CreateCollision(MarioCollisionOrder::Player);
 	LeftMagentaShield->SetColType(ECollisionType::Rect);
 	RightMagentaShield = CreateCollision(MarioCollisionOrder::Player);
@@ -122,6 +114,11 @@ void Mario::Tick(float _DeltaTime)
 	//AActor::Tick(_DeltaTime);
 	StateUpdate(_DeltaTime);
 	MoveCameraMarioPos(_DeltaTime);
+}
+
+void Mario::BGMSoundControl()
+{
+
 }
 
 // 마리오가 지형에 끼이는 것을 방지
@@ -517,6 +514,9 @@ void Mario::JumpStart()
 
 void Mario::FlagStopStart()
 {
+	BGMPlay = UEngineSound::SoundPlay("Level1.mp3");
+	BGMPlay.Off();
+
 	FlagDownSound = UEngineSound::SoundPlay("FlagTouch.wav");
 	Renderer->ChangeAnimation(GetAnimationName("FlagStop"));
 	//DirCheck();

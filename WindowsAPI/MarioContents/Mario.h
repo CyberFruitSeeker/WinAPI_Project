@@ -25,6 +25,8 @@ public:
 	// Mushroom 클래스에서 알기 위해서 public으로 해둔 상태
 	void MarioModeChange(MarioMode _MarioMode);
 
+	void BGMSoundControl();
+
 
 protected:
 	void BeginPlay() override;
@@ -99,6 +101,12 @@ protected:
 	UEngineSoundPlayer StageClearMusic;
 
 	UEngineSoundPlayer BlockBreakingSound;
+
+	UCollision* FlagColCheck;
+
+	
+
+	//UEngineSoundPlayer BGM;
 
 	float TroopaShellMoveSound = 1.0f;
 

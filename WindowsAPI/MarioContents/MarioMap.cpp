@@ -1,6 +1,7 @@
 #include "MarioMap.h"
 #include "ContentsHelper.h"
 #include <EngineCore/EngineResourcesManager.h>
+#include <EnginePlatform/EngineSound.h>
 
 MarioMap::MarioMap()
 {
@@ -48,7 +49,7 @@ void MarioMap::SwitchDebug()
 	}
 	else
 	{
-		Renderer->SetActive(true);
+		Renderer->SetActive(false);
 		ColRenderer->SetActive(true);
 	}
 }
@@ -61,4 +62,12 @@ void MarioMap::BeginPlay()
 	Renderer->SetImage("MarioWorld01.png");
 	ColRenderer = CreateImageRenderer(MarioRenderOrder::Map);
 	ColRenderer->SetActive(false);
+
+	//{
+	//	BGMPlay = UEngineSound::SoundPlay("Level1.mp3");
+	//	BGMPlay.Loop();
+	//}
+
+
+
 }

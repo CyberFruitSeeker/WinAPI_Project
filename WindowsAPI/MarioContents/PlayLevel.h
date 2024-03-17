@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Level.h>
 #include <EnginePlatform/EngineSound.h>
+#include <EngineCore/Collision.h>
 
 // Ό³Έν :
 class MarioMap;
@@ -23,12 +24,15 @@ protected:
 	void LevelStart(ULevel* _Level) override;
 	void LevelEnd(ULevel* _Level) override;
 
+	void BGMSoundControl();
+
 private:
 	//MarioMap* Map;
 	//MarioUI* ActorUI;
 	
 	UEngineSoundPlayer BGMPlayer;
 
+	UCollision* FlagColCheck;
 
 };
 

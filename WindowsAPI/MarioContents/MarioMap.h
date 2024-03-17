@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class MarioMap : public AActor
@@ -33,5 +34,8 @@ private:
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* ColRenderer = nullptr;
 	FVector ImageScale;
+
+	UEngineSoundPlayer BGMPlay;
+
 };
 

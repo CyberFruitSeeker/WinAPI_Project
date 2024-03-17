@@ -14,6 +14,7 @@
 #include "BrickBlockBreaking.h"
 #include "Flag.h"
 #include "MarioUI.h" 
+#include <EngineCore/Collision.h>
 
 PlayLevel::PlayLevel()
 {
@@ -30,7 +31,6 @@ void PlayLevel::BeginPlay()
 	// BGM
 	BGMPlayer = UEngineSound::SoundPlay("Level1.mp3");
 	BGMPlayer.Loop();
-
 
 	// UI
 	MarioUI* UI = SpawnActor<MarioUI>(MarioRenderOrder::UI);
@@ -51,7 +51,7 @@ void PlayLevel::BeginPlay()
 	//UI->SetMarioTimeUI("1.png");
 
 
-	
+
 	MarioMap* Map = SpawnActor<MarioMap>(MarioRenderOrder::Map);
 	Map = SpawnActor<MarioMap>();
 	Map->SetMapImage("MarioWorld01.png");
@@ -269,39 +269,39 @@ void PlayLevel::BeginPlay()
 		NewActor->SetName("Troopa");
 		NewActor->SetActorLocation({ 2200,500 });
 	}
-	
+
 	{
 		Troopa* NewActor = SpawnActor<Troopa>(MarioRenderOrder::Monster);
 		NewActor->SetName("Troopa");
 		NewActor->SetActorLocation({ 2850,500 });
 	}
-	
+
 	{
 		Troopa* NewActor = SpawnActor<Troopa>(MarioRenderOrder::Monster);
 		NewActor->SetName("Troopa");
 		NewActor->SetActorLocation({ 2700,500 });
 	}
-	
+
 	{
 		Troopa* NewActor = SpawnActor<Troopa>(MarioRenderOrder::Monster);
 		NewActor->SetName("Troopa");
 		NewActor->SetActorLocation({ 3300,500 });
 	}
-	
+
 	{
 		Troopa* NewActor = SpawnActor<Troopa>(MarioRenderOrder::Monster);
 		NewActor->SetName("Troopa");
 		NewActor->SetActorLocation({ 3400,500 });
 	}
-	
 
 
 
 
-	
 
 
-	
+
+
+
 
 
 }
@@ -310,8 +310,8 @@ void PlayLevel::BeginPlay()
 void PlayLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
-
-
+	
+	
 }
 
 
@@ -325,4 +325,15 @@ void PlayLevel::LevelEnd(ULevel* _Level)
 {
 	// 리소스를 날리고, 액터를 삭제하는 역할(우선 값을넣어준다.)
 	int a = 0;
+}
+
+void PlayLevel::BGMSoundControl()
+{
+
+	//std::vector<UCollision*> FlagCollision;
+	//if (true == FlagColCheck->CollisionCheck(MarioCollisionOrder::FlagUp, FlagCollision))
+	//{
+	//	
+	//	BGMPlayer.Off();
+	//}
 }

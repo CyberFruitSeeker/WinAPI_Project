@@ -110,10 +110,19 @@ void MarioUI::BeginPlay()
 	}
 
 	// World Time UI
+	// 천의 자리 수
+	//{
+	//	Renderer = CreateImageRenderer(MarioRenderOrder::UI);
+	//	Renderer->SetImage("Numbers", 0);
+	//	Renderer->SetTransform({ {827,120}, {30, 30} });
+	//	Renderer->CameraEffectOff();
+	//	NumberRenderer.push_back(Renderer);
+	//}
+
 	// 백의 자리 수
 	{
 		Renderer = CreateImageRenderer(MarioRenderOrder::UI);
-		Renderer->SetImage("Numbers", 4);
+		Renderer->SetImage("Numbers", 0);
 		Renderer->SetTransform({ {860,120}, {30, 30} });
 		Renderer->CameraEffectOff();
 		NumberRenderer.push_back(Renderer);
@@ -146,7 +155,7 @@ void MarioUI::Tick(float _DeltaTime)
 	int TimeFlowInt = TimeFlow;
 
 	std::string Text = std::to_string(TimeFlowInt);
-
+	
 	int N100 = Text[0] - '1';
 	int N10 = Text[1] - '0';
 	int N1 = Text[2] - '0';

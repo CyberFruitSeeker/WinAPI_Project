@@ -44,10 +44,6 @@ void Goomba::BeginPlay()
 		BodyCollision->SetTransform({ {0,-32},{ 80, 80} });
 		BodyCollision->SetColType(ECollisionType::Rect);
 
-		
-		
-
-
 	}
 
 }
@@ -105,30 +101,9 @@ void Goomba::CalMove(float _DeltaTime)
 
 	}
 
-
-
-	{
-		// 굼바가 끼었다면 밀어내는 코드도 + 한다.
-		//Color8Bit Color = ContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
-		//if (Color == Color8Bit(255, 0, 255, 0))
-		//{
-		//	MoveVector.X *= 1.0f;
-		//}
-
-	}
-
 	
 
-
-
-
-
-
-
 	AddActorLocation(MoveVector * _DeltaTime * MoveSpeed);
-
-
-
 
 }
 
