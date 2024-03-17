@@ -61,7 +61,7 @@ void PlayLevel::BeginPlay()
 	{
 		Mario* NewActor = SpawnActor<Mario>(MarioRenderOrder::Player);
 		NewActor->SetName("Mario");
-		//NewActor->SetActorLocation({ 12404.f,172.f });
+		//NewActor->SetActorLocation({ 12404.f,826.5f });
 		NewActor->SetActorLocation({ 185.f,827.f });
 		//NewActor->SetActorLocation({ 4676.f,827.f });
 	}

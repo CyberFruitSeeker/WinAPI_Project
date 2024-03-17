@@ -14,8 +14,8 @@ void EndingLogo::BeginPlay()
 	UImageRenderer* Renderer = CreateImageRenderer();
 
 	Renderer->SetImage("Ending.png");
-	SetActorLocation({ 500,500 });
-	Renderer->SetTransform({ {0,0}, {768, 320} });
+	SetActorLocation({ 512,480 });
+	Renderer->SetTransform({ {0,0}, {1020, 956} });
 	Renderer->SetImageCuttingTransform({ {0,0}, {0, 0} });
 
 

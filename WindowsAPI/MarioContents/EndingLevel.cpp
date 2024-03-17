@@ -16,11 +16,7 @@ void EndingLevel::BeginPlay()
 {
 	EndingLogo* Ending = SpawnActor<EndingLogo>();
 
-	//{
-	//	EndingBGM = UEngineSound::SoundPlay("StageClear.wav");
-	//	EndingBGM.On();
-
-	//}
+	
 
 
 
