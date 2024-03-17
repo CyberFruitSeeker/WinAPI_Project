@@ -3,6 +3,7 @@
 #include<EngineCore/Collision.h>
 #include "ContentsHelper.h"
 #include "Mario.h"
+#include <EnginePlatform/EngineSound.h>
 
 // ¼³¸í :
 class Mushroom : public AActor
@@ -50,7 +51,7 @@ protected:
 	// 2. ¹ö¼¸ÀÌ ¸¶¸®¿ÀÇÑÅ× ¸ÔÇû´Ù.
 	void MarioMushroomEat();
 
-
+	UEngineSoundPlayer MushroomEatSound;
 
 
 

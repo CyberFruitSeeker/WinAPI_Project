@@ -2,6 +2,7 @@
 #include "BlockCommonClass.h"
 #include <EngineCore/Collision.h>
 #include "Mario.h"
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class ItemBlock : public BlockCommonClass
@@ -33,6 +34,8 @@ protected:
 	void BlockMove(float _DeltaTime);
 
 	void ItemMoveUp(float _DeltaTime);
+
+	UEngineSoundPlayer BlockMoveSound;
 
 
 

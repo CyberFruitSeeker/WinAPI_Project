@@ -3,6 +3,7 @@
 #include <EngineCore/Collision.h>
 #include "ContentsHelper.h"
 #include "Mario.h"
+#include <EnginePlatform/EngineSound.h>
 
 
 Mushroom::Mushroom()
@@ -111,8 +112,13 @@ void Mushroom::MarioMushroomEat()
 
 		Player->MarioModeChange(MarioMode::BigMario);
 
+		MushroomEatSound = UEngineSound::SoundPlay("GainMushRoom.wav");
+		MushroomEatSound.On();
+
+
 		Destroy(0.002f);
 	}
+
 
 }
 

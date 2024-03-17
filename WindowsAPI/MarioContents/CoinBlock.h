@@ -2,6 +2,7 @@
 #include "BlockCommonClass.h"
 #include <EngineCore/Collision.h>
 #include "Mario.h"
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class CoinBlock : public BlockCommonClass
@@ -36,7 +37,7 @@ protected:
 
 	void MarioGetCoin(float _DeltaTime);
 
-
+	UEngineSoundPlayer BlockMoveSound;
 
 
 private:

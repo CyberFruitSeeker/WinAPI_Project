@@ -6,6 +6,7 @@
 #include "Mario.h"
 #include "BlockCommonClass.h"
 #include "Mushroom.h"
+#include <EnginePlatform/EngineSound.h>
 
 ItemBlock::ItemBlock()
 {
@@ -70,6 +71,10 @@ void ItemBlock::BlockMove(float _DeltaTime)
 			Mushroom* NewActor = GetWorld()->SpawnActor<Mushroom>(MarioRenderOrder::Item);
 			NewActor->SetActorLocation(GetActorLocation());
 
+			BlockMoveSound = UEngineSound::SoundPlay("MushRoomAppear.wav");
+			BlockMoveSound = UEngineSound::SoundPlay("Interactive.wav");
+			BlockMoveSound.On();
+
 			IsColEnd = true;
 			return;
 		}
@@ -80,6 +85,10 @@ void ItemBlock::BlockMove(float _DeltaTime)
 
 			Mushroom* NewActor = GetWorld()->SpawnActor<Mushroom>(MarioRenderOrder::Item);
 			NewActor->SetActorLocation(GetActorLocation());
+
+			BlockMoveSound = UEngineSound::SoundPlay("MushRoomAppear.wav");
+			BlockMoveSound = UEngineSound::SoundPlay("Interactive.wav");
+			BlockMoveSound.On();
 
 			IsColEnd = true;
 			return;

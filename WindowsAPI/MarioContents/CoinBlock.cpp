@@ -5,6 +5,7 @@
 #include "ContentsHelper.h"
 #include "Mario.h"
 #include "BlockCommonClass.h"
+#include <EnginePlatform/EngineSound.h>
 
 CoinBlock::CoinBlock()
 {
@@ -56,13 +57,18 @@ void CoinBlock::BlockMove(float _DeltaTime)
 
 		if (Mode == MarioMode::BigMario)
 		{
-			//Destroy(0.0001f);
+			BlockMoveSound = UEngineSound::SoundPlay("GainCoin.wav");
+			BlockMoveSound.On();
+
 			IsColEnd = true;
 			return;
 		}
 
 		if (Mode == MarioMode::SmallMario)
 		{
+			BlockMoveSound = UEngineSound::SoundPlay("GainCoin.wav");
+			BlockMoveSound.On();
+
 			IsColEnd = true;
 			return;
 		}

@@ -452,6 +452,9 @@ void Mario::FlagStop(float _DeltaTime)
 		StateChange(MarioState::FlagAutoMove);
 	}
 
+	//BGMPlay = UEngineSound::SoundPlay("Level1.mp3");
+	//BGMPlay.Off();
+
 	//FlagDownSound = UEngineSound::SoundPlay("FlagTouch.wav");
 
 
@@ -564,12 +567,6 @@ void Mario::FreeMove(float _DeltaTime)
 
 
 // ====== 마리오의 중력, 가속도 물리 구현과 계산 =========
-
-// 점프시 중력 가속도는 점프함수에 이미 구현되어있는거나 마찬가지이다.
-//void Mario::CalJumpVector(float _DeltaTime)
-//{
-//
-//}
 
 void Mario::CalGravityVector(float _DeltaTime)
 {
