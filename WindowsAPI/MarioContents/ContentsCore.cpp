@@ -33,10 +33,10 @@ void UContentsCore::BeginPlay()
 	UEngineDirectory NewDir;
 
 	// 드라이브:\Project\파일명\WinAPI
-	NewDir.MoveParent();
+	//NewDir.MoveParent();
 
 	// ContentsResources 폴더로 접근하기
-	NewDir.Move("ContentsResources");
+	NewDir.MoveToSearchChild("ContentsResources");
 
 	std::list<UEngineFile> NewList = NewDir.AllFile({ ".png", ".bmp" }, true);
 
@@ -83,8 +83,7 @@ void UContentsCore::BeginPlay()
 	// UI 폴더를 추적해서 알게 해주는 기능, 싱글톤 방식이다.
 	{
 		UEngineDirectory UIDir;
-		UIDir.MoveParent();
-		UIDir.Move("ContentsResources");
+		UIDir.MoveToSearchChild("ContentsResources");
 		UIDir.Move("PlayLevel/UI/Number");
 
 		UEngineResourcesManager::GetInst().LoadFolder(UIDir.GetFullPath(), "Numbers");
