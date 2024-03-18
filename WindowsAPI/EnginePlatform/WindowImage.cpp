@@ -11,7 +11,7 @@
 
 
 
-// Png를 로드하는 기능을 윈도우 기본 라이브러리만으로 지원해주지 않기 때문ㅇ
+// Png를 로드하는 기능을 윈도우 기본 라이브러리만으로 지원해주지 않기 때문에
 // GDIPlus를 사용해야 한다.
 // GIDPlus는 윈도우가 초기 윈도우의 그래픽 시스템을 개선해서 추가한 라이브러리입니다.
 
@@ -73,17 +73,6 @@ bool UWindowImage::Load(UWindowImage* _Image)
 
 	if (".BMP" == UpperExt)
 	{
-		//HINSTANCE hInst,  이 이미지를 사용할 프로그램을 알려달라는건데. nullptr넣어도 괜찮다.
-		//LPCSTR name, // 경로
-		//UINT type, // 이미지 타입
-		//int cx, // 이미지를 로드할 크기 X 0을 넣으면 전체 크기로 로드
-		//int cy, // 이미지를 로드할 크기 Y 0을 넣으면 전체 크기로 로드
-		//UINT fuLoad 로드 옵션
-		
-		// 비트맵을 제어할수 있는 핸들입니다.
-		// 비트맵을 그릴수 있는 핸들은 아닙니다.
-		// 그린다는 목적을 가진 핸들과
-		// 비트맵을 로드한다는 목적의 핸들이 다르다는 것입니다.
 		HANDLE ImageHandle = LoadImageA(nullptr, Path.GetFullPath().c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		hBitMap = reinterpret_cast<HBITMAP>(ImageHandle);
 		ImageType = EWIndowImageType::IMG_BMP;
@@ -91,16 +80,7 @@ bool UWindowImage::Load(UWindowImage* _Image)
 	else if (".PNG" == UpperExt)
 	{
 		ULONG_PTR gdiplusToken = 0;
-		// Gdiplus헤더의 함수들은 전부다 Gdiplus 네임스페이스 안에 들어있어요.
-		// GDi를 사용하겠다는 시작 
-		// GDIPlus를 사용해본적이 거의 없는데 이번에 Png가 로드가 안되면 여러분들이 귀찮아 할것같아서
-		// 로드하는걸 알아봤는데.
-		// Png를 그대로 출력하는 함수도 있었는데. 
-		// 겁나게 느렸습니다.
-		// 게임을 못만들정도였다.
-		// 그건 포기
-		// 로드는 가능한데. png로 사용하면 안되기 때문에
-		// Png로 로드한 녀석을 Bmp로 바꾸면 무리없이 되서 그 방식으로 하기로 했습니다.
+
 		Gdiplus::GdiplusStartupInput gdistartupinput;
 		Gdiplus::GdiplusStartup(&gdiplusToken, &gdistartupinput, nullptr);
 
@@ -125,13 +105,7 @@ bool UWindowImage::Load(UWindowImage* _Image)
 
 		ImageType = EWIndowImageType::IMG_PNG;
 	}
-
-	// 그릴수있고 이미지에 간섭할수 있는 권한이다.
-	// 어디에 그릴거냐.
-	// 어디속해서 어디에 그려질 DC냐를 넣어줘야 합니다.
-	// 당연히 하나뿐인 mainwindow의 DC를 넣어주면 됩니다.
-	// 그릴수 있는 권한이 자신이 뭘 그려야하는지를 알려줘야 합니다.
-	// ImageDC야 너는 BitMap그려야 해.
+	
 	ImageDC = CreateCompatibleDC(_Image->ImageDC);
 
 	if (nullptr == ImageDC)

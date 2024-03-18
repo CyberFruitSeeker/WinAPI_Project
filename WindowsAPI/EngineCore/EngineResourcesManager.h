@@ -32,11 +32,6 @@ public:
 	// 포인터형 싱글톤
 	//static UEngineResourcesManager* GetPInst()
 	//{
-	//  // 포인터형의 장점
-	//  // 1. 내가 삭제하고 싶을때 삭제할수 있다.
-	//  // 2. new는 동적할당이죠?
-	//  //    new는 가장 마지막에 마지막에 해야한다는 격언이 있다.
-	//  //    ?????? 100바이트 아껴서 뭐하게?
 	//	if (nullptr == pInst)
 	//	{
 	//		pInst = new UEngineResourcesManager();
@@ -46,7 +41,6 @@ public:
 	//}
 
 	// 언제든지 싱글톤 객체를 파괴할수 있다는 장점이 있다.
-	// 그럼 왜 파괴하는데?
 	//static void Destroy()
 	//{
 	//	if (nullptr != pInst)

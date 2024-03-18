@@ -1,6 +1,6 @@
 #pragma once
-// 키보드를 제어해주는 건 OS일것이기 때문에
-// 입력에 대한 함수도 당연히 OS가 우리에게 제공해야 합니다.
+// 키보드를 제어해주는 것은 OS의 권한이기 때문에
+// 입력에 대한 함수도 당연히 OS가 우리에게 제공해야 한다.
 #include <Windows.h>
 #include <map>
 #include <EngineBase\EngineDebug.h>

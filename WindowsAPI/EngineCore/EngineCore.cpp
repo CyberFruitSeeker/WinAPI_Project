@@ -21,26 +21,6 @@ void UEngineCore::CoreTick()
 	float DeltaTime = MainTimer.TimeCheck();
 	double dDeltaTime = MainTimer.GetDeltaTime();
 
-
-	// 100프레임으로 실행되는 컴퓨터가 있다면
-	// 0.01이 나와야 한다.
-	// float Time;
-	// Time += 0.01f;
-	// 
-	// 우리는 50프레임으로 제한하고 싶다.
-	// 0.02가 나와야 한다.
-	// FrameTime = 1 / 50.0; =>
-	// FrameTime = 0.02;
-	// CurFrameTime += 0.01;
-	// 0.01             0.02
-	// CurFrameTime <= FrameTime
-	// CurFrameTime += 0.01;
-	// 0.0203000        0.02
-	// CurFrameTime <= FrameTime
-	// 돌아야한다.
-	// 0.0003000
-	// CurFrameTime -= FrameTime;
-
 	if (1 <= Frame)
 	{
 		//               5.0f

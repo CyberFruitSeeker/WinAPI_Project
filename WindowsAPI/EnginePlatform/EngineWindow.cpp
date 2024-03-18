@@ -82,7 +82,7 @@ void UEngineWindow::Open(std::string_view _Title /*= "Title"*/, std::string_view
 
 	}
 
-	// 간혹가다가 앞쪽이이나 뒤쪽에 W가 붙거나 A가 붙어있는 함수들을 보게 될겁니다.
+	// 간혹가다가 앞쪽이이나 뒤쪽에 W가 붙거나 A가 붙어있는 함수들을 보게 될 것인데
 	// A가 붙어있으면 멀티바이트 함수
 	// W가 붙어있으면 와이드 바이트 함수
 	WNDCLASSEXA wcex;
@@ -103,7 +103,7 @@ void UEngineWindow::Open(std::string_view _Title /*= "Title"*/, std::string_view
 
 	RegisterClassExA(&wcex);
 
-	// const std::string& = 내부에 뭘들고 있다고 생각하라고 했나요?
+	// const std::string& = 내부에 뭘들고 있다고 생각하라고 했는가?
 	// std::vector<char> 들고 있다고 생각하라고 했다.
 	// _Title[0] = char&를 리턴해준 것과 같다.
 	// _Title.c_str(); => 자연스럽게 내부에서 

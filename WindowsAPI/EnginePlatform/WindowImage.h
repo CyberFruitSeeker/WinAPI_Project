@@ -62,12 +62,6 @@ public:
 
 	FVector GetScale();
 
-	// 윈도우 랜더링의 핵심 인터페이스중 하나인 HDC를 외부에 공개할 필요는 굳이 없어.
-	//HDC GetImageDC()
-	//{
-	//	return ImageDC;
-	//}
-
 	// UWindowImage* _Copy 이 이미지를
 	// FTransform _Trans 이 위치와 크기로
 	// 나한테 카피해라.

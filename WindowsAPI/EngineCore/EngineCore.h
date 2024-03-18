@@ -22,7 +22,7 @@ public:
 	UEngineCore& operator=(const UEngineCore& _Other) = delete;
 	UEngineCore& operator=(UEngineCore&& _Other) noexcept = delete;
 
-	// 하나는 무조건 만들어지고 사라질일이 없을것이므ㅗ.
+	// 하나는 무조건 만들어지고 사라질일이 없을것이므로
 	// 코어가 윈도우를 가지고
 	UEngineWindow MainWindow;
 	EngineTime MainTimer;

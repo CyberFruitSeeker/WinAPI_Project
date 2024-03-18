@@ -10,13 +10,28 @@ EndingLogo::~EndingLogo()
 
 void EndingLogo::BeginPlay()
 {
-	
-	UImageRenderer* Renderer = CreateImageRenderer();
 
-	Renderer->SetImage("Ending.png");
-	SetActorLocation({ 512,480 });
-	Renderer->SetTransform({ {0,0}, {1020, 956} });
-	Renderer->SetImageCuttingTransform({ {0,0}, {0, 0} });
+	{
+		UImageRenderer* Renderer = CreateImageRenderer();
+
+		Renderer->SetImage("Mario_Ending_Background.png");
+		SetActorLocation({ 512,480 });
+		Renderer->SetTransform({ {0,0}, {1024, 960} });
+		Renderer->SetImageCuttingTransform({ {0,0}, {0, 0} });
+	}
+
+	{
+		UImageRenderer* Renderer = CreateImageRenderer();
+
+		Renderer->SetImage("Ending.png");
+		SetActorLocation({ 512,480 });
+		Renderer->SetTransform({ {0,35}, {1000, 640} });
+		Renderer->SetImageCuttingTransform({ {0,0}, {0, 0} });
+
+	}
+
+
+
 
 
 }

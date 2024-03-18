@@ -8,7 +8,7 @@
 // 컴파일러가 무시한다.
 #include "ThirdParty\FMOD\inc\fmod.hpp"
 
-// 이녀석은 선생님 본래 관리 방식을 보여드리겠습니다.
+// 우선 이런 방식으로 관리해본다.
 
 class UEngineSoundPlayer 
 {
